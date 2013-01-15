@@ -10,4 +10,11 @@
 
 @interface addPurchasesViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *Categories;
+@property (weak, nonatomic) IBOutlet UITextField *Price;
+@property (weak, nonatomic) IBOutlet UITextField *Name;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *Done;
+
+- (IBAction)Done:(id)sender;
+
 @end
