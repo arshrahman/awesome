@@ -7,12 +7,17 @@
 //
 
 #import "addPurchasesViewController.h"
+#import "Database.h"
 
 @interface addPurchasesViewController ()
 
 @end
 
 @implementation addPurchasesViewController
+
+@synthesize Categories;
+@synthesize Price;
+@synthesize Name;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +38,25 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidUnload {
+    [self setCategories:nil];
+    [self setPrice:nil];
+    [self setName:nil];
+    [super viewDidUnload];
+}
+
+//When user click on Done button
+- (IBAction)Done:(id)sender {
+    NSLog(@"Done event triggered!");
+    Database *db = [[Database alloc]init];
+    
+    NSString *stringValue = Price.text;
+    NSString *convertPrice = [NSString stringWithFormat:@"%.2f",[stringValue doubleValue]/(double)100.00];
+    
+    [db addPurchase:convertPrice.doubleValue :Categories.text :Name.text];
+    
 }
 
 @end

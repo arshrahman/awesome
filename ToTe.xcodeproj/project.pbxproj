@@ -443,6 +443,8 @@
 		CEB07044169B9B4400F96FD4 /* shoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07043169B9B4400F96FD4 /* shoppingListViewController.m */; };
 		CEB07047169B9B6200F96FD4 /* editShoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */; };
 		CEB0704E169BC85C00F96FD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEB0704D169BC85B00F96FD4 /* Settings.bundle */; };
+		CEE8750816A5A6DF00A26B15 /* Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE8750516A5A6DF00A26B15 /* Purchase.m */; };
+		CEE8750916A5A6DF00A26B15 /* viewPurchasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE8750716A5A6DF00A26B15 /* viewPurchasesViewController.m */; };
 		CEFC834E16917DE600F4E2B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC834D16917DE600F4E2B1 /* UIKit.framework */; };
 		CEFC835016917DE600F4E2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC834F16917DE600F4E2B1 /* Foundation.framework */; };
 		CEFC835216917DE600F4E2B1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC835116917DE600F4E2B1 /* CoreGraphics.framework */; };
@@ -903,6 +905,10 @@
 		CEB07045169B9B6200F96FD4 /* editShoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editShoppingListViewController.h; sourceTree = "<group>"; };
 		CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editShoppingListViewController.m; sourceTree = "<group>"; };
 		CEB0704D169BC85B00F96FD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CEE8750416A5A6DF00A26B15 /* Purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Purchase.h; sourceTree = "<group>"; };
+		CEE8750516A5A6DF00A26B15 /* Purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Purchase.m; sourceTree = "<group>"; };
+		CEE8750616A5A6DF00A26B15 /* viewPurchasesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewPurchasesViewController.h; sourceTree = "<group>"; };
+		CEE8750716A5A6DF00A26B15 /* viewPurchasesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewPurchasesViewController.m; sourceTree = "<group>"; };
 		CEFC834916917DE600F4E2B1 /* ToTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFC834D16917DE600F4E2B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEFC834F16917DE600F4E2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -972,6 +978,10 @@
 		CEB06CEE169573E900F96FD4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
+				CEE8750416A5A6DF00A26B15 /* Purchase.h */,
+				CEE8750516A5A6DF00A26B15 /* Purchase.m */,
+				CEE8750616A5A6DF00A26B15 /* viewPurchasesViewController.h */,
+				CEE8750716A5A6DF00A26B15 /* viewPurchasesViewController.m */,
 				CEB0703F169B9B0E00F96FD4 /* addPurchasesViewController.h */,
 				CEB07040169B9B0E00F96FD4 /* addPurchasesViewController.m */,
 			);
@@ -1984,6 +1994,8 @@
 				B4266E8816A05817008FC51F /* Database.m in Sources */,
 				B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */,
 				B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */,
+				CEE8750816A5A6DF00A26B15 /* Purchase.m in Sources */,
+				CEE8750916A5A6DF00A26B15 /* viewPurchasesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
