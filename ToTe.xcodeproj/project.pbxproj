@@ -11,6 +11,7 @@
 		B4266E8816A05817008FC51F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = B4266E8716A05817008FC51F /* Database.m */; };
 		B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42951FB16A27563004F5D5E /* BudgetViewController.m */; };
 		B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B429520516A2828B004F5D5E /* roundedrectangle.png */; };
+		B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B452204A16A54F74006209A7 /* OverviewViewController.m */; };
 		B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */; };
 		B4664389169C020D00C83739 /* glyphicons_000_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E5169C020C00C83739 /* glyphicons_000_glass.png */; };
 		B466438A169C020D00C83739 /* glyphicons_001_leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E6169C020C00C83739 /* glyphicons_001_leaf.png */; };
@@ -435,7 +436,6 @@
 		B4664530169C067300C83739 /* StartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B466452F169C067300C83739 /* StartPageViewController.m */; };
 		B4664534169C0A0100C83739 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B4664533169C0A0100C83739 /* logo.jpeg */; };
 		B4AEB51E169EEF47008BCF98 /* IncomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */; };
-		CE9F8CC316A51D660026C011 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F8CC216A51D660026C011 /* HistoryViewController.m */; };
 		CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */; };
 		CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CF11695743F00F96FD4 /* GoalViewController.m */; };
 		CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */; };
@@ -462,6 +462,8 @@
 		B42951FA16A27563004F5D5E /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
 		B42951FB16A27563004F5D5E /* BudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetViewController.m; sourceTree = "<group>"; };
 		B429520516A2828B004F5D5E /* roundedrectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = roundedrectangle.png; path = Images/roundedrectangle.png; sourceTree = "<group>"; };
+		B452204916A54F73006209A7 /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
+		B452204A16A54F74006209A7 /* OverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewViewController.m; sourceTree = "<group>"; };
 		B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		B46641E5169C020C00C83739 /* glyphicons_000_glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_000_glass.png; path = Images/glyphicons_000_glass.png; sourceTree = "<group>"; };
 		B46641E6169C020C00C83739 /* glyphicons_001_leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_001_leaf.png; path = Images/glyphicons_001_leaf.png; sourceTree = "<group>"; };
@@ -888,8 +890,6 @@
 		B4664533169C0A0100C83739 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpeg; path = Images/logo.jpeg; sourceTree = "<group>"; };
 		B4AEB51C169EEF47008BCF98 /* IncomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeViewController.h; sourceTree = "<group>"; };
 		B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeViewController.m; sourceTree = "<group>"; };
-		CE9F8CC116A51D660026C011 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryViewController.h; path = ../HistoryViewController.h; sourceTree = "<group>"; };
-		CE9F8CC216A51D660026C011 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryViewController.m; path = ../HistoryViewController.m; sourceTree = "<group>"; };
 		CEB06CE316954DFD00F96FD4 /* setBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setBudgetViewController.h; sourceTree = "<group>"; };
 		CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setBudgetViewController.m; sourceTree = "<group>"; };
 		CEB06CF01695743F00F96FD4 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -981,8 +981,8 @@
 		CEB06CEF169573F100F96FD4 /* Overview */ = {
 			isa = PBXGroup;
 			children = (
-				CE9F8CC116A51D660026C011 /* HistoryViewController.h */,
-				CE9F8CC216A51D660026C011 /* HistoryViewController.m */,
+				B452204916A54F73006209A7 /* OverviewViewController.h */,
+				B452204A16A54F74006209A7 /* OverviewViewController.m */,
 			);
 			name = Overview;
 			sourceTree = "<group>";
@@ -1983,7 +1983,7 @@
 				B4AEB51E169EEF47008BCF98 /* IncomeViewController.m in Sources */,
 				B4266E8816A05817008FC51F /* Database.m in Sources */,
 				B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */,
-				CE9F8CC316A51D660026C011 /* HistoryViewController.m in Sources */,
+				B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
