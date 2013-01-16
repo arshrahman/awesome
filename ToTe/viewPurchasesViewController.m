@@ -44,27 +44,35 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
-    //return [purchasesList count];
+    Database *db = [[Database alloc]init];
+    
+    [db viewPurchases];
+    
+    return [purchasesList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell"];
     
+    
+    
+    NSLog(@"Grabbing data in datbase");
+    
     UILabel *lbName = nil;
     UILabel *lbCategory = nil;
     UILabel *lbPrice = nil;
-    
-    NSLog(@"Haven't create labels");
     
     if(cell == nil){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MainCell"];
         
         Purchase *p = [purchasesList objectAtIndex:indexPath.row];
         
-        lbName.text = p.name;
-        lbPrice.text = [NSString stringWithFormat:@"%.2f", p.price];
-        lbCategory.text = p.category;
+        if(p != nil)
+        {
+            lbName.text = p.name;
+            lbPrice.text = [NSString stringWithFormat:@"%.2f", p.price];
+            lbCategory.text = p.category;
+        }
         
         NSLog(@"Creating label");
         
@@ -94,8 +102,10 @@
     }
     
     //cell.textLabel.text = [NSString stringWithFormat:@"Index row of this cell: %d", indexPath.row];
-    
+    [[self purchaseTV]reloadData];
     return cell;
+    
+    
     
 }
 
@@ -106,6 +116,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setPurchaseTV:nil];
     [super viewDidUnload];
 }
 @end

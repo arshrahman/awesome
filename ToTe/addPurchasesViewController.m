@@ -7,6 +7,7 @@
 //
 
 #import "addPurchasesViewController.h"
+#import "BudgetViewController.h"
 #import "Database.h"
 
 @interface addPurchasesViewController ()
@@ -15,7 +16,7 @@
 
 @implementation addPurchasesViewController
 
-@synthesize Categories;
+@synthesize Category;
 @synthesize Price;
 @synthesize Name;
 
@@ -41,9 +42,10 @@
 }
 
 - (void)viewDidUnload {
-    [self setCategories:nil];
     [self setPrice:nil];
     [self setName:nil];
+    [self setDone:nil];
+    [self setCategory:nil];
     [super viewDidUnload];
 }
 
@@ -55,8 +57,20 @@
     NSString *stringValue = Price.text;
     NSString *convertPrice = [NSString stringWithFormat:@"%.2f",[stringValue doubleValue]/(double)100.00];
     
-    [db addPurchase:convertPrice.doubleValue :Categories.text :Name.text];
+    [db addPurchase:convertPrice.doubleValue :Category.text=@"Fake" :Name.text];
+    
+   // BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
+   // [self.navigationController pushViewController:svc animated:YES];
     
 }
+
+- (IBAction)SelectCat:(id)sender {
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"Select Category" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Category", nil];
+
+    [action showFromTabBar:self.tabBarController.tabBar];
+    
+}
+
+
 
 @end

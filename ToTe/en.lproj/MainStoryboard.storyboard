@@ -270,6 +270,10 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZk-CD-9hG">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Lyj-jx-ctU" id="ar6-BV-bxo"/>
+                                    <outlet property="delegate" destination="Lyj-jx-ctU" id="H6c-tZ-KJf"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -288,6 +292,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="purchaseTV" destination="rZk-CD-9hG" id="IJs-eM-THR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OG-3R-Ct9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -323,44 +330,65 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yMZ-WH-ycw">
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZRg-uc-HQT">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdn-li-blw">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wec-yb-FZX">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Select Category">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SelectCat:" destination="ur5-d9-lec" eventType="touchUpInside" id="suE-H9-Hrh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YgT-U9-9NX" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="67" id="27T-NN-hQV"/>
-                            <constraint firstItem="yMZ-WH-ycw" firstAttribute="leading" secondItem="ymB-J8-wuH" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="8Ij-Kn-Y4E"/>
-                            <constraint firstItem="yMZ-WH-ycw" firstAttribute="leading" secondItem="YgT-U9-9NX" secondAttribute="leading" type="default" id="8kG-l0-cHM"/>
                             <constraint firstItem="bbO-bW-TJb" firstAttribute="leading" secondItem="ymB-J8-wuH" secondAttribute="leading" type="default" id="GUH-b0-uxZ"/>
+                            <constraint firstAttribute="trailing" secondItem="wec-yb-FZX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ilr-fw-w7E"/>
                             <constraint firstItem="bbO-bW-TJb" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="71" id="LoI-MP-9rW"/>
-                            <constraint firstItem="yMZ-WH-ycw" firstAttribute="leading" secondItem="ZRg-uc-HQT" secondAttribute="leading" type="default" id="Ycc-ee-bwv"/>
+                            <constraint firstItem="Gdn-li-blw" firstAttribute="leading" secondItem="ZRg-uc-HQT" secondAttribute="leading" type="default" id="PtO-Mr-KOO"/>
+                            <constraint firstItem="Gdn-li-blw" firstAttribute="leading" secondItem="YgT-U9-9NX" secondAttribute="leading" type="default" id="RpM-rM-NEE"/>
+                            <constraint firstItem="wec-yb-FZX" firstAttribute="baseline" secondItem="Gdn-li-blw" secondAttribute="baseline" type="default" id="WBi-Xg-KuK"/>
+                            <constraint firstItem="Gdn-li-blw" firstAttribute="baseline" secondItem="ymB-J8-wuH" secondAttribute="baseline" type="default" id="XSl-un-hXp"/>
                             <constraint firstItem="ZRg-uc-HQT" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="144" id="Zeo-TP-cRT"/>
                             <constraint firstItem="4Ey-XV-dSM" firstAttribute="leading" secondItem="ymB-J8-wuH" secondAttribute="leading" type="default" id="cdI-FY-BNA"/>
                             <constraint firstAttribute="trailing" secondItem="ZRg-uc-HQT" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="gSg-jg-0zm"/>
-                            <constraint firstAttribute="trailing" secondItem="yMZ-WH-ycw" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="iCg-TW-R9C"/>
-                            <constraint firstItem="ymB-J8-wuH" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="109" id="k42-FO-XVh"/>
                             <constraint firstItem="4Ey-XV-dSM" firstAttribute="baseline" secondItem="ZRg-uc-HQT" secondAttribute="baseline" type="default" id="kTD-2t-zJm"/>
+                            <constraint firstItem="Gdn-li-blw" firstAttribute="leading" secondItem="ymB-J8-wuH" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="l42-Qh-XxN"/>
                             <constraint firstAttribute="trailing" secondItem="YgT-U9-9NX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="txp-uz-1DN"/>
-                            <constraint firstItem="yMZ-WH-ycw" firstAttribute="top" secondItem="YgT-U9-9NX" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="u9U-v7-ssS"/>
+                            <constraint firstItem="wec-yb-FZX" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="99" id="w3X-O8-O6j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h49-CT-Dc9">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ve9-cP-g1o">
                             <connections>
-                                <segue destination="4" kind="modal" modalTransitionStyle="crossDissolve" id="XGz-En-szo"/>
+                                <action selector="Done:" destination="ur5-d9-lec" id="NYy-Hi-7IU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="Category" destination="Gdn-li-blw" id="hVb-fJ-lxc"/>
+                        <outlet property="Done" destination="ve9-cP-g1o" id="gdd-eB-OR2"/>
+                        <outlet property="Name" destination="YgT-U9-9NX" id="CU4-Qi-F0N"/>
+                        <outlet property="Price" destination="ZRg-uc-HQT" id="Phm-o0-4vK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dU8-C5-LpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="161" y="1835"/>
+            <point key="canvasLocation" x="155" y="1835"/>
         </scene>
         <!--Navigation Controller - BudgetViewController-->
         <scene sceneID="fns-PE-gjd">
@@ -1524,12 +1552,65 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
+    <classes>
+        <class className="BudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
+                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="IncomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btndone:"/>
+                <relationship kind="outlet" name="txtincome" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainPageViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="OverviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
+        </class>
+        <class className="StartPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
+        </class>
+        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
+        </class>
+        <class className="addPurchasesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/addPurchasesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Done:"/>
+                <relationship kind="action" name="SelectCat:"/>
+                <relationship kind="outlet" name="Category" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="Done" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="Name" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="Price" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="setBudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
+        </class>
+        <class className="viewPurchasesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="purchaseTV" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="XGz-En-szo"/>
+        <segue reference="gFB-Xz-sLv"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -92,7 +92,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PURCHASES"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PURCHASE"];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -104,10 +104,10 @@
                 {
                     Purchase *p = [[Purchase alloc]init];
                     
-                    NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                    NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
                     NSString *category = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
                     
-                    NSString *date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                    NSString *date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                     
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
                     [dateFormatter setDateFormat:@"dd-MM-yyyy"];
@@ -115,7 +115,7 @@
                     dateFromString = [dateFormatter dateFromString:date];
                     
                     
-                    NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                    NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
                     
                     double convertPrice = [price doubleValue];
                     
@@ -174,7 +174,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PURCHASE(purchase_date, item_category, item_price, item_name) VALUES ('%@','%@','%.2f', '%@')",date, category, price, name];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME) VALUES ('%@','%@','%.2f', '%@')",date, category, price, name];
         const char *insert_stmt = [insertStmt UTF8String];
         
         if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)

@@ -11,5 +11,6 @@
 @interface viewPurchasesViewController : UIViewController
 
 @property (nonatomic, strong)NSMutableArray *purchasesList;
+@property (strong, nonatomic) IBOutlet UITableView *purchaseTV;
 
 @end
