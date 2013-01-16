@@ -181,6 +181,17 @@
         if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
         {
             result = true;
+            
+            Purchase *p = [[Purchase alloc] init];
+            
+            [p setName:name];
+            [p setCategory:category];
+            [p setPrice:price];
+            [p setDate:date];
+            
+            viewPurchasesViewController *vpvc = [[viewPurchasesViewController alloc]init];
+            [vpvc.purchasesList addObject:p];
+            
             NSLog(@"Purchase Item Added!");
         }
         sqlite3_close(budgetDB);
