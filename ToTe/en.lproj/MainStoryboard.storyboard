@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
@@ -175,18 +175,40 @@
             </objects>
             <point key="canvasLocation" x="1129" y="3384"/>
         </scene>
-        <!--View Controller - By Month-->
+        <!--By Month View Controller - By Month-->
         <scene sceneID="fLS-I8-Bou">
             <objects>
-                <viewController id="gAM-1Z-KyZ" sceneMemberID="viewController">
+                <viewController id="gAM-1Z-KyZ" customClass="ByMonthViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cGD-Kb-ptj">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fl8-dX-i85" customClass="CustomDateUIPickerView">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="qVr-RI-tw6"/>
+                                </constraints>
+                            </pickerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fl8-dX-i85" firstAttribute="leading" secondItem="cGD-Kb-ptj" secondAttribute="leading" type="default" id="2ao-f2-JId"/>
+                            <constraint firstItem="fl8-dX-i85" firstAttribute="trailing" secondItem="cGD-Kb-ptj" secondAttribute="trailing" type="default" id="ccd-2S-R1y"/>
+                            <constraint firstItem="fl8-dX-i85" firstAttribute="bottom" secondItem="cGD-Kb-ptj" secondAttribute="bottom" type="default" id="qxk-ZD-2LO"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="By Month" id="aeX-gV-Nus">
                         <barButtonItem key="backBarButtonItem" title="Back" id="fod-2x-rdk"/>
+                        <barButtonItem key="rightBarButtonItem" image="glyphicons_045_calendar.png" id="jz3-tW-2kk">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="btnCalender:" destination="gAM-1Z-KyZ" id="2LG-M8-T17"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnCalendar" destination="jz3-tW-2kk" id="r8L-wr-3TY"/>
+                        <outlet property="customDate" destination="fl8-dX-i85" id="ycs-fp-KEh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAR-Rq-awW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1545,6 +1567,7 @@
     <resources>
         <image name="glyphicons_011_camera.png" width="26" height="20"/>
         <image name="glyphicons_041_charts.png" width="27" height="24"/>
+        <image name="glyphicons_045_calendar.png" width="23" height="24"/>
         <image name="glyphicons_202_shopping_cart.png" width="26" height="23"/>
         <image name="glyphicons_227_usd.png" width="17" height="26"/>
         <image name="glyphicons_267_credit_card.png" width="26" height="19"/>
@@ -1561,6 +1584,17 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
                 <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
             </relationships>
+        </class>
+        <class className="ByMonthViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByMonthViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCalender:"/>
+                <relationship kind="outlet" name="btnCalendar" candidateClass="UIBarItem"/>
+                <relationship kind="outlet" name="customDate" candidateClass="CustomDateUIPickerView"/>
+            </relationships>
+        </class>
+        <class className="CustomDateUIPickerView" superclassName="UIPickerView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
         </class>
         <class className="IncomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IncomeViewController.h"/>
