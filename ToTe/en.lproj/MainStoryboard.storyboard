@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Overview View Controller - History-->
@@ -517,48 +517,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="roundedrectangle.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="z4L-eS-532">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="266" id="hIk-b4-plZ"/>
-                                    <constraint firstAttribute="height" constant="68" id="pUw-sU-zFg"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Weekly Income" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="76" translatesAutoresizingMaskIntoConstraints="NO" id="8VX-ot-CMy">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="76" id="TAP-nl-2Ux"/>
-                                    <constraint firstAttribute="height" constant="73" id="pKU-Yv-L6a"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pDA-CG-bgL">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="157" id="FFA-H6-HW2"/>
-                                    <constraint firstAttribute="height" constant="55" id="MnW-oV-lCT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S59-et-sCk">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="4" id="mzz-AY-Igt"/>
-                                    <constraint firstAttribute="height" constant="68" id="t2i-0U-b7r"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="41"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xSr-NG-nGD">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="176" id="rLH-hE-xjz"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="s9E-KB-X98" id="q3y-fK-ieE"/>
-                                    <outlet property="delegate" destination="s9E-KB-X98" id="N1M-w2-7y0"/>
-                                </connections>
-                            </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your Budget:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lo6-VS-0aF">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="b5p-j0-kSh"/>
@@ -577,25 +535,78 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZYW-WZ-QRD" customClass="TPKeyboardAvoidingScrollView">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="roundedrectangle.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="aDU-tR-Xuh">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="266" id="sp7-8w-rSs"/>
+                                            <constraint firstAttribute="height" constant="68" id="zAp-RE-0tF"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Weekly Income" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="76" translatesAutoresizingMaskIntoConstraints="NO" id="NYA-vV-4Nh">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="73" id="NgV-qZ-NC0"/>
+                                            <constraint firstAttribute="width" constant="76" id="Vb0-iB-zTN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-4i-SaY">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="157" id="S2g-rd-YHC"/>
+                                            <constraint firstAttribute="height" constant="55" id="jmC-TF-xat"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04x-tA-inN">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="4" id="Gy4-l9-Ik4"/>
+                                            <constraint firstAttribute="height" constant="68" id="jXY-bF-eA8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="41"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XWb-HR-Rdb">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="176" id="vN7-4e-DRV"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="s9E-KB-X98" id="ad0-Mc-jY8"/>
+                                            <outlet property="delegate" destination="s9E-KB-X98" id="LYi-F3-FSK"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="trailing" secondItem="XWb-HR-Rdb" secondAttribute="trailing" type="default" id="0PI-QP-B1g"/>
+                                    <constraint firstItem="XWb-HR-Rdb" firstAttribute="centerX" secondItem="ZYW-WZ-QRD" secondAttribute="centerX" type="default" id="7l5-zz-mQ1"/>
+                                    <constraint firstItem="NYA-vV-4Nh" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="15" id="IoY-Ua-J1q"/>
+                                    <constraint firstAttribute="trailing" secondItem="aDU-tR-Xuh" secondAttribute="trailing" constant="27" id="Rnc-K7-5LI"/>
+                                    <constraint firstItem="XWb-HR-Rdb" firstAttribute="leading" secondItem="aDU-tR-Xuh" secondAttribute="leading" type="default" id="XUP-vb-Zg6"/>
+                                    <constraint firstItem="NYA-vV-4Nh" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="42" id="ewL-h0-o3A"/>
+                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="18" id="gub-mc-Yt2"/>
+                                    <constraint firstItem="04x-tA-inN" firstAttribute="bottom" secondItem="Qlb-4i-SaY" secondAttribute="bottom" type="default" id="iEm-ck-gwa"/>
+                                    <constraint firstItem="04x-tA-inN" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="13" id="kzO-of-sMC"/>
+                                    <constraint firstItem="Qlb-4i-SaY" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="128" id="pXy-gv-p7n"/>
+                                    <constraint firstItem="XWb-HR-Rdb" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="113" id="rW6-wZ-Wd8"/>
+                                    <constraint firstItem="04x-tA-inN" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="112" id="sgg-ay-pnD"/>
+                                    <constraint firstAttribute="bottom" secondItem="XWb-HR-Rdb" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="zcW-lQ-bFW"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8FG-cq-dE5" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="12" id="304-vf-nxu"/>
-                            <constraint firstItem="z4L-eS-532" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="70" id="3jj-QN-ngV"/>
-                            <constraint firstItem="S59-et-sCk" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="65" id="5gL-J5-GOj"/>
-                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="20" symbolic="YES" type="default" id="84h-fs-OrL"/>
-                            <constraint firstItem="xSr-NG-nGD" firstAttribute="centerX" secondItem="6Oi-av-Xn9" secondAttribute="centerX" type="default" id="LDN-y8-fm7"/>
-                            <constraint firstItem="xSr-NG-nGD" firstAttribute="trailing" secondItem="z4L-eS-532" secondAttribute="trailing" type="default" id="NSF-fU-4nj"/>
-                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="56" id="T5h-YH-EFz"/>
-                            <constraint firstItem="pDA-CG-bgL" firstAttribute="bottom" secondItem="S59-et-sCk" secondAttribute="bottom" type="default" id="V5G-3x-392"/>
-                            <constraint firstItem="pDA-CG-bgL" firstAttribute="baseline" secondItem="S59-et-sCk" secondAttribute="baseline" type="default" id="Yqg-Fq-JkC"/>
-                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="centerX" secondItem="S59-et-sCk" secondAttribute="centerX" type="default" id="ZmX-cj-ef7"/>
-                            <constraint firstItem="8FG-cq-dE5" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="128" id="ZzO-wc-wfO"/>
-                            <constraint firstItem="z4L-eS-532" firstAttribute="leading" secondItem="xSr-NG-nGD" secondAttribute="leading" type="default" id="deA-Pm-V0D"/>
-                            <constraint firstItem="xSr-NG-nGD" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="165" id="tER-vM-o75"/>
-                            <constraint firstItem="8VX-ot-CMy" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="42" id="v8W-Hx-4TN"/>
-                            <constraint firstItem="8VX-ot-CMy" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="67" id="xEn-Mq-jU0"/>
-                            <constraint firstItem="8FG-cq-dE5" firstAttribute="leading" secondItem="pDA-CG-bgL" secondAttribute="leading" type="default" id="yfm-Xv-Dfx"/>
+                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="18" id="0ba-dF-TIA"/>
+                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="70" id="AVA-DP-t08"/>
+                            <constraint firstItem="8FG-cq-dE5" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="142" id="CjY-u1-TOb"/>
+                            <constraint firstItem="ZYW-WZ-QRD" firstAttribute="bottom" secondItem="6Oi-av-Xn9" secondAttribute="bottom" type="default" id="Ktk-U3-JDe"/>
+                            <constraint firstItem="ZYW-WZ-QRD" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="58" id="aFN-WH-aex"/>
+                            <constraint firstItem="ZYW-WZ-QRD" firstAttribute="trailing" secondItem="6Oi-av-Xn9" secondAttribute="trailing" type="default" id="aVa-r0-OZg"/>
+                            <constraint firstItem="ZYW-WZ-QRD" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" type="default" id="lq4-ey-s4b"/>
+                            <constraint firstItem="8FG-cq-dE5" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="10" id="lsj-cD-DBJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="xol-8q-PXv">
@@ -607,9 +618,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="budgetCat" destination="xSr-NG-nGD" id="8p7-eW-3mA"/>
+                        <outlet property="budgetCat" destination="XWb-HR-Rdb" id="l0R-no-dxy"/>
                         <outlet property="lblBudget" destination="8FG-cq-dE5" id="kTx-cZ-ZZw"/>
-                        <outlet property="txtBudget" destination="pDA-CG-bgL" id="qqG-hS-mYD"/>
+                        <outlet property="scrollView" destination="ZYW-WZ-QRD" id="DOq-DC-vTP"/>
+                        <outlet property="txtBudget" destination="Qlb-4i-SaY" id="aYJ-8S-oKQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZo-Gb-Yk3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1518,8 +1530,8 @@
             <relationships>
                 <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
                 <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtCatValue" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="IncomeViewController" superclassName="UIViewController">
@@ -1540,6 +1552,9 @@
         </class>
         <class className="StartPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
+        </class>
+        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
         </class>
         <class className="addPurchasesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/addPurchasesViewController.h"/>

@@ -7,17 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TPKeyboardAvoidingScrollView;
 
 @interface BudgetViewController : UIViewController<UIActionSheetDelegate,UITabBarControllerDelegate>
 {
-    //temporary
-    NSArray *data;
     IBOutlet UITableView *budgetCat;
     IBOutlet UILabel *lblBudget;
-    IBOutlet UITextField *txtCatValue;
 }
 @property (nonatomic) IBOutlet UITableView *budgetCat;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtBudget;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 
 @end

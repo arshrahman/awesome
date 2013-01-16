@@ -8,22 +8,29 @@
 //
 
 #import "BudgetViewController.h"
+#import "TPKeyboardAvoidingScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface BudgetViewController ()
+{
+    int budgetValue;
+    //Temporary
+    NSMutableArray *data;
+    NSMutableArray *otherButtons;
+}
 
 @end
 
 @implementation BudgetViewController
 
 @synthesize budgetCat;
+@synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        //data = [[NSArray alloc]initWithObjects:@"1", @"2", @"3", nil];
     }
     return self;
 }
@@ -33,7 +40,8 @@
     [super viewDidLoad];
     [self.tabBarController setDelegate:self];
     self.navigationItem.hidesBackButton = YES;
-    data = [[NSArray alloc]initWithObjects:@"Food", @"Transport", @"Utility", nil];
+    data = [[NSMutableArray alloc]init];
+    otherButtons = [[NSMutableArray alloc]initWithObjects:@"Clothes", @"Books", @"Saloon", @"Snacks", @"Charity", @"Parents",@"School", nil];
     budgetCat.layer.cornerRadius = 5.0f;
     budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
     budgetCat.layer.borderWidth = 1;
@@ -47,7 +55,7 @@
 }
 
 
-- (NSInteger)numberOfSelectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
@@ -105,6 +113,11 @@
             txtCatValue.tag = 100;
             txtCatValue.placeholder = @"Enter Amount";
             txtCatValue.textColor = [UIColor blackColor];
+            txtCatValue.keyboardType = UIKeyboardTypeNumberPad;
+            
+            [txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
+            [txtCatValue addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+            [txtCatValue addTarget:self action:@selector(textFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEnd];
             
             
             lblCat = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 130, 30)];
@@ -115,8 +128,6 @@
             imv = [[UIImageView alloc]initWithFrame:CGRectMake(7,7, 25, 25)];
             imv.image=[UIImage imageNamed:@"glyphicons_069_gift.png"];
             imv.tag = 300;
-            
-            //[txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventAllEditingEvents];
             
             [cell.contentView addSubview:txtCatValue];
             [cell.contentView addSubview:lblCat];
@@ -135,59 +146,61 @@
     }
 }
 
-/*- (void)textFieldDidBeginEditing:(UITextField *)textField
- {
- if (self.tableView.contentOffset.y == 0)
- {
- [UIView animateWithDuration:0.0 delay:0.5 options:UIViewAnimationOptionAllowUserInteraction animations:^{
- } completion:^(BOOL finished) {
- UITableViewCell *cell = (UITableViewCell*) [[textField superview] superview];
- [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
- }];
- }
- }*/
-
-
-- (void)ValueChanged:(UITextField *)sender
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    UITableViewCell *ParentCell = [[sender superview] superview];
-    NSIndexPath *ipOftxtfield = [budgetCat indexPathForCell:ParentCell];
-    NSLog(@"index path: %d", ipOftxtfield.row);
+    [scrollView adjustOffsetToIdealIfNeeded];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)textFieldEditingChanged:(UITextField *)textField
 {
-    /*if (indexPath.row == 0)
-     {
-     //[cell setBackgroundColor:[UIColor lightGrayColor]];
-     cell.textLabel.font = [UIFont systemFontOfSize:17.0];
-     cell.textLabel.textColor = [UIColor grayColor];
-     }*/
+    budgetValue += [textField.text intValue];
+    lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
 }
 
+-(void)textFieldDoneEditing:(UITextField *)textField
+{
+    //budgetValue += [textField.text intValue];
+    //lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
     {
-        UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Clothes", @"Books", @"Saloon", @"Snacks", @"Charity", @"Parents",@"School", nil];
+        UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
+        
+        for (int i=0; i < [otherButtons count]; i++)
+        {
+            NSString *button = [otherButtons objectAtIndex:i];
+            [as addButtonWithTitle:button];
+        }
         
         [as showFromTabBar:self.tabBarController.tabBar];
     }
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        /*Person *p = [arrayOfPerson objectAtIndex:indexPath.row];
+         [self deleteData:[NSString stringWithFormat:@"DELETE FROM PERSONS WHERE NAME IS '%s'", [p.name UTF8String]]];*/
+        [data removeObjectAtIndex:indexPath.row-1];
+        
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    }
+}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    //[super touchesBegan:touches withEvent:event];
-    //[[self txtBudget]resignFirstResponder];
     [self.view endEditing:YES];
 }
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    [data addObject:[otherButtons objectAtIndex:buttonIndex]];
+    [[self budgetCat]reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -200,9 +213,9 @@
     [self setTxtBudget:nil];
     [self setBudgetCat:nil];
     lblBudget = nil;
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
-
 
 @end
 
