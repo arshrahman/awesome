@@ -64,7 +64,7 @@
     
     if(cell == nil){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MainCell"];
-        
+        NSLog(@"Check data rolled in");
         Purchase *p = [purchasesList objectAtIndex:indexPath.row];
         
         if(p != nil)
