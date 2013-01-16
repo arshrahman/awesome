@@ -10,7 +10,7 @@
 
 @interface Database : NSObject
 
-- (void)SetDBPath;
+- (NSString *)SetDBPath;
 - (void)CreateDB;
 - (BOOL)checkBudgetExists;
 - (BOOL)InsertWeeklyIncome:(int)income;

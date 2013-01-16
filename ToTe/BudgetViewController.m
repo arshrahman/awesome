@@ -8,6 +8,7 @@
 //
 
 #import "BudgetViewController.h"
+#import "Category.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -41,7 +42,15 @@
     [self.tabBarController setDelegate:self];
     self.navigationItem.hidesBackButton = YES;
     data = [[NSMutableArray alloc]init];
-    otherButtons = [[NSMutableArray alloc]initWithObjects:@"Clothes", @"Books", @"Saloon", @"Snacks", @"Charity", @"Parents",@"School", nil];
+    Category *c = [[Category alloc]init];
+    otherButtons = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        //NSLog(@"Category: %d, %@, %@", cc.category_id, cc.category_name, cc.category_image);
+        [otherButtons addObject:cc];
+    }
+    
     budgetCat.layer.cornerRadius = 5.0f;
     budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
     budgetCat.layer.borderWidth = 1;
@@ -127,7 +136,7 @@
             lblCat.tag = 200;
             
             imv = [[UIImageView alloc]initWithFrame:CGRectMake(7,7, 25, 25)];
-            imv.image=[UIImage imageNamed:@"glyphicons_069_gift.png"];
+            //imv.image=[UIImage imageNamed:@"glyphicons_069_gift.png"];
             imv.tag = 300;
             
             [cell.contentView addSubview:txtCatValue];
@@ -170,10 +179,9 @@
     {
         UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
         
-        for (int i=0; i < [otherButtons count]; i++)
+        for(Category *c in otherButtons)
         {
-            NSString *button = [otherButtons objectAtIndex:i];
-            [as addButtonWithTitle:button];
+            [as addButtonWithTitle:c.category_name];
         }
         
         [as showFromTabBar:self.tabBarController.tabBar];
@@ -200,7 +208,8 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [data addObject:[otherButtons objectAtIndex:buttonIndex]];
+    Category *c = [otherButtons objectAtIndex:buttonIndex];
+    [data addObject:c.category_name];
     [[self budgetCat]reloadData];
 }
 

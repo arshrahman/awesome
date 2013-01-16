@@ -10,8 +10,9 @@
 
 @interface Category : NSObject
 
-@property(nonatomic, strong)NSString *category_name;
-@property(nonatomic, strong)NSString *category_image;
+@property(nonatomic)NSString *category_name;
+@property(nonatomic)NSString *category_image;
+@property(nonatomic)int category_id;
 
 -(NSMutableArray *)SelectAllCategory;
 
