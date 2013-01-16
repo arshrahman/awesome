@@ -114,6 +114,7 @@
             txtCatValue.placeholder = @"Enter Amount";
             txtCatValue.textColor = [UIColor blackColor];
             txtCatValue.keyboardType = UIKeyboardTypeNumberPad;
+            txtCatValue.clearButtonMode = UITextFieldViewModeWhileEditing;
             
             [txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
             [txtCatValue addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];

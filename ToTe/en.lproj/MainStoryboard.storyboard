@@ -552,7 +552,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-4i-SaY">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-4i-SaY">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="157" id="S2g-rd-YHC"/>
                                             <constraint firstAttribute="height" constant="55" id="jmC-TF-xat"/>
@@ -611,7 +611,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="xol-8q-PXv">
                         <barButtonItem key="backBarButtonItem" title="Back" id="s0c-46-3FF"/>
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="iiE-sd-I2L">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="iiE-sd-I2L">
                             <connections>
                                 <segue destination="vFS-dx-f3U" kind="push" id="kEr-Hk-KzC"/>
                             </connections>
@@ -1524,55 +1524,6 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
-    <classes>
-        <class className="BudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="IncomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btndone:"/>
-                <relationship kind="outlet" name="txtincome" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MainPageViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="OverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
-        </class>
-        <class className="StartPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-        <class className="addPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/addPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Done:"/>
-                <relationship kind="outlet" name="Categories" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="Done" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="Name" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="Price" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="setBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
-        </class>
-        <class className="viewPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -437,6 +437,7 @@
 		B4664534169C0A0100C83739 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B4664533169C0A0100C83739 /* logo.jpeg */; };
 		B4AEB51E169EEF47008BCF98 /* IncomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */; };
 		B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */; };
+		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
 		CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */; };
 		CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CF11695743F00F96FD4 /* GoalViewController.m */; };
 		CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */; };
@@ -895,6 +896,8 @@
 		B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeViewController.m; sourceTree = "<group>"; };
 		B4E5046416A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		B4E5046816A663610003D0D5 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		B4E5046916A663610003D0D5 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		CEB06CE316954DFD00F96FD4 /* setBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setBudgetViewController.h; sourceTree = "<group>"; };
 		CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setBudgetViewController.m; sourceTree = "<group>"; };
 		CEB06CF01695743F00F96FD4 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -956,6 +959,8 @@
 				CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */,
 				B42951FA16A27563004F5D5E /* BudgetViewController.h */,
 				B42951FB16A27563004F5D5E /* BudgetViewController.m */,
+				B4E5046816A663610003D0D5 /* Category.h */,
+				B4E5046916A663610003D0D5 /* Category.m */,
 			);
 			name = Budget;
 			sourceTree = "<group>";
@@ -2002,6 +2007,7 @@
 				CEE8750816A5A6DF00A26B15 /* Purchase.m in Sources */,
 				CEE8750916A5A6DF00A26B15 /* viewPurchasesViewController.m in Sources */,
 				B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				B4E5046A16A663610003D0D5 /* Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
