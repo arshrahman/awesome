@@ -69,7 +69,7 @@
     Database *db = [[Database alloc]init];
     
     NSString *stringValue = Price.text;
-    NSString *convertPrice = [NSString stringWithFormat:@"%.2f",[stringValue doubleValue]/(double)100.00];
+    NSString *convertPrice = [NSString stringWithFormat:@"%2f",[stringValue doubleValue]/(double)100.00];
     
     [db addPurchase:convertPrice.doubleValue :btnCate.currentTitle :Name.text];
     

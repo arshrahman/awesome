@@ -44,17 +44,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    Database *db = [[Database alloc]init];
-    
-    [db viewPurchases];
     
     return [purchasesList count];
+    //return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell"];
-    
-    
     
     NSLog(@"Grabbing data in datbase");
     
@@ -70,7 +66,7 @@
         if(p != nil)
         {
             lbName.text = p.name;
-            lbPrice.text = [NSString stringWithFormat:@"%.2f", p.price];
+            lbPrice.text = [NSString stringWithFormat:@"%2f", p.price];
             lbCategory.text = p.category;
         }
         
@@ -94,7 +90,7 @@
         [cell.contentView addSubview:lbName];
         [cell.contentView addSubview:lbCategory];
         [cell.contentView addSubview:lbPrice];
-
+        
     } else {
         lbName = (UILabel *)[cell.contentView viewWithTag:100];
         lbCategory = (UILabel *)[cell.contentView viewWithTag:100];
@@ -102,7 +98,7 @@
     }
     
     //cell.textLabel.text = [NSString stringWithFormat:@"Index row of this cell: %d", indexPath.row];
-    [[self purchaseTV]reloadData];
+    //[[self purchaseTV]reloadData];
     return cell;
     
     
