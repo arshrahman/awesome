@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *Price;
 @property (weak, nonatomic) IBOutlet UITextField *Name;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Done;
-@property (weak, nonatomic) IBOutlet UILabel *Category;
+@property (weak, nonatomic) IBOutlet UIButton *btnCate;
 
 - (IBAction)Done:(id)sender;
 - (IBAction)SelectCat:(id)sender;

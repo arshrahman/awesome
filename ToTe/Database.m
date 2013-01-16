@@ -109,19 +109,13 @@
                     
                     NSString *date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                     
-                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-                    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-                    NSDate *dateFromString = [[NSDate alloc]init];
-                    dateFromString = [dateFormatter dateFromString:date];
-                    
-                    
                     NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
                     
                     double convertPrice = [price doubleValue];
                     
                     [p setName:name];
                     [p setCategory:category];
-                    [p setDate:dateFromString];
+                    [p setDate:date];
                     [p setPrice:convertPrice];
                     
                     //Array
@@ -171,10 +165,14 @@
     
     //get current Date
     NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *theDate = [dateFormat stringFromDate:date];
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME) VALUES ('%@','%@','%.2f', '%@')",date, category, price, name];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME) VALUES ('%@','%@','%.2f', '%@')",theDate, category, price, name];
         const char *insert_stmt = [insertStmt UTF8String];
         
         if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
@@ -186,7 +184,7 @@
             [p setName:name];
             [p setCategory:category];
             [p setPrice:price];
-            [p setDate:date];
+            [p setDate:theDate];
             
             viewPurchasesViewController *vpvc = [[viewPurchasesViewController alloc]init];
             [vpvc.purchasesList addObject:p];

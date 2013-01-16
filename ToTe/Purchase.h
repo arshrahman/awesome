@@ -13,6 +13,6 @@
 @property(nonatomic, strong)NSString *name;
 @property(nonatomic, strong)NSString *category;
 @property(assign)double price;
-@property(nonatomic, strong)NSDate *date;
+@property(nonatomic, strong)NSString *date;
 
 @end

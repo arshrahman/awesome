@@ -7,16 +7,20 @@
 //
 
 #import "addPurchasesViewController.h"
-#import "BudgetViewController.h"
 #import "Database.h"
+#import "Category.h"
 
 @interface addPurchasesViewController ()
+{
+    //NSMutableArray *data;
+    NSMutableArray *otherButtons;
+}
 
 @end
 
 @implementation addPurchasesViewController
 
-@synthesize Category;
+@synthesize btnCate;
 @synthesize Price;
 @synthesize Name;
 
@@ -33,6 +37,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //data = [[NSMutableArray alloc]init];
+    Category *c = [[Category alloc]init];
+    otherButtons = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        //NSLog(@"Category: %d, %@, %@", cc.category_id, cc.category_name, cc.category_image);
+        [otherButtons addObject:cc];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +59,7 @@
     [self setPrice:nil];
     [self setName:nil];
     [self setDone:nil];
-    [self setCategory:nil];
+    [self setBtnCate:nil];
     [super viewDidUnload];
 }
 
@@ -57,18 +71,30 @@
     NSString *stringValue = Price.text;
     NSString *convertPrice = [NSString stringWithFormat:@"%.2f",[stringValue doubleValue]/(double)100.00];
     
-    [db addPurchase:convertPrice.doubleValue :Category.text=@"Fake" :Name.text];
+    [db addPurchase:convertPrice.doubleValue :btnCate.currentTitle :Name.text];
     
-   // BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
-   // [self.navigationController pushViewController:svc animated:YES];
+    // BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
+    // [self.navigationController pushViewController:svc animated:YES];
     
 }
 
 - (IBAction)SelectCat:(id)sender {
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"Select Category" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Category", nil];
-
-    [action showFromTabBar:self.tabBarController.tabBar];
+    UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
     
+    for(Category *c in otherButtons)
+    {
+        [as addButtonWithTitle:c.category_name];
+    }
+    
+    [as showFromTabBar:self.tabBarController.tabBar];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    Category *c = [otherButtons objectAtIndex:buttonIndex];
+    //[data addObject:c.category_name];
+    [btnCate setTitle:c.category_name forState:UIControlStateNormal];
+    //[[self budgetCat]reloadData];
 }
 
 
