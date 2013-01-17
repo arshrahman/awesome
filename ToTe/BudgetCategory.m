@@ -7,7 +7,16 @@
 //
 
 #import "BudgetCategory.h"
+#import "Database.h"
+#import "sqlite3.h"
 
 @implementation BudgetCategory
+{
+    sqlite3 *budgetDB;
+    NSString *dbPathString;
+    NSMutableArray *categoryList;
+}
+
+
 
 @end

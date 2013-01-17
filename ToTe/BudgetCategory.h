@@ -10,4 +10,12 @@
 
 @interface BudgetCategory : NSObject
 
+@property(nonatomic)int budgetCategory_id;
+@property(nonatomic)int budget_id;
+@property(nonatomic)int category_id;
+@property(nonatomic)double category_spent;
+@property(nonatomic)double category_amount;
+@property(nonatomic)NSString *bcategory_name;
+@property(nonatomic)NSString *bcategory_image;
+
 @end

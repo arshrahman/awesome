@@ -9,14 +9,14 @@
 
 #import "BudgetViewController.h"
 #import "Category.h"
+#import "BudgetCategory.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface BudgetViewController ()
 {
     int budgetValue;
-    //Temporary
-    NSMutableArray *data;
+    NSMutableArray *bgCat;
     NSMutableArray *otherButtons;
 }
 
@@ -26,6 +26,7 @@
 
 @synthesize budgetCat;
 @synthesize scrollView;
+@synthesize txtBudget;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,9 +42,29 @@
     [super viewDidLoad];
     [self.tabBarController setDelegate:self];
     self.navigationItem.hidesBackButton = YES;
-    data = [[NSMutableArray alloc]init];
+    bgCat = [[NSMutableArray alloc]init];
     Category *c = [[Category alloc]init];
     otherButtons = [[NSMutableArray alloc]init];
+    
+    NSDate *now = [NSDate date];
+    int daysToAdd = 1;
+    NSDate *newDate1 = [now dateByAddingTimeInterval:7*60*60*24*daysToAdd];
+    //NSLog(@"Day: %@", newDate1);
+    
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    int weekday = [comps weekday];
+    NSLog(@"day: %d", weekday);
+    
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    dayComponent.day = 2-weekday;
+    
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    NSDate *days = [theCalendar dateByAddingComponents:dayComponent toDate:now options:0];
+    NSLog(@"tochange: %d", dayComponent.day);
+    NSLog(@"Day1: %@", days);
+
     
     for(Category *cc in [c SelectAllCategory])
     {
@@ -71,7 +92,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1 + [data count];
+    return 1 + [bgCat count];
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,8 +122,6 @@
             [staticCell.contentView addSubview:lblstatic];
         }
         
-        //staticCell.textLabel.text = @"Add Category";
-        
         return staticCell;
     }
     else
@@ -122,13 +141,11 @@
             txtCatValue.tag = 100;
             txtCatValue.placeholder = @"Enter Amount";
             txtCatValue.textColor = [UIColor blackColor];
-            txtCatValue.keyboardType = UIKeyboardTypeNumberPad;
+            txtCatValue.keyboardType = UIKeyboardTypeDecimalPad;
             txtCatValue.clearButtonMode = UITextFieldViewModeWhileEditing;
             
             [txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
             [txtCatValue addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-            [txtCatValue addTarget:self action:@selector(textFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEnd];
-            
             
             lblCat = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 130, 30)];
             lblCat.textColor = [UIColor blackColor];
@@ -150,7 +167,10 @@
             imv = (UIImageView *)[cell.contentView viewWithTag:300];
         }
         
-        lblCat.text = [data objectAtIndex:indexPath.row-1];
+        BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
+        
+        lblCat.text = bgc.bcategory_name;
+        imv.image = [UIImage imageNamed:bgc.bcategory_image];
         
         return cell;
     }
@@ -163,15 +183,17 @@
 
 - (void)textFieldEditingChanged:(UITextField *)textField
 {
-    budgetValue += [textField.text intValue];
+    NSIndexPath *indexPath = [self.budgetCat indexPathForCell:(UITableViewCell *)[(UIView *)[textField superview] superview]];
+    
+    BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
+
+    budgetValue -= bgc.category_amount;
+    bgc.category_amount = [textField.text intValue];
+    budgetValue += bgc.category_amount;
+    
     lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
 }
 
--(void)textFieldDoneEditing:(UITextField *)textField
-{
-    //budgetValue += [textField.text intValue];
-    //lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -194,7 +216,7 @@
     {
         /*Person *p = [arrayOfPerson objectAtIndex:indexPath.row];
          [self deleteData:[NSString stringWithFormat:@"DELETE FROM PERSONS WHERE NAME IS '%s'", [p.name UTF8String]]];*/
-        [data removeObjectAtIndex:indexPath.row-1];
+        [bgCat removeObjectAtIndex:indexPath.row-1];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     }
@@ -209,8 +231,55 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     Category *c = [otherButtons objectAtIndex:buttonIndex];
-    [data addObject:c.category_name];
+    BudgetCategory *bc = [[BudgetCategory alloc]init];
+    bc.category_id = c.category_id;
+    bc.bcategory_name = c.category_name;
+    bc.bcategory_image = c.category_image;
+    
+    [bgCat addObject:bc];
     [[self budgetCat]reloadData];
+}
+
+-(IBAction)btnDone:(id)sender
+{    
+    bool showAlert = false;
+
+    if (txtBudget.text.length > 0 && bgCat.count > 0)
+    {
+        int wkIncome = [txtBudget.text intValue];
+        
+        if (wkIncome > budgetValue)
+        {
+            for (BudgetCategory *bc in bgCat)
+            {
+                if (bc.category_amount == 0)
+                {
+                    showAlert = true;
+                }
+            }
+            
+            if (showAlert == true)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Budget"message:@"Please specify the amount for your categories!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                
+            }
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Budget"message:@"Weekly income must be greater than your budget!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Budget"message:@"Please Enter your weekly income and categories!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+
+    }
 }
 
 - (void)didReceiveMemoryWarning

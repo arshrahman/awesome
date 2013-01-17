@@ -15,7 +15,9 @@
     IBOutlet UILabel *lblBudget;
 }
 @property (nonatomic) IBOutlet UITableView *budgetCat;
-@property (weak, nonatomic) IBOutlet UITextField *txtBudget;
-@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UITextField *txtBudget;
+@property (strong, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
+
+-(IBAction)btnDone:(id)sender;
 
 @end

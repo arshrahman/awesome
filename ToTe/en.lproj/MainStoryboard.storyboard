@@ -587,7 +587,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="$100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FG-cq-dE5">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FG-cq-dE5">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="WDe-RI-ypn"/>
                                     <constraint firstAttribute="width" constant="124" id="WQW-sv-l81"/>
@@ -613,12 +613,12 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-4i-SaY">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-4i-SaY">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="157" id="S2g-rd-YHC"/>
                                             <constraint firstAttribute="height" constant="55" id="jmC-TF-xat"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04x-tA-inN">
@@ -672,9 +672,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="xol-8q-PXv">
                         <barButtonItem key="backBarButtonItem" title="Back" id="s0c-46-3FF"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="iiE-sd-I2L">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="iiE-sd-I2L">
                             <connections>
-                                <segue destination="vFS-dx-f3U" kind="push" id="kEr-Hk-KzC"/>
+                                <action selector="btnDone:" destination="s9E-KB-X98" id="lWx-FI-WSy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1098,7 +1098,7 @@
             <objects>
                 <viewController title="setExpenseViewController" id="vFS-dx-f3U" customClass="setBudgetCategoriesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GWy-jM-4bP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk5-gI-LaR">
@@ -1590,6 +1590,7 @@
         <class className="BudgetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
             <relationships>
+                <relationship kind="action" name="btnDone:"/>
                 <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
@@ -1634,10 +1635,10 @@
             <relationships>
                 <relationship kind="action" name="Done:"/>
                 <relationship kind="action" name="SelectCat:"/>
-                <relationship kind="outlet" name="Category" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="Done" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="Name" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="Price" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="btnCate" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="setBudgetViewController" superclassName="UIViewController">
@@ -1646,6 +1647,7 @@
         <class className="viewPurchasesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
             <relationships>
+                <relationship kind="action" name="Swicth:"/>
                 <relationship kind="outlet" name="purchaseTV" candidateClass="UITableView"/>
             </relationships>
         </class>

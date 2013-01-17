@@ -10,4 +10,10 @@
 
 @interface Budget : NSObject
 
+@property(nonatomic)int budget_id;
+@property(nonatomic)NSString *startDate;
+@property(nonatomic)NSString *endDate;
+@property(nonatomic)double budget_amount;
+@property(nonatomic)double wincome;
+
 @end
