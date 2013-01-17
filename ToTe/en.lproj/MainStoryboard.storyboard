@@ -292,18 +292,31 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZk-CD-9hG">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="306" id="6ga-zI-exF"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="Lyj-jx-ctU" id="ar6-BV-bxo"/>
                                     <outlet property="delegate" destination="Lyj-jx-ctU" id="H6c-tZ-KJf"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0EH-ev-o4i">
+                                <segments>
+                                    <segment title="Today"/>
+                                    <segment title="This Week"/>
+                                </segments>
+                                <connections>
+                                    <action selector="Swicth:" destination="Lyj-jx-ctU" eventType="valueChanged" id="2p9-cF-QFk"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="rZk-CD-9hG" firstAttribute="top" secondItem="5os-mr-uqz" secondAttribute="top" type="default" id="X5x-X3-UfQ"/>
-                            <constraint firstItem="rZk-CD-9hG" firstAttribute="bottom" secondItem="5os-mr-uqz" secondAttribute="bottom" type="default" id="hkG-2W-tQW"/>
-                            <constraint firstItem="rZk-CD-9hG" firstAttribute="trailing" secondItem="5os-mr-uqz" secondAttribute="trailing" type="default" id="i4u-9x-3nQ"/>
-                            <constraint firstItem="rZk-CD-9hG" firstAttribute="leading" secondItem="5os-mr-uqz" secondAttribute="leading" type="default" id="yoX-Jg-nC6"/>
+                            <constraint firstItem="rZk-CD-9hG" firstAttribute="leading" secondItem="5os-mr-uqz" secondAttribute="leading" type="default" id="AWC-X5-q93"/>
+                            <constraint firstItem="0EH-ev-o4i" firstAttribute="top" secondItem="5os-mr-uqz" secondAttribute="top" constant="8" id="e4z-t4-412"/>
+                            <constraint firstItem="rZk-CD-9hG" firstAttribute="trailing" secondItem="5os-mr-uqz" secondAttribute="trailing" type="default" id="o51-BW-Yg6"/>
+                            <constraint firstItem="0EH-ev-o4i" firstAttribute="centerX" secondItem="rZk-CD-9hG" secondAttribute="centerX" type="default" id="qQc-hq-bai"/>
+                            <constraint firstItem="rZk-CD-9hG" firstAttribute="bottom" secondItem="5os-mr-uqz" secondAttribute="bottom" type="default" id="uZo-Sn-3Go"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -630,9 +643,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="aDU-tR-Xuh" firstAttribute="trailing" secondItem="XWb-HR-Rdb" secondAttribute="trailing" type="default" id="0PI-QP-B1g"/>
-                                    <constraint firstItem="XWb-HR-Rdb" firstAttribute="centerX" secondItem="ZYW-WZ-QRD" secondAttribute="centerX" type="default" id="7l5-zz-mQ1"/>
                                     <constraint firstItem="NYA-vV-4Nh" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="15" id="IoY-Ua-J1q"/>
                                     <constraint firstAttribute="trailing" secondItem="aDU-tR-Xuh" secondAttribute="trailing" constant="27" id="Rnc-K7-5LI"/>
+                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="centerX" secondItem="ZYW-WZ-QRD" secondAttribute="centerX" type="default" id="RqU-Ji-q52"/>
                                     <constraint firstItem="XWb-HR-Rdb" firstAttribute="leading" secondItem="aDU-tR-Xuh" secondAttribute="leading" type="default" id="XUP-vb-Zg6"/>
                                     <constraint firstItem="NYA-vV-4Nh" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="42" id="ewL-h0-o3A"/>
                                     <constraint firstItem="aDU-tR-Xuh" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="18" id="gub-mc-Yt2"/>
@@ -1573,70 +1586,6 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
-    <classes>
-        <class className="BudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ByMonthViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByMonthViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnCalender:"/>
-                <relationship kind="outlet" name="btnCalendar" candidateClass="UIBarItem"/>
-                <relationship kind="outlet" name="customDate" candidateClass="CustomDateUIPickerView"/>
-            </relationships>
-        </class>
-        <class className="CustomDateUIPickerView" superclassName="UIPickerView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
-        </class>
-        <class className="IncomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btndone:"/>
-                <relationship kind="outlet" name="txtincome" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MainPageViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="OverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
-        </class>
-        <class className="StartPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-        <class className="addPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/addPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Done:"/>
-                <relationship kind="action" name="SelectCat:"/>
-                <relationship kind="outlet" name="Done" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="Name" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="Price" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="btnCate" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="setBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
-        </class>
-        <class className="viewPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="purchaseTV" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

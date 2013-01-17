@@ -122,4 +122,8 @@
     [self setPurchaseTV:nil];
     [super viewDidUnload];
 }
+- (IBAction)Swicth:(id)sender {
+    
+    NSLog(@"Switch");
+}
 @end

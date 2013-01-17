@@ -13,4 +13,5 @@
 @property (nonatomic, strong)NSMutableArray *purchasesList;
 @property (strong, nonatomic) IBOutlet UITableView *purchaseTV;
 
+- (IBAction)Swicth:(id)sender;
 @end
