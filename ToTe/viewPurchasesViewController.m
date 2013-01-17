@@ -62,7 +62,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MainCell"];
         NSLog(@"Check data rolled in");
         Purchase *p = [purchasesList objectAtIndex:indexPath.row];
-        
+
         if(p != nil)
         {
             lbName.text = p.name;
@@ -73,18 +73,18 @@
         NSLog(@"Creating label");
         
         lbName = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 185, 30)];
-        //lbName.text = [NSString stringWithFormat:@"Name: %d", indexPath.row];
+        lbName.text = [NSString stringWithFormat:@"Name: %d", indexPath.row];
         lbName.font = [UIFont systemFontOfSize:20];
         lbName.tag = 100;
         lbName.textColor = [UIColor blackColor];
-        lbCategory = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 100, 10)];
-        lbCategory.font = [UIFont systemFontOfSize:10];
-        //lbCategory.text = @"Category: ";
+        lbCategory = [[UILabel alloc] initWithFrame:CGRectMake(150, 5, 185, 30)];
+        lbCategory.font = [UIFont systemFontOfSize:20];
+        lbCategory.text = @"Category: ";
         lbCategory.tag = 100;
         lbCategory.textColor = [UIColor blackColor];
-        lbPrice = [[UILabel alloc] initWithFrame:CGRectMake(150, 5, 185, 30)];
-        lbPrice.font = [UIFont systemFontOfSize:30];
-        //lbPrice.text = @"Price: ";
+        lbPrice = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 100, 10)];
+        lbPrice.font = [UIFont systemFontOfSize:12];
+        lbPrice.text = @"Price: ";
         lbPrice.tag = 100;
         lbPrice.textColor = [UIColor blackColor];
         [cell.contentView addSubview:lbName];
@@ -100,9 +100,16 @@
     //cell.textLabel.text = [NSString stringWithFormat:@"Index row of this cell: %d", indexPath.row];
     //[[self purchaseTV]reloadData];
     return cell;
-    
-    
-    
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [purchasesList removeObjectAtIndex:indexPath.row];
+        
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    }
 }
 
 - (void)didReceiveMemoryWarning
