@@ -10,6 +10,7 @@
 #import "BudgetViewController.h"
 #import "Category.h"
 #import "BudgetCategory.h"
+#import "Budget.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -46,29 +47,10 @@
     Category *c = [[Category alloc]init];
     otherButtons = [[NSMutableArray alloc]init];
     
-    NSDate *now = [NSDate date];
-    int daysToAdd = 1;
-    NSDate *newDate1 = [now dateByAddingTimeInterval:7*60*60*24*daysToAdd];
-    //NSLog(@"Day: %@", newDate1);
     
-    
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    int weekday = [comps weekday];
-    NSLog(@"day: %d", weekday);
-    
-    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-    dayComponent.day = 2-weekday;
-    
-    NSCalendar *theCalendar = [NSCalendar currentCalendar];
-    NSDate *days = [theCalendar dateByAddingComponents:dayComponent toDate:now options:0];
-    NSLog(@"tochange: %d", dayComponent.day);
-    NSLog(@"Day1: %@", days);
-
     
     for(Category *cc in [c SelectAllCategory])
     {
-        //NSLog(@"Category: %d, %@, %@", cc.category_id, cc.category_name, cc.category_image);
         [otherButtons addObject:cc];
     }
     
@@ -265,7 +247,8 @@
             }
             else
             {
-                
+                Budget *b = [[Budget alloc]init];
+                [b InsertBudget:budgetValue:wkIncome];
             }
         }
         else
