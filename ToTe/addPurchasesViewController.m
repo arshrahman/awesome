@@ -9,10 +9,10 @@
 #import "addPurchasesViewController.h"
 #import "Database.h"
 #import "Category.h"
+#import "Purchase.h"
 
 @interface addPurchasesViewController ()
 {
-    //NSMutableArray *data;
     NSMutableArray *otherButtons;
 }
 
@@ -37,13 +37,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //data = [[NSMutableArray alloc]init];
     Category *c = [[Category alloc]init];
     otherButtons = [[NSMutableArray alloc]init];
     
     for(Category *cc in [c SelectAllCategory])
     {
-        //NSLog(@"Category: %d, %@, %@", cc.category_id, cc.category_name, cc.category_image);
         [otherButtons addObject:cc];
     }
     
@@ -66,16 +64,15 @@
 //When user click on Done button
 - (IBAction)Done:(id)sender {
     NSLog(@"Done event triggered!");
-    Database *db = [[Database alloc]init];
+    Purchase *p = [[Purchase alloc]init];
     
     NSString *stringValue = Price.text;
     NSString *convertPrice = [NSString stringWithFormat:@"%2f",[stringValue doubleValue]/(double)100.00];
     
-    [db addPurchase:convertPrice.doubleValue :btnCate.currentTitle :Name.text];
+    [p addPurchase:convertPrice.doubleValue :btnCate.currentTitle :Name.text];
     
     // BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
     // [self.navigationController pushViewController:svc animated:YES];
-    
 }
 
 - (IBAction)SelectCat:(id)sender {

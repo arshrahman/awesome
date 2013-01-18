@@ -14,6 +14,5 @@
 - (void)CreateDB;
 - (BOOL)checkBudgetExists;
 - (BOOL)InsertWeeklyIncome:(int)income;
-- (BOOL) viewPurchases;
-- (BOOL)addPurchase:(double)price :(NSString *)category : (NSString *)name;
+
 @end

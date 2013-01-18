@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TPKeyboardAvoidingScrollView;
+@interface viewPurchasesViewController : UIViewController<UIActionSheetDelegate,UITabBarControllerDelegate>
+{
+    IBOutlet UITableView *purchaseTV;
+    IBOutlet UILabel *lblBudget;
+}
 
-@interface viewPurchasesViewController : UIViewController
-
-@property (nonatomic, strong)NSMutableArray *purchasesList;
-@property (strong, nonatomic) IBOutlet UITableView *purchaseTV;
+@property (nonatomic) IBOutlet UITableView *purchaseTV;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 
 - (IBAction)Swicth:(id)sender;
+
+
+
 @end

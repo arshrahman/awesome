@@ -8,22 +8,6 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Average Weekly Income:</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-			<key>Title</key>
-			<string></string>
-			<key>Key</key>
-			<string>Group</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
 			<string>Publish To:</string>
 		</dict>
 		<dict>
@@ -60,7 +44,13 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>FooterText</key>
-			<string>This Mobile Application is partof the Humanities &amp; Social Sciences School Deliverables to the Tote Board Project.Creators of this App: Dr. Tan Wah Pheow Abigail SengKweh Yu TingEdwin Paul RahmanCredits Thanks to the designers who helped made this possible: The League of Movable TypeGlyphicons</string>
+			<string>This Mobile Application is part
+of the Humanities &amp; Social Sciences School Deliverables to the Tote Board Project.
+Creators of this App: Dr. Tan Wah Pheow Abigail Seng
+Kweh Yu Ting
+Edwin Paul Rahman
+Credits Thanks to the designers who helped made this possible: The League of Movable Type
+Glyphicons</string>
 			<key>Title</key>
 			<string>About Us</string>
 		</dict>
