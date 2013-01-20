@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Database : NSObject
+{
+    int FirstUse;
+}
 
 - (NSString *)SetDBPath;
 - (void)CreateDB;

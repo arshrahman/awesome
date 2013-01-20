@@ -15,6 +15,9 @@
 @end
 
 @implementation setBudgetViewController
+{
+    //Database *d;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,8 +32,11 @@
 {
     [super viewDidLoad];
     
-    Database *d = [[Database alloc]init];
-    if ([d checkBudgetExists])
+    NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"FirstTimeUser"];
+    
+    int FirstTimeUse = [ns intValue];
+    NSLog(@"user: %d", FirstTimeUse);
+    if (FirstTimeUse == 2)
     {
         BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
         [self.navigationController pushViewController:svc animated:YES];
