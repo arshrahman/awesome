@@ -14,7 +14,7 @@
 @implementation Database
 {
     sqlite3 *budgetDB;
-    //NSString *dbPathString;
+    NSString *dbPathString;
 }
 
 - (NSString *)SetDBPath
@@ -26,7 +26,7 @@
 
 - (void)CreateDB
 {
-    NSString *dbPathString = [self SetDBPath];
+    dbPathString = [self SetDBPath];
     char *error;
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -42,7 +42,7 @@
             @try
             {
                 sqlite3_exec(budgetDB, sql_stmt, NULL, NULL, &error);
-                FirstUse = 2;
+                FirstUse = 1;
             }
             @catch (NSException *exception)
             {
@@ -58,7 +58,14 @@
     }
     else
     {
-        FirstUse = 1;
+        if (self.checkBudgetExists)
+        {
+            FirstUse = 3;
+        }
+        else
+        {
+            FirstUse = 4;
+        }
     }
     
     [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:FirstUse] forKey:@"FirstTimeUser"];
@@ -68,7 +75,7 @@
 {
     bool result = false;
     int count;
-    NSString *dbPathString = [self SetDBPath];
+    dbPathString = [self SetDBPath];
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
@@ -80,8 +87,7 @@
         {
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
-                NSString *s = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-                count = [s intValue];
+                count = sqlite3_column_int(statement, 0);
                 NSLog(@"count : %d", count);
             }
         }
@@ -90,7 +96,7 @@
             NSLog(@"Hi!");
         }
         
-        if (count == 0)
+        if (count > 0)
         {
             result = true;
         }
@@ -106,7 +112,7 @@
 {
     char *error;
     bool result = false;
-    NSString *dbPathString = [self SetDBPath];
+    dbPathString = [self SetDBPath];
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
