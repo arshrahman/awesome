@@ -74,6 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"tableview rows: %d", 1+bgCat.count);    
     return 1 + [bgCat count];
 }
 
@@ -95,7 +96,7 @@
             img = [[UIImageView alloc]initWithFrame:CGRectMake(7,7, 25, 25)];
             img.image=[UIImage imageNamed:@"glyphicons_190_circle_plus.png"];
             
-            lblstatic = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 180, 30)];
+            lblstatic = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 160, 30)];
             lblstatic.textColor = [UIColor grayColor];
             lblstatic.font = [UIFont fontWithName:@"Helvetica" size:16];
             lblstatic.text = @"Add Category";
@@ -118,12 +119,12 @@
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             
-            txtCatValue = [[UITextField alloc]initWithFrame:CGRectMake(170, 10, 185, 30)];
+            txtCatValue = [[UITextField alloc]initWithFrame:CGRectMake(170, 10, 165, 30)];
             txtCatValue.font = [UIFont fontWithName:@"Helvetica" size:14];
             txtCatValue.tag = 100;
             txtCatValue.placeholder = @"Enter Amount";
             txtCatValue.textColor = [UIColor blackColor];
-            txtCatValue.keyboardType = UIKeyboardTypeDecimalPad;
+            txtCatValue.keyboardType = UIKeyboardTypeNumberPad;
             txtCatValue.clearButtonMode = UITextFieldViewModeWhileEditing;
             
             [txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
@@ -165,7 +166,15 @@
 
 - (void)textFieldEditingChanged:(UITextField *)textField
 {
-    NSIndexPath *indexPath = [self.budgetCat indexPathForCell:(UITableViewCell *)[(UIView *)[textField superview] superview]];
+    //UITableViewCell *selectedCell = (UITableViewCell *)textField.superview.superview;
+    //NSIndexPath *indexPath = [self.budgetCat indexPathForCell:selectedCell];
+    //NSIndexPath *indexPath = [self.budgetCat indexPathForCell:(UITableViewCell *)[(UIView *)[textField superview] superview]];
+    
+    CGRect textFieldFrame = [textField convertRect:textField.bounds toView:self.budgetCat];
+    NSIndexPath *indexPath = [self.budgetCat indexPathForRowAtPoint:textFieldFrame.origin];
+    
+    NSLog(@"row: %d", indexPath.row);
+    NSLog(@"bgcat count: %d", bgCat.count);
     
     BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
 
@@ -196,9 +205,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        /*Person *p = [arrayOfPerson objectAtIndex:indexPath.row];
-         [self deleteData:[NSString stringWithFormat:@"DELETE FROM PERSONS WHERE NAME IS '%s'", [p.name UTF8String]]];*/
+        BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
+        budgetValue -= bgc.category_amount;
         [bgCat removeObjectAtIndex:indexPath.row-1];
+        lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     }
@@ -248,7 +258,9 @@
             else
             {
                 Budget *b = [[Budget alloc]init];
-                [b InsertBudget:budgetValue:wkIncome];
+                int budgetID = [b InsertBudget:budgetValue:wkIncome];
+                bool result = [b InsertBudgetCategories:bgCat :budgetID];
+                NSLog(@"result: %@", result);
             }
         }
         else

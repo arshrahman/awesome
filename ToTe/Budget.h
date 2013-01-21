@@ -17,6 +17,7 @@
 @property(nonatomic)double wincome;
 
 -(NSMutableArray*)GetDate;
-- (BOOL)InsertBudget:(double)budgetAmount :(double)wkIncome;
+- (int)InsertBudget:(double)budgetAmount :(double)wkIncome;
+-(BOOL)InsertBudgetCategories:(NSMutableArray *)catList:(int)budgetID;
 
 @end

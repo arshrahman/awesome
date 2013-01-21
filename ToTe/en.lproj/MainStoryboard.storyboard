@@ -461,26 +461,35 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Set a new budget by clicking here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCC-Hy-KBh">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="zST-uJ-OVj">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="2yT-iA-WRv"/>
+                                    <constraint firstAttribute="height" constant="143" id="uLP-8P-Fft"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="p8V-E3-ljz" id="IDW-L3-Ve8"/>
+                                    <outlet property="delegate" destination="p8V-E3-ljz" id="lEp-sM-rTQ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.56706204379562042" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BCC-Hy-KBh" firstAttribute="centerX" secondItem="B00-G3-9TH" secondAttribute="centerX" type="default" id="Awh-QB-yWu"/>
-                            <constraint firstItem="BCC-Hy-KBh" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="gll-8r-sLT"/>
+                            <constraint firstItem="zST-uJ-OVj" firstAttribute="centerX" secondItem="B00-G3-9TH" secondAttribute="centerX" type="default" id="tJX-iH-ckn"/>
+                            <constraint firstItem="zST-uJ-OVj" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="zZe-Ay-aT9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="pzJ-Bl-CJg">
                         <barButtonItem key="backBarButtonItem" title="Back" id="gla-xW-XoW"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="OpV-q9-kBE">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="OpV-q9-kBE">
                             <connections>
                                 <segue destination="s9E-KB-X98" kind="push" id="GGc-L1-EFl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="topView" destination="zST-uJ-OVj" id="L9M-a2-xWa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HUC-E6-7sb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -581,7 +590,7 @@
             </objects>
             <point key="canvasLocation" x="-324" y="-1601"/>
         </scene>
-        <!--Budget View Controller - Budget-->
+        <!--Budget View Controller - Add Budget-->
         <scene sceneID="TXS-g9-AYg">
             <objects>
                 <viewController storyboardIdentifier="BudgetViewController" id="s9E-KB-X98" customClass="BudgetViewController" sceneMemberID="viewController">
@@ -641,10 +650,10 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XWb-HR-Rdb">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" indicatorStyle="white" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XWb-HR-Rdb">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="176" id="vN7-4e-DRV"/>
+                                            <constraint firstAttribute="height" constant="169" id="pqm-wa-9PA"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dataSource" destination="s9E-KB-X98" id="ad0-Mc-jY8"/>
@@ -653,19 +662,19 @@
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="trailing" secondItem="XWb-HR-Rdb" secondAttribute="trailing" type="default" id="0PI-QP-B1g"/>
+                                    <constraint firstAttribute="bottom" secondItem="XWb-HR-Rdb" secondAttribute="bottom" constant="27" id="9Sc-dp-KEg"/>
+                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="centerX" secondItem="ZYW-WZ-QRD" secondAttribute="centerX" type="default" id="AaL-ci-eRq"/>
                                     <constraint firstItem="NYA-vV-4Nh" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="15" id="IoY-Ua-J1q"/>
-                                    <constraint firstAttribute="trailing" secondItem="aDU-tR-Xuh" secondAttribute="trailing" constant="27" id="Rnc-K7-5LI"/>
-                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="centerX" secondItem="ZYW-WZ-QRD" secondAttribute="centerX" type="default" id="RqU-Ji-q52"/>
-                                    <constraint firstItem="XWb-HR-Rdb" firstAttribute="leading" secondItem="aDU-tR-Xuh" secondAttribute="leading" type="default" id="XUP-vb-Zg6"/>
+                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="trailing" secondItem="XWb-HR-Rdb" secondAttribute="trailing" type="default" id="Mf5-av-j8j"/>
                                     <constraint firstItem="NYA-vV-4Nh" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="42" id="ewL-h0-o3A"/>
                                     <constraint firstItem="aDU-tR-Xuh" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="18" id="gub-mc-Yt2"/>
+                                    <constraint firstItem="aDU-tR-Xuh" firstAttribute="leading" secondItem="XWb-HR-Rdb" secondAttribute="leading" type="default" id="i5i-Gy-pPx"/>
                                     <constraint firstItem="04x-tA-inN" firstAttribute="bottom" secondItem="Qlb-4i-SaY" secondAttribute="bottom" type="default" id="iEm-ck-gwa"/>
                                     <constraint firstItem="04x-tA-inN" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="13" id="kzO-of-sMC"/>
                                     <constraint firstItem="Qlb-4i-SaY" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="128" id="pXy-gv-p7n"/>
                                     <constraint firstItem="XWb-HR-Rdb" firstAttribute="top" secondItem="ZYW-WZ-QRD" secondAttribute="top" constant="113" id="rW6-wZ-Wd8"/>
                                     <constraint firstItem="04x-tA-inN" firstAttribute="leading" secondItem="ZYW-WZ-QRD" secondAttribute="leading" constant="112" id="sgg-ay-pnD"/>
-                                    <constraint firstAttribute="bottom" secondItem="XWb-HR-Rdb" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="zcW-lQ-bFW"/>
+                                    <constraint firstAttribute="trailing" secondItem="aDU-tR-Xuh" secondAttribute="trailing" constant="27" id="wUM-6K-CNr"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -681,7 +690,7 @@
                             <constraint firstItem="8FG-cq-dE5" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="10" id="lsj-cD-DBJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Budget" id="xol-8q-PXv">
+                    <navigationItem key="navigationItem" title="Add Budget" id="xol-8q-PXv">
                         <barButtonItem key="backBarButtonItem" title="Back" id="s0c-46-3FF"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="iiE-sd-I2L">
                             <connections>
@@ -1654,12 +1663,17 @@
         </class>
         <class className="setBudgetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="viewPurchasesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
             <relationships>
                 <relationship kind="action" name="Swicth:"/>
+                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="purchaseTV" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
             </relationships>
         </class>
     </classes>

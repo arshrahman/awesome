@@ -10,4 +10,6 @@
 
 @interface setBudgetViewController : UIViewController
 
+@property(nonatomic, retain)IBOutlet UITableView *topView;
+
 @end
