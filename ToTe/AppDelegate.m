@@ -14,6 +14,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    if ([UITabBar instancesRespondToSelector:@selector(setSelectedImageTintColor:)])
+    {
+        //[[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
+    }
+    [[UINavigationBar appearance]setTintColor:[UIColor lightGrayColor]];
+    //[[UINavigationBar appearance]setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    //[[UITabBar appearance]setTintColor:[UIColor blackColor]];
+    
     return YES;
 }
 							

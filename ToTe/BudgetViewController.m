@@ -260,7 +260,7 @@
                 Budget *b = [[Budget alloc]init];
                 int budgetID = [b InsertBudget:budgetValue:wkIncome];
                 bool result = [b InsertBudgetCategories:bgCat :budgetID];
-                NSLog(@"result: %@", result);
+                NSLog(@"result: %c", result);
             }
         }
         else

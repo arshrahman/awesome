@@ -461,34 +461,75 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="zST-uJ-OVj">
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <pageControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tzb-A0-jD5">
+                                <color key="pageIndicatorTintColor" white="0.50019958941605835" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="pageControl:" destination="p8V-E3-ljz" eventType="valueChanged" id="coM-Ae-zoV"/>
+                                </connections>
+                            </pageControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6go-SC-sRo">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="257" id="2yT-iA-WRv"/>
-                                    <constraint firstAttribute="height" constant="143" id="uLP-8P-Fft"/>
+                                    <constraint firstAttribute="height" constant="131" id="Hih-we-t3G"/>
+                                    <constraint firstAttribute="width" constant="274" id="dmj-Bm-AQb"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="dataSource" destination="p8V-E3-ljz" id="IDW-L3-Ve8"/>
-                                    <outlet property="delegate" destination="p8V-E3-ljz" id="lEp-sM-rTQ"/>
+                                    <outlet property="dataSource" destination="p8V-E3-ljz" id="bXu-jc-fDS"/>
+                                    <outlet property="delegate" destination="p8V-E3-ljz" id="Mvn-zR-AHb"/>
                                 </connections>
                             </tableView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHd-mK-Mk9">
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-VB-cN3">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="131" id="5AK-d1-bkF"/>
+                                            <constraint firstAttribute="width" constant="274" id="hrv-7h-AEW"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="p8V-E3-ljz" id="Cmz-RJ-HJD"/>
+                                            <outlet property="delegate" destination="p8V-E3-ljz" id="FxC-PF-upu"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KB7-VB-cN3" secondAttribute="trailing" constant="23" id="FSl-Pu-zNn"/>
+                                    <constraint firstItem="KB7-VB-cN3" firstAttribute="centerY" secondItem="GHd-mK-Mk9" secondAttribute="centerY" type="default" id="Hzg-fU-hG4"/>
+                                    <constraint firstAttribute="bottom" secondItem="KB7-VB-cN3" secondAttribute="bottom" constant="8" id="kS4-ct-QwK"/>
+                                    <constraint firstItem="KB7-VB-cN3" firstAttribute="centerX" secondItem="GHd-mK-Mk9" secondAttribute="centerX" type="default" id="tg2-s6-SwK"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="p8V-E3-ljz" id="5sy-VE-DEY"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="0.56706204379562042" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zST-uJ-OVj" firstAttribute="centerX" secondItem="B00-G3-9TH" secondAttribute="centerX" type="default" id="tJX-iH-ckn"/>
-                            <constraint firstItem="zST-uJ-OVj" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="zZe-Ay-aT9"/>
+                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="trailing" secondItem="B00-G3-9TH" secondAttribute="trailing" type="default" id="AmD-tm-3Ig"/>
+                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="bottom" secondItem="B00-G3-9TH" secondAttribute="bottom" type="default" id="GM2-Yd-qWX"/>
+                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="176" id="Lxc-9M-DYS"/>
+                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="trailing" secondItem="Tzb-A0-jD5" secondAttribute="trailing" type="default" id="OGF-R3-kil"/>
+                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="centerX" secondItem="6go-SC-sRo" secondAttribute="centerX" type="default" id="SPa-Y7-pJf"/>
+                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="bQE-j9-FTH"/>
+                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="kaO-gv-MsB"/>
+                            <constraint firstItem="6go-SC-sRo" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="oQ0-oQ-NBl"/>
+                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="top" secondItem="GHd-mK-Mk9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sR9-Xb-JXA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="pzJ-Bl-CJg">
                         <barButtonItem key="backBarButtonItem" title="Back" id="gla-xW-XoW"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="OpV-q9-kBE">
                             <connections>
-                                <segue destination="s9E-KB-X98" kind="push" id="GGc-L1-EFl"/>
+                                <action selector="btnClicked:" destination="p8V-E3-ljz" id="Cqa-jB-Png"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="topView" destination="zST-uJ-OVj" id="L9M-a2-xWa"/>
+                        <outlet property="bottomView" destination="KB7-VB-cN3" id="zaM-xW-54s"/>
+                        <outlet property="pageControl" destination="Tzb-A0-jD5" id="t9o-yi-ylN"/>
+                        <outlet property="scroller" destination="GHd-mK-Mk9" id="zcD-zD-Hnd"/>
+                        <outlet property="topView" destination="6go-SC-sRo" id="L13-Ko-hWg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HUC-E6-7sb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -595,7 +636,7 @@
             <objects>
                 <viewController storyboardIdentifier="BudgetViewController" id="s9E-KB-X98" customClass="BudgetViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Oi-av-Xn9">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your Budget:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lo6-VS-0aF">
@@ -1664,6 +1705,12 @@
         <class className="setBudgetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
             <relationships>
+                <relationship kind="action" name="btnClicked:"/>
+                <relationship kind="action" name="pageControl:"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
             </relationships>
         </class>

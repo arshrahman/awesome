@@ -118,7 +118,6 @@
 
 -(NSMutableArray *)GetIncomeBudget
 {
-    char *error;
     NSMutableArray *incomeBudget = [[NSMutableArray alloc]init];
     
     Database *d = [[Database alloc]init];
@@ -136,9 +135,10 @@
             {
                 
                 int column = sqlite3_column_int(statement, 0);
-                NSString *h = @"he";
-                [incomeBudget addObject:h];
-                NSLog(@"column : %d", column);
+                NSNumber *number = [NSNumber numberWithInt:column];
+                
+                [incomeBudget addObject:number];
+                NSLog(@"number : %@", number);
             }
         }
         else
@@ -146,6 +146,7 @@
             NSLog(@"Hi!");
         }
     }
+    return incomeBudget;
 }
 
 
