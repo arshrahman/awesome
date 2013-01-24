@@ -19,5 +19,8 @@
 -(NSMutableArray*)GetDate;
 - (int)InsertBudget:(double)budgetAmount :(double)wkIncome;
 -(BOOL)InsertBudgetCategories:(NSMutableArray *)catList:(int)budgetID;
+-(NSMutableArray *)GetIncomeBudget;
+-(double)GetExpenses;
+-(NSMutableArray *)GetBudgetCategories;
 
 @end

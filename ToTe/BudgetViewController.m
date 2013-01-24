@@ -73,8 +73,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSLog(@"tableview rows: %d", 1+bgCat.count);    
+{  
     return 1 + [bgCat count];
 }
 
@@ -173,9 +172,6 @@
     CGRect textFieldFrame = [textField convertRect:textField.bounds toView:self.budgetCat];
     NSIndexPath *indexPath = [self.budgetCat indexPathForRowAtPoint:textFieldFrame.origin];
     
-    NSLog(@"row: %d", indexPath.row);
-    NSLog(@"bgcat count: %d", bgCat.count);
-    
     BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
 
     budgetValue -= bgc.category_amount;
@@ -260,7 +256,6 @@
                 Budget *b = [[Budget alloc]init];
                 int budgetID = [b InsertBudget:budgetValue:wkIncome];
                 bool result = [b InsertBudgetCategories:bgCat :budgetID];
-                NSLog(@"result: %c", result);
             }
         }
         else

@@ -9,6 +9,7 @@
 #import "setBudgetViewController.h"
 #import "Database.h"
 #import "Budget.h"
+#import "BudgetCategory.h"
 #import "BudgetViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -21,6 +22,9 @@
     NSMutableArray *topArray;
     NSMutableArray *bottomArray;
     NSMutableArray *catList;
+    Budget *b;
+    double income;
+    double expenses;
 }
 
 @synthesize topView;
@@ -44,7 +48,6 @@
     
     NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"FirstTimeUser"];
     int FirstTimeUse = [ns intValue];
-    NSLog(@"user: %d", FirstTimeUse);
     
     if (FirstTimeUse != 3)
     {
@@ -57,6 +60,25 @@
         topArray = [[NSMutableArray alloc]init];
         bottomArray = [[NSMutableArray alloc]init];
         catList = [[NSMutableArray alloc]init];
+        b = [[Budget alloc]init];
+                
+        for(Budget *bb in [b GetIncomeBudget])
+        {
+            [topArray addObject:bb];
+        }
+
+        expenses = b.GetExpenses;
+        income = [[topArray objectAtIndex:0] doubleValue];
+        NSLog(@"Current Expenses: %f", expenses);
+        
+        [bottomArray addObject:[NSNumber numberWithDouble:expenses]];
+        [bottomArray addObject:[NSNumber numberWithDouble:income - expenses]];
+        
+        for (BudgetCategory *bc in b.GetBudgetCategories)
+        {
+            //NSLog(@"bc: %@", bc.bcategory_name);
+            [catList addObject:bc];
+        }
         
         sideView = [[UITableView alloc] initWithFrame:CGRectMake(343, 8, 274, 131) style:UITableViewStylePlain];
         sideView.delegate = self;
@@ -74,8 +96,7 @@
         rightSwipeGestureRecognizer.numberOfTouchesRequired = 1;
         rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
         [scroller addGestureRecognizer:rightSwipeGestureRecognizer];
-        
-        
+
 
         topView.layer.cornerRadius = 10.0f;
         topView.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -107,24 +128,17 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    NSInteger sections;
-	
-	if(tableView == topView) sections = 2;
-	if(tableView == bottomView) sections = 1;
-	if(tableView == sideView) sections = 1;
-    
-	return sections;
-
+{    
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger rows;
 	
-	if(tableView == topView) rows = [topArray count] + 1;
-	if(tableView == bottomView) rows = [bottomArray count] + 2;
-    if(tableView == sideView) rows = 2;
+	if(tableView == topView) rows = [topArray count];
+	if(tableView == bottomView) rows = [bottomArray count];
+    if(tableView == sideView) rows = catList.count;
 	
 	return rows;
 }
@@ -140,15 +154,17 @@
 	}
 	
 	if(tableView == topView)
-		//cell.textLabel.text = [topArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = @"Income : $120";
+		cell.textLabel.text = [[topArray objectAtIndex:indexPath.row] stringValue];
+        //cell.textLabel.text = @"Income : $120";
 	if(tableView == bottomView)
-        //cell.textLabel.text = [bottomArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = @"Current Savings: $100";
+        cell.textLabel.text = [[bottomArray objectAtIndex:indexPath.row] stringValue];
+        //cell.textLabel.text = @"Current Savings: $100";
     if(tableView == sideView)
-		//cell.textLabel.text = [topArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = @"Banana";
-        
+    {
+        BudgetCategory *bc = [catList objectAtIndex:indexPath.row];
+        cell.textLabel.text = bc.bcategory_name;
+    }
+    
 	return cell;
 
 }
