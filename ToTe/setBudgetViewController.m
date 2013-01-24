@@ -80,7 +80,7 @@
             [catList addObject:bc];
         }
         
-        sideView = [[UITableView alloc] initWithFrame:CGRectMake(343, 8, 274, 131) style:UITableViewStylePlain];
+        sideView = [[UITableView alloc] initWithFrame:CGRectMake(347, 8, 270, 130) style:UITableViewStylePlain];
         sideView.delegate = self;
         sideView.dataSource = self;
         
@@ -145,28 +145,80 @@
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *CellIdentifier = @"TwoTablesCell";
+	static NSString *TopTableCell = @"TopTableCell";
+    static NSString *BottomTableCell = @"BottomTableCell";
+    static NSString *SideTableCell = @"SideTableCell";
 	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if(cell == nil)
-    {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-	}
 	
 	if(tableView == topView)
-		cell.textLabel.text = [[topArray objectAtIndex:indexPath.row] stringValue];
-        //cell.textLabel.text = @"Income : $120";
-	if(tableView == bottomView)
-        cell.textLabel.text = [[bottomArray objectAtIndex:indexPath.row] stringValue];
-        //cell.textLabel.text = @"Current Savings: $100";
-    if(tableView == sideView)
     {
-        BudgetCategory *bc = [catList objectAtIndex:indexPath.row];
-        cell.textLabel.text = bc.bcategory_name;
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TopTableCell];
+        
+        UILabel *lblname = nil;
+        UILabel *lblamount = nil;
+        
+        if(cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TopTableCell];
+            
+            lblname = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150, 60)];
+            lblname.textColor = [UIColor blackColor];
+            lblname.font = [UIFont fontWithName:@"Helvetica" size:18];
+            lblname.text = @"Weekly Income:";
+            //lblname.textAlignment = NSTextAlignmentCenter;
+            //[lblname sizeToFit];
+            lblname.tag = 100;
+            
+            lblamount = [[UILabel alloc]initWithFrame:CGRectMake(156, 0, 130, 60)];
+            lblamount.textColor = [UIColor blackColor];
+            lblamount.font = [UIFont fontWithName:@"Helvetica" size:25];
+            lblamount.font = [UIFont boldSystemFontOfSize:25 ];
+            //lblname.textAlignment = NSTextAlignmentCenter;
+            //[lblamount sizeToFit];
+            lblamount.tag = 200;
+            
+            [cell.contentView addSubview:lblname];
+            [cell.contentView addSubview:lblamount];
+        }
+        else
+        {
+            lblname = (UILabel *)[cell.contentView viewWithTag:100];
+            lblamount = (UILabel *)[cell.contentView viewWithTag:200];
+        }
+        
+        if (indexPath.row == 1)lblname.text = @"Weekly Budget:";
+        lblamount.text = [NSString stringWithFormat:@"$%@", [[topArray objectAtIndex:indexPath.row] stringValue]];
+        
+        return cell;
     }
     
-	return cell;
-
+	else if(tableView == bottomView)
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:BottomTableCell];
+        if(cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BottomTableCell];
+        }
+        
+        cell.textLabel.text = [[bottomArray objectAtIndex:indexPath.row] stringValue];
+        //cell.textLabel.text = @"Current Savings: $100";
+        
+        return cell;
+    }
+    
+    else
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SideTableCell];
+        if(cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SideTableCell];
+        }
+        
+        BudgetCategory *bc = [catList objectAtIndex:indexPath.row];
+        cell.textLabel.text = bc.bcategory_name;
+        
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -468,11 +468,11 @@
                                     <action selector="pageControl:" destination="p8V-E3-ljz" eventType="valueChanged" id="coM-Ae-zoV"/>
                                 </connections>
                             </pageControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6go-SC-sRo">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6go-SC-sRo">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="131" id="Hih-we-t3G"/>
-                                    <constraint firstAttribute="width" constant="274" id="dmj-Bm-AQb"/>
+                                    <constraint firstAttribute="height" constant="130" id="jXD-PX-jnA"/>
+                                    <constraint firstAttribute="width" constant="270" id="yR4-fy-UcF"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="p8V-E3-ljz" id="bXu-jc-fDS"/>
@@ -481,11 +481,11 @@
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHd-mK-Mk9">
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-VB-cN3">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-VB-cN3">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="131" id="5AK-d1-bkF"/>
-                                            <constraint firstAttribute="width" constant="274" id="hrv-7h-AEW"/>
+                                            <constraint firstAttribute="height" constant="130" id="6c0-gs-aTt"/>
+                                            <constraint firstAttribute="width" constant="270" id="jIa-cB-A9x"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dataSource" destination="p8V-E3-ljz" id="Cmz-RJ-HJD"/>
@@ -494,7 +494,7 @@
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="KB7-VB-cN3" secondAttribute="trailing" constant="23" id="FSl-Pu-zNn"/>
+                                    <constraint firstAttribute="trailing" secondItem="KB7-VB-cN3" secondAttribute="trailing" constant="25" id="9gS-Gs-4xR"/>
                                     <constraint firstItem="KB7-VB-cN3" firstAttribute="centerY" secondItem="GHd-mK-Mk9" secondAttribute="centerY" type="default" id="Hzg-fU-hG4"/>
                                     <constraint firstAttribute="bottom" secondItem="KB7-VB-cN3" secondAttribute="bottom" constant="8" id="kS4-ct-QwK"/>
                                     <constraint firstItem="KB7-VB-cN3" firstAttribute="centerX" secondItem="GHd-mK-Mk9" secondAttribute="centerX" type="default" id="tg2-s6-SwK"/>
@@ -509,11 +509,11 @@
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="trailing" secondItem="B00-G3-9TH" secondAttribute="trailing" type="default" id="AmD-tm-3Ig"/>
                             <constraint firstItem="Tzb-A0-jD5" firstAttribute="bottom" secondItem="B00-G3-9TH" secondAttribute="bottom" type="default" id="GM2-Yd-qWX"/>
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="176" id="Lxc-9M-DYS"/>
-                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="trailing" secondItem="Tzb-A0-jD5" secondAttribute="trailing" type="default" id="OGF-R3-kil"/>
-                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="centerX" secondItem="6go-SC-sRo" secondAttribute="centerX" type="default" id="SPa-Y7-pJf"/>
                             <constraint firstItem="Tzb-A0-jD5" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="bQE-j9-FTH"/>
+                            <constraint firstItem="6go-SC-sRo" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="edq-VH-T6z"/>
+                            <constraint firstItem="6go-SC-sRo" firstAttribute="centerX" secondItem="GHd-mK-Mk9" secondAttribute="centerX" type="default" id="jbn-hj-bwU"/>
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="kaO-gv-MsB"/>
-                            <constraint firstItem="6go-SC-sRo" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="oQ0-oQ-NBl"/>
+                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="trailing" secondItem="B00-G3-9TH" secondAttribute="trailing" type="default" id="q8e-8m-4FX"/>
                             <constraint firstItem="Tzb-A0-jD5" firstAttribute="top" secondItem="GHd-mK-Mk9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sR9-Xb-JXA"/>
                         </constraints>
                     </view>
