@@ -87,7 +87,7 @@
     
     for(BudgetCategory *bc in catList)
     {
-        NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET_CATEGORY(BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT) VALUES (%d,%d,%d);",budgetID, bc.category_id, bc.category_amount];
+        NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET_CATEGORY(BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT) VALUES (%d,%d,%f);",budgetID, bc.category_id, bc.category_amount];
         inst_stmt = [inst_stmt stringByAppendingString:temp];
     }
     
@@ -134,8 +134,8 @@
         {
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
-                NSNumber *income = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
-                NSNumber *budget = [NSNumber numberWithInt:sqlite3_column_int(statement, 1)];
+                NSNumber *income = [NSNumber numberWithDouble:sqlite3_column_double(statement, 0)];
+                NSNumber *budget = [NSNumber numberWithDouble:sqlite3_column_double(statement, 1)];
                 
                 [incomeBudget addObject:income];
                 [incomeBudget addObject:budget];
@@ -171,7 +171,6 @@
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
                 expenses = sqlite3_column_double(statement, 0);
-                NSLog(@"expenses: %f", expenses);
             }
         }
         else

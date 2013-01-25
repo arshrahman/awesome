@@ -436,8 +436,9 @@
 		B466452C169C020E00C83739 /* glyphicons_419_e-mail.png in Resources */ = {isa = PBXBuildFile; fileRef = B4664388169C020D00C83739 /* glyphicons_419_e-mail.png */; };
 		B4664530169C067300C83739 /* StartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B466452F169C067300C83739 /* StartPageViewController.m */; };
 		B4664534169C0A0100C83739 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B4664533169C0A0100C83739 /* logo.jpeg */; };
-		B4AEB51E169EEF47008BCF98 /* IncomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */; };
 		B4C85A2016A7A3D00036E52E /* Budget.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C85A1F16A7A3D00036E52E /* Budget.m */; };
+		B4CAC24A16B139E900626478 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CAC24916B139E900626478 /* SettingsViewController.m */; };
+		B4CAC25216B162F400626478 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CAC25116B162F400626478 /* CMPopTipView.m */; };
 		B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */; };
 		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
 		CE60261316A6BD3D0065EABB /* ByMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261016A6BD3D0065EABB /* ByMonthViewController.m */; };
@@ -898,10 +899,12 @@
 		B466452E169C067300C83739 /* StartPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewController.h; sourceTree = "<group>"; };
 		B466452F169C067300C83739 /* StartPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewController.m; sourceTree = "<group>"; };
 		B4664533169C0A0100C83739 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpeg; path = Images/logo.jpeg; sourceTree = "<group>"; };
-		B4AEB51C169EEF47008BCF98 /* IncomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeViewController.h; sourceTree = "<group>"; };
-		B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeViewController.m; sourceTree = "<group>"; };
 		B4C85A1E16A7A3D00036E52E /* Budget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Budget.h; sourceTree = "<group>"; };
 		B4C85A1F16A7A3D00036E52E /* Budget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Budget.m; sourceTree = "<group>"; };
+		B4CAC24816B139E900626478 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B4CAC24916B139E900626478 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B4CAC25016B162F400626478 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		B4CAC25116B162F400626478 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
 		B4E5046416A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		B4E5046816A663610003D0D5 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
@@ -961,12 +964,12 @@
 		CEB06CE216954CD900F96FD4 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				B4CAC25016B162F400626478 /* CMPopTipView.h */,
+				B4CAC25116B162F400626478 /* CMPopTipView.m */,
 				B4E5046416A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.h */,
 				B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */,
 				B466452E169C067300C83739 /* StartPageViewController.h */,
 				B466452F169C067300C83739 /* StartPageViewController.m */,
-				B4AEB51C169EEF47008BCF98 /* IncomeViewController.h */,
-				B4AEB51D169EEF47008BCF98 /* IncomeViewController.m */,
 				CEB06CE316954DFD00F96FD4 /* setBudgetViewController.h */,
 				CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */,
 				B42951FA16A27563004F5D5E /* BudgetViewController.h */,
@@ -977,6 +980,8 @@
 				B4C85A1F16A7A3D00036E52E /* Budget.m */,
 				B4470E8016A7A4120045EEC8 /* BudgetCategory.h */,
 				B4470E8116A7A4120045EEC8 /* BudgetCategory.m */,
+				B4CAC24816B139E900626478 /* SettingsViewController.h */,
+				B4CAC24916B139E900626478 /* SettingsViewController.m */,
 			);
 			name = Budget;
 			sourceTree = "<group>";
@@ -2020,7 +2025,6 @@
 				CEB07044169B9B4400F96FD4 /* shoppingListViewController.m in Sources */,
 				CEB07047169B9B6200F96FD4 /* editShoppingListViewController.m in Sources */,
 				B4664530169C067300C83739 /* StartPageViewController.m in Sources */,
-				B4AEB51E169EEF47008BCF98 /* IncomeViewController.m in Sources */,
 				B4266E8816A05817008FC51F /* Database.m in Sources */,
 				B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */,
 				B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */,
@@ -2032,6 +2036,8 @@
 				CE60261416A6BD3D0065EABB /* CustomDateUIPickerView.m in Sources */,
 				B4C85A2016A7A3D00036E52E /* Budget.m in Sources */,
 				B4470E8216A7A4120045EEC8 /* BudgetCategory.m in Sources */,
+				B4CAC24A16B139E900626478 /* SettingsViewController.m in Sources */,
+				B4CAC25216B162F400626478 /* CMPopTipView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

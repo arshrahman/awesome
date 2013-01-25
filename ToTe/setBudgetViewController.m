@@ -25,6 +25,8 @@
     Budget *b;
     double income;
     double expenses;
+    
+    CMPopTipView *tooltip;
 }
 
 @synthesize topView;
@@ -32,6 +34,7 @@
 @synthesize sideView;
 @synthesize scroller;
 @synthesize pageControl;
+@synthesize topButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,71 +49,61 @@
 {
     [super viewDidLoad];
     
-    NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"FirstTimeUser"];
-    int FirstTimeUse = [ns intValue];
+    self.navigationItem.hidesBackButton = YES;
     
-    if (FirstTimeUse != 3)
+    topArray = [[NSMutableArray alloc]init];
+    bottomArray = [[NSMutableArray alloc]init];
+    catList = [[NSMutableArray alloc]init];
+    b = [[Budget alloc]init];
+    
+    for(Budget *bb in [b GetIncomeBudget])
     {
-        BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
-        [self.navigationController pushViewController:svc animated:YES];
-
+        [topArray addObject:bb];
     }
-    else
+    
+    expenses = b.GetExpenses;
+    income = [[topArray objectAtIndex:0] doubleValue];
+    
+    [bottomArray addObject:[NSNumber numberWithDouble:expenses]];
+    [bottomArray addObject:[NSNumber numberWithDouble:income - expenses]];
+    
+    for (BudgetCategory *bc in b.GetBudgetCategories)
     {
-        topArray = [[NSMutableArray alloc]init];
-        bottomArray = [[NSMutableArray alloc]init];
-        catList = [[NSMutableArray alloc]init];
-        b = [[Budget alloc]init];
-                
-        for(Budget *bb in [b GetIncomeBudget])
-        {
-            [topArray addObject:bb];
-        }
 
-        expenses = b.GetExpenses;
-        income = [[topArray objectAtIndex:0] doubleValue];
-        NSLog(@"Current Expenses: %f", expenses);
-        
-        [bottomArray addObject:[NSNumber numberWithDouble:expenses]];
-        [bottomArray addObject:[NSNumber numberWithDouble:income - expenses]];
-        
-        for (BudgetCategory *bc in b.GetBudgetCategories)
-        {
-            //NSLog(@"bc: %@", bc.bcategory_name);
-            [catList addObject:bc];
-        }
-        
-        sideView = [[UITableView alloc] initWithFrame:CGRectMake(347, 8, 270, 130) style:UITableViewStylePlain];
-        sideView.delegate = self;
-        sideView.dataSource = self;
-        
-        [scroller addSubview:sideView];
-
-        UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(secondPage:)];
-        leftSwipeGestureRecognizer.numberOfTouchesRequired = 1;
-        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-        [scroller addGestureRecognizer:leftSwipeGestureRecognizer];
-        
-
-        UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(firstPage:)];
-        rightSwipeGestureRecognizer.numberOfTouchesRequired = 1;
-        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-        [scroller addGestureRecognizer:rightSwipeGestureRecognizer];
-
-
-        topView.layer.cornerRadius = 10.0f;
-        topView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        topView.layer.borderWidth = 1.5;
-        
-        bottomView.layer.cornerRadius = 10.0f;
-        bottomView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        bottomView.layer.borderWidth = 1.5;
-        bottomView.scrollEnabled = NO;
-        
-        sideView.layer.cornerRadius = 10.0f;
-        sideView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        sideView.layer.borderWidth = 1.5;
+        [catList addObject:bc];
     }
+    
+    sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
+    sideView.delegate = self;
+    sideView.dataSource = self;
+    sideView.rowHeight = 50;
+    
+    [scroller addSubview:sideView];
+    
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(secondPage:)];
+    leftSwipeGestureRecognizer.numberOfTouchesRequired = 1;
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [scroller addGestureRecognizer:leftSwipeGestureRecognizer];
+    
+    
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(firstPage:)];
+    rightSwipeGestureRecognizer.numberOfTouchesRequired = 1;
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [scroller addGestureRecognizer:rightSwipeGestureRecognizer];
+    
+    
+    topView.layer.cornerRadius = 10.0f;
+    topView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    topView.layer.borderWidth = 1.5;
+    
+    bottomView.layer.cornerRadius = 10.0f;
+    bottomView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    bottomView.layer.borderWidth = 1.5;
+    bottomView.scrollEnabled = NO;
+    
+    sideView.layer.cornerRadius = 10.0f;
+    sideView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    sideView.layer.borderWidth = 1.5;
 }
 
 - (void)secondPage:(UISwipeGestureRecognizer *)swipeGestureRecognizer
@@ -156,68 +149,164 @@
         
         UILabel *lblname = nil;
         UILabel *lblamount = nil;
+        UIImageView *imv = nil;
         
         if(cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TopTableCell];
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
             
-            lblname = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150, 60)];
+            lblname = [[UILabel alloc]initWithFrame:CGRectMake(65, 0, 157, 60)];
             lblname.textColor = [UIColor blackColor];
-            lblname.font = [UIFont fontWithName:@"Helvetica" size:18];
-            lblname.text = @"Weekly Income:";
-            //lblname.textAlignment = NSTextAlignmentCenter;
-            //[lblname sizeToFit];
+            lblname.font = [UIFont fontWithName:@"Helvetica" size:17];
+            lblname.text = @"Weekly\nIncome:";
+            lblname.lineBreakMode = UILineBreakModeWordWrap;
+            lblname.numberOfLines = 2;
             lblname.tag = 100;
             
-            lblamount = [[UILabel alloc]initWithFrame:CGRectMake(156, 0, 130, 60)];
+            lblamount = [[UILabel alloc]initWithFrame:CGRectMake(157, 0, 130, 60)];
             lblamount.textColor = [UIColor blackColor];
-            lblamount.font = [UIFont fontWithName:@"Helvetica" size:25];
-            lblamount.font = [UIFont boldSystemFontOfSize:25 ];
-            //lblname.textAlignment = NSTextAlignmentCenter;
-            //[lblamount sizeToFit];
+            lblamount.font = [UIFont fontWithName:@"Helvetica" size:21];
+            lblamount.font = [UIFont boldSystemFontOfSize:21 ];
             lblamount.tag = 200;
+            
+            imv = [[UIImageView alloc]initWithFrame:CGRectMake(18, 18, 18, 26)];
+            imv.image=[UIImage imageNamed:@"glyphicons_227_usd.png"];
+            imv.tag = 300;
             
             [cell.contentView addSubview:lblname];
             [cell.contentView addSubview:lblamount];
+            [cell.contentView addSubview:imv];
         }
         else
         {
             lblname = (UILabel *)[cell.contentView viewWithTag:100];
             lblamount = (UILabel *)[cell.contentView viewWithTag:200];
+            imv = (UIImageView *)[cell.contentView viewWithTag:300];
         }
         
-        if (indexPath.row == 1)lblname.text = @"Weekly Budget:";
-        lblamount.text = [NSString stringWithFormat:@"$%@", [[topArray objectAtIndex:indexPath.row] stringValue]];
+        if (indexPath.row == 1)
+        {
+            lblname.text = @"Weekly\nBudget:";
+            imv.image=[UIImage imageNamed:@"glyphicons_325_wallet.png"];
+            
+        }
+        lblamount.text = [NSString stringWithFormat:@"$%g", [[topArray objectAtIndex:indexPath.row] doubleValue]];
         
         return cell;
     }
     
 	else if(tableView == bottomView)
     {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:BottomTableCell];
-        if(cell == nil)
+        UITableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:BottomTableCell];
+        
+        UILabel *lblcurrent = nil;
+        UILabel *lbltotal = nil;
+        UIImageView *img = nil;
+        
+        if(cell1 == nil)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BottomTableCell];
+            cell1 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BottomTableCell];
+            cell1.selectionStyle = UITableViewCellSelectionStyleGray;
+                        
+            lblcurrent = [[UILabel alloc]initWithFrame:CGRectMake(65, 0, 157, 60)];
+            lblcurrent.textColor = [UIColor blackColor];
+            lblcurrent.font = [UIFont fontWithName:@"Helvetica" size:17];
+            lblcurrent.text = @"Current\nExpenses:";
+            lblcurrent.lineBreakMode = UILineBreakModeWordWrap;
+            lblcurrent.numberOfLines = 2;
+            lblcurrent.tag = 400;
+            
+            lbltotal = [[UILabel alloc]initWithFrame:CGRectMake(157, 0, 130, 60)];
+            lbltotal.textColor = [UIColor blackColor];
+            lbltotal.font = [UIFont fontWithName:@"Helvetica" size:21];
+            lbltotal.font = [UIFont boldSystemFontOfSize:21 ];
+            lbltotal.tag = 500;
+            
+            img = [[UIImageView alloc]initWithFrame:CGRectMake(18, 18, 25, 25)];
+            img.image=[UIImage imageNamed:@"glyphicons_195_circle_info.png"];
+            img.tag = 600;
+            
+            [cell1.contentView addSubview:lblcurrent];
+            [cell1.contentView addSubview:lbltotal];
+            [cell1.contentView addSubview:img];
+        }
+        else
+        {
+            lblcurrent = (UILabel *)[cell1.contentView viewWithTag:400];
+            lbltotal = (UILabel *)[cell1.contentView viewWithTag:500];
+            img = (UIImageView *)[cell1.contentView viewWithTag:600];
         }
         
-        cell.textLabel.text = [[bottomArray objectAtIndex:indexPath.row] stringValue];
-        //cell.textLabel.text = @"Current Savings: $100";
+        if (indexPath.row == 1)
+        {
+            lblcurrent.text = @"Current\nSavings:";
+            img.image=[UIImage imageNamed:@"glyphicons_037_coins.png"];
+        }
+
+        lbltotal.text = [NSString stringWithFormat:@"$%g",[[bottomArray objectAtIndex:indexPath.row] doubleValue]];
+
         
-        return cell;
+        return cell1;
     }
     
     else
     {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SideTableCell];
-        if(cell == nil)
+        UITableViewCell *cell2 = [tableView dequeueReusableCellWithIdentifier:SideTableCell];
+        
+        UILabel *lblcat = nil;
+        UILabel *lblcatamount = nil;
+        UIImageView *imgv = nil;
+        
+        if(cell2 == nil)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SideTableCell];
+            cell2 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SideTableCell];
+            cell2.selectionStyle = UITableViewCellSelectionStyleGray;
+            
+            lblcat = [[UILabel alloc]initWithFrame:CGRectMake(51, 0, 130, 47)];
+            lblcat.textColor = [UIColor blackColor];
+            lblcat.font = [UIFont fontWithName:@"Helvetica" size:17];
+            lblcat.text = @"Current\nExpenses:";
+            lblcat.lineBreakMode = UILineBreakModeWordWrap;
+            lblcat.numberOfLines = 2;
+            lblcat.tag = 700;
+            
+            lblcatamount = [[UILabel alloc]initWithFrame:CGRectMake(140, 0, 130, 50)];
+            lblcatamount.textColor = [UIColor blackColor];
+            lblcatamount.font = [UIFont fontWithName:@"Helvetica" size:19];
+            lblcatamount.font = [UIFont boldSystemFontOfSize:19 ];
+            lblcatamount.tag = 800;
+            
+            imgv = [[UIImageView alloc]initWithFrame:CGRectMake(13, 12, 25, 25)];
+            imgv.image=[UIImage imageNamed:@"glyphicons_195_circle_info.png"];
+            imgv.tag = 900;
+            
+            [cell2.contentView addSubview:lblcat];
+            [cell2.contentView addSubview:lblcatamount];
+            [cell2.contentView addSubview:imgv];
+        }
+        else
+        {
+            lblcat = (UILabel *)[cell2.contentView viewWithTag:700];
+            lblcatamount = (UILabel *)[cell2.contentView viewWithTag:800];
+            imgv = (UIImageView *)[cell2.contentView viewWithTag:900];
         }
         
         BudgetCategory *bc = [catList objectAtIndex:indexPath.row];
-        cell.textLabel.text = bc.bcategory_name;
         
-        return cell;
+        lblcat.text = bc.bcategory_name;
+        imgv.image = [UIImage imageNamed:bc.bcategory_image];
+        
+        if (bc.category_amount > 0)
+        {
+            lblcatamount.text = [NSString stringWithFormat:@"$%g / $%g", bc.category_spent, bc.category_amount];
+        }
+        else
+        {
+            lblcatamount.text = [NSString stringWithFormat:@"$%g", bc.category_spent];
+        }
+        
+        return cell2;
     }
 }
 
@@ -241,7 +330,34 @@
 
 - (IBAction)btnClicked:(id)sender
 {
-    [scroller setContentOffset:CGPointMake(320, 0) animated:YES];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    int weekday = [comp weekday];
+    
+    if (weekday == 2 || weekday == 3)
+    {
+        BudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
+        [self.navigationController pushViewController:bvc animated:YES];
+    }
+    else
+    {        
+        tooltip = [[CMPopTipView alloc]
+                                      initWithMessage:@"Weekly Budget is only editable on start of weeks.\n(Monday & Tuesday)"] ;
+        tooltip.delegate = self;
+        tooltip.backgroundColor = [UIColor lightGrayColor];
+        tooltip.textColor = [UIColor whiteColor];
+        //tooltip.opaque = FALSE;
+        [tooltip presentPointingAtBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+        //tooltip.alpha = 0.8f;
+        
+        NSTimer *timerShowToolTip;
+        timerShowToolTip = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(dismissToolTip) userInfo:nil repeats:NO];
+    }
+}
+
+- (void) dismissToolTip
+{
+    [tooltip dismissAnimated:YES];
 }
 
 
@@ -254,6 +370,7 @@
 
 - (void)viewDidUnload {
     [self setScroller:nil];
+    [self setTopButton:nil];
     [super viewDidUnload];
 }
 @end

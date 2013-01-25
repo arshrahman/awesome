@@ -445,8 +445,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="p8V-E3-ljz" kind="relationship" relationship="rootViewController" id="A1H-x4-Pt5"/>
-                        <segue destination="6FW-Dt-chh" kind="push" id="Lob-5m-QGn"/>
+                        <segue destination="6FW-Dt-chh" kind="relationship" relationship="rootViewController" id="U7I-sO-FmU"/>
+                        <segue destination="p8V-E3-ljz" kind="push" id="7yv-Rc-8lG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MRl-Cx-feO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -471,7 +471,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6go-SC-sRo">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="jXD-PX-jnA"/>
+                                    <constraint firstAttribute="height" constant="130" id="8JX-rP-iyQ"/>
                                     <constraint firstAttribute="width" constant="270" id="yR4-fy-UcF"/>
                                 </constraints>
                                 <connections>
@@ -484,7 +484,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-VB-cN3">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="130" id="6c0-gs-aTt"/>
+                                            <constraint firstAttribute="height" constant="130" id="bcT-sQ-L1O"/>
                                             <constraint firstAttribute="width" constant="270" id="jIa-cB-A9x"/>
                                         </constraints>
                                         <connections>
@@ -495,8 +495,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="KB7-VB-cN3" secondAttribute="trailing" constant="25" id="9gS-Gs-4xR"/>
-                                    <constraint firstItem="KB7-VB-cN3" firstAttribute="centerY" secondItem="GHd-mK-Mk9" secondAttribute="centerY" type="default" id="Hzg-fU-hG4"/>
-                                    <constraint firstAttribute="bottom" secondItem="KB7-VB-cN3" secondAttribute="bottom" constant="8" id="kS4-ct-QwK"/>
+                                    <constraint firstAttribute="bottom" secondItem="KB7-VB-cN3" secondAttribute="bottom" constant="24" id="O3Z-FL-mb2"/>
+                                    <constraint firstItem="KB7-VB-cN3" firstAttribute="top" secondItem="GHd-mK-Mk9" secondAttribute="top" constant="21" id="qNF-jp-jrS"/>
                                     <constraint firstItem="KB7-VB-cN3" firstAttribute="centerX" secondItem="GHd-mK-Mk9" secondAttribute="centerX" type="default" id="tg2-s6-SwK"/>
                                 </constraints>
                                 <connections>
@@ -506,15 +506,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="342" id="1Sz-l6-BVt"/>
+                            <constraint firstAttribute="bottom" secondItem="GHd-mK-Mk9" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="4KL-aT-ZyF"/>
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="trailing" secondItem="B00-G3-9TH" secondAttribute="trailing" type="default" id="AmD-tm-3Ig"/>
-                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="bottom" secondItem="B00-G3-9TH" secondAttribute="bottom" type="default" id="GM2-Yd-qWX"/>
-                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="176" id="Lxc-9M-DYS"/>
+                            <constraint firstItem="6go-SC-sRo" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="25" id="QUs-8N-SSU"/>
                             <constraint firstItem="Tzb-A0-jD5" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="bQE-j9-FTH"/>
-                            <constraint firstItem="6go-SC-sRo" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="20" symbolic="YES" type="default" id="edq-VH-T6z"/>
+                            <constraint firstItem="GHd-mK-Mk9" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="172" id="gVR-do-kU8"/>
                             <constraint firstItem="6go-SC-sRo" firstAttribute="centerX" secondItem="GHd-mK-Mk9" secondAttribute="centerX" type="default" id="jbn-hj-bwU"/>
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="kaO-gv-MsB"/>
                             <constraint firstItem="Tzb-A0-jD5" firstAttribute="trailing" secondItem="B00-G3-9TH" secondAttribute="trailing" type="default" id="q8e-8m-4FX"/>
-                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="top" secondItem="GHd-mK-Mk9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sR9-Xb-JXA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="pzJ-Bl-CJg">
@@ -529,6 +529,7 @@
                         <outlet property="bottomView" destination="KB7-VB-cN3" id="zaM-xW-54s"/>
                         <outlet property="pageControl" destination="Tzb-A0-jD5" id="t9o-yi-ylN"/>
                         <outlet property="scroller" destination="GHd-mK-Mk9" id="zcD-zD-Hnd"/>
+                        <outlet property="topButton" destination="OpV-q9-kBE" id="Odx-nU-WbD"/>
                         <outlet property="topView" destination="6go-SC-sRo" id="L13-Ko-hWg"/>
                     </connections>
                 </viewController>
@@ -536,10 +537,10 @@
             </objects>
             <point key="canvasLocation" x="-332" y="-972"/>
         </scene>
-        <!--Income View Controller - Weekly Income-->
+        <!--Settings View Controller - Settings-->
         <scene sceneID="Ib5-ca-HWs">
             <objects>
-                <viewController storyboardIdentifier="IncomeViewController" title="Weekly Income" id="6FW-Dt-chh" customClass="IncomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" title="Settings" id="6FW-Dt-chh" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tXm-rE-W8M">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -552,51 +553,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="43C-Tf-iJI">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="293" id="Nah-9s-9r5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
                             <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" usesAttributedText="YES" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="dKU-5v-av5">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="x86-Ze-pXx"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Please state your average">
+                                    <fragment content="Hi Mr. Edwin! Good day. Do your in-app settings here. Thanks in advance!~">
                                         <attributes>
                                             <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <font key="NSFont" size="15" name="Helvetica-Light"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="weekly">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name="Helvetica-LightOblique"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="allowance / income">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name="Helvetica-Light"/>
-                                            <font key="NSOriginalFont" size="15" name="Helvetica-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
@@ -610,22 +575,11 @@
                             <constraint firstItem="4lu-sh-jvx" firstAttribute="leading" secondItem="tXm-rE-W8M" secondAttribute="leading" constant="99" id="6pN-gw-Rtg"/>
                             <constraint firstAttribute="trailing" secondItem="dKU-5v-av5" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="AUJ-iD-Avi"/>
                             <constraint firstItem="4lu-sh-jvx" firstAttribute="top" secondItem="tXm-rE-W8M" secondAttribute="top" constant="30" id="RLK-1b-kyK"/>
-                            <constraint firstItem="43C-Tf-iJI" firstAttribute="top" secondItem="tXm-rE-W8M" secondAttribute="top" constant="134" id="ii9-3y-k6Z"/>
                             <constraint firstItem="dKU-5v-av5" firstAttribute="top" secondItem="tXm-rE-W8M" secondAttribute="top" constant="69" id="mdI-7k-lWR"/>
-                            <constraint firstItem="dKU-5v-av5" firstAttribute="centerX" secondItem="43C-Tf-iJI" secondAttribute="centerX" type="default" id="rk8-xp-NGA"/>
                             <constraint firstItem="dKU-5v-av5" firstAttribute="leading" secondItem="tXm-rE-W8M" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="tfn-Kx-VMe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Weekly Income" id="WPk-oC-nUo">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="ltV-uX-bJV">
-                            <connections>
-                                <action selector="btndone:" destination="6FW-Dt-chh" id="ums-wn-Ktd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="txtincome" destination="43C-Tf-iJI" id="8Br-mj-dmO"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Settings" id="WPk-oC-nUo"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6VK-mR-MG5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -722,8 +676,8 @@
                         <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Lo6-VS-0aF" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="18" id="0ba-dF-TIA"/>
-                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="70" id="AVA-DP-t08"/>
                             <constraint firstItem="8FG-cq-dE5" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="142" id="CjY-u1-TOb"/>
+                            <constraint firstItem="Lo6-VS-0aF" firstAttribute="leading" secondItem="6Oi-av-Xn9" secondAttribute="leading" constant="40" id="Icb-Ni-iEk"/>
                             <constraint firstItem="ZYW-WZ-QRD" firstAttribute="bottom" secondItem="6Oi-av-Xn9" secondAttribute="bottom" type="default" id="Ktk-U3-JDe"/>
                             <constraint firstItem="ZYW-WZ-QRD" firstAttribute="top" secondItem="6Oi-av-Xn9" secondAttribute="top" constant="58" id="aFN-WH-aex"/>
                             <constraint firstItem="ZYW-WZ-QRD" firstAttribute="trailing" secondItem="6Oi-av-Xn9" secondAttribute="trailing" type="default" id="aVa-r0-OZg"/>
@@ -1669,13 +1623,6 @@
         <class className="CustomDateUIPickerView" superclassName="UIPickerView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
         </class>
-        <class className="IncomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btndone:"/>
-                <relationship kind="outlet" name="txtincome" candidateClass="UITextField"/>
-            </relationships>
-        </class>
         <class className="MainPageViewController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
         </class>
@@ -1684,6 +1631,9 @@
         </class>
         <class className="OverviewViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
         </class>
         <class className="StartPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
@@ -1711,6 +1661,7 @@
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
                 <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
             </relationships>
         </class>

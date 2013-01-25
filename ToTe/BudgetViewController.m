@@ -8,6 +8,7 @@
 //
 
 #import "BudgetViewController.h"
+#import "setBudgetViewController.h"
 #import "Category.h"
 #import "BudgetCategory.h"
 #import "Budget.h"
@@ -16,7 +17,7 @@
 
 @interface BudgetViewController ()
 {
-    int budgetValue;
+    double budgetValue;
     NSMutableArray *bgCat;
     NSMutableArray *otherButtons;
 }
@@ -41,6 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.tabBarController setDelegate:self];
     self.navigationItem.hidesBackButton = YES;
     bgCat = [[NSMutableArray alloc]init];
@@ -91,6 +93,7 @@
         if (!staticCell)
         {
             staticCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStaticID];
+            staticCell.selectionStyle = UITableViewCellSelectionStyleGray;
             
             img = [[UIImageView alloc]initWithFrame:CGRectMake(7,7, 25, 25)];
             img.image=[UIImage imageNamed:@"glyphicons_190_circle_plus.png"];
@@ -117,13 +120,14 @@
         if (!cell)
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
             
             txtCatValue = [[UITextField alloc]initWithFrame:CGRectMake(170, 10, 165, 30)];
             txtCatValue.font = [UIFont fontWithName:@"Helvetica" size:14];
             txtCatValue.tag = 100;
             txtCatValue.placeholder = @"Enter Amount";
             txtCatValue.textColor = [UIColor blackColor];
-            txtCatValue.keyboardType = UIKeyboardTypeNumberPad;
+            txtCatValue.keyboardType = UIKeyboardTypeDecimalPad;
             txtCatValue.clearButtonMode = UITextFieldViewModeWhileEditing;
             
             [txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
@@ -153,6 +157,11 @@
         
         lblCat.text = bgc.bcategory_name;
         imv.image = [UIImage imageNamed:bgc.bcategory_image];
+        if (bgc.category_amount > 0)
+        {
+            txtCatValue.text = [NSString stringWithFormat:@"%g", bgc.category_amount];
+        }
+        else txtCatValue.text = @"";
         
         return cell;
     }
@@ -173,12 +182,11 @@
     NSIndexPath *indexPath = [self.budgetCat indexPathForRowAtPoint:textFieldFrame.origin];
     
     BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
-
     budgetValue -= bgc.category_amount;
-    bgc.category_amount = [textField.text intValue];
+    bgc.category_amount = [textField.text doubleValue];
     budgetValue += bgc.category_amount;
     
-    lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
+    lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
 }
 
 
@@ -186,12 +194,15 @@
 {
     if (indexPath.row == 0)
     {
-        UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
-        
+        UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+                
         for(Category *c in otherButtons)
         {
             [as addButtonWithTitle:c.category_name];
         }
+        
+        [as addButtonWithTitle:@"Cancel"];
+        as.cancelButtonIndex = as.numberOfButtons-1;
         
         [as showFromTabBar:self.tabBarController.tabBar];
     }
@@ -202,9 +213,17 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
+        
+        Category *c = [[Category alloc]init];
+        c.category_id = bgc.category_id;
+        c.category_image = bgc.bcategory_image;
+        c.category_name = bgc.bcategory_name;
+
         budgetValue -= bgc.category_amount;
+                
         [bgCat removeObjectAtIndex:indexPath.row-1];
-        lblBudget.text =  [NSString stringWithFormat:@"$%d",budgetValue];
+        [otherButtons addObject:c];
+        lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     }
@@ -218,14 +237,18 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    Category *c = [otherButtons objectAtIndex:buttonIndex];
-    BudgetCategory *bc = [[BudgetCategory alloc]init];
-    bc.category_id = c.category_id;
-    bc.bcategory_name = c.category_name;
-    bc.bcategory_image = c.category_image;
-    
-    [bgCat addObject:bc];
-    [[self budgetCat]reloadData];
+    if (buttonIndex != actionSheet.cancelButtonIndex)
+    {
+        Category *c = [otherButtons objectAtIndex:buttonIndex];
+        BudgetCategory *bc = [[BudgetCategory alloc]init];
+        bc.category_id = c.category_id;
+        bc.bcategory_name = c.category_name;
+        bc.bcategory_image = c.category_image;
+        
+        [bgCat addObject:bc];
+        [otherButtons removeObject:c];
+        [[self budgetCat]reloadData];
+    }
 }
 
 -(IBAction)btnDone:(id)sender
@@ -255,7 +278,10 @@
             {
                 Budget *b = [[Budget alloc]init];
                 int budgetID = [b InsertBudget:budgetValue:wkIncome];
-                bool result = [b InsertBudgetCategories:bgCat :budgetID];
+                [b InsertBudgetCategories:bgCat :budgetID];
+                
+                setBudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
+                [self.navigationController pushViewController:svc animated:YES];
             }
         }
         else

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMPopTipView.h"
 
-@interface setBudgetViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface setBudgetViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, CMPopTipViewDelegate>
 {
     BOOL pageControlIsChangingPage;
 }
@@ -18,6 +19,7 @@
 @property(nonatomic, retain)IBOutlet UITableView *sideView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *topButton;
 
 - (IBAction)pageControl:(id)sender;
 - (IBAction)btnClicked:(id)sender;
