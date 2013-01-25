@@ -554,11 +554,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" usesAttributedText="YES" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="dKU-5v-av5">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="x86-Ze-pXx"/>
-                                </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Hi Mr. Edwin! Good day. Do your in-app settings here. Thanks in advance!~">
+                                    <fragment>
+                                        <string key="content">Hi Mr. Edwin! Good day. If it's not too much of a bother, can I request you to do your in-app settings here. Thanks in advance!~</string>
                                         <attributes>
                                             <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <font key="NSFont" size="15" name="Helvetica-Light"/>
@@ -1601,80 +1599,6 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
-    <classes>
-        <class className="BudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ByMonthViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByMonthViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnCalender:"/>
-                <relationship kind="outlet" name="btnCalendar" candidateClass="UIBarItem"/>
-                <relationship kind="outlet" name="customDate" candidateClass="CustomDateUIPickerView"/>
-            </relationships>
-        </class>
-        <class className="CustomDateUIPickerView" superclassName="UIPickerView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
-        </class>
-        <class className="MainPageViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="OverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-        </class>
-        <class className="StartPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-        <class className="addPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/addPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Done:"/>
-                <relationship kind="action" name="SelectCat:"/>
-                <relationship kind="outlet" name="Done" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="Name" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="Price" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="btnCate" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="setBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnClicked:"/>
-                <relationship kind="action" name="pageControl:"/>
-                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="viewPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Swicth:"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="purchaseTV" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
