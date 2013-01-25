@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B400904C16A3B6C900BFD732 /* roundedrectangle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */; };
+		B419EC8416B27DCF00AD458D /* UpdateBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */; };
 		B4266E8816A05817008FC51F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = B4266E8716A05817008FC51F /* Database.m */; };
 		B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42951FB16A27563004F5D5E /* BudgetViewController.m */; };
 		B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B429520516A2828B004F5D5E /* roundedrectangle.png */; };
@@ -466,6 +467,8 @@
 
 /* Begin PBXFileReference section */
 		B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = roundedrectangle.jpg; path = Images/roundedrectangle.jpg; sourceTree = "<group>"; };
+		B419EC8216B27DCE00AD458D /* UpdateBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBudgetViewController.h; sourceTree = "<group>"; };
+		B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBudgetViewController.m; sourceTree = "<group>"; };
 		B4266E8616A05817008FC51F /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		B4266E8716A05817008FC51F /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		B42951FA16A27563004F5D5E /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
@@ -982,6 +985,8 @@
 				B4470E8116A7A4120045EEC8 /* BudgetCategory.m */,
 				B4CAC24816B139E900626478 /* SettingsViewController.h */,
 				B4CAC24916B139E900626478 /* SettingsViewController.m */,
+				B419EC8216B27DCE00AD458D /* UpdateBudgetViewController.h */,
+				B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */,
 			);
 			name = Budget;
 			sourceTree = "<group>";
@@ -2038,6 +2043,7 @@
 				B4470E8216A7A4120045EEC8 /* BudgetCategory.m in Sources */,
 				B4CAC24A16B139E900626478 /* SettingsViewController.m in Sources */,
 				B4CAC25216B162F400626478 /* CMPopTipView.m in Sources */,
+				B419EC8416B27DCF00AD458D /* UpdateBudgetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

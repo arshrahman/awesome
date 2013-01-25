@@ -55,16 +55,19 @@
 {
     char *error;
     int rowID = 0;
-    Database *d = [[Database alloc]init];
-    dbPathString = [d SetDBPath];
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
     
     NSMutableArray *dates = [self GetDate];
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO BUDGET(START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) VALUES ('%@','%@','%2f', '%f')",[dates objectAtIndex:0], [dates objectAtIndex:1], budgetAmount, wkIncome];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO BUDGET(START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) VALUES ('%@','%@','%g', '%g')",[dates objectAtIndex:0], [dates objectAtIndex:1], budgetAmount, wkIncome];
         const char *insert_stmt = [insertStmt UTF8String];
-        
+
         if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
         {
             rowID = sqlite3_last_insert_rowid(budgetDB);
@@ -75,24 +78,30 @@
     return rowID;
 }
 
--(BOOL)InsertBudgetCategories:(NSMutableArray *)catList:(int)budgetID
+-(BOOL)InsertBudgetCategories:(NSMutableArray *)catList
 {
     char *error;
+    int maxId = 0;
     bool result = false;
     
-    Database *d = [[Database alloc]init];
-    dbPathString = [d SetDBPath];
-    
-    NSString *inst_stmt = @"";
-    
-    for(BudgetCategory *bc in catList)
+    if(dbPathString == NULL)
     {
-        NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET_CATEGORY(BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT) VALUES (%d,%d,%f);",budgetID, bc.category_id, bc.category_amount];
-        inst_stmt = [inst_stmt stringByAppendingString:temp];
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
     }
-    
+        
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
+        maxId = self.GetMaxBudgetID;
+        
+        NSString *inst_stmt = @"";
+        
+        for(BudgetCategory *bc in catList)
+        {
+            NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET_CATEGORY(BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT) VALUES (%d,%d,%f);",maxId, bc.category_id, bc.category_amount];
+            inst_stmt = [inst_stmt stringByAppendingString:temp];
+        }
+        
         const char *insert_stmt = [inst_stmt UTF8String];
         
         @try
@@ -145,7 +154,9 @@
         {
             NSLog(@"Hi!");
         }
+        sqlite3_finalize(statement);
     }
+    sqlite3_close(budgetDB);
     
     return incomeBudget;
 }
@@ -177,7 +188,10 @@
         {
             NSLog(@"Hi!");
         }
+        sqlite3_finalize(statement);
     }
+    sqlite3_close(budgetDB);
+    
     return expenses;
 }
 
@@ -194,16 +208,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        sqlite3_stmt *st;
-        const char *queryMaxId = "SELECT MAX(BUDGET_ID) FROM BUDGET";
-        
-        if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
-        {            
-            if (sqlite3_step(st)==SQLITE_ROW)
-            {
-                maxId = sqlite3_column_int(st, 0);
-            }
-        }
+        maxId = self.GetMaxBudgetID;
         
         /*query
         SELECT X.CATEGORY_ID, X.CATEGORY_NAME, X.CATEGORY_IMAGE, SUM(X.CATEGORY_SPENT), CATEGORY_AMOUNT FROM (SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(I.SHOPPING_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM SHOPPING_ITEM I, CATEGORY C, SHOPPING_LIST L WHERE C.CATEGORY_ID = I.CATEGORY_ID AND I.SHOPPING_ID = L.SHOPPING_ID AND L.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET) GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(P.PURCHASE_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM PURCHASE P, CATEGORY C WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET) GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, '' AS CATEGORY_SPENT, BC.CATEGORY_AMOUNT FROM CATEGORY C, BUDGET_CATEGORY BC WHERE C.CATEGORY_ID = BC.CATEGORY_ID AND BC.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)) X GROUP BY X.CATEGORY_ID ORDER BY X.CATEGORY_AMOUNT
@@ -233,9 +238,118 @@
         {
             NSLog(@"Hi!");
         }
+        sqlite3_finalize(statement);
     }
+    sqlite3_close(budgetDB);
+    
     return budgetCategories;
 }
 
+-(int)GetMaxBudgetID
+{
+    int maxId = 0;
+    
+    sqlite3_stmt *st;
+    const char *queryMaxId = "SELECT MAX(BUDGET_ID) FROM BUDGET";
+    
+    if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
+    {
+        if (sqlite3_step(st)==SQLITE_ROW)
+        {
+            maxId = sqlite3_column_int(st, 0);
+        }
+    }
+    sqlite3_finalize(st);
+
+    return maxId;
+}
+
+-(NSMutableArray *)SelectAllBudgetCategories
+{
+    NSMutableArray *bgCategories = [[NSMutableArray alloc]init];
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {        
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT BC.BUDGET_CATEGORY_ID, BC.CATEGORY_AMOUNT, C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE  FROM BUDGET_CATEGORY BC, CATEGORY C WHERE BC.CATEGORY_ID = C.CATEGORY_ID AND BC.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)"];
+        
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                BudgetCategory *bc = [[BudgetCategory alloc]init];
+                
+                //bc.budgetCategory_id = sqlite3_column_int(statement, 0);
+                bc.category_amount = sqlite3_column_double(statement, 1);
+                bc.category_id = sqlite3_column_int(statement, 2);
+                bc.bcategory_name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                bc.bcategory_image = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                
+                [bgCategories addObject:bc];
+            }
+        }
+        else
+        {
+            NSLog(@"Hi!");
+        }
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(budgetDB);
+    
+    return bgCategories;
+}
+
+- (void)UpdateBudget:(double)budgetAmount :(double)wkIncome
+{
+    char *error;
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *updateStmt = [NSString stringWithFormat:@"UPDATE BUDGET SET BUDGET_AMOUNT = '%g', WINCOME = '%g' WHERE BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)", budgetAmount, wkIncome];
+        const char *update_stmt = [updateStmt UTF8String];
+        
+        if (sqlite3_exec(budgetDB, update_stmt, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Updated!");
+        }
+        sqlite3_close(budgetDB);
+    }
+}
+
+- (void)DeleteBudgetCategories
+{
+    char *error;
+
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        const char *delete_stmt = "DELETE FROM BUDGET_CATEGORY WHERE BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)";
+        
+        if (sqlite3_exec(budgetDB, delete_stmt, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Deleted!");
+        }
+        sqlite3_close(budgetDB);
+    }
+}
 
 @end

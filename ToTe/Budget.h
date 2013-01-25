@@ -16,11 +16,15 @@
 @property(nonatomic)double budget_amount;
 @property(nonatomic)double wincome;
 
--(NSMutableArray*)GetDate;
+- (NSMutableArray*)GetDate;
 - (int)InsertBudget:(double)budgetAmount :(double)wkIncome;
--(BOOL)InsertBudgetCategories:(NSMutableArray *)catList:(int)budgetID;
--(NSMutableArray *)GetIncomeBudget;
--(double)GetExpenses;
--(NSMutableArray *)GetBudgetCategories;
+- (BOOL)InsertBudgetCategories:(NSMutableArray *)catList;
+- (NSMutableArray *)GetIncomeBudget;
+- (double)GetExpenses;
+- (int)GetMaxBudgetID;
+- (NSMutableArray *)GetBudgetCategories;
+- (NSMutableArray *)SelectAllBudgetCategories;
+- (void)UpdateBudget:(double)budgetAmount :(double)wkIncome;
+- (void)DeleteBudgetCategories;
 
 @end

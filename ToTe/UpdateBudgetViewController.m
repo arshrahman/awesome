@@ -1,13 +1,12 @@
-
 //
-//  BudgetViewController.m
+//  UpdateBudgetViewController.m
 //  ToTe
 //
-//  Created by Abdul Rahman on 13/1/13.
+//  Created by Abdul Rahman on 25/1/13.
 //  Copyright (c) 2013 user. All rights reserved.
 //
 
-#import "BudgetViewController.h"
+#import "UpdateBudgetViewController.h"
 #import "setBudgetViewController.h"
 #import "Category.h"
 #import "BudgetCategory.h"
@@ -15,16 +14,17 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface BudgetViewController ()
+@interface UpdateBudgetViewController ()
 {
     double budgetValue;
     NSMutableArray *bgCat;
     NSMutableArray *otherButtons;
+    NSMutableArray *getIncomeBudget;
 }
 
 @end
 
-@implementation BudgetViewController
+@implementation UpdateBudgetViewController
 
 @synthesize budgetCat;
 @synthesize scrollView;
@@ -44,16 +44,35 @@
     [super viewDidLoad];
     
     [self.tabBarController setDelegate:self];
-    self.navigationItem.hidesBackButton = YES;
+    //self.navigationItem.hidesBackButton = YES;
     bgCat = [[NSMutableArray alloc]init];
     Category *c = [[Category alloc]init];
+    Budget *b = [[Budget alloc]init];
     otherButtons = [[NSMutableArray alloc]init];
+    getIncomeBudget = [[NSMutableArray alloc]initWithArray:b.GetIncomeBudget copyItems:YES];
     
-    
+    budgetValue = [[getIncomeBudget objectAtIndex:1]doubleValue];
+    txtBudget.text = [NSString stringWithFormat:@"%g", [[getIncomeBudget objectAtIndex:0] doubleValue]];
+    lblBudget.text = [NSString stringWithFormat:@"$%g", [[getIncomeBudget objectAtIndex:1]doubleValue]];
     
     for(Category *cc in [c SelectAllCategory])
     {
         [otherButtons addObject:cc];
+    }
+    
+    for(BudgetCategory *bc in [b SelectAllBudgetCategories])
+    {
+        [bgCat addObject:bc];
+        
+        for(int i = 0; i < otherButtons.count; i++)
+        {
+            Category *c = [otherButtons objectAtIndex:i];
+            
+            if (bc.category_id == c.category_id)
+            {
+                [otherButtons removeObjectAtIndex:i];
+            }
+        }
     }
     
     budgetCat.layer.cornerRadius = 5.0f;
@@ -75,7 +94,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{  
+{
     return 1 + [bgCat count];
 }
 
@@ -123,7 +142,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             
             txtCatValue = [[UITextField alloc]initWithFrame:CGRectMake(170, 10, 165, 30)];
-            txtCatValue.font = [UIFont fontWithName:@"Helvetica" size:14];
+            txtCatValue.font = [UIFont fontWithName:@"Helvetica" size:16];
             txtCatValue.tag = 100;
             txtCatValue.placeholder = @"Enter Amount";
             txtCatValue.textColor = [UIColor blackColor];
@@ -195,7 +214,7 @@
     if (indexPath.row == 0)
     {
         UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-                
+        
         for(Category *c in otherButtons)
         {
             [as addButtonWithTitle:c.category_name];
@@ -218,9 +237,9 @@
         c.category_id = bgc.category_id;
         c.category_image = bgc.bcategory_image;
         c.category_name = bgc.bcategory_name;
-
+        
         budgetValue -= bgc.category_amount;
-                
+        
         [bgCat removeObjectAtIndex:indexPath.row-1];
         [otherButtons addObject:c];
         lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
@@ -252,9 +271,9 @@
 }
 
 -(IBAction)btnDone:(id)sender
-{    
+{
     bool showAlert = false;
-
+    
     if (txtBudget.text.length > 0 && bgCat.count > 0)
     {
         int wkIncome = [txtBudget.text intValue];
@@ -277,7 +296,9 @@
             else
             {
                 Budget *b = [[Budget alloc]init];
-                [b InsertBudget:budgetValue:wkIncome];
+                
+                [b UpdateBudget:budgetValue:wkIncome];
+                [b DeleteBudgetCategories];
                 [b InsertBudgetCategories:bgCat];
                 
                 setBudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
@@ -294,7 +315,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Budget"message:@"Please Enter your weekly income and categories!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
-
+        
     }
 }
 
@@ -313,13 +334,5 @@
 }
 
 @end
-
-
-
-
-
-
-
-
 
 
