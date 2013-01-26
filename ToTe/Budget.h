@@ -26,5 +26,7 @@
 - (NSMutableArray *)SelectAllBudgetCategories;
 - (void)UpdateBudget:(double)budgetAmount :(double)wkIncome;
 - (void)DeleteBudgetCategories;
+- (void)InsertPreviousBudget;
+- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
 
 @end

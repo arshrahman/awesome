@@ -352,4 +352,79 @@
     }
 }
 
+- (void)InsertPreviousBudget
+{
+    NSString *nslast_date;
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT END_DATE FROM BUDGET WHERE BUDGET_ID=(SELECT MAX(BUDGET_ID) FROM BUDGET)"];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                nslast_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+            }
+        }
+        else
+        {
+            NSLog(@"Hi!");
+        }
+        sqlite3_finalize(statement);
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-mm-dd HH:mm:ss VVVV"];
+        
+        NSDate *last_date = [[NSDate alloc] init];
+        last_date = [dateFormatter dateFromString:nslast_date];
+        
+        NSDate *today = [NSDate date];
+        
+        int days = [self daysBetweenDate:last_date andDate:today];
+        int weeks;
+        
+        if (days > 7)
+        {
+            weeks = ceil(days/7);
+            
+            if (ceil(days%7) > 0)
+            {
+                weeks += 1;
+            }
+        }
+        
+        NSLog(@"days: %d, weeks: %d", days, weeks);
+        
+    }
+    sqlite3_close(budgetDB);
+
+}
+
+- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar rangeOfUnit:NSDayCalendarUnit startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSDayCalendarUnit startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    return [difference day];
+}
+
 @end

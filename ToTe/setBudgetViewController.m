@@ -56,6 +56,8 @@
     catList = [[NSMutableArray alloc]init];
     b = [[Budget alloc]init];
     
+    [b InsertPreviousBudget];
+    
     for(Budget *bb in [b GetIncomeBudget])
     {
         [topArray addObject:bb];
