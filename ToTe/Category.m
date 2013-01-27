@@ -24,8 +24,6 @@
     Database *d = [[Database alloc]init];    
     dbPathString = [d SetDBPath];
     
-    NSLog(@"Hello");
-    
     if (sqlite3_open([ dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
@@ -51,7 +49,7 @@
         }
         else
         {
-            NSLog(@"Error!");
+            NSLog(@"Category Error!");
         }
     }
     return categoryList;

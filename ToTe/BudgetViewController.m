@@ -210,22 +210,26 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
+    if (indexPath.row > 0)
     {
-        BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
-        
-        Category *c = [[Category alloc]init];
-        c.category_id = bgc.category_id;
-        c.category_image = bgc.bcategory_image;
-        c.category_name = bgc.bcategory_name;
+        if (editingStyle == UITableViewCellEditingStyleDelete)
+        {
+            BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
+            
+            Category *c = [[Category alloc]init];
+            c.category_id = bgc.category_id;
+            c.category_image = bgc.bcategory_image;
+            c.category_name = bgc.bcategory_name;
+            
+            budgetValue -= bgc.category_amount;
+            
+            [bgCat removeObjectAtIndex:indexPath.row-1];
+            [otherButtons addObject:c];
+            lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
+            
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        }
 
-        budgetValue -= bgc.category_amount;
-                
-        [bgCat removeObjectAtIndex:indexPath.row-1];
-        [otherButtons addObject:c];
-        lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
-        
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     }
 }
 

@@ -26,6 +26,11 @@
     [calendar setLocale:[NSLocale currentLocale]];
     [calendar setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
     NSDateComponents *nowComponents = [calendar components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
     
     [nowComponents setWeekday:2];
@@ -45,8 +50,8 @@
     NSDate *sunday = [calendar dateByAddingComponents:dayComponent toDate:monday options:0];
     NSLog(@"Sunday: %@", sunday);
 
-    [dates addObject:monday];
-    [dates addObject:sunday];
+    [dates addObject:[formatter stringFromDate:monday]];
+    [dates addObject:[formatter stringFromDate:sunday]];
         
     return dates;
 }
@@ -373,36 +378,73 @@
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
                 nslast_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+                //NSLog(@"date: %@", nslast_date);
             }
         }
         else
         {
-            NSLog(@"Hi!");
+            NSLog(@"Hi InsertPreviousBudget!");
         }
         sqlite3_finalize(statement);
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-mm-dd HH:mm:ss VVVV"];
-        
-        NSDate *last_date = [[NSDate alloc] init];
-        last_date = [dateFormatter dateFromString:nslast_date];
-        
-        NSDate *today = [NSDate date];
-        
-        int days = [self daysBetweenDate:last_date andDate:today];
-        int weeks;
-        
-        if (days > 7)
+        if ( [nslast_date length] > 0)
         {
-            weeks = ceil(days/7);
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
             
-            if (ceil(days%7) > 0)
+            NSDate *last_date = [[NSDate alloc] init];
+            last_date = [dateFormatter dateFromString:nslast_date];
+            NSLog(@"date1: %@", last_date);
+            
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];
+            
+            NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+            NSDate *today = [dateFormatter dateFromString:strDate];
+            NSLog(@"today: %@", today);
+            
+            int days = [self daysBetweenDate:last_date andDate:today];
+            int weeks = 0;
+            
+            if (days > 6)
             {
-                weeks += 1;
+                weeks = ceil(days/7);
+                
+                if (ceil(days%7) > 0) 
+                {
+                    weeks += 1;
+                }
+                
+                char *error;
+                int maxId = 0;
+                maxId = self.GetMaxBudgetID;
+                
+                NSString *inst_stmt = @"";
+                
+                for (int i = 1; i <= weeks; i++)
+                {
+                    NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET (START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) SELECT DATETIME(START_DATE, '+%d DAYS') AS START_DATE, DATETIME(END_DATE, '+%d DAYS') AS END_DATE, BUDGET_AMOUNT, WINCOME FROM BUDGET WHERE BUDGET_ID = %d; INSERT INTO BUDGET_CATEGORY (BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT)  SELECT %d, CATEGORY_ID, CATEGORY_AMOUNT FROM BUDGET_CATEGORY WHERE BUDGET_ID = %d;", (i*7), (i*7), maxId, (maxId+i), maxId];
+                    inst_stmt = [inst_stmt stringByAppendingString:temp];
+                }
+                
+                NSLog(@"query %@", inst_stmt);
+                
+                const char *insert_stmt = [inst_stmt UTF8String];
+                
+                @try
+                {
+                    sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error);
+                }
+                @catch (NSException *exception)
+                {
+                    NSLog(@"Error: %s", error);
+                    NSLog(@"Exception %@", exception);
+                }
+                
             }
+            
+            NSLog(@"days: %d, weeks: %d", days, weeks);
         }
-        
-        NSLog(@"days: %d, weeks: %d", days, weeks);
         
     }
     sqlite3_close(budgetDB);
@@ -410,7 +452,7 @@
 }
 
 - (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
-{
+{   
     NSDate *fromDate;
     NSDate *toDate;
     

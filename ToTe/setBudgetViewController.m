@@ -338,12 +338,14 @@
     
     if (weekday == 2 || weekday == 3)
     {
+        [b InsertPreviousBudget];
+        
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         [self.navigationController pushViewController:bvc animated:YES];
     }
     else
-    {        
-        /*tooltip = [[CMPopTipView alloc]
+    {
+        tooltip = [[CMPopTipView alloc]
                                       initWithMessage:@"Weekly Budget is only editable on start of weeks.\n(Monday & Tuesday)"] ;
         tooltip.delegate = self;
         tooltip.backgroundColor = [UIColor lightGrayColor];
@@ -353,10 +355,10 @@
         //tooltip.alpha = 0.8f;
         
         NSTimer *timerShowToolTip;
-        timerShowToolTip = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(dismissToolTip) userInfo:nil repeats:NO];*/
+        timerShowToolTip = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(dismissToolTip) userInfo:nil repeats:NO];
         
-        UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
-        [self.navigationController pushViewController:bvc animated:YES];
+        //UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
+        //[self.navigationController pushViewController:bvc animated:YES];
     }
 }
 

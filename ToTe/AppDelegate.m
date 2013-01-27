@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "StartPageViewController.h"
+#import "Budget.h"
 
 @implementation AppDelegate
 
@@ -22,6 +23,9 @@
     [[UINavigationBar appearance]setTintColor:[UIColor lightGrayColor]];
     //[[UINavigationBar appearance]setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     //[[UITabBar appearance]setTintColor:[UIColor blackColor]];
+    
+    //Budget *b = [[Budget alloc]init];
+    //[b InsertPreviousBudget];
     
     return YES;
 }
@@ -41,6 +45,9 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    Budget *b = [[Budget alloc]init];
+    [b InsertPreviousBudget];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
