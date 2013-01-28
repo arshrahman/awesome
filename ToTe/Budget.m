@@ -370,7 +370,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT END_DATE FROM BUDGET WHERE BUDGET_ID=(SELECT MAX(BUDGET_ID) FROM BUDGET)"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT START_DATE FROM BUDGET WHERE BUDGET_ID=(SELECT MAX(BUDGET_ID) FROM BUDGET)"];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -413,7 +413,7 @@
                         
             NSLog(@"days: %d", days);
             
-            if (today > last_date)
+            if (today >= last_date)
             {
                 int days = [self daysBetweenDate:last_date andDate:today];
                 int weeks = 0;
@@ -461,21 +461,20 @@
 }
 
 - (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
-{   
-    NSDate *fromDate;
-    NSDate *toDate;
+{       
+    NSTimeInterval distanceBetweenDates = [toDateTime timeIntervalSinceDate:fromDateTime];
+    double secondsInAnHour = 60;
+    NSInteger minutes = distanceBetweenDates / secondsInAnHour;
+    NSLog(@"minutes: %d", minutes);
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSInteger days = minutes/1440;
     
-    [calendar rangeOfUnit:NSDayCalendarUnit startDate:&fromDate
-                 interval:NULL forDate:fromDateTime];
-    [calendar rangeOfUnit:NSDayCalendarUnit startDate:&toDate
-                 interval:NULL forDate:toDateTime];
+    if (minutes < 1440 && minutes%1440)
+    {
+        days += 1;
+    }
     
-    NSDateComponents *difference = [calendar components:NSDayCalendarUnit
-                                               fromDate:fromDate toDate:toDateTime options:0];
-    
-    return [difference day];
+    return days;
 }
 
 @end
