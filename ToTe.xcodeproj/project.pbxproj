@@ -444,15 +444,18 @@
 		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
 		CE60261316A6BD3D0065EABB /* ByMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261016A6BD3D0065EABB /* ByMonthViewController.m */; };
 		CE60261416A6BD3D0065EABB /* CustomDateUIPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261216A6BD3D0065EABB /* CustomDateUIPickerView.m */; };
+		CE6BA68A16B64C8D00E828CD /* AddPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68116B64C8D00E828CD /* AddPurchaseViewController.m */; };
+		CE6BA68B16B64C8D00E828CD /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68316B64C8D00E828CD /* customCell.m */; };
+		CE6BA68C16B64C8D00E828CD /* EditPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68516B64C8D00E828CD /* EditPurchaseViewController.m */; };
+		CE6BA68D16B64C8D00E828CD /* Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68716B64C8D00E828CD /* Purchase.m */; };
+		CE6BA68E16B64C8D00E828CD /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68916B64C8D00E828CD /* PurchaseViewController.m */; };
+		CE6BA69016B64C9E00E828CD /* customCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6BA68F16B64C9E00E828CD /* customCell.xib */; };
 		CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */; };
 		CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CF11695743F00F96FD4 /* GoalViewController.m */; };
 		CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */; };
-		CEB07041169B9B0E00F96FD4 /* addPurchasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07040169B9B0E00F96FD4 /* addPurchasesViewController.m */; };
 		CEB07044169B9B4400F96FD4 /* shoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07043169B9B4400F96FD4 /* shoppingListViewController.m */; };
 		CEB07047169B9B6200F96FD4 /* editShoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */; };
 		CEB0704E169BC85C00F96FD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEB0704D169BC85B00F96FD4 /* Settings.bundle */; };
-		CEE8750816A5A6DF00A26B15 /* Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE8750516A5A6DF00A26B15 /* Purchase.m */; };
-		CEE8750916A5A6DF00A26B15 /* viewPurchasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE8750716A5A6DF00A26B15 /* viewPurchasesViewController.m */; };
 		CEFC834E16917DE600F4E2B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC834D16917DE600F4E2B1 /* UIKit.framework */; };
 		CEFC835016917DE600F4E2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC834F16917DE600F4E2B1 /* Foundation.framework */; };
 		CEFC835216917DE600F4E2B1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC835116917DE600F4E2B1 /* CoreGraphics.framework */; };
@@ -916,23 +919,28 @@
 		CE60261016A6BD3D0065EABB /* ByMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByMonthViewController.m; sourceTree = "<group>"; };
 		CE60261116A6BD3D0065EABB /* CustomDateUIPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateUIPickerView.h; sourceTree = "<group>"; };
 		CE60261216A6BD3D0065EABB /* CustomDateUIPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDateUIPickerView.m; sourceTree = "<group>"; };
+		CE6BA68016B64C8D00E828CD /* AddPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPurchaseViewController.h; sourceTree = "<group>"; };
+		CE6BA68116B64C8D00E828CD /* AddPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPurchaseViewController.m; sourceTree = "<group>"; };
+		CE6BA68216B64C8D00E828CD /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customCell.h; sourceTree = "<group>"; };
+		CE6BA68316B64C8D00E828CD /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customCell.m; sourceTree = "<group>"; };
+		CE6BA68416B64C8D00E828CD /* EditPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPurchaseViewController.h; sourceTree = "<group>"; };
+		CE6BA68516B64C8D00E828CD /* EditPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPurchaseViewController.m; sourceTree = "<group>"; };
+		CE6BA68616B64C8D00E828CD /* Purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Purchase.h; sourceTree = "<group>"; };
+		CE6BA68716B64C8D00E828CD /* Purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Purchase.m; sourceTree = "<group>"; };
+		CE6BA68816B64C8D00E828CD /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseViewController.h; sourceTree = "<group>"; };
+		CE6BA68916B64C8D00E828CD /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
+		CE6BA68F16B64C9E00E828CD /* customCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = customCell.xib; sourceTree = "<group>"; };
 		CEB06CE316954DFD00F96FD4 /* setBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setBudgetViewController.h; sourceTree = "<group>"; };
 		CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setBudgetViewController.m; sourceTree = "<group>"; };
 		CEB06CF01695743F00F96FD4 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		CEB06CF11695743F00F96FD4 /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		CEB0703C169B9A5100F96FD4 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
-		CEB0703F169B9B0E00F96FD4 /* addPurchasesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addPurchasesViewController.h; sourceTree = "<group>"; };
-		CEB07040169B9B0E00F96FD4 /* addPurchasesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addPurchasesViewController.m; sourceTree = "<group>"; };
 		CEB07042169B9B4400F96FD4 /* shoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shoppingListViewController.h; sourceTree = "<group>"; };
 		CEB07043169B9B4400F96FD4 /* shoppingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shoppingListViewController.m; sourceTree = "<group>"; };
 		CEB07045169B9B6200F96FD4 /* editShoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editShoppingListViewController.h; sourceTree = "<group>"; };
 		CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editShoppingListViewController.m; sourceTree = "<group>"; };
 		CEB0704D169BC85B00F96FD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		CEE8750416A5A6DF00A26B15 /* Purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Purchase.h; sourceTree = "<group>"; };
-		CEE8750516A5A6DF00A26B15 /* Purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Purchase.m; sourceTree = "<group>"; };
-		CEE8750616A5A6DF00A26B15 /* viewPurchasesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewPurchasesViewController.h; sourceTree = "<group>"; };
-		CEE8750716A5A6DF00A26B15 /* viewPurchasesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewPurchasesViewController.m; sourceTree = "<group>"; };
 		CEFC834916917DE600F4E2B1 /* ToTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFC834D16917DE600F4E2B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEFC834F16917DE600F4E2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1014,12 +1022,17 @@
 		CEB06CEE169573E900F96FD4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
-				CEE8750416A5A6DF00A26B15 /* Purchase.h */,
-				CEE8750516A5A6DF00A26B15 /* Purchase.m */,
-				CEE8750616A5A6DF00A26B15 /* viewPurchasesViewController.h */,
-				CEE8750716A5A6DF00A26B15 /* viewPurchasesViewController.m */,
-				CEB0703F169B9B0E00F96FD4 /* addPurchasesViewController.h */,
-				CEB07040169B9B0E00F96FD4 /* addPurchasesViewController.m */,
+				CE6BA68016B64C8D00E828CD /* AddPurchaseViewController.h */,
+				CE6BA68116B64C8D00E828CD /* AddPurchaseViewController.m */,
+				CE6BA68216B64C8D00E828CD /* customCell.h */,
+				CE6BA68316B64C8D00E828CD /* customCell.m */,
+				CE6BA68416B64C8D00E828CD /* EditPurchaseViewController.h */,
+				CE6BA68516B64C8D00E828CD /* EditPurchaseViewController.m */,
+				CE6BA68616B64C8D00E828CD /* Purchase.h */,
+				CE6BA68716B64C8D00E828CD /* Purchase.m */,
+				CE6BA68816B64C8D00E828CD /* PurchaseViewController.h */,
+				CE6BA68916B64C8D00E828CD /* PurchaseViewController.m */,
+				CE6BA68F16B64C9E00E828CD /* customCell.xib */,
 			);
 			name = Purchases;
 			sourceTree = "<group>";
@@ -2011,6 +2024,7 @@
 				B4664534169C0A0100C83739 /* logo.jpeg in Resources */,
 				B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */,
 				B400904C16A3B6C900BFD732 /* roundedrectangle.jpg in Resources */,
+				CE6BA69016B64C9E00E828CD /* customCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2026,15 +2040,12 @@
 				CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */,
 				CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */,
 				CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */,
-				CEB07041169B9B0E00F96FD4 /* addPurchasesViewController.m in Sources */,
 				CEB07044169B9B4400F96FD4 /* shoppingListViewController.m in Sources */,
 				CEB07047169B9B6200F96FD4 /* editShoppingListViewController.m in Sources */,
 				B4664530169C067300C83739 /* StartPageViewController.m in Sources */,
 				B4266E8816A05817008FC51F /* Database.m in Sources */,
 				B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */,
 				B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */,
-				CEE8750816A5A6DF00A26B15 /* Purchase.m in Sources */,
-				CEE8750916A5A6DF00A26B15 /* viewPurchasesViewController.m in Sources */,
 				B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				B4E5046A16A663610003D0D5 /* Category.m in Sources */,
 				CE60261316A6BD3D0065EABB /* ByMonthViewController.m in Sources */,
@@ -2044,6 +2055,11 @@
 				B4CAC24A16B139E900626478 /* SettingsViewController.m in Sources */,
 				B4CAC25216B162F400626478 /* CMPopTipView.m in Sources */,
 				B419EC8416B27DCF00AD458D /* UpdateBudgetViewController.m in Sources */,
+				CE6BA68A16B64C8D00E828CD /* AddPurchaseViewController.m in Sources */,
+				CE6BA68B16B64C8D00E828CD /* customCell.m in Sources */,
+				CE6BA68C16B64C8D00E828CD /* EditPurchaseViewController.m in Sources */,
+				CE6BA68D16B64C8D00E828CD /* Purchase.m in Sources */,
+				CE6BA68E16B64C8D00E828CD /* PurchaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

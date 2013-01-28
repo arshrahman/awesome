@@ -8,8 +8,6 @@
 
 #import "Database.h"
 #import "sqlite3.h"
-#import "Purchase.h"
-#import "viewPurchasesViewController.h"
 
 @implementation Database
 {
