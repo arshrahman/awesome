@@ -78,6 +78,12 @@
     budgetCat.layer.cornerRadius = 5.0f;
     budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
     budgetCat.layer.borderWidth = 1;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    tap.cancelsTouchesInView = FALSE;
+    [self.view addGestureRecognizer:tap];
 }
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
@@ -252,11 +258,11 @@
     }
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+
+-(void)dismissKeyboard
 {
     [self.view endEditing:YES];
 }
-
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {

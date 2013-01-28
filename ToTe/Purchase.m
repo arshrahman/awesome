@@ -107,13 +107,13 @@
         if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
         {
             NSLog(@"Purchase Item Added!");
-            sqlite3_close(budgetDB);
         }
         else
         {
             NSLog(@"Insert not complete!");
         }
     }
+    sqlite3_close(budgetDB);
 }
 
 //View Today Purchase
@@ -195,6 +195,7 @@
             NSLog(@"Error!");
         }
     }
+    sqlite3_close(budgetDB);
     return purchaseList;
 }
 
@@ -270,6 +271,7 @@
             NSLog(@"Error!");
         }
     }
+    sqlite3_close(budgetDB);
     return purchaseList;
 }
 
