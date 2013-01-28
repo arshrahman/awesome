@@ -263,18 +263,18 @@
     if(self.SortBy.selectedSegmentIndex == 0)
     {
         check = @"Today";
-        //Purchase *p = [[Purchase alloc]init];
+        Purchase *p = [[Purchase alloc]init];
         //self.PurchaseList = [[NSMutableArray alloc]init];
-        //self.PurchaseList = [p viewTodayPurchases];
+        self.PurchaseList = [p viewTodayPurchases];
         NSLog(@"Today");
         [self.PurchaseTableView reloadData];
     }
     else
     {
         check = @"This Week";
-        //Purchase *pp = [[Purchase alloc]init];
+        Purchase *pp = [[Purchase alloc]init];
         //self.PurchaseListWeek = [[NSMutableArray alloc]init];
-        //self.PurchaseListWeek = [pp viewThisWeekPurchases];
+        self.PurchaseListWeek = [pp viewThisWeekPurchases];
         NSLog(@"This Week");
         [self.PurchaseTableView reloadData];
     }

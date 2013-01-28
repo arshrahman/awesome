@@ -53,6 +53,7 @@
     self.EditItemName.text = self.purchaseItem.name;
     self.EditItemPrice.text = [NSString stringWithFormat: @"%.2lf", self.purchaseItem.price];
     [self.EditItemCategory setTitle:self.purchaseItem.category forState:UIControlStateNormal];
+    catID = self.purchaseItem.cateID;
     EditStar = self.purchaseItem.priority;
     
     if(EditStar == 5)
