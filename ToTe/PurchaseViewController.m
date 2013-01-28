@@ -47,8 +47,9 @@
     self.PurchaseList = [p viewTodayPurchases];
     
     //NSLog(@"This Week");
+    Purchase *pp = [[Purchase alloc]init];
     self.PurchaseListWeek = [[NSMutableArray alloc]init];
-    self.PurchaseListWeek = [p viewThisWeekPurchases];
+    self.PurchaseListWeek = [pp viewThisWeekPurchases];
 }
 
 - (void)didReceiveMemoryWarning
@@ -261,25 +262,19 @@
     
     if(self.SortBy.selectedSegmentIndex == 0)
     {
-        //NSLog(@"Today");
-        //self.PurchaseList = [p viewTodayPurchases];
-        
         check = @"Today";
-        Purchase *p = [[Purchase alloc]init];
-        self.PurchaseList = [[NSMutableArray alloc]init];
-        self.PurchaseList = [p viewTodayPurchases];
+        //Purchase *p = [[Purchase alloc]init];
+        //self.PurchaseList = [[NSMutableArray alloc]init];
+        //self.PurchaseList = [p viewTodayPurchases];
         NSLog(@"Today");
         [self.PurchaseTableView reloadData];
     }
     else
     {
-        //NSLog(@"This Week");
-        //self.PurchaseList = [p viewThisWeekPurchases];
-        
         check = @"This Week";
-        Purchase *pp = [[Purchase alloc]init];
-        self.PurchaseListWeek = [[NSMutableArray alloc]init];
-        self.PurchaseListWeek = [pp viewThisWeekPurchases];
+        //Purchase *pp = [[Purchase alloc]init];
+        //self.PurchaseListWeek = [[NSMutableArray alloc]init];
+        //self.PurchaseListWeek = [pp viewThisWeekPurchases];
         NSLog(@"This Week");
         [self.PurchaseTableView reloadData];
     }

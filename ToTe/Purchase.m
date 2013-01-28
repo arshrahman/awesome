@@ -167,6 +167,7 @@
                 int convertId = [uniqueId integerValue];
                 int convertPriority = [priority integerValue];
                 int convertCate = [category integerValue];
+                int checkCate = convertCate - 1;
                 
                 [p setUniqueId:convertId];
                 [p setName:name];
@@ -175,7 +176,7 @@
                 [p setPriority:convertPriority];
                 [p setCateID:convertCate];
                 
-                c = [categoryList objectAtIndex:convertCate-1];
+                c = [categoryList objectAtIndex:checkCate];
                 
                 [p setCategory: c.category_name];
                     
@@ -241,6 +242,7 @@
                 int convertId = [uniqueId integerValue];
                 int convertPriority = [priority integerValue];
                 int convertCate = [category integerValue];
+                int checkCate = convertCate - 1;
                 
                 [p setUniqueId:convertId];
                 [p setName:name];
@@ -249,7 +251,7 @@
                 [p setPriority:convertPriority];
                 [p setCateID:convertCate];
                 
-                c = [categoryList objectAtIndex:convertCate-1];
+                c = [categoryList objectAtIndex:checkCate];
                 
                 [p setCategory: c.category_name];
                 
@@ -310,7 +312,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"UPDATE PURCHASE SET PURCHASE_ITEM_NAME = '%@', CATEGORY_ID = '%d', PURCHASE_ITEM_PRICE ='%f', PURCHASE_ITEM_PRIORITY = '%d' WHERE PURCHASE_ID = '%d'", name, category, price, priority, uniqueId];
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE PURCHASE SET PURCHASE_ITEM_NAME = '%@', CATEGORY_ID = '%d', PURCHASE_ITEM_PRICE ='%2f', PURCHASE_ITEM_PRIORITY = '%d' WHERE PURCHASE_ID = '%d'", name, category, price, priority, uniqueId];
         
         const char *query_sql = [querySql UTF8String];
         
