@@ -9,6 +9,7 @@
 #import "Purchase.h"
 #import "Database.h"
 #import "sqlite3.h"
+#import "Budget.h"
 
 
 @implementation Purchase
@@ -73,6 +74,10 @@
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
     
+    int maxID = 0;
+    
+    Budget *b = [[Budget alloc]init];
+    
     //get current Date
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -82,21 +87,13 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME, PURCHASE_ITEM_PRIORITY) VALUES ('%@','%@','%2f', '%@', '%d')",theDate, category, price, name, priority];
+        maxID = [b GetMaxBudgetID];
+        
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, BUDGET_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME, PURCHASE_ITEM_PRIORITY) VALUES ('%@','%@', '%d','%2f', '%@', '%d')",theDate, category, maxID, price, name, priority];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
         {
-            /*
-            Purchase *p = [[Purchase alloc] init];
-            
-            [p setName:name];
-            [p setCategory:category];
-            [p setPrice:price];
-            [p setDate:theDate];
-            
-            [purchaseList addObject:p];
-            */
             NSLog(@"Purchase Item Added!");
             sqlite3_close(budgetDB);
         }
@@ -136,15 +133,15 @@
                 
                 NSString *uniqueId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
             
-                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
                 
                 NSString *category = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
                     
                 NSString *date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                     
-                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
                 
-                NSString *priority = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
+                NSString *priority = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                     
                 double convertPrice = [price doubleValue];
                 int convertId = [uniqueId integerValue];
@@ -181,13 +178,10 @@
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
     
-    //get current Date
-    NSMutableArray *dates = [self GetDate];
-    
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PURCHASE WHERE PURCHASE_DATE BETWEEN '%@' AND '%@'", [dates objectAtIndex:0], [dates objectAtIndex:1]];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PURCHASE WHERE BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)"];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -198,15 +192,15 @@
                 
                 NSString *uniqueId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                 
-                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
                 
                 NSString *category = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
                 
                 NSString *date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 
-                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
                 
-                NSString *priority = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
+                NSString *priority = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                 
                 double convertPrice = [price doubleValue];
                 int convertId = [uniqueId integerValue];
