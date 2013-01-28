@@ -13,6 +13,7 @@
 @interface EditPurchaseViewController ()
 {
     NSMutableArray *CategoryList;
+    int catID;
 }
 
 @end
@@ -152,9 +153,10 @@
         self.purchaseItem.name = self.EditItemName.text;
         self.purchaseItem.price = [self.EditItemPrice.text doubleValue];
         self.purchaseItem.category = self.EditItemCategory.currentTitle;
+        self.purchaseItem.cateID = catID;
         self.purchaseItem.priority = EditStar;
         
-        [p updatePurchase:self.purchaseItem.uniqueId :self.purchaseItem.name :self.purchaseItem.category :self.purchaseItem.price :self.purchaseItem.priority];
+        [p updatePurchase:self.purchaseItem.uniqueId :self.purchaseItem.name :self.purchaseItem.cateID :self.purchaseItem.price :self.purchaseItem.priority];
     }
     
     NSLog(@"Update data");
@@ -183,6 +185,7 @@
     else
     {
         Category *c = [CategoryList objectAtIndex:buttonIndex];
+        catID = c.category_id;
         [self.EditItemCategory setTitle:c.category_name forState:UIControlStateNormal];
     }
 }

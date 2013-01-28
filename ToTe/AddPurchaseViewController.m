@@ -14,7 +14,7 @@
 @interface AddPurchaseViewController ()
 {
     NSMutableArray *CategoryList;
-    
+    int catID;
 }
 
 @end
@@ -137,13 +137,14 @@
         newPurchase.price = [self.AddItemPrice.text doubleValue];
         newPurchase.category = self.AddItemCategory.currentTitle;
         newPurchase.priority = AddStar;
+        newPurchase.cateID = catID;
         
         [self.purchaseViewController.PurchaseList addObject:newPurchase];
         [self.purchaseViewController.PurchaseListWeek addObject:newPurchase];
         //[self.purchaseViewController.PurchaseTableView reloadData];
         
         //add into database
-        [newPurchase addPurchase:newPurchase.price: newPurchase.category : newPurchase.name : newPurchase.priority];
+        [newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
         [self dismissModalViewControllerAnimated:YES];
     }
 }
@@ -160,11 +161,12 @@
     
     if([check2 isEqualToString:@"Cancel"])
     {
-     [self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];   
+        [self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];   
     }
     else
     {
         Category *c = [CategoryList objectAtIndex:buttonIndex];
+        catID = c.category_id;
         [self.AddItemCategory setTitle:c.category_name forState:UIControlStateNormal];
     }
 }

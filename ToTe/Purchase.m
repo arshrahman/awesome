@@ -10,6 +10,7 @@
 #import "Database.h"
 #import "sqlite3.h"
 #import "Budget.h"
+#import "Category.h"
 
 
 @implementation Purchase
@@ -17,6 +18,7 @@
     sqlite3 *budgetDB;
     NSString *dbPathString;
     NSMutableArray *purchaseList;
+    NSMutableArray *categoryList;
 }
 
 //GetDate
@@ -68,7 +70,7 @@
 }
 
 //Add
-- (void)addPurchase:(double)price :(NSString *)category : (NSString *)name :(int)priority
+- (void)addPurchase:(double)price :(int)category : (NSString *)name :(int)priority
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -99,7 +101,7 @@
         sqlite3_finalize(st);
 
         
-        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, BUDGET_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME, PURCHASE_ITEM_PRIORITY) VALUES ('%@','%@', '%d','%2f', '%@', '%d')",theDate, category, maxID, price, name, priority];
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, BUDGET_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME, PURCHASE_ITEM_PRIORITY) VALUES ('%@','%d', '%d','%2f', '%@', '%d')",theDate, category, maxID, price, name, priority];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
@@ -118,6 +120,14 @@
 - (NSMutableArray *) viewTodayPurchases
 {
     purchaseList =[[NSMutableArray alloc]init];
+    
+    Category *c = [[Category alloc]init];
+    categoryList = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        [categoryList addObject:cc];
+    }
     
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
@@ -156,13 +166,18 @@
                 double convertPrice = [price doubleValue];
                 int convertId = [uniqueId integerValue];
                 int convertPriority = [priority integerValue];
+                int convertCate = [category integerValue];
                 
                 [p setUniqueId:convertId];
                 [p setName:name];
-                [p setCategory:category];
                 [p setDate:date];
                 [p setPrice:convertPrice];
                 [p setPriority:convertPriority];
+                [p setCateID:convertCate];
+                
+                c = [categoryList objectAtIndex:convertCate-1];
+                
+                [p setCategory: c.category_name];
                     
                 //Array
                 [purchaseList addObject:p];
@@ -186,6 +201,14 @@
 - (NSMutableArray *) viewThisWeekPurchases
 {
     purchaseList =[[NSMutableArray alloc]init];
+    
+    Category *c = [[Category alloc]init];
+    categoryList = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        [categoryList addObject:cc];
+    }
     
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
@@ -217,13 +240,18 @@
                 double convertPrice = [price doubleValue];
                 int convertId = [uniqueId integerValue];
                 int convertPriority = [priority integerValue];
+                int convertCate = [category integerValue];
                 
                 [p setUniqueId:convertId];
                 [p setName:name];
-                [p setCategory:category];
                 [p setDate:date];
                 [p setPrice:convertPrice];
                 [p setPriority:convertPriority];
+                [p setCateID:convertCate];
+                
+                c = [categoryList objectAtIndex:convertCate-1];
+                
+                [p setCategory: c.category_name];
                 
                 //Array
                 [purchaseList addObject:p];
@@ -274,7 +302,7 @@
 }
 
 //Update
--(void)updatePurchase:(int)uniqueId :(NSString *)name :(NSString *)category :(double)price :(int)priority;
+-(void)updatePurchase:(int)uniqueId :(NSString *)name :(int)category :(double)price :(int)priority;
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -282,7 +310,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"UPDATE PURCHASE SET PURCHASE_ITEM_NAME = '%@', CATEGORY_ID = '%@', PURCHASE_ITEM_PRICE ='%f', PURCHASE_ITEM_PRIORITY = '%d' WHERE PURCHASE_ID = '%d'", name, category, price, priority, uniqueId];
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE PURCHASE SET PURCHASE_ITEM_NAME = '%@', CATEGORY_ID = '%d', PURCHASE_ITEM_PRICE ='%f', PURCHASE_ITEM_PRIORITY = '%d' WHERE PURCHASE_ID = '%d'", name, category, price, priority, uniqueId];
         
         const char *query_sql = [querySql UTF8String];
         
