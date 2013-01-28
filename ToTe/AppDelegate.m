@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "StartPageViewController.h"
 #import "Budget.h"
+#import "Database.h"
 
 @implementation AppDelegate
 
@@ -24,8 +25,11 @@
     //[[UINavigationBar appearance]setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     //[[UITabBar appearance]setTintColor:[UIColor blackColor]];
     
-    //Budget *b = [[Budget alloc]init];
-    //[b InsertPreviousBudget];
+    Database *d = [[Database alloc]init];
+    [d CreateDB];
+    
+    Budget *b = [[Budget alloc]init];
+    [b InsertPreviousBudget];
     
     return YES;
 }

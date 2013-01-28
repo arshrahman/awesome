@@ -27,9 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self CreateDB];
-    Database *d = [[Database alloc]init];
-    [d CreateDB];
+    
     time = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
     
 }
@@ -50,7 +48,7 @@
 
 
 - (void)viewDidUnload {
-    //spinner = nil;
+
     [super viewDidUnload];
 }
 

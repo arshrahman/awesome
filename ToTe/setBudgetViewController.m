@@ -56,8 +56,6 @@
     catList = [[NSMutableArray alloc]init];
     b = [[Budget alloc]init];
     
-    [b InsertPreviousBudget];
-    
     for(Budget *bb in [b GetIncomeBudget])
     {
         [topArray addObject:bb];
@@ -338,7 +336,7 @@
     
     if (weekday == 2 || weekday == 3)
     {
-        [b InsertPreviousBudget];
+        //[b InsertPreviousBudget];
         
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         [self.navigationController pushViewController:bvc animated:YES];
