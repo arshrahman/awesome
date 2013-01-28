@@ -87,7 +87,19 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        maxID = [b GetMaxBudgetID];
+        
+        sqlite3_stmt *st;
+        const char *queryMaxId = "SELECT MAX(BUDGET_ID) FROM BUDGET";
+        
+        if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(st)==SQLITE_ROW)
+            {
+                maxID = sqlite3_column_int(st, 0);
+            }
+        }
+        sqlite3_finalize(st);
+
         
         NSString *querySql = [NSString stringWithFormat:@"INSERT INTO PURCHASE(PURCHASE_DATE, CATEGORY_ID, BUDGET_ID, PURCHASE_ITEM_PRICE, PURCHASE_ITEM_NAME, PURCHASE_ITEM_PRIORITY) VALUES ('%@','%@', '%d','%2f', '%@', '%d')",theDate, category, maxID, price, name, priority];
         const char *query_sql = [querySql UTF8String];
@@ -158,8 +170,8 @@
                 [purchaseList addObject:p];
                 
                 NSLog(@"Show Today Purchase");
-                //sqlite3_finalize(statement);
-                //sqlite3_close(budgetDB);
+                sqlite3_finalize(statement);
+                sqlite3_close(budgetDB);
             }
         }
         else
@@ -217,8 +229,8 @@
                 [purchaseList addObject:p];
                 
                 NSLog(@"Show This Week Purchase");
-                //sqlite3_finalize(statement);
-                //sqlite3_close(budgetDB);
+                sqlite3_finalize(statement);
+                sqlite3_close(budgetDB);
             }
         }
         else
