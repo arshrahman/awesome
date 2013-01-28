@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *SortBy;
 @property (nonatomic, strong)NSMutableArray *PurchaseList;
+@property (nonatomic, strong)NSMutableArray *PurchaseListWeek;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Edit;
 @property (nonatomic) IBOutlet UITableView *PurchaseTableView;
 

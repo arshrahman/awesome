@@ -139,6 +139,7 @@
         newPurchase.priority = AddStar;
         
         [self.purchaseViewController.PurchaseList addObject:newPurchase];
+        [self.purchaseViewController.PurchaseListWeek addObject:newPurchase];
         //[self.purchaseViewController.PurchaseTableView reloadData];
         
         //add into database

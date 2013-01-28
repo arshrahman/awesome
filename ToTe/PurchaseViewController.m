@@ -13,12 +13,16 @@
 #import "customCell.h"
 
 @interface PurchaseViewController ()
+{
+    NSString *check;
+}
 
 @end
 
 @implementation PurchaseViewController
 
 @synthesize PurchaseList = _PurchaseList;
+@synthesize PurchaseListWeek = _PurchaseListWeek;
 @synthesize Edit;
 @synthesize PurchaseTableView =_PurchaseTableView;
 @synthesize SortBy =_SortBy;
@@ -40,9 +44,11 @@
     
     Purchase *p = [[Purchase alloc]init];
     self.PurchaseList = [[NSMutableArray alloc]init];
-    
     self.PurchaseList = [p viewTodayPurchases];
     
+    //NSLog(@"This Week");
+    self.PurchaseListWeek = [[NSMutableArray alloc]init];
+    self.PurchaseListWeek = [p viewThisWeekPurchases];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,15 +76,24 @@
     {
         cell = [[customCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    Purchase *currentPurchaseItem = [[Purchase alloc]init];
     
-    Purchase *currentPurchaseItem = [self.PurchaseList objectAtIndex:indexPath.row];
+    if([check isEqualToString:@"This Week"])
+    {
+        currentPurchaseItem = [self.PurchaseListWeek objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        currentPurchaseItem = [self.PurchaseList objectAtIndex:indexPath.row];
+    }
     
     // Configure the cell...
     cell.customCellItemName.text = currentPurchaseItem.name;
     cell.customCellItemPrice.text = [NSString stringWithFormat: @"%.2lf", currentPurchaseItem.price];
     cell.customCellItemCategory.text = currentPurchaseItem.category;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
+    
+    //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
     if(currentPurchaseItem.priority == 5)
     {
         cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
@@ -246,16 +261,26 @@
     
     if(self.SortBy.selectedSegmentIndex == 0)
     {
+        //NSLog(@"Today");
+        //self.PurchaseList = [p viewTodayPurchases];
+        
+        check = @"Today";
+        //Purchase *p = [[Purchase alloc]init];
+        //self.PurchaseList = [[NSMutableArray alloc]init];
+        //self.PurchaseList = [p viewTodayPurchases];
         NSLog(@"Today");
-        Purchase *p = [[Purchase alloc]init];
-        self.PurchaseList = [p viewTodayPurchases];
         [self.PurchaseTableView reloadData];
     }
     else
     {
+        //NSLog(@"This Week");
+        //self.PurchaseList = [p viewThisWeekPurchases];
+        
+        check = @"This Week";
+        //Purchase *pp = [[Purchase alloc]init];
+        //self.PurchaseListWeek = [[NSMutableArray alloc]init];
+        //self.PurchaseListWeek = [pp viewThisWeekPurchases];
         NSLog(@"This Week");
-        Purchase *p = [[Purchase alloc]init];
-        self.PurchaseList = [p viewThisWeekPurchases];
         [self.PurchaseTableView reloadData];
     }
 }

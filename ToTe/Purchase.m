@@ -170,9 +170,11 @@
                 [purchaseList addObject:p];
                 
                 NSLog(@"Show Today Purchase");
-                sqlite3_finalize(statement);
-                sqlite3_close(budgetDB);
+               
+                //sqlite3_close(budgetDB);
             }
+            
+             sqlite3_finalize(statement);
         }
         else
         {
@@ -229,9 +231,11 @@
                 [purchaseList addObject:p];
                 
                 NSLog(@"Show This Week Purchase");
-                sqlite3_finalize(statement);
-                sqlite3_close(budgetDB);
+                
+                //sqlite3_close(budgetDB);
             }
+            
+            sqlite3_finalize(statement);
         }
         else
         {
