@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--Overview View Controller - History-->
@@ -275,164 +275,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Lyj-jx-ctU" kind="relationship" relationship="rootViewController" id="6dL-v5-ahi"/>
+                        <segue destination="CTW-wK-0VD" kind="relationship" relationship="rootViewController" id="nac-m8-XZx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yqr-HY-elB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-853" y="1835"/>
-        </scene>
-        <!--View Purchases View Controller - Purchases-->
-        <scene sceneID="K9w-I0-Whh">
-            <objects>
-                <viewController id="Lyj-jx-ctU" customClass="viewPurchasesViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5os-mr-uqz">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0EH-ev-o4i">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="JUa-VV-8WN"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Today"/>
-                                    <segment title="This Week"/>
-                                </segments>
-                                <color key="tintColor" red="0.17346938775510201" green="0.17346938775510201" blue="0.17346938775510201" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="Swicth:" destination="Lyj-jx-ctU" eventType="valueChanged" id="2p9-cF-QFk"/>
-                                </connections>
-                            </segmentedControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzg-oO-obL" customClass="TPKeyboardAvoidingScrollView">
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZk-CD-9hG">
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="cme-ja-vcR"/>
-                                            <constraint firstAttribute="width" constant="300" id="pfu-k8-deb"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="Lyj-jx-ctU" id="0fw-4h-3KE"/>
-                                            <outlet property="delegate" destination="Lyj-jx-ctU" id="gtk-Oz-VRL"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="rZk-CD-9hG" firstAttribute="top" secondItem="hzg-oO-obL" secondAttribute="top" constant="10" id="Hk2-09-jS5"/>
-                                    <constraint firstAttribute="trailing" secondItem="rZk-CD-9hG" secondAttribute="trailing" constant="10" id="KhH-Om-7oe"/>
-                                    <constraint firstItem="rZk-CD-9hG" firstAttribute="bottom" secondItem="hzg-oO-obL" secondAttribute="bottom" type="default" id="MTB-1g-n2e"/>
-                                    <constraint firstItem="rZk-CD-9hG" firstAttribute="centerX" secondItem="hzg-oO-obL" secondAttribute="centerX" type="default" id="kHr-9G-BYP"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="0EH-ev-o4i" firstAttribute="centerX" secondItem="hzg-oO-obL" secondAttribute="centerX" type="default" id="Ndo-dE-wt3"/>
-                            <constraint firstItem="hzg-oO-obL" firstAttribute="trailing" secondItem="5os-mr-uqz" secondAttribute="trailing" type="default" id="SpC-gs-peW"/>
-                            <constraint firstItem="hzg-oO-obL" firstAttribute="leading" secondItem="5os-mr-uqz" secondAttribute="leading" type="default" id="eE8-UZ-fRz"/>
-                            <constraint firstItem="hzg-oO-obL" firstAttribute="top" secondItem="5os-mr-uqz" secondAttribute="top" constant="57" id="hYR-bP-gde"/>
-                            <constraint firstItem="hzg-oO-obL" firstAttribute="bottom" secondItem="5os-mr-uqz" secondAttribute="bottom" type="default" id="kUb-52-N32"/>
-                            <constraint firstItem="0EH-ev-o4i" firstAttribute="top" secondItem="5os-mr-uqz" secondAttribute="top" constant="13" id="vNH-cL-JFZ"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Purchases" id="aoa-8W-9bP"/>
-                    <connections>
-                        <outlet property="purchaseTV" destination="rZk-CD-9hG" id="IJs-eM-THR"/>
-                        <outlet property="scrollView" destination="hzg-oO-obL" id="L8K-OB-YaP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9OG-3R-Ct9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-332" y="1835"/>
-        </scene>
-        <!--Add Purchases View Controller - Add Purchase-->
-        <scene sceneID="D6d-4I-CJl">
-            <objects>
-                <viewController id="ur5-d9-lec" customClass="addPurchasesViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1dq-Dc-RYa">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Item Name :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-bW-TJb">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Categories :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymB-J8-wuH">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Item Price :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ey-XV-dSM">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YgT-U9-9NX">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="158" id="Nca-mM-JHB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Price" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZRg-uc-HQT">
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wec-yb-FZX">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="Zlu-AW-zaZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Select Category">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="SelectCat:" destination="ur5-d9-lec" eventType="touchUpInside" id="suE-H9-Hrh"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="YgT-U9-9NX" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="67" id="27T-NN-hQV"/>
-                            <constraint firstItem="wec-yb-FZX" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="104" id="6zG-Bc-rtg"/>
-                            <constraint firstItem="wec-yb-FZX" firstAttribute="centerY" secondItem="ymB-J8-wuH" secondAttribute="centerY" type="default" id="EMy-yg-3UV"/>
-                            <constraint firstAttribute="trailing" secondItem="wec-yb-FZX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ilr-fw-w7E"/>
-                            <constraint firstItem="bbO-bW-TJb" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="71" id="LoI-MP-9rW"/>
-                            <constraint firstItem="ymB-J8-wuH" firstAttribute="leading" secondItem="1dq-Dc-RYa" secondAttribute="leading" constant="36" id="PQ4-BW-aqk"/>
-                            <constraint firstItem="wec-yb-FZX" firstAttribute="leading" secondItem="YgT-U9-9NX" secondAttribute="leading" type="default" id="Ro5-zD-WbO"/>
-                            <constraint firstItem="ZRg-uc-HQT" firstAttribute="leading" secondItem="wec-yb-FZX" secondAttribute="leading" type="default" id="Svg-r9-N4n"/>
-                            <constraint firstItem="ZRg-uc-HQT" firstAttribute="top" secondItem="1dq-Dc-RYa" secondAttribute="top" constant="144" id="Zeo-TP-cRT"/>
-                            <constraint firstItem="ymB-J8-wuH" firstAttribute="trailing" secondItem="bbO-bW-TJb" secondAttribute="trailing" type="default" id="ewY-6l-CGH"/>
-                            <constraint firstAttribute="trailing" secondItem="ZRg-uc-HQT" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="gSg-jg-0zm"/>
-                            <constraint firstItem="ymB-J8-wuH" firstAttribute="baseline" secondItem="wec-yb-FZX" secondAttribute="baseline" type="default" id="kI8-T8-hes"/>
-                            <constraint firstItem="4Ey-XV-dSM" firstAttribute="baseline" secondItem="ZRg-uc-HQT" secondAttribute="baseline" type="default" id="kTD-2t-zJm"/>
-                            <constraint firstItem="ymB-J8-wuH" firstAttribute="trailing" secondItem="4Ey-XV-dSM" secondAttribute="trailing" type="default" id="rpX-9G-TTv"/>
-                            <constraint firstAttribute="trailing" secondItem="YgT-U9-9NX" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="txp-uz-1DN"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add Purchase" id="h49-CT-Dc9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ve9-cP-g1o">
-                            <connections>
-                                <action selector="Done:" destination="ur5-d9-lec" id="NYy-Hi-7IU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="Done" destination="ve9-cP-g1o" id="gdd-eB-OR2"/>
-                        <outlet property="Name" destination="YgT-U9-9NX" id="CU4-Qi-F0N"/>
-                        <outlet property="Price" destination="ZRg-uc-HQT" id="Phm-o0-4vK"/>
-                        <outlet property="btnCate" destination="wec-yb-FZX" id="iiZ-KN-pNM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dU8-C5-LpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="155" y="1835"/>
         </scene>
         <!--Navigation Controller - BudgetViewController-->
         <scene sceneID="fns-PE-gjd">
@@ -1501,11 +1349,593 @@
             </objects>
             <point key="canvasLocation" x="1501" y="-1076"/>
         </scene>
+        <!--Edit Purchase View Controller - Edit Purchase-->
+        <scene sceneID="YpZ-Y4-tnW">
+            <objects>
+                <tableViewController storyboardIdentifier="EditPurchaseViewController" id="07q-5H-54G" customClass="EditPurchaseViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KSJ-55-8if">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Purchase Item Detail" footerTitle="Please refrain from leaving any field empty." id="xwb-U5-9wt">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Oa5-BA-jXb">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rj0-jV-z8o">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="Vbz-Mt-Xou"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Select Category">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="SelectCategory:" destination="07q-5H-54G" eventType="touchUpInside" id="2In-cs-EeI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="centerX" secondItem="Oa5-BA-jXb" secondAttribute="centerX" type="default" id="Fow-3e-2qJ"/>
+                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="top" secondItem="Oa5-BA-jXb" secondAttribute="top" type="default" id="IdU-3H-Uhv"/>
+                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="centerY" secondItem="Oa5-BA-jXb" secondAttribute="centerY" type="default" id="dde-4d-2W8"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5NO-wQ-fnx">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Price" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhT-WM-ZdH">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="260" id="gfj-Fa-IX0"/>
+                                                        <constraint firstAttribute="height" constant="30" id="zwH-wZ-Tct"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <connections>
+                                                        <action selector="textfieldReutrn:" destination="07q-5H-54G" eventType="editingDidEndOnExit" id="W6c-yK-gTw"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="bhT-WM-ZdH" firstAttribute="centerX" secondItem="5NO-wQ-fnx" secondAttribute="centerX" type="default" id="93i-pL-Zpk"/>
+                                            <constraint firstItem="bhT-WM-ZdH" firstAttribute="centerY" secondItem="5NO-wQ-fnx" secondAttribute="centerY" type="default" id="Y7u-Sx-AL3"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wP8-yQ-vrf">
+                                        <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMg-ni-qhh">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="6dF-91-UFn"/>
+                                                        <constraint firstAttribute="width" constant="260" id="cfZ-RK-Je3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldReutrn:" destination="07q-5H-54G" eventType="editingDidEndOnExit" id="ktg-52-V2E"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="centerX" secondItem="wP8-yQ-vrf" secondAttribute="centerX" type="default" id="Csn-6N-N8D"/>
+                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="centerY" secondItem="wP8-yQ-vrf" secondAttribute="centerY" type="default" id="oe1-O1-Sns"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zN8-lr-dhg">
+                                        <rect key="frame" x="0.0" y="179" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAb-bW-vcp">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="1fy-Wv-Jea"/>
+                                                        <constraint firstAttribute="width" constant="43" id="C2n-ye-5al"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starOneClicked:" destination="07q-5H-54G" eventType="touchUpInside" id="XH6-a7-0ZT"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNz-4o-ISk">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="aDh-KI-qnw"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starTwoClicked:" destination="07q-5H-54G" eventType="touchUpInside" id="bbD-DM-1Iy"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1T-gv-xMl">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="F7q-tJ-xW1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starThreeClicked:" destination="07q-5H-54G" eventType="touchUpInside" id="DaF-N4-xXb"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEh-KG-ePr">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="tBI-Zj-BMT"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starFourClicked:" destination="07q-5H-54G" eventType="touchUpInside" id="MeR-f2-M26"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LmX-Op-pnr">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="fSE-Jv-r4L"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starFiveClicked:" destination="07q-5H-54G" eventType="touchUpInside" id="cVF-av-mNG"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="LmX-Op-pnr" firstAttribute="top" secondItem="zN8-lr-dhg" secondAttribute="top" type="default" id="3Ns-Gz-Nbq"/>
+                                            <constraint firstItem="Q1T-gv-xMl" firstAttribute="bottom" secondItem="GEh-KG-ePr" secondAttribute="bottom" type="default" id="EFL-y2-ulN"/>
+                                            <constraint firstItem="cNz-4o-ISk" firstAttribute="leading" secondItem="FAb-bW-vcp" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="G6u-q7-vI9"/>
+                                            <constraint firstItem="Q1T-gv-xMl" firstAttribute="top" secondItem="zN8-lr-dhg" secondAttribute="top" type="default" id="H61-c3-kXz"/>
+                                            <constraint firstItem="cNz-4o-ISk" firstAttribute="top" secondItem="zN8-lr-dhg" secondAttribute="top" type="default" id="IO4-0P-zmZ"/>
+                                            <constraint firstItem="FAb-bW-vcp" firstAttribute="top" secondItem="zN8-lr-dhg" secondAttribute="top" type="default" id="MVL-yG-j8b"/>
+                                            <constraint firstItem="Q1T-gv-xMl" firstAttribute="centerX" secondItem="zN8-lr-dhg" secondAttribute="centerX" type="default" id="MaJ-uZ-zAi"/>
+                                            <constraint firstItem="GEh-KG-ePr" firstAttribute="bottom" secondItem="LmX-Op-pnr" secondAttribute="bottom" type="default" id="SsI-o1-OIR"/>
+                                            <constraint firstItem="GEh-KG-ePr" firstAttribute="top" secondItem="zN8-lr-dhg" secondAttribute="top" type="default" id="VRf-Yz-dVP"/>
+                                            <constraint firstItem="LmX-Op-pnr" firstAttribute="leading" secondItem="GEh-KG-ePr" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ZQN-o6-wOO"/>
+                                            <constraint firstItem="GEh-KG-ePr" firstAttribute="leading" secondItem="Q1T-gv-xMl" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="dGe-ZZ-E71"/>
+                                            <constraint firstItem="FAb-bW-vcp" firstAttribute="bottom" secondItem="cNz-4o-ISk" secondAttribute="bottom" type="default" id="gsc-am-YfI"/>
+                                            <constraint firstItem="Q1T-gv-xMl" firstAttribute="leading" secondItem="cNz-4o-ISk" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="p0J-fb-Iy5"/>
+                                            <constraint firstItem="Q1T-gv-xMl" firstAttribute="bottom" secondItem="cNz-4o-ISk" secondAttribute="bottom" type="default" id="wGu-68-1Xr"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="07q-5H-54G" id="0Sw-WX-QdW"/>
+                            <outlet property="delegate" destination="07q-5H-54G" id="iue-gA-4gT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Purchase" id="rfz-PV-PI0">
+                        <barButtonItem key="rightBarButtonItem" title="Update" id="xD6-cC-Imk">
+                            <connections>
+                                <action selector="btnUpdate:" destination="07q-5H-54G" id="OTh-DK-5sr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="EditItemCategory" destination="rj0-jV-z8o" id="uq5-L7-VwF"/>
+                        <outlet property="EditItemName" destination="mMg-ni-qhh" id="bpg-dX-Wml"/>
+                        <outlet property="EditItemPrice" destination="bhT-WM-ZdH" id="Rkv-BX-aap"/>
+                        <outlet property="EditStar1" destination="FAb-bW-vcp" id="LMD-bH-xzz"/>
+                        <outlet property="EditStar2" destination="cNz-4o-ISk" id="fAr-4w-TcG"/>
+                        <outlet property="EditStar3" destination="Q1T-gv-xMl" id="Wwt-Kc-IxO"/>
+                        <outlet property="EditStar4" destination="GEh-KG-ePr" id="AIL-z4-VEM"/>
+                        <outlet property="EditStar5" destination="LmX-Op-pnr" id="pxp-3S-WwT"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAD-GR-ZCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="733" y="2107"/>
+        </scene>
+        <!--Add Purchase View Controller - Add Purchase-->
+        <scene sceneID="2pH-F1-BdV">
+            <objects>
+                <tableViewController id="yof-dH-D4t" customClass="AddPurchaseViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zbO-Oa-m23">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Purchase Item Details" footerTitle="Please fill up all the information on the above." id="XDW-5R-Xre">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SD3-cl-sjb">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCN-Wc-Oau">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="2Ug-ke-h9W"/>
+                                                        <constraint firstAttribute="width" constant="300" id="5e0-Zi-tPb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Select Category">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="SelectCategory:" destination="yof-dH-D4t" eventType="touchUpInside" id="N7l-my-IBf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="MCN-Wc-Oau" firstAttribute="bottom" secondItem="SD3-cl-sjb" secondAttribute="bottom" type="default" id="cI6-jy-PAH"/>
+                                            <constraint firstItem="MCN-Wc-Oau" firstAttribute="centerX" secondItem="SD3-cl-sjb" secondAttribute="centerX" type="default" id="fBb-Xw-T2j"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="57J-mm-2b7">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Price" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGJ-5H-h9g">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="260" id="22T-eP-SIF"/>
+                                                        <constraint firstAttribute="height" constant="30" id="yxL-dr-Oby"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    <connections>
+                                                        <action selector="textfieldReutrn:" destination="yof-dH-D4t" eventType="editingDidEndOnExit" id="MIp-gf-qx9"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="cGJ-5H-h9g" firstAttribute="centerY" secondItem="57J-mm-2b7" secondAttribute="centerY" type="default" id="aYj-OP-ldF"/>
+                                            <constraint firstItem="cGJ-5H-h9g" firstAttribute="centerX" secondItem="57J-mm-2b7" secondAttribute="centerX" type="default" id="sa6-7o-AqJ"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4KC-9f-jfB">
+                                        <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LGH-gb-Ajf">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="260" id="F8u-Bg-MaV"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Kld-k6-1py"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldReutrn:" destination="yof-dH-D4t" eventType="editingDidEndOnExit" id="37c-cB-kts"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="LGH-gb-Ajf" firstAttribute="centerX" secondItem="4KC-9f-jfB" secondAttribute="centerX" type="default" id="Mfh-9P-12I"/>
+                                            <constraint firstItem="LGH-gb-Ajf" firstAttribute="centerY" secondItem="4KC-9f-jfB" secondAttribute="centerY" type="default" id="Sqr-Bd-3eh"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fDe-zg-9D2">
+                                        <rect key="frame" x="0.0" y="179" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ir-bP-z2Y">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="B2U-2M-MbA"/>
+                                                        <constraint firstAttribute="width" constant="43" id="vWH-i7-Os6"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starOneClicked:" destination="yof-dH-D4t" eventType="touchUpInside" id="Fb8-cH-wDH"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxK-4G-hiG">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="mtG-2q-L2X"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starTwoClicked:" destination="yof-dH-D4t" eventType="touchUpInside" id="gR2-GE-WJQ"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68c-gx-HSP">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="jxh-5c-meS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starThreeClicked:" destination="yof-dH-D4t" eventType="touchUpInside" id="dKd-RR-2Sc"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4l-vc-e2Q">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="hm6-NQ-9B9"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starFourClicked:" destination="yof-dH-D4t" eventType="touchUpInside" id="hbe-kG-1ro"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6r-2i-LA7">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="Lww-hk-g6R"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="glyphicons_048_dislikes.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="starFiveClicked:" destination="yof-dH-D4t" eventType="touchUpInside" id="E5Q-5n-1MV"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="B6r-2i-LA7" firstAttribute="leading" secondItem="j4l-vc-e2Q" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="0oP-DK-G7J"/>
+                                            <constraint firstItem="j4l-vc-e2Q" firstAttribute="bottom" secondItem="68c-gx-HSP" secondAttribute="bottom" type="default" id="5y5-Dc-nDY"/>
+                                            <constraint firstItem="1ir-bP-z2Y" firstAttribute="top" secondItem="fDe-zg-9D2" secondAttribute="top" type="default" id="C3g-jO-jv7"/>
+                                            <constraint firstItem="B6r-2i-LA7" firstAttribute="top" secondItem="fDe-zg-9D2" secondAttribute="top" type="default" id="Ykg-Ce-sig"/>
+                                            <constraint firstItem="JxK-4G-hiG" firstAttribute="bottom" secondItem="1ir-bP-z2Y" secondAttribute="bottom" type="default" id="aZO-EL-gXi"/>
+                                            <constraint firstItem="j4l-vc-e2Q" firstAttribute="leading" secondItem="68c-gx-HSP" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="eeI-Gh-z0I"/>
+                                            <constraint firstItem="68c-gx-HSP" firstAttribute="bottom" secondItem="JxK-4G-hiG" secondAttribute="bottom" type="default" id="gPc-FB-LSZ"/>
+                                            <constraint firstItem="j4l-vc-e2Q" firstAttribute="top" secondItem="fDe-zg-9D2" secondAttribute="top" type="default" id="hQd-c9-3HT"/>
+                                            <constraint firstItem="68c-gx-HSP" firstAttribute="top" secondItem="fDe-zg-9D2" secondAttribute="top" type="default" id="krQ-Og-gfF"/>
+                                            <constraint firstItem="JxK-4G-hiG" firstAttribute="leading" secondItem="1ir-bP-z2Y" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="pYl-ET-eyj"/>
+                                            <constraint firstItem="68c-gx-HSP" firstAttribute="leading" secondItem="JxK-4G-hiG" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="qCD-C1-bxk"/>
+                                            <constraint firstItem="JxK-4G-hiG" firstAttribute="top" secondItem="fDe-zg-9D2" secondAttribute="top" type="default" id="tCM-4R-pCZ"/>
+                                            <constraint firstItem="68c-gx-HSP" firstAttribute="centerX" secondItem="fDe-zg-9D2" secondAttribute="centerX" type="default" id="txh-h7-GBx"/>
+                                            <constraint firstItem="B6r-2i-LA7" firstAttribute="bottom" secondItem="j4l-vc-e2Q" secondAttribute="bottom" type="default" id="vYD-bM-2fF"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="yof-dH-D4t" id="vhn-vQ-7Df"/>
+                            <outlet property="delegate" destination="yof-dH-D4t" id="HAL-HZ-UDT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Purchase" id="BlG-Lo-7Sh">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="eqU-F1-Utb">
+                            <connections>
+                                <action selector="cancelPressed:" destination="yof-dH-D4t" id="WmJ-Ce-OF7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mfG-5v-uxD">
+                            <connections>
+                                <action selector="donePressed:" destination="yof-dH-D4t" id="df0-ZX-7ba"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="AddItemCategory" destination="MCN-Wc-Oau" id="zdE-If-KEy"/>
+                        <outlet property="AddItemName" destination="LGH-gb-Ajf" id="waf-rE-0Q4"/>
+                        <outlet property="AddItemPrice" destination="cGJ-5H-h9g" id="WoY-U3-qrJ"/>
+                        <outlet property="AddStar1" destination="1ir-bP-z2Y" id="MI8-A8-UER"/>
+                        <outlet property="AddStar2" destination="JxK-4G-hiG" id="fB6-ip-fh8"/>
+                        <outlet property="AddStar3" destination="68c-gx-HSP" id="TBR-tT-IqY"/>
+                        <outlet property="AddStar4" destination="j4l-vc-e2Q" id="X7r-WZ-Y85"/>
+                        <outlet property="AddStar5" destination="B6r-2i-LA7" id="kMc-Cx-G6N"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5S2-aN-tmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="733" y="1508"/>
+        </scene>
+        <!--Purchase View Controller - Purchase-->
+        <scene sceneID="pQx-A0-uW0">
+            <objects>
+                <viewController id="CTW-wK-0VD" customClass="PurchaseViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1zb-Ta-q2H">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="deQ-ZW-ZLe">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Khr-3w-HiH"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hKs-za-zYX">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="07q-5H-54G" kind="push" id="aEL-xn-HoB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CTW-wK-0VD" id="gmy-eP-Fvd"/>
+                                    <outlet property="delegate" destination="CTW-wK-0VD" id="8dk-pD-05j"/>
+                                </connections>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZaG-QV-bNP">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="rGZ-4L-nTu"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Today"/>
+                                    <segment title="This Week"/>
+                                </segments>
+                                <color key="tintColor" red="0.27419483420000001" green="0.27419483420000001" blue="0.27419483420000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="Switch:" destination="CTW-wK-0VD" eventType="valueChanged" id="PsT-eI-iWe"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBw-t0-a1q">
+                                <color key="backgroundColor" red="0.17346938780000001" green="0.17346938780000001" blue="0.17346938780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="Agz-fe-qZV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="BBw-t0-a1q" firstAttribute="trailing" secondItem="1zb-Ta-q2H" secondAttribute="trailing" type="default" id="3ha-y1-nXW"/>
+                            <constraint firstItem="BBw-t0-a1q" firstAttribute="leading" secondItem="1zb-Ta-q2H" secondAttribute="leading" type="default" id="DZW-QT-goY"/>
+                            <constraint firstItem="ZaG-QV-bNP" firstAttribute="top" secondItem="1zb-Ta-q2H" secondAttribute="top" constant="14" id="R58-K8-K15"/>
+                            <constraint firstItem="deQ-ZW-ZLe" firstAttribute="bottom" secondItem="1zb-Ta-q2H" secondAttribute="bottom" type="default" id="WdG-pl-SEP"/>
+                            <constraint firstItem="deQ-ZW-ZLe" firstAttribute="trailing" secondItem="1zb-Ta-q2H" secondAttribute="trailing" type="default" id="bSR-UU-FYg"/>
+                            <constraint firstItem="BBw-t0-a1q" firstAttribute="top" secondItem="1zb-Ta-q2H" secondAttribute="top" constant="58" id="hVU-Gb-ToM"/>
+                            <constraint firstItem="deQ-ZW-ZLe" firstAttribute="leading" secondItem="1zb-Ta-q2H" secondAttribute="leading" type="default" id="nvc-oD-icX"/>
+                            <constraint firstItem="ZaG-QV-bNP" firstAttribute="centerX" secondItem="BBw-t0-a1q" secondAttribute="centerX" type="default" id="tSb-Uw-FvJ"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Purchase" id="JPr-wc-2Ai">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="deQ-Dn-NVS">
+                            <connections>
+                                <action selector="btnEdit:" destination="CTW-wK-0VD" id="USA-YG-59A"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Vwv-kD-e2K">
+                            <connections>
+                                <segue destination="wLt-Rz-6tu" kind="modal" identifier="AddItem" id="qFy-Gp-Dna"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="Edit" destination="deQ-Dn-NVS" id="6Cv-xY-ZpP"/>
+                        <outlet property="PurchaseTableView" destination="deQ-ZW-ZLe" id="nQx-VQ-30H"/>
+                        <outlet property="SortBy" destination="ZaG-QV-bNP" id="Vuk-oJ-0B9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tYq-rg-pAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-332" y="1835"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BPn-1J-WHP">
+            <objects>
+                <navigationController id="wLt-Rz-6tu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="vUf-Zi-oA8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="yof-dH-D4t" kind="relationship" relationship="rootViewController" id="oNT-WA-bEY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oJu-34-QzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="167" y="1835"/>
+        </scene>
     </scenes>
     <resources>
         <image name="glyphicons_011_camera.png" width="26" height="20"/>
         <image name="glyphicons_041_charts.png" width="27" height="24"/>
         <image name="glyphicons_045_calendar.png" width="23" height="24"/>
+        <image name="glyphicons_048_dislikes.png" width="25" height="24"/>
         <image name="glyphicons_202_shopping_cart.png" width="26" height="23"/>
         <image name="glyphicons_227_usd.png" width="17" height="26"/>
         <image name="glyphicons_267_credit_card.png" width="26" height="19"/>
@@ -1514,6 +1944,28 @@
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
     <classes>
+        <class className="AddPurchaseViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="cancelPressed:"/>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="AddItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
         <class className="BudgetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
             <relationships>
@@ -1535,6 +1987,27 @@
         <class className="CustomDateUIPickerView" superclassName="UIPickerView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
         </class>
+        <class className="EditPurchaseViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditPurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="btnUpdate:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="EditItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="EditItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="EditStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
         <class className="MainPageViewController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
         </class>
@@ -1543,6 +2016,16 @@
         </class>
         <class className="OverviewViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
+        </class>
+        <class className="PurchaseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Switch:"/>
+                <relationship kind="action" name="btnEdit:"/>
+                <relationship kind="outlet" name="Edit" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="PurchaseTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="SortBy" candidateClass="UISegmentedControl"/>
+            </relationships>
         </class>
         <class className="SettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
@@ -1563,17 +2046,6 @@
                 <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
             </relationships>
         </class>
-        <class className="addPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/addPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Done:"/>
-                <relationship kind="action" name="SelectCat:"/>
-                <relationship kind="outlet" name="Done" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="Name" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="Price" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="btnCate" candidateClass="UIButton"/>
-            </relationships>
-        </class>
         <class className="setBudgetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
             <relationships>
@@ -1585,15 +2057,6 @@
                 <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="viewPurchasesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/viewPurchasesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Swicth:"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="purchaseTV" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
             </relationships>
         </class>
     </classes>
