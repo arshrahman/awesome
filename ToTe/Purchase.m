@@ -76,8 +76,6 @@
     
     int maxID = 0;
     
-    Budget *b = [[Budget alloc]init];
-    
     //get current Date
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
