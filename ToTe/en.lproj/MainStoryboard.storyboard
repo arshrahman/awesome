@@ -731,7 +731,7 @@
                                 <sections/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CVu-41-gC1" firstAttribute="leading" secondItem="xVp-ko-Zx8" secondAttribute="leading" constant="155" id="3ej-my-gup"/>
                             <constraint firstAttribute="bottom" secondItem="d8Q-S8-L9H" secondAttribute="bottom" constant="109" id="88B-0H-iJC"/>
@@ -779,7 +779,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ybw-RR-k18" firstAttribute="top" secondItem="FXA-k5-MHC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="5SL-Uy-zJr"/>
                             <constraint firstItem="FXA-k5-MHC" firstAttribute="leading" secondItem="B9A-qS-5Q7" secondAttribute="leading" type="default" id="F0k-BX-Ksu"/>
