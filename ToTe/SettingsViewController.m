@@ -11,6 +11,9 @@
 #import "setBudgetViewController.h"
 
 @interface SettingsViewController ()
+{
+    int FirstTimeUse;
+}
 
 @end
 
@@ -28,9 +31,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
     NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"FirstTimeUser"];
-    int FirstTimeUse = [ns intValue];
+    FirstTimeUse = [ns intValue];
     
     if (FirstTimeUse != 3)
     {
@@ -41,9 +47,8 @@
     else
     {
         setBudgetViewController *sbc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
-        [self.navigationController pushViewController:sbc animated:YES];
+        [self.navigationController pushViewController:sbc animated:NO];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,18 +7,27 @@
 //
 
 #import "AddGoalViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AddGoalViewController ()
 
 @end
 
 @implementation AddGoalViewController
+{
+    UIImage *image;
+    NSData *imageData;
+    NSString *oldPhotoName;
+}
+
 @synthesize txtGoal;
 @synthesize txtDescription;
 @synthesize txtAmount;
 @synthesize txtDeadline;
-
+@synthesize deadline;
 @synthesize addGoalTB;
+@synthesize photoView;
+@synthesize photoLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,10 +42,19 @@
 {
     [super viewDidLoad];
 	
+    oldPhotoName = @"";
+    
+    txtGoal.tag = 100;
+    txtDescription.tag = 200;
+    txtAmount.tag = 300;
+    txtDeadline.tag = 400;
+    
     txtDescription.backgroundColor = [UIColor clearColor];
     txtDescription.textColor = [UIColor lightGrayColor];
     txtDescription.text = @"Goal Description";
     
+    photoView.layer.cornerRadius = 5.0;
+    photoView.clipsToBounds = YES;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -45,6 +63,98 @@
     [self.view addGestureRecognizer:tap];
     
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setUserInteractionEnabled:NO];
+    
+    if (indexPath.section == 1 && indexPath.row == 0)
+    {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        [cell setUserInteractionEnabled:YES];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.imagePicker = [[UIImagePickerController alloc]init];
+    self.imagePicker.delegate = self;
+    [self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    self.imagePicker.allowsEditing = YES;
+    
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:@"public.image"])
+    {
+        image = [info objectForKey:UIImagePickerControllerEditedImage];
+        imageData = UIImagePNGRepresentation(image);
+        
+        NSString *photoName = [NSString stringWithFormat:@"%@.png", [self getImageName]];
+        [imageData writeToFile:[self documentsPathForFileName:photoName] atomically:YES];
+        
+        if ([oldPhotoName length] > 0)
+        {
+            [self removeImage:oldPhotoName];
+        }
+        oldPhotoName = photoName;
+    }
+    
+    photoView.image = image;
+    photoLabel.text = @"Edit photo";
+}
+
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSString *)documentsPathForFileName:(NSString *)name
+{
+    NSString *documentsPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
+    
+    NSError *error = nil;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:documentsPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:documentsPath withIntermediateDirectories:NO attributes:nil error:&error];
+
+    return [documentsPath stringByAppendingPathComponent:name];
+}
+
+- (void)removeImage:(NSString*)fileName
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSString *documentsPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:[NSString stringWithFormat:@"Images/%@", fileName]];
+    
+    NSError *error = nil;
+    if(![fileManager removeItemAtPath: documentsPath error:&error])
+    {
+        NSLog(@"Delete failed:%@", error);
+    }
+    else
+    {
+        //NSLog(@"image removed: %@", documentsPath);
+    }
+}
+
+-(NSString*)getImageName
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyyMMddHHmmss"];
+    
+    NSDate *now = [NSDate date];
+    
+    return [format stringFromDate:now];
+}
+
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
@@ -78,7 +188,20 @@
     return YES;
 }
 
--(BOOL) textFieldShouldReturn:(UITextField *)textField{
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField.tag == 400)
+    {
+        [self DoDeadline];
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [textField resignFirstResponder];
     return YES;
@@ -87,6 +210,93 @@
 -(void)dismissKeyboard
 {
     [self.view endEditing:YES];
+}
+
+
+-(void)DoDeadline
+{
+    dateSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    [dateSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    
+    CGRect pickerFrame = CGRectMake(0, 44, 0, 0);
+    UIDatePicker *deadlinePicker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
+    
+    [deadlinePicker setDatePickerMode:UIDatePickerModeDate];
+    
+    NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    NSDate * currentDate = [NSDate date];
+    
+    NSDateComponents * comps = [[NSDateComponents alloc] init];
+    
+    [comps setDay:1];
+    NSDate * minDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
+    
+    [comps setYear: 3];
+    NSDate * maxDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
+    
+    deadlinePicker.minimumDate = minDate;
+    deadlinePicker.maximumDate = maxDate;
+    deadlinePicker.date = minDate;
+    
+    NSLog(@"minDate: %@, maxDate: %@", minDate, maxDate);
+    
+    [dateSheet addSubview:deadlinePicker];
+    
+    UIToolbar *controlBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, dateSheet.bounds.size.width, 44)];
+    [[UIToolbar appearance] setTintColor:[UIColor lightGrayColor]];
+    
+    [controlBar sizeToFit];
+    
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIBarButtonItem *setButton = [[UIBarButtonItem alloc]initWithTitle:@"Set" style:UIBarButtonItemStyleDone target:self action:@selector(DismissDateSet)];
+    [setButton setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(255/255.0) alpha:1]];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(CancelDateSet)];
+    [cancelButton setTintColor:[UIColor colorWithRed:(230/255.0) green:(0/255.0) blue:(0/255.0) alpha:1]];
+    
+    [controlBar setItems:[NSArray arrayWithObjects:spacer, cancelButton, setButton, nil] animated:YES];
+    
+    
+    [dateSheet addSubview:controlBar];
+    [dateSheet showFromTabBar:self.tabBarController.tabBar];
+    [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
+}
+
+
+-(void)DismissDateSet
+{
+    NSArray *listOfViews = [dateSheet subviews];
+    
+    for(UIView *subView in listOfViews)
+    {
+        if([subView isKindOfClass:[UIDatePicker class]])
+        {
+            self.deadline = [(UIDatePicker *)subView date];
+        }
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    [txtDeadline setText:[dateFormatter stringFromDate:self.deadline]];
+    
+    [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+
+-(void)CancelDateSet
+{
+    [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+
+- (IBAction)btnDone:(id)sender
+{
+    [self removeImage:@"Rahman.png"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,8 +311,10 @@
     [self setTxtDescription:nil];
     [self setTxtAmount:nil];
     [self setTxtDeadline:nil];
+    [self setDeadline:nil];
+    [self setPhotoView:nil];
+    [self setPhotoLabel:nil];
     [super viewDidUnload];
 }
-- (IBAction)btnDone:(id)sender {
-}
+
 @end

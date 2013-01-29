@@ -367,6 +367,7 @@
                     <navigationItem key="navigationItem" title="Budget" id="pzJ-Bl-CJg">
                         <barButtonItem key="backBarButtonItem" title="Back" id="gla-xW-XoW"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="OpV-q9-kBE">
+                            <color key="tintColor" red="0.0" green="0.78431372549019607" blue="0.27292427007299269" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="btnClicked:" destination="p8V-E3-ljz" id="Cqa-jB-Png"/>
                             </connections>
@@ -538,6 +539,7 @@
                     <navigationItem key="navigationItem" title="Add Budget" id="xol-8q-PXv">
                         <barButtonItem key="backBarButtonItem" title="Back" id="s0c-46-3FF"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="iiE-sd-I2L">
+                            <color key="tintColor" red="0.0" green="0.7843137255" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="btnDone:" destination="s9E-KB-X98" id="lWx-FI-WSy"/>
                             </connections>
@@ -584,6 +586,7 @@
                     <navigationItem key="navigationItem" title="Goal" id="zdo-wp-NUe">
                         <barButtonItem key="backBarButtonItem" title="Back" id="QM4-rH-d1l"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QCU-5W-Zf6">
+                            <color key="tintColor" red="0.0" green="0.7843137255" blue="0.27626026459854014" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="wpD-sH-6vk" kind="push" id="LDb-nI-OJs"/>
                             </connections>
@@ -602,7 +605,7 @@
         <scene sceneID="7Th-Sd-msj">
             <objects>
                 <tableViewController storyboardIdentifier="AddGoalViewController" id="wpD-sH-6vk" customClass="AddGoalViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="20" sectionFooterHeight="1" id="T2h-AE-fqQ">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="20" sectionFooterHeight="1" id="T2h-AE-fqQ">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.91788321167883213" alpha="1" colorSpace="calibratedWhite"/>
@@ -664,7 +667,7 @@
                                                     <color key="textColor" white="0.29907048357664234" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Hello" translatesAutoresizingMaskIntoConstraints="NO" id="Wvw-8v-L4K">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Goal Description" translatesAutoresizingMaskIntoConstraints="NO" id="Wvw-8v-L4K">
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="TxA-7y-1tD"/>
@@ -681,7 +684,6 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="44m-GW-WQp" firstAttribute="top" secondItem="OPM-uG-haJ" secondAttribute="top" constant="20" type="default" id="1KK-fE-Ih6"/>
-                                            <constraint firstItem="44m-GW-WQp" firstAttribute="centerY" secondItem="OPM-uG-haJ" secondAttribute="centerY" type="default" id="8lX-3A-uOz"/>
                                             <constraint firstItem="Wvw-8v-L4K" firstAttribute="top" secondItem="OPM-uG-haJ" secondAttribute="top" constant="15" id="K2R-Oq-Vas"/>
                                             <constraint firstItem="Wvw-8v-L4K" firstAttribute="leading" secondItem="OPM-uG-haJ" secondAttribute="leading" constant="117" id="Rjg-hP-D9q"/>
                                             <constraint firstItem="44m-GW-WQp" firstAttribute="leading" secondItem="OPM-uG-haJ" secondAttribute="leading" constant="21" id="giT-86-uc8"/>
@@ -778,16 +780,16 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="camera-icon-md.png" translatesAutoresizingMaskIntoConstraints="NO" id="HUj-zG-Mqs">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="afL-bF-RPD"/>
-                                                        <constraint firstAttribute="width" constant="40" id="iOh-nx-ilq"/>
+                                                        <constraint firstAttribute="height" constant="35" id="KAK-fo-twc"/>
+                                                        <constraint firstAttribute="width" constant="35" id="TsC-Dc-UAf"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add Photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJx-9c-2bH">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJx-9c-2bH">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="204" id="MEC-0m-5cY"/>
-                                                        <constraint firstAttribute="height" constant="21" id="WGR-XE-eag"/>
+                                                        <constraint firstAttribute="height" constant="21" id="Wll-8p-dP1"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                                                     <color key="textColor" white="0.2955634124" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -795,10 +797,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="trailing" secondItem="laj-pd-bIS" secondAttribute="trailing" type="default" id="488-81-uyZ"/>
-                                            <constraint firstItem="HUj-zG-Mqs" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="6" id="FZP-Kq-ckX"/>
-                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="leading" secondItem="HUj-zG-Mqs" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="km3-54-uoV"/>
-                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="18" id="upn-Aq-kUC"/>
+                                            <constraint firstItem="HUj-zG-Mqs" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="9" id="1B5-I5-bZw"/>
+                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="leading" secondItem="HUj-zG-Mqs" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Iiu-2A-qfT"/>
+                                            <constraint firstItem="HUj-zG-Mqs" firstAttribute="leading" secondItem="laj-pd-bIS" secondAttribute="leading" constant="87" id="ibs-CG-fNv"/>
+                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="17" id="nMV-2J-uR1"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qor-wg-t9u">
@@ -836,7 +838,7 @@
                     <navigationItem key="navigationItem" title="Add Goal" id="hEZ-91-Aht">
                         <barButtonItem key="backBarButtonItem" title="Back" id="VVm-uL-ne2"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Nfe-98-OvX">
-                            <color key="tintColor" red="0.0" green="0.58049156020000003" blue="0.91808280109999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.78431372549019607" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="btnDone:" destination="wpD-sH-6vk" id="5ic-Nv-oDv"/>
                             </connections>
@@ -846,6 +848,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addGoalTB" destination="T2h-AE-fqQ" id="rpG-Rn-Ovz"/>
+                        <outlet property="photoLabel" destination="sJx-9c-2bH" id="4Ex-8P-8cE"/>
+                        <outlet property="photoView" destination="HUj-zG-Mqs" id="QkT-mg-u05"/>
                         <outlet property="txtAmount" destination="PMt-Ei-l4h" id="EXB-Ik-huW"/>
                         <outlet property="txtDeadline" destination="7sm-3s-cJI" id="eW0-It-YxM"/>
                         <outlet property="txtDescription" destination="Wvw-8v-L4K" id="y5m-AZ-cLC"/>
@@ -1245,6 +1249,7 @@
                     <navigationItem key="navigationItem" title="Update Budget" id="ElU-5W-RyG">
                         <barButtonItem key="backBarButtonItem" title="Back" id="d36-YA-7bM"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="V6z-EL-lMn">
+                            <color key="tintColor" red="0.0" green="0.7843137255" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="btnDone:" destination="ylD-v9-8oP" id="fdj-OP-Y98"/>
                             </connections>
@@ -1861,6 +1866,8 @@
             <relationships>
                 <relationship kind="action" name="btnDone:"/>
                 <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>

@@ -45,9 +45,24 @@
     
     [self.tabBarController setDelegate:self];
     //self.navigationItem.hidesBackButton = YES;
-    bgCat = [[NSMutableArray alloc]init];
+        
+    budgetCat.layer.cornerRadius = 5.0f;
+    budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    budgetCat.layer.borderWidth = 1;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    tap.cancelsTouchesInView = FALSE;
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
     Category *c = [[Category alloc]init];
     Budget *b = [[Budget alloc]init];
+    
+    bgCat = [[NSMutableArray alloc]init];
     otherButtons = [[NSMutableArray alloc]init];
     getIncomeBudget = [[NSMutableArray alloc]initWithArray:b.GetIncomeBudget copyItems:YES];
     
@@ -66,24 +81,15 @@
         
         for(int i = 0; i < otherButtons.count; i++)
         {
-            Category *c = [otherButtons objectAtIndex:i];
+            Category *cc = [otherButtons objectAtIndex:i];
             
-            if (bc.category_id == c.category_id)
+            if (bc.category_id == cc.category_id)
             {
                 [otherButtons removeObjectAtIndex:i];
             }
         }
     }
-    
-    budgetCat.layer.cornerRadius = 5.0f;
-    budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    budgetCat.layer.borderWidth = 1;
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    tap.cancelsTouchesInView = FALSE;
-    [self.view addGestureRecognizer:tap];
+
 }
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
@@ -147,7 +153,7 @@
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             
-            txtCatValue = [[UITextField alloc]initWithFrame:CGRectMake(170, 10, 165, 30)];
+            txtCatValue = [[UITextField alloc]initWithFrame:CGRectMake(160, 10, 165, 30)];
             txtCatValue.font = [UIFont fontWithName:@"Helvetica" size:16];
             txtCatValue.tag = 100;
             txtCatValue.placeholder = @"Enter Amount";
@@ -158,7 +164,7 @@
             [txtCatValue addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
             [txtCatValue addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
             
-            lblCat = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 130, 30)];
+            lblCat = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 120, 30)];
             lblCat.textColor = [UIColor blackColor];
             lblCat.font = [UIFont fontWithName:@"Helvetica" size:16];
             lblCat.tag = 200;
@@ -220,10 +226,12 @@
     if (indexPath.row == 0)
     {
         UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        [as setActionSheetStyle: UIActionSheetStyleBlackTranslucent];
+        as.backgroundColor = [UIColor lightGrayColor];
         
-        for(Category *c in otherButtons)
+        for(Category *cc in otherButtons)
         {
-            [as addButtonWithTitle:c.category_name];
+            [as addButtonWithTitle:cc.category_name];
         }
         
         [as addButtonWithTitle:@"Cancel"];
@@ -241,15 +249,15 @@
         {
             BudgetCategory *bgc = [bgCat objectAtIndex:indexPath.row-1];
             
-            Category *c = [[Category alloc]init];
-            c.category_id = bgc.category_id;
-            c.category_image = bgc.bcategory_image;
-            c.category_name = bgc.bcategory_name;
+            Category *cc = [[Category alloc]init];
+            cc.category_id = bgc.category_id;
+            cc.category_image = bgc.bcategory_image;
+            cc.category_name = bgc.bcategory_name;
             
             budgetValue -= bgc.category_amount;
             
             [bgCat removeObjectAtIndex:indexPath.row-1];
-            [otherButtons addObject:c];
+            [otherButtons addObject:cc];
             lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
             
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
@@ -268,14 +276,14 @@
 {
     if (buttonIndex != actionSheet.cancelButtonIndex)
     {
-        Category *c = [otherButtons objectAtIndex:buttonIndex];
+        Category *cc = [otherButtons objectAtIndex:buttonIndex];
         BudgetCategory *bc = [[BudgetCategory alloc]init];
-        bc.category_id = c.category_id;
-        bc.bcategory_name = c.category_name;
-        bc.bcategory_image = c.category_image;
+        bc.category_id = cc.category_id;
+        bc.bcategory_name = cc.category_name;
+        bc.bcategory_image = cc.category_image;
         
         [bgCat addObject:bc];
-        [otherButtons removeObject:c];
+        [otherButtons removeObject:cc];
         [[self budgetCat]reloadData];
     }
 }
@@ -305,11 +313,11 @@
             }
             else
             {
-                Budget *b = [[Budget alloc]init];
+                Budget *bb = [[Budget alloc]init];
                 
-                [b UpdateBudget:budgetValue:wkIncome];
-                [b DeleteBudgetCategories];
-                [b InsertBudgetCategories:bgCat];
+                [bb UpdateBudget:budgetValue:wkIncome];
+                [bb DeleteBudgetCategories];
+                [bb InsertBudgetCategories:bgCat];
                 
                 setBudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
                 [self.navigationController pushViewController:svc animated:YES];

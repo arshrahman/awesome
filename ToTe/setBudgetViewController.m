@@ -49,30 +49,6 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.hidesBackButton = YES;
-    
-    topArray = [[NSMutableArray alloc]init];
-    bottomArray = [[NSMutableArray alloc]init];
-    catList = [[NSMutableArray alloc]init];
-    b = [[Budget alloc]init];
-    
-    for(Budget *bb in [b GetIncomeBudget])
-    {
-        [topArray addObject:bb];
-    }
-    
-    expenses = b.GetExpenses;
-    income = [[topArray objectAtIndex:0] doubleValue];
-    
-    [bottomArray addObject:[NSNumber numberWithDouble:expenses]];
-    [bottomArray addObject:[NSNumber numberWithDouble:income - expenses]];
-    
-    for (BudgetCategory *bc in b.GetBudgetCategories)
-    {
-
-        [catList addObject:bc];
-    }
-    
     sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
     sideView.delegate = self;
     sideView.dataSource = self;
@@ -104,6 +80,37 @@
     sideView.layer.cornerRadius = 10.0f;
     sideView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     sideView.layer.borderWidth = 1.5;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    animated = NO;
+    self.navigationItem.hidesBackButton = YES;
+    
+    topArray = [[NSMutableArray alloc]init];
+    bottomArray = [[NSMutableArray alloc]init];
+    catList = [[NSMutableArray alloc]init];
+    b = [[Budget alloc]init];
+    
+    for(Budget *bb in [b GetIncomeBudget])
+    {
+        [topArray addObject:bb];
+    }
+    
+    expenses = b.GetExpenses;
+    income = [[topArray objectAtIndex:0] doubleValue];
+    
+    [bottomArray addObject:[NSNumber numberWithDouble:expenses]];
+    [bottomArray addObject:[NSNumber numberWithDouble:income - expenses]];
+    
+    for (BudgetCategory *bc in b.GetBudgetCategories)
+    {
+        [catList addObject:bc];
+    }
+    
+    [topView reloadData];
+    [bottomView reloadData];
+    [sideView reloadData];
 }
 
 - (void)secondPage:(UISwipeGestureRecognizer *)swipeGestureRecognizer
@@ -348,9 +355,7 @@
         tooltip.delegate = self;
         tooltip.backgroundColor = [UIColor lightGrayColor];
         tooltip.textColor = [UIColor whiteColor];
-        //tooltip.opaque = FALSE;
         [tooltip presentPointingAtBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
-        //tooltip.alpha = 0.8f;
         
         NSTimer *timerShowToolTip;
         timerShowToolTip = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(dismissToolTip) userInfo:nil repeats:NO];
