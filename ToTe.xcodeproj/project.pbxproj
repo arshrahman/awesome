@@ -446,6 +446,7 @@
 		B4D4C7AD16B6CCC000D0E12A /* camera-icon-md.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D4C7AC16B6CCC000D0E12A /* camera-icon-md.png */; };
 		B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */; };
 		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
+		CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D8CBB16B8FE690071FC79 /* Social.framework */; };
 		CE60261316A6BD3D0065EABB /* ByMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261016A6BD3D0065EABB /* ByMonthViewController.m */; };
 		CE60261416A6BD3D0065EABB /* CustomDateUIPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261216A6BD3D0065EABB /* CustomDateUIPickerView.m */; };
 		CE6BA68A16B64C8D00E828CD /* AddPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68116B64C8D00E828CD /* AddPurchaseViewController.m */; };
@@ -925,6 +926,7 @@
 		B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		B4E5046816A663610003D0D5 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
 		B4E5046916A663610003D0D5 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		CE3D8CBB16B8FE690071FC79 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE60260F16A6BD3D0065EABB /* ByMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByMonthViewController.h; sourceTree = "<group>"; };
 		CE60261016A6BD3D0065EABB /* ByMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByMonthViewController.m; sourceTree = "<group>"; };
 		CE60261116A6BD3D0065EABB /* CustomDateUIPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateUIPickerView.h; sourceTree = "<group>"; };
@@ -972,6 +974,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */,
 				B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */,
 				CEFC834E16917DE600F4E2B1 /* UIKit.framework in Frameworks */,
 				CEFC835016917DE600F4E2B1 /* Foundation.framework in Frameworks */,
@@ -1519,6 +1522,7 @@
 		CEFC834C16917DE600F4E2B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE3D8CBB16B8FE690071FC79 /* Social.framework */,
 				CEFC834D16917DE600F4E2B1 /* UIKit.framework */,
 				CEFC834F16917DE600F4E2B1 /* Foundation.framework */,
 				CEFC835116917DE600F4E2B1 /* CoreGraphics.framework */,

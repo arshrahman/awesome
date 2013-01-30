@@ -46,10 +46,11 @@
     self.PurchaseList = [[NSMutableArray alloc]init];
     self.PurchaseList = [p viewTodayPurchases];
     
-    //NSLog(@"This Week");
-    Purchase *pp = [[Purchase alloc]init];
-    self.PurchaseListWeek = [[NSMutableArray alloc]init];
-    self.PurchaseListWeek = [pp viewThisWeekPurchases];
+    /*
+     Purchase *pp = [[Purchase alloc]init];
+     self.PurchaseListWeek = [[NSMutableArray alloc]init];
+     self.PurchaseListWeek = [pp viewThisWeekPurchases];
+     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +67,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.PurchaseList.count;
+    if([check isEqualToString:@"This Week"])
+    {
+        return self.PurchaseListWeek.count;
+    }
+    else
+    {
+        return self.PurchaseList.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -244,7 +252,7 @@
 }
 
 //-(void)refresh:(UITableView *)tableview {
-    //[tableview reloadData];
+//[tableview reloadData];
 //}
 
 - (IBAction)btnEdit:(id)sender {

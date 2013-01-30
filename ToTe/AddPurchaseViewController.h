@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Social/Social.h>
+
 @class PurchaseListViewController;
 @class PurchaseViewController;
 
