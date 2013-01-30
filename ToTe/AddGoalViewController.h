@@ -12,6 +12,7 @@
 {
     NSDate *deadline;
     UIActionSheet *dateSheet;
+    IBOutlet UIButton *btnCancel;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *addGoalTB;
@@ -26,6 +27,8 @@
 
 
 - (IBAction)btnDone:(id)sender;
+- (IBAction)btnCancel:(id)sender;
+
 
 -(void)DoDeadline;
 -(void)DismissDateSet;

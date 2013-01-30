@@ -7,6 +7,7 @@
 //
 
 #import "AddGoalViewController.h"
+#import "Goal.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AddGoalViewController ()
@@ -18,6 +19,7 @@
     UIImage *image;
     NSData *imageData;
     NSString *oldPhotoName;
+    Goal *g;
 }
 
 @synthesize txtGoal;
@@ -42,6 +44,8 @@
 {
     [super viewDidLoad];
 	
+    g = [[Goal alloc]init];
+    
     oldPhotoName = @"";
     
     txtGoal.tag = 100;
@@ -56,6 +60,8 @@
     photoView.layer.cornerRadius = 5.0;
     photoView.clipsToBounds = YES;
     
+    btnCancel.hidden = TRUE;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -67,23 +73,26 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    [cell setUserInteractionEnabled:NO];
+    //[cell setUserInteractionEnabled:NO];
     
     if (indexPath.section == 1 && indexPath.row == 0)
     {
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-        [cell setUserInteractionEnabled:YES];
+        //[cell setUserInteractionEnabled:YES];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.imagePicker = [[UIImagePickerController alloc]init];
-    self.imagePicker.delegate = self;
-    [self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    self.imagePicker.allowsEditing = YES;
-    
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    if(indexPath.section == 1 && indexPath.row ==0)
+    {
+        self.imagePicker = [[UIImagePickerController alloc]init];
+        self.imagePicker.delegate = self;
+        [self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        self.imagePicker.allowsEditing = YES;
+        
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -109,6 +118,7 @@
     
     photoView.image = image;
     photoLabel.text = @"Edit photo";
+    btnCancel.hidden = FALSE;
 }
 
 
@@ -192,6 +202,7 @@
 {
     if (textField.tag == 400)
     {
+        [self.view endEditing:YES];
         [self DoDeadline];
         return NO;
     }
@@ -200,6 +211,8 @@
         return YES;
     }
 }
+
+//-(void)textFieldE
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
@@ -223,10 +236,27 @@
     UIDatePicker *deadlinePicker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
     
     [deadlinePicker setDatePickerMode:UIDatePickerModeDate];
+        
+    /*NSDate* sourceDate = [NSDate date];
+    
+    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    
+    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:sourceDate];
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
+    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+    
+    NSDate* currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];*/
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    [df setLocale:[NSLocale currentLocale]];
+    [df setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *strDate = [df stringFromDate:[NSDate date]];
+    NSDate* currentDate = [df dateFromString:strDate];
     
     NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
-    NSDate * currentDate = [NSDate date];
-    
     NSDateComponents * comps = [[NSDateComponents alloc] init];
     
     [comps setDay:1];
@@ -293,10 +323,42 @@
     [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
+-(BOOL)IsEmpty:(NSString *)txt
+{
+    if([txt length] > 0)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
 
 - (IBAction)btnDone:(id)sender
 {
-    [self removeImage:@"Rahman.png"];
+    if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtDescription.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
+    {
+        
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Goal"message:@"Please fill in all the fields!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    int weeks = [g WeeksBetweenDate:txtDeadline.text];
+    
+    NSLog(@"weeks: %d", weeks);
+}
+
+- (IBAction)btnCancel:(id)sender
+{
+    [self removeImage:oldPhotoName];
+    oldPhotoName = @"";
+    photoView.image = [UIImage imageNamed:@"camera-icon-md.png"];
+    photoLabel.text = @"Add photo";
+    btnCancel.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -314,6 +376,7 @@
     [self setDeadline:nil];
     [self setPhotoView:nil];
     [self setPhotoLabel:nil];
+    btnCancel = nil;
     [super viewDidUnload];
 }
 

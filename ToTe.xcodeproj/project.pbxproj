@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B400904C16A3B6C900BFD732 /* roundedrectangle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */; };
+		B407A3EF16B80358008E47D5 /* button-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = B407A3EE16B80358008E47D5 /* button-delete.png */; };
+		B407A3F316B82163008E47D5 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = B407A3F216B82163008E47D5 /* Goal.m */; };
 		B419EC8416B27DCF00AD458D /* UpdateBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */; };
 		B4266E8816A05817008FC51F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = B4266E8716A05817008FC51F /* Database.m */; };
 		B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42951FB16A27563004F5D5E /* BudgetViewController.m */; };
@@ -472,6 +474,9 @@
 
 /* Begin PBXFileReference section */
 		B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = roundedrectangle.jpg; path = Images/roundedrectangle.jpg; sourceTree = "<group>"; };
+		B407A3EE16B80358008E47D5 /* button-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-delete.png"; path = "images/button-delete.png"; sourceTree = "<group>"; };
+		B407A3F116B82163008E47D5 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		B407A3F216B82163008E47D5 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		B419EC8216B27DCE00AD458D /* UpdateBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBudgetViewController.h; sourceTree = "<group>"; };
 		B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBudgetViewController.m; sourceTree = "<group>"; };
 		B4266E8616A05817008FC51F /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -1011,6 +1016,8 @@
 				CEB06CF11695743F00F96FD4 /* GoalViewController.m */,
 				B4D4C7A616B6A4FB00D0E12A /* AddGoalViewController.h */,
 				B4D4C7A716B6A4FB00D0E12A /* AddGoalViewController.m */,
+				B407A3F116B82163008E47D5 /* Goal.h */,
+				B407A3F216B82163008E47D5 /* Goal.m */,
 			);
 			name = "Goal Setting";
 			sourceTree = "<group>";
@@ -1060,6 +1067,7 @@
 		CEB06CF31696860F00F96FD4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B407A3EE16B80358008E47D5 /* button-delete.png */,
 				B4D4C7AC16B6CCC000D0E12A /* camera-icon-md.png */,
 				B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */,
 				B429520516A2828B004F5D5E /* roundedrectangle.png */,
@@ -2034,6 +2042,7 @@
 				B400904C16A3B6C900BFD732 /* roundedrectangle.jpg in Resources */,
 				CE6BA69016B64C9E00E828CD /* customCell.xib in Resources */,
 				B4D4C7AD16B6CCC000D0E12A /* camera-icon-md.png in Resources */,
+				B407A3EF16B80358008E47D5 /* button-delete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2070,6 +2079,7 @@
 				CE6BA68D16B64C8D00E828CD /* Purchase.m in Sources */,
 				CE6BA68E16B64C8D00E828CD /* PurchaseViewController.m in Sources */,
 				B4D4C7A816B6A4FB00D0E12A /* AddGoalViewController.m in Sources */,
+				B407A3F316B82163008E47D5 /* Goal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

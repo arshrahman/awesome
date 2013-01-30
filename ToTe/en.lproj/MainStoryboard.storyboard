@@ -703,7 +703,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="wpD-sH-6vk" id="uS6-OU-j3d"/>
                                                     </connections>
@@ -793,14 +793,32 @@
                                                     <color key="textColor" white="0.2955634124" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-AT-0ZL">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="23" id="93k-sQ-MLi"/>
+                                                        <constraint firstAttribute="height" constant="23" id="Dom-rZ-AMo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                    <state key="normal" backgroundImage="button-delete.png">
+                                                        <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btnCancel:" destination="wpD-sH-6vk" eventType="touchUpInside" id="mK4-i0-Gbp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="HUj-zG-Mqs" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="9" id="1B5-I5-bZw"/>
+                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="centerY" secondItem="4hE-AT-0ZL" secondAttribute="centerY" type="default" id="6Vk-di-S8a"/>
+                                            <constraint firstAttribute="trailing" secondItem="4hE-AT-0ZL" secondAttribute="trailing" constant="22" id="Bu3-z0-O8A"/>
                                             <constraint firstItem="sJx-9c-2bH" firstAttribute="leading" secondItem="HUj-zG-Mqs" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Iiu-2A-qfT"/>
+                                            <constraint firstItem="4hE-AT-0ZL" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="16" id="YQG-dy-ALf"/>
                                             <constraint firstItem="HUj-zG-Mqs" firstAttribute="leading" secondItem="laj-pd-bIS" secondAttribute="leading" constant="87" id="ibs-CG-fNv"/>
-                                            <constraint firstItem="sJx-9c-2bH" firstAttribute="top" secondItem="laj-pd-bIS" secondAttribute="top" constant="17" id="nMV-2J-uR1"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qor-wg-t9u">
@@ -848,6 +866,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addGoalTB" destination="T2h-AE-fqQ" id="rpG-Rn-Ovz"/>
+                        <outlet property="btnCancel" destination="4hE-AT-0ZL" id="GGQ-Vg-g1q"/>
                         <outlet property="photoLabel" destination="sJx-9c-2bH" id="4Ex-8P-8cE"/>
                         <outlet property="photoView" destination="HUj-zG-Mqs" id="QkT-mg-u05"/>
                         <outlet property="txtAmount" destination="PMt-Ei-l4h" id="EXB-Ik-huW"/>
@@ -1849,6 +1868,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="button-delete.png" width="30" height="30"/>
         <image name="camera-icon-md.png" width="100" height="100"/>
         <image name="glyphicons_041_charts.png" width="27" height="24"/>
         <image name="glyphicons_045_calendar.png" width="23" height="24"/>
@@ -1861,133 +1881,8 @@
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
     <classes>
-        <class className="AddGoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AddPurchaseViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPurchaseViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="SelectCategory:"/>
-                <relationship kind="action" name="cancelPressed:"/>
-                <relationship kind="action" name="donePressed:"/>
-                <relationship kind="action" name="starFiveClicked:"/>
-                <relationship kind="action" name="starFourClicked:"/>
-                <relationship kind="action" name="starOneClicked:"/>
-                <relationship kind="action" name="starThreeClicked:"/>
-                <relationship kind="action" name="starTwoClicked:"/>
-                <relationship kind="action" name="textfieldReutrn:"/>
-                <relationship kind="outlet" name="AddItemCategory" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddItemName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="AddItemPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="AddStar1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar5" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="BudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ByMonthViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByMonthViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnCalender:"/>
-                <relationship kind="outlet" name="btnCalendar" candidateClass="UIBarItem"/>
-                <relationship kind="outlet" name="customDate" candidateClass="CustomDateUIPickerView"/>
-            </relationships>
-        </class>
-        <class className="CustomDateUIPickerView" superclassName="UIPickerView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
-        </class>
-        <class className="EditPurchaseViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditPurchaseViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="SelectCategory:"/>
-                <relationship kind="action" name="btnUpdate:"/>
-                <relationship kind="action" name="starFiveClicked:"/>
-                <relationship kind="action" name="starFourClicked:"/>
-                <relationship kind="action" name="starOneClicked:"/>
-                <relationship kind="action" name="starThreeClicked:"/>
-                <relationship kind="action" name="starTwoClicked:"/>
-                <relationship kind="action" name="textfieldReutrn:"/>
-                <relationship kind="outlet" name="EditItemCategory" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditItemName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="EditItemPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="EditStar1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar5" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MainPageViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
-        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="OverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
-        </class>
-        <class className="PurchaseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PurchaseViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Switch:"/>
-                <relationship kind="action" name="btnEdit:"/>
-                <relationship kind="outlet" name="Edit" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="PurchaseTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="SortBy" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-        </class>
-        <class className="StartPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-        <class className="UpdateBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UpdateBudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="setBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnClicked:"/>
-                <relationship kind="action" name="pageControl:"/>
-                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
-            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
