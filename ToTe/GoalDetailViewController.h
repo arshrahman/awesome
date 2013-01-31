@@ -20,5 +20,7 @@
 
 - (IBAction)btnEdit:(id)sender;
 
+-(void)ProgressBar;
+
 @end
 

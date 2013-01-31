@@ -345,7 +345,7 @@
 
 - (IBAction)btnDone:(id)sender
 {
-    if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtDescription.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
+    if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
     {
         NSString *strDeadline = [g ConvertDateFormat:txtDeadline.text];
         

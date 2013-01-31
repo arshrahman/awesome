@@ -49,7 +49,6 @@
             
             if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
             {
-                NSLog(@"Successfully Goal Inserted!");
                 success = TRUE;
             }
             else
@@ -159,6 +158,74 @@
     return goal;
 }
 
+-(BOOL)UpdateGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave:(int)g_id
+{
+    char *error;
+    BOOL success = FALSE;
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {            
+        NSString *updateStmt = [NSString stringWithFormat:@"UPDATE GOAL SET TITLE = '%@', DESCRIPTION = '%@', GOAL_AMOUNT = %d, DEADLINE = '%@', GOAL_PHOTO = '%@',  AMOUNT_TOSAVE = %d WHERE GOAL_ID = %d", g_title, g_description, g_amount, deadline, g_photo, amount_tosave, g_id];
+            
+        const char *update_stmt = [updateStmt UTF8String];
+            
+        if (sqlite3_exec(budgetDB, update_stmt, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Successfully Goal Updated!");
+            success = TRUE;
+        }
+        else
+        {
+            NSLog(@"Error: %s", error);
+        }
+    }
+    else
+    {
+        NSLog(@"Goal: cannot open db!");
+    }
+    sqlite3_close(budgetDB);
+    
+    return success;
+}
+    
+-(BOOL)DeleteGoal:(int)g_id
+{
+    char *error;
+    BOOL success = FALSE;
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *deleteStmt = [NSString stringWithFormat:@"DELETE FROM GOAL WHERE GOAL_ID = %d", g_id];
+        
+        const char *delete_stmt = [deleteStmt UTF8String];
+        
+        if (sqlite3_exec(budgetDB, delete_stmt, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Goal Deleted!");
+            success = TRUE;
+        }
+        else
+        {
+            NSLog(@"Delete Goal: cannot open db!");
+        }
+        sqlite3_close(budgetDB);
+    }
+    return success;
+}
+
+
 -(NSString *)getCurrentDay
 {
     NSDate *today = [[NSDate alloc]init];
@@ -200,7 +267,39 @@
     weekday = 8 - [comps weekday];
     
     NSTimeInterval distanceBetweenDates = [lastDay timeIntervalSinceDate:today];
-    NSInteger days = (distanceBetweenDates / (60*1440))-weekday;
+    NSInteger days = (distanceBetweenDates / (60*1440)) - weekday;
+    
+    weeks += days/7;
+    
+    if (ceil(days%7) > 0)
+    {
+        weeks += 1;
+    }
+    
+    return weeks;
+}
+
+-(NSDate *)StringToDate:(NSString *)strDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    return [formatter dateFromString:strDate];
+}
+
+-(NSInteger)WeeksBetweenTwoDate:(NSDate *)start_date:(NSDate *)end_date
+{
+    int weeks = 1;
+    int weekday;
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:start_date];
+    weekday = 8 - [comps weekday];
+    
+    NSTimeInterval distanceBetweenDates = [end_date timeIntervalSinceDate:start_date];
+    NSInteger days = (distanceBetweenDates / (60*1440)) - weekday;
     
     weeks += days/7;
     

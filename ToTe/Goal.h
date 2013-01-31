@@ -27,5 +27,9 @@
 -(NSInteger)WeeksBetweenDate:(NSString *)end_date;
 -(NSMutableArray *)SelectAllGoals;
 -(NSMutableArray *)SelectGoal:(int)g_id;
+-(BOOL)UpdateGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave:(int)g_id;
+-(BOOL)DeleteGoal:(int)g_id;
+-(NSInteger)WeeksBetweenTwoDate:(NSDate *)start_date:(NSDate *)end_date;
+-(NSDate *)StringToDate:(NSString *)strDate;
 
 @end
