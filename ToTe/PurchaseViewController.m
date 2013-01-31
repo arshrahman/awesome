@@ -11,6 +11,7 @@
 #import "AddPurchaseViewController.h"
 #import "EditPurchaseViewController.h"
 #import "customCell.h"
+#import "SettingsData.h"
 
 @interface PurchaseViewController ()
 {
@@ -51,6 +52,7 @@
      self.PurchaseListWeek = [[NSMutableArray alloc]init];
      self.PurchaseListWeek = [pp viewThisWeekPurchases];
      */
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +64,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if([check isEqualToString:@"This Week"])
+    {
+        return 1;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -74,6 +83,25 @@
     else
     {
         return self.PurchaseList.count;
+    }
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if([check isEqualToString:@"This Week"])
+    {
+        return @"testing";
+    }
+    else
+    {
+        //get current Date
+        NSDate *date = [NSDate date];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd, MMM yyyy"];
+        
+        NSString *theDate = [dateFormat stringFromDate:date];
+        
+        return theDate;
     }
 }
 
@@ -170,12 +198,24 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        Purchase *p = [self.PurchaseList objectAtIndex:indexPath.row];
-        //Call database method
-        [p deletePurchase:p.uniqueId];
+        if([check isEqualToString:@"This Week"])
+        {
+            Purchase *p = [self.PurchaseListWeek objectAtIndex:indexPath.row];
+            //Call database method
+            [p deletePurchase:p.uniqueId];
+            
+            // Delete the row from the data source
+            [self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
+        }
+        else
+        {
+            Purchase *p = [self.PurchaseList objectAtIndex:indexPath.row];
+            //Call database method
+            [p deletePurchase:p.uniqueId];
         
-        // Delete the row from the data source
-        [self.PurchaseList removeObjectAtIndex:indexPath.row];
+            // Delete the row from the data source
+            [self.PurchaseList removeObjectAtIndex:indexPath.row];
+        }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -257,6 +297,10 @@
 {
     [super viewWillAppear:animated];
     [self.PurchaseTableView reloadData];
+    
+    SettingsData *s = [[SettingsData alloc]init];
+    [s getDataFromSetting];
+    NSLog(s.Facebook ? @"Yes" : @"No");
 }
 
 //-(void)refresh:(UITableView *)tableview {

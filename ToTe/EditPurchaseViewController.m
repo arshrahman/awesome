@@ -142,11 +142,23 @@
     
     //NSString *name = self.EditItemName.text;
     NSString *price = self.EditItemPrice.text;
-    
-    if([price length] == 0 || [price doubleValue] == 0)
+    NSString *category = self.EditItemCategory.currentTitle;
+    if(([price length] == 0 || [price doubleValue] == 0) && [category isEqualToString:@"Select Category"])
     {
         NSLog(@"Call alert");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Edit Purchase"message:@"Please specify the amount of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the amount of the item and the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([price length] == 0 || [price doubleValue] == 0)
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the amount of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([category isEqualToString:@"Select Category"])
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
     else

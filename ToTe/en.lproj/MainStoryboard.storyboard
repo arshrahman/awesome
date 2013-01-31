@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--Overview View Controller - History-->
@@ -966,13 +966,13 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rj0-jV-z8o">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rj0-jV-z8o">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="Vbz-Mt-Xou"/>
+                                                        <constraint firstAttribute="width" constant="174" id="GWX-Fc-les"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Select Category">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="highlighted">
@@ -982,13 +982,23 @@
                                                         <action selector="SelectCategory:" destination="07q-5H-54G" eventType="touchUpInside" id="2In-cs-EeI"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8Q-cL-U6X">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="98" id="rJn-8n-c4R"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="centerX" secondItem="Oa5-BA-jXb" secondAttribute="centerX" type="default" id="Fow-3e-2qJ"/>
                                             <constraint firstItem="rj0-jV-z8o" firstAttribute="top" secondItem="Oa5-BA-jXb" secondAttribute="top" type="default" id="IdU-3H-Uhv"/>
-                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="centerY" secondItem="Oa5-BA-jXb" secondAttribute="centerY" type="default" id="dde-4d-2W8"/>
+                                            <constraint firstItem="S8Q-cL-U6X" firstAttribute="leading" secondItem="Oa5-BA-jXb" secondAttribute="leading" constant="30" id="XwF-bm-XeE"/>
+                                            <constraint firstItem="S8Q-cL-U6X" firstAttribute="top" secondItem="Oa5-BA-jXb" secondAttribute="top" constant="13" id="c6D-O0-jAR"/>
+                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="bottom" secondItem="Oa5-BA-jXb" secondAttribute="bottom" type="default" id="hYQ-BH-fQw"/>
+                                            <constraint firstItem="rj0-jV-z8o" firstAttribute="leading" secondItem="S8Q-cL-U6X" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="hij-5m-rKa"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5NO-wQ-fnx">
@@ -998,10 +1008,10 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Price" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhT-WM-ZdH">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Price" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhT-WM-ZdH">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="gfj-Fa-IX0"/>
-                                                        <constraint firstAttribute="height" constant="30" id="zwH-wZ-Tct"/>
+                                                        <constraint firstAttribute="height" constant="43" id="5RH-Hr-qMV"/>
+                                                        <constraint firstAttribute="width" constant="154" id="6hz-hq-Q7f"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
@@ -1009,12 +1019,23 @@
                                                         <action selector="textfieldReutrn:" destination="07q-5H-54G" eventType="editingDidEndOnExit" id="W6c-yK-gTw"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maL-ga-UHw">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="98" id="t3F-i6-veY"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="bhT-WM-ZdH" firstAttribute="centerX" secondItem="5NO-wQ-fnx" secondAttribute="centerX" type="default" id="93i-pL-Zpk"/>
-                                            <constraint firstItem="bhT-WM-ZdH" firstAttribute="centerY" secondItem="5NO-wQ-fnx" secondAttribute="centerY" type="default" id="Y7u-Sx-AL3"/>
+                                            <constraint firstItem="maL-ga-UHw" firstAttribute="centerY" secondItem="bhT-WM-ZdH" secondAttribute="centerY" type="default" id="GRE-4N-4GG"/>
+                                            <constraint firstItem="bhT-WM-ZdH" firstAttribute="top" secondItem="5NO-wQ-fnx" secondAttribute="top" type="default" id="Lva-Rk-2e0"/>
+                                            <constraint firstItem="maL-ga-UHw" firstAttribute="leading" secondItem="5NO-wQ-fnx" secondAttribute="leading" constant="30" id="bx2-WP-gPh"/>
+                                            <constraint firstItem="maL-ga-UHw" firstAttribute="baseline" secondItem="bhT-WM-ZdH" secondAttribute="baseline" type="default" id="nt1-kC-KNO"/>
+                                            <constraint firstItem="bhT-WM-ZdH" firstAttribute="leading" secondItem="maL-ga-UHw" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="v9v-Dl-NSX"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wP8-yQ-vrf">
@@ -1024,10 +1045,10 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMg-ni-qhh">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMg-ni-qhh">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="6dF-91-UFn"/>
-                                                        <constraint firstAttribute="width" constant="260" id="cfZ-RK-Je3"/>
+                                                        <constraint firstAttribute="height" constant="43" id="1xS-gN-HdY"/>
+                                                        <constraint firstAttribute="width" constant="154" id="5Qp-TS-HFu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1035,12 +1056,23 @@
                                                         <action selector="textfieldReutrn:" destination="07q-5H-54G" eventType="editingDidEndOnExit" id="ktg-52-V2E"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4x-fv-Mr2">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="98" id="0WY-ae-Jyb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="centerX" secondItem="wP8-yQ-vrf" secondAttribute="centerX" type="default" id="Csn-6N-N8D"/>
-                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="centerY" secondItem="wP8-yQ-vrf" secondAttribute="centerY" type="default" id="oe1-O1-Sns"/>
+                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="centerY" secondItem="M4x-fv-Mr2" secondAttribute="centerY" type="default" id="Vmt-zT-lBN"/>
+                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="top" secondItem="wP8-yQ-vrf" secondAttribute="top" type="default" id="kYT-Ok-M05"/>
+                                            <constraint firstItem="M4x-fv-Mr2" firstAttribute="baseline" secondItem="mMg-ni-qhh" secondAttribute="baseline" type="default" id="ojg-3B-zCQ"/>
+                                            <constraint firstItem="M4x-fv-Mr2" firstAttribute="leading" secondItem="wP8-yQ-vrf" secondAttribute="leading" constant="30" id="rA1-9e-OxH"/>
+                                            <constraint firstItem="mMg-ni-qhh" firstAttribute="leading" secondItem="M4x-fv-Mr2" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="udd-l5-vFs"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zN8-lr-dhg">
@@ -1199,14 +1231,14 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCN-Wc-Oau">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCN-Wc-Oau">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="2Ug-ke-h9W"/>
-                                                        <constraint firstAttribute="width" constant="300" id="5e0-Zi-tPb"/>
+                                                        <constraint firstAttribute="width" constant="174" id="9ZJ-lU-x4X"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Select Category">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="highlighted">
@@ -1216,12 +1248,22 @@
                                                         <action selector="SelectCategory:" destination="yof-dH-D4t" eventType="touchUpInside" id="N7l-my-IBf"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMy-ua-ikM">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="98" id="PwB-Em-1bd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="MCN-Wc-Oau" firstAttribute="bottom" secondItem="SD3-cl-sjb" secondAttribute="bottom" type="default" id="cI6-jy-PAH"/>
-                                            <constraint firstItem="MCN-Wc-Oau" firstAttribute="centerX" secondItem="SD3-cl-sjb" secondAttribute="centerX" type="default" id="fBb-Xw-T2j"/>
+                                            <constraint firstItem="uMy-ua-ikM" firstAttribute="leading" secondItem="SD3-cl-sjb" secondAttribute="leading" constant="30" id="n0n-tk-LtV"/>
+                                            <constraint firstItem="MCN-Wc-Oau" firstAttribute="leading" secondItem="uMy-ua-ikM" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="sPa-6B-gVT"/>
+                                            <constraint firstItem="uMy-ua-ikM" firstAttribute="centerY" secondItem="MCN-Wc-Oau" secondAttribute="centerY" type="default" id="vdA-YG-Vet"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="57J-mm-2b7">
@@ -1231,9 +1273,9 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Price" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGJ-5H-h9g">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Price" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGJ-5H-h9g">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="22T-eP-SIF"/>
+                                                        <constraint firstAttribute="width" constant="154" id="muX-Ep-QNr"/>
                                                         <constraint firstAttribute="height" constant="30" id="yxL-dr-Oby"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1242,12 +1284,23 @@
                                                         <action selector="textfieldReutrn:" destination="yof-dH-D4t" eventType="editingDidEndOnExit" id="MIp-gf-qx9"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKP-IA-KY4">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="98" id="CCN-xp-MCw"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="cGJ-5H-h9g" firstAttribute="centerY" secondItem="57J-mm-2b7" secondAttribute="centerY" type="default" id="aYj-OP-ldF"/>
-                                            <constraint firstItem="cGJ-5H-h9g" firstAttribute="centerX" secondItem="57J-mm-2b7" secondAttribute="centerX" type="default" id="sa6-7o-AqJ"/>
+                                            <constraint firstItem="vKP-IA-KY4" firstAttribute="baseline" secondItem="cGJ-5H-h9g" secondAttribute="baseline" type="default" id="6Nh-gd-aPv"/>
+                                            <constraint firstItem="cGJ-5H-h9g" firstAttribute="leading" secondItem="vKP-IA-KY4" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="HEW-Ob-MI6"/>
+                                            <constraint firstItem="vKP-IA-KY4" firstAttribute="centerY" secondItem="57J-mm-2b7" secondAttribute="centerY" type="default" id="WoW-sd-iLJ"/>
+                                            <constraint firstItem="vKP-IA-KY4" firstAttribute="leading" secondItem="57J-mm-2b7" secondAttribute="leading" constant="30" id="uqH-US-LNP"/>
+                                            <constraint firstItem="cGJ-5H-h9g" firstAttribute="centerY" secondItem="vKP-IA-KY4" secondAttribute="centerY" type="default" id="vkZ-YI-POI"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4KC-9f-jfB">
@@ -1257,10 +1310,10 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LGH-gb-Ajf">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter Item Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LGH-gb-Ajf">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="F8u-Bg-MaV"/>
                                                         <constraint firstAttribute="height" constant="30" id="Kld-k6-1py"/>
+                                                        <constraint firstAttribute="width" constant="154" id="soQ-lR-kvD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1268,12 +1321,23 @@
                                                         <action selector="textfieldReutrn:" destination="yof-dH-D4t" eventType="editingDidEndOnExit" id="37c-cB-kts"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTL-0Z-0SC">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="98" id="DBN-fZ-691"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="LGH-gb-Ajf" firstAttribute="centerX" secondItem="4KC-9f-jfB" secondAttribute="centerX" type="default" id="Mfh-9P-12I"/>
+                                            <constraint firstItem="vTL-0Z-0SC" firstAttribute="centerY" secondItem="LGH-gb-Ajf" secondAttribute="centerY" type="default" id="Pwb-ai-pte"/>
+                                            <constraint firstItem="vTL-0Z-0SC" firstAttribute="baseline" secondItem="LGH-gb-Ajf" secondAttribute="baseline" type="default" id="STh-Ne-rAn"/>
                                             <constraint firstItem="LGH-gb-Ajf" firstAttribute="centerY" secondItem="4KC-9f-jfB" secondAttribute="centerY" type="default" id="Sqr-Bd-3eh"/>
+                                            <constraint firstItem="LGH-gb-Ajf" firstAttribute="leading" secondItem="vTL-0Z-0SC" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="WJT-5V-ccG"/>
+                                            <constraint firstItem="vTL-0Z-0SC" firstAttribute="leading" secondItem="4KC-9f-jfB" secondAttribute="leading" constant="30" id="ysY-sr-drG"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fDe-zg-9D2">
@@ -1393,7 +1457,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Purchase" id="BlG-Lo-7Sh">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="eqU-F1-Utb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="eqU-F1-Utb">
                             <connections>
                                 <action selector="cancelPressed:" destination="yof-dH-D4t" id="WmJ-Ce-OF7"/>
                             </connections>
@@ -1489,11 +1553,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Purchase" id="JPr-wc-2Ai">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="deQ-Dn-NVS">
-                            <connections>
-                                <action selector="btnEdit:" destination="CTW-wK-0VD" id="USA-YG-59A"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Vwv-kD-e2K">
                             <connections>
                                 <segue destination="wLt-Rz-6tu" kind="modal" identifier="AddItem" id="qFy-Gp-Dna"/>
@@ -1501,7 +1560,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="Edit" destination="deQ-Dn-NVS" id="6Cv-xY-ZpP"/>
                         <outlet property="PurchaseTableView" destination="deQ-ZW-ZLe" id="nQx-VQ-30H"/>
                         <outlet property="SortBy" destination="ZaG-QV-bNP" id="Vuk-oJ-0B9"/>
                     </connections>

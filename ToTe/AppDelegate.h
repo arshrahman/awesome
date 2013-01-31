@@ -10,6 +10,11 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+//Setting
+@property BOOL Facebook;
+@property BOOL Twitter;
+@property BOOL Share;
+
 @property (strong, nonatomic) UIWindow *window;
 
 @end

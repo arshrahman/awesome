@@ -10,6 +10,7 @@
 #import "StartPageViewController.h"
 #import "Budget.h"
 #import "Database.h"
+#import "SettingsData.h"
 
 @implementation AppDelegate
 
