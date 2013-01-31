@@ -8,7 +8,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Publish To:</string>
+			<string>Allow App To Publish Onto:</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -16,7 +16,7 @@
 			<key>Title</key>
 			<string>Facebook</string>
 			<key>Key</key>
-			<string>Group</string>
+			<string>FacebookSwitch</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
@@ -26,7 +26,7 @@
 			<key>Title</key>
 			<string>Twitter</string>
 			<key>Key</key>
-			<string>Group</string>
+			<string>TwitterSwitch</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
@@ -36,7 +36,7 @@
 			<key>Title</key>
 			<string>Share Data With TP</string>
 			<key>Key</key>
-			<string>Group</string>
+			<string>ShareSwitch</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
@@ -44,15 +44,11 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>FooterText</key>
-			<string>This Mobile Application is part
-of the Humanities &amp; Social Sciences School Deliverables to the Tote Board Project.
-Creators of this App: Dr. Tan Wah Pheow Abigail Seng
-Kweh Yu Ting
-Edwin Paul Rahman
-Credits Thanks to the designers who helped made this possible: The League of Movable Type
-Glyphicons</string>
+			<string>This Mobile Application is part of the Humanities &amp; Social Sciences School Deliverables to the Tote Board Project.
+  Creators of this App:   Dr. Tan Wah   Pheow Abigail Seng  Kweh Yu Ting  Edwin Moses Low   Paul Michael C.Pangilinan  Abdul Rahman
+  Credits:   Thanks to the designers who helped made this possible: The League of Movable Type Glyphicons</string>
 			<key>Title</key>
-			<string>About Us</string>
+			<string></string>
 		</dict>
 	</array>
 	<key>StringsTable</key>
