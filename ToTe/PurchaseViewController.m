@@ -215,7 +215,15 @@
     EditPurchaseViewController *editingView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPurchaseViewController"];
     
     //EditPurchaseViewController *editPuchase = segue.destinationViewController;
-    editingView.purchaseItem = [self.PurchaseList objectAtIndex:tableView.indexPathForSelectedRow.row];
+    if([check isEqualToString:@"This Week"])
+    {
+        editingView.purchaseItem = [self.PurchaseListWeek objectAtIndex:tableView.indexPathForSelectedRow.row];
+    }
+    else
+    {
+        editingView.purchaseItem = [self.PurchaseList objectAtIndex:tableView.indexPathForSelectedRow.row];
+    }
+    
     // Pass the selected object to the new view controller.
     [self.navigationController pushViewController:editingView animated:YES];
 }
