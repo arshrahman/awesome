@@ -90,7 +90,7 @@
 {
     if([check isEqualToString:@"This Week"])
     {
-        return @"testing";
+        return @"";
     }
     else
     {
