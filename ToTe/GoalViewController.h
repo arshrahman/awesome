@@ -10,4 +10,5 @@
 
 @interface GoalViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITableView *tblViewGoal;
 @end

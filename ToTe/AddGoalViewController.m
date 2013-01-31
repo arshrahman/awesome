@@ -8,6 +8,7 @@
 
 #import "AddGoalViewController.h"
 #import "Goal.h"
+#import "GoalViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AddGoalViewController ()
@@ -20,6 +21,7 @@
     NSData *imageData;
     NSString *oldPhotoName;
     Goal *g;
+    int toSave;
 }
 
 @synthesize txtGoal;
@@ -30,6 +32,7 @@
 @synthesize addGoalTB;
 @synthesize photoView;
 @synthesize photoLabel;
+@synthesize lblSave;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,6 +71,7 @@
     tap.cancelsTouchesInView = FALSE;
     [self.view addGestureRecognizer:tap];
     
+    [txtAmount addTarget:self action:@selector(textEditingChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,7 +138,7 @@
     NSError *error = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:documentsPath])
         [[NSFileManager defaultManager] createDirectoryAtPath:documentsPath withIntermediateDirectories:NO attributes:nil error:&error];
-
+    
     return [documentsPath stringByAppendingPathComponent:name];
 }
 
@@ -212,7 +216,13 @@
     }
 }
 
-//-(void)textFieldE
+-(void)textEditingChanged:(UITextField *)textField
+{
+    if([txtDeadline.text length] > 0 && [txtAmount.text length] > 0)
+    {
+        [self ChangelblSave];
+    }
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
@@ -223,6 +233,14 @@
 -(void)dismissKeyboard
 {
     [self.view endEditing:YES];
+}
+
+-(void)ChangelblSave
+{
+    int weeks = [g WeeksBetweenDate:txtDeadline.text];
+    int amount = [txtAmount.text intValue];
+    toSave = amount/weeks;
+    lblSave.text = [NSString stringWithFormat:@"Save $%d per week", toSave];
 }
 
 
@@ -236,17 +254,6 @@
     UIDatePicker *deadlinePicker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
     
     [deadlinePicker setDatePickerMode:UIDatePickerModeDate];
-        
-    /*NSDate* sourceDate = [NSDate date];
-    
-    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
-    
-    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:sourceDate];
-    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
-    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
-    
-    NSDate* currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];*/
     
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
     [df setLocale:[NSLocale currentLocale]];
@@ -268,8 +275,6 @@
     deadlinePicker.minimumDate = minDate;
     deadlinePicker.maximumDate = maxDate;
     deadlinePicker.date = minDate;
-    
-    NSLog(@"minDate: %@, maxDate: %@", minDate, maxDate);
     
     [dateSheet addSubview:deadlinePicker];
     
@@ -314,6 +319,8 @@
     
     [txtDeadline setText:[dateFormatter stringFromDate:self.deadline]];
     
+    if([txtAmount.text length] > 0)[self ChangelblSave];
+    
     [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
@@ -340,16 +347,19 @@
 {
     if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtDescription.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
     {
+        NSString *strDeadline = [g ConvertDateFormat:txtDeadline.text];
         
+        if ([g InsertGoal:txtGoal.text :txtDescription.text :[txtAmount.text intValue] :strDeadline :oldPhotoName :toSave])
+        {
+            GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
+            [self.navigationController pushViewController:gvc animated:YES];
+        }
     }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Goal"message:@"Please fill in all the fields!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
-    int weeks = [g WeeksBetweenDate:txtDeadline.text];
-    
-    NSLog(@"weeks: %d", weeks);
 }
 
 - (IBAction)btnCancel:(id)sender
@@ -377,6 +387,7 @@
     [self setPhotoView:nil];
     [self setPhotoLabel:nil];
     btnCancel = nil;
+    [self setLblSave:nil];
     [super viewDidUnload];
 }
 

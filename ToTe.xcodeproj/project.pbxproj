@@ -439,6 +439,8 @@
 		B466452C169C020E00C83739 /* glyphicons_419_e-mail.png in Resources */ = {isa = PBXBuildFile; fileRef = B4664388169C020D00C83739 /* glyphicons_419_e-mail.png */; };
 		B4664530169C067300C83739 /* StartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B466452F169C067300C83739 /* StartPageViewController.m */; };
 		B4664534169C0A0100C83739 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B4664533169C0A0100C83739 /* logo.jpeg */; };
+		B46A481B16BA1AC7009A2E1F /* EditGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A481816BA1AC6009A2E1F /* EditGoalViewController.m */; };
+		B46A481C16BA1AC7009A2E1F /* GoalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A481A16BA1AC7009A2E1F /* GoalDetailViewController.m */; };
 		B4C85A2016A7A3D00036E52E /* Budget.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C85A1F16A7A3D00036E52E /* Budget.m */; };
 		B4CAC24A16B139E900626478 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CAC24916B139E900626478 /* SettingsViewController.m */; };
 		B4CAC25216B162F400626478 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CAC25116B162F400626478 /* CMPopTipView.m */; };
@@ -913,6 +915,10 @@
 		B466452E169C067300C83739 /* StartPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewController.h; sourceTree = "<group>"; };
 		B466452F169C067300C83739 /* StartPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewController.m; sourceTree = "<group>"; };
 		B4664533169C0A0100C83739 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpeg; path = Images/logo.jpeg; sourceTree = "<group>"; };
+		B46A481716BA1AC6009A2E1F /* EditGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGoalViewController.h; sourceTree = "<group>"; };
+		B46A481816BA1AC6009A2E1F /* EditGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGoalViewController.m; sourceTree = "<group>"; };
+		B46A481916BA1AC6009A2E1F /* GoalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalDetailViewController.h; sourceTree = "<group>"; };
+		B46A481A16BA1AC7009A2E1F /* GoalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalDetailViewController.m; sourceTree = "<group>"; };
 		B4C85A1E16A7A3D00036E52E /* Budget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Budget.h; sourceTree = "<group>"; };
 		B4C85A1F16A7A3D00036E52E /* Budget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Budget.m; sourceTree = "<group>"; };
 		B4CAC24816B139E900626478 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -1015,6 +1021,10 @@
 		CEB06CEC169573BD00F96FD4 /* Goal Setting */ = {
 			isa = PBXGroup;
 			children = (
+				B46A481716BA1AC6009A2E1F /* EditGoalViewController.h */,
+				B46A481816BA1AC6009A2E1F /* EditGoalViewController.m */,
+				B46A481916BA1AC6009A2E1F /* GoalDetailViewController.h */,
+				B46A481A16BA1AC7009A2E1F /* GoalDetailViewController.m */,
 				CEB06CF01695743F00F96FD4 /* GoalViewController.h */,
 				CEB06CF11695743F00F96FD4 /* GoalViewController.m */,
 				B4D4C7A616B6A4FB00D0E12A /* AddGoalViewController.h */,
@@ -2084,6 +2094,8 @@
 				CE6BA68E16B64C8D00E828CD /* PurchaseViewController.m in Sources */,
 				B4D4C7A816B6A4FB00D0E12A /* AddGoalViewController.m in Sources */,
 				B407A3F316B82163008E47D5 /* Goal.m in Sources */,
+				B46A481B16BA1AC7009A2E1F /* EditGoalViewController.m in Sources */,
+				B46A481C16BA1AC7009A2E1F /* GoalDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

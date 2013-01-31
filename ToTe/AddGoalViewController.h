@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (weak, nonatomic) IBOutlet UILabel *photoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *lblSave;
 
 
 - (IBAction)btnDone:(id)sender;
@@ -33,6 +34,7 @@
 -(void)DoDeadline;
 -(void)DismissDateSet;
 -(void)CancelDateSet;
-- (NSString *)documentsPathForFileName:(NSString *)name;
+-(NSString *)documentsPathForFileName:(NSString *)name;
+-(void)ChangelblSave;
 
 @end

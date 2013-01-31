@@ -13,7 +13,7 @@
 @property(nonatomic)int goal_id;
 @property(nonatomic)NSString *goal_title;
 @property(nonatomic)NSString *goal_description;
-@property(nonatomic)int *goal_amount;
+@property(nonatomic)int goal_amount;
 @property(nonatomic)NSString *deadline;
 @property(nonatomic)NSString *goal_photo;
 @property(nonatomic)int priority;
@@ -21,9 +21,11 @@
 @property(nonatomic)int amount_tosave;
 @property(nonatomic)NSString* goal_start_date;
 
--(void)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave:(NSString *)g_start_date;
+-(BOOL)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave;
 -(NSString *)ConvertDateFormat:(NSString *)end_date;
 -(NSString *)getCurrentDay;
 -(NSInteger)WeeksBetweenDate:(NSString *)end_date;
+-(NSMutableArray *)SelectAllGoals;
+-(NSMutableArray *)SelectGoal:(int)g_id;
 
 @end
