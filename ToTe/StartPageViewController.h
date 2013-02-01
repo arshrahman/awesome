@@ -13,4 +13,6 @@
     NSTimer *time;
 }
 
+@property (strong, nonatomic) IBOutlet UILabel *lblTip;
+
 @end

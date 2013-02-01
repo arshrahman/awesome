@@ -14,6 +14,11 @@
 @end
 
 @implementation StartPageViewController
+{
+    NSString *pListPath;
+}
+
+@synthesize lblTip;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +33,9 @@
 {
     [super viewDidLoad];
     
-    time = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
+    [self readAppPlist];
+    
+    time = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
     
 }
 
@@ -40,6 +47,17 @@
 }
 
 
+-(void)readAppPlist
+{
+    pListPath = [[NSBundle mainBundle] pathForResource:@"TipOfDay" ofType:@"plist"];
+    NSMutableDictionary * propertyDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    
+    int randomNum = arc4random() % 33;
+    if (randomNum == 0)randomNum = 1;
+    
+    lblTip.text = [propertyDict objectForKey:[NSString stringWithFormat:@"%d", randomNum]];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -49,6 +67,7 @@
 
 - (void)viewDidUnload {
 
+    [self setLblTip:nil];
     [super viewDidUnload];
 }
 
