@@ -145,7 +145,7 @@
         
         //add into database
         [newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
-        //[self Tweet];
+        [self Tweet];
         //[self FacebookPost];
         [self dismissModalViewControllerAnimated:YES];
     }

@@ -96,7 +96,12 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    //[self ChangelblSave];
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeKeyboard:)];
+    leftSwipeGestureRecognizer.numberOfTouchesRequired = 1;
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [addGoalTB addGestureRecognizer:leftSwipeGestureRecognizer];
+    
+    addGoalTB.scrollEnabled = NO;
 }
 
 
@@ -231,6 +236,12 @@
 {
     [self.view endEditing:YES];
 }
+
+- (void)SwipeKeyboard:(UISwipeGestureRecognizer *)swipeGestureRecognizer
+{
+    [self.view endEditing:YES];
+}
+
 
 -(void)ChangelblSave
 {

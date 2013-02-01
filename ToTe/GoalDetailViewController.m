@@ -58,16 +58,16 @@
     NSDate *lastDate = [g StringToDate:g.deadline];
     
     double totalWeeks = [g WeeksBetweenTwoDate:startDate :lastDate];
-    double currentWeek = [g WeeksBetweenTwoDate:today :startDate];
+    double currentWeek = [g WeeksBetweenTwoDate:today :startDate] - 1;
     double weeksMet = g.weeks_met;
     
     NSLog(@"currenWeek: %g", currentWeek);
     NSLog(@"totalWeeks: %g", totalWeeks);
     NSLog(@"weeksMet: %g", weeksMet);
         
-    totalWeeks = 20;
+    /*totalWeeks = 20;
     currentWeek = 7;
-    weeksMet = 4;
+    weeksMet = 4;*/
     
     if (currentWeek > totalWeeks) currentWeek = totalWeeks;
     
@@ -134,7 +134,15 @@
         }
         
         UIBezierPath *maskPath;
-        maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGrey.bounds byRoundingCorners:(UIRectCornerBottomRight | UIRectCornerTopRight) cornerRadii:CGSizeMake(6.0, 6.0)];
+        
+        if (greenWidth <= 0  && redWidth <= 0)
+        {
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGrey.bounds byRoundingCorners:( UIRectCornerAllCorners) cornerRadii:CGSizeMake(6.0, 6.0)];
+        }
+        else
+        {
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGrey.bounds byRoundingCorners:(UIRectCornerBottomRight | UIRectCornerTopRight) cornerRadii:CGSizeMake(6.0, 6.0)];
+        }
         
         CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
         maskLayer.frame = lblGrey.bounds;

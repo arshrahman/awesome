@@ -72,6 +72,13 @@
     [self.view addGestureRecognizer:tap];
     
     [txtAmount addTarget:self action:@selector(textEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeKeyboard:)];
+    leftSwipeGestureRecognizer.numberOfTouchesRequired = 1;
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [addGoalTB addGestureRecognizer:leftSwipeGestureRecognizer];
+    
+    addGoalTB.scrollEnabled = NO;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -234,6 +241,13 @@
 {
     [self.view endEditing:YES];
 }
+
+
+- (void)SwipeKeyboard:(UISwipeGestureRecognizer *)swipeGestureRecognizer
+{
+    [self.view endEditing:YES];
+}
+
 
 -(void)ChangelblSave
 {
