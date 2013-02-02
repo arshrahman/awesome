@@ -21,7 +21,7 @@
 @property(nonatomic)int amount_tosave;
 @property(nonatomic)NSString* goal_start_date;
 
--(BOOL)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave;
+-(int)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave;
 -(NSString *)ConvertDateFormat:(NSString *)end_date;
 -(NSString *)getCurrentDay;
 -(NSInteger)WeeksBetweenDate:(NSDate *)end_date;

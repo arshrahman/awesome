@@ -56,11 +56,11 @@
     double currentWeek = [g WeeksBetweenTwoDate:today :startDate] - 1;
     double weeksMet = g.weeks_met;
     
-    NSLog(@"Start Date: %@, Last Day: %@, currenWeek: %g", startDate, lastDate, currentWeek);
+    /*NSLog(@"Start Date: %@, Last Day: %@, currenWeek: %g", startDate, lastDate, currentWeek);
     NSLog(@"totalWeeks: %g", totalWeeks);
     NSLog(@"weeksMet: %g", weeksMet);
         
-    /*totalWeeks = 20;
+    totalWeeks = 20;
     currentWeek = 7;
     weeksMet = 4;*/
     
@@ -201,9 +201,15 @@
  
     NSData *imgData = [NSData dataWithContentsOfFile:[self documentsPathForFileName:g.goal_photo]];
     UIImage *img = [UIImage imageWithData:imgData];
+    
+    double width = 320;
+    if (img.size.width <= 300)
+    {
+        width = img.size.width;
+    }
  
     scroller = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 160)];
-    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img.size.height)];
     lblGoalTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 126, 320, 35)];
     lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(20, 160, 280, 85)];
     lbltoSaveWeekly = [[UILabel alloc]initWithFrame:CGRectMake(0, 293, 320, 36)];

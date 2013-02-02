@@ -16,11 +16,10 @@
     NSString *dbPathString;
 }
 
--(BOOL)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave
+-(int)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave
 {
     char *error;
     int rowId = 1;
-    BOOL success = FALSE;
     
     if(dbPathString == NULL)
     {
@@ -49,7 +48,7 @@
             
             if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
             {
-                success = TRUE;
+                rowId = sqlite3_last_insert_rowid(budgetDB);
             }
             else
             {
@@ -64,7 +63,7 @@
         sqlite3_close(budgetDB);
     }
     
-    return success;
+    return rowId;
 }
 
 -(NSMutableArray *)SelectAllGoals

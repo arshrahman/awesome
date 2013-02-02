@@ -8,7 +8,7 @@
 
 #import "AddGoalViewController.h"
 #import "Goal.h"
-#import "GoalViewController.h"
+#import "GoalDetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AddGoalViewController ()
@@ -325,12 +325,16 @@
 {
     if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
     {
-        NSString *strDeadline = [g ConvertDateFormat:txtDeadline.text];
+        NSString *strDeadline = [g DateToString:self.deadline];
+        int goalID = 0;
+        goalID = [g InsertGoal:txtGoal.text :txtDescription.text :[txtAmount.text intValue] :strDeadline :oldPhotoName :toSave];
         
-        if ([g InsertGoal:txtGoal.text :txtDescription.text :[txtAmount.text intValue] :strDeadline :oldPhotoName :toSave])
+        if (goalID > 0)
         {
-            GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
-            [self.navigationController pushViewController:gvc animated:YES];
+            GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
+            gdc.goal_id = goalID;
+            
+            [self.navigationController pushViewController:gdc animated:YES];
         }
     }
     else
