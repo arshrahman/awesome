@@ -1627,6 +1627,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Goals" id="DNa-O7-lKe">
                         <barButtonItem key="backBarButtonItem" title="Back" id="svB-nw-QLC"/>
+                        <barButtonItem key="leftBarButtonItem" title="Reorder" id="YnA-U9-adv">
+                            <connections>
+                                <action selector="btnReorderClicked:" destination="Hqm-rg-y0k" id="due-9Y-4lu"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9oc-7s-eVY">
                             <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -1635,6 +1640,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnReorder" destination="YnA-U9-adv" id="Uvu-75-5U9"/>
                         <outlet property="tblViewGoal" destination="9bE-sc-hlx" id="YAM-sb-dV8"/>
                         <segue destination="ju1-yM-3kc" kind="push" id="UWq-vR-igU"/>
                     </connections>
@@ -2269,171 +2275,6 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
-    <classes>
-        <class className="AddGoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnCancel:"/>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lblSave" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AddPurchaseViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPurchaseViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="SelectCategory:"/>
-                <relationship kind="action" name="cancelPressed:"/>
-                <relationship kind="action" name="donePressed:"/>
-                <relationship kind="action" name="starFiveClicked:"/>
-                <relationship kind="action" name="starFourClicked:"/>
-                <relationship kind="action" name="starOneClicked:"/>
-                <relationship kind="action" name="starThreeClicked:"/>
-                <relationship kind="action" name="starTwoClicked:"/>
-                <relationship kind="action" name="textfieldReutrn:"/>
-                <relationship kind="outlet" name="AddItemCategory" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddItemName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="AddItemPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="AddStar1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="AddStar5" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="BudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ByMonthViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByMonthViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnCalender:"/>
-                <relationship kind="outlet" name="btnCalendar" candidateClass="UIBarItem"/>
-                <relationship kind="outlet" name="customDate" candidateClass="CustomDateUIPickerView"/>
-            </relationships>
-        </class>
-        <class className="CustomDateUIPickerView" superclassName="UIPickerView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
-        </class>
-        <class className="EditGoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditGoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnCancel:"/>
-                <relationship kind="action" name="btnCancelEdit:"/>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lblSave" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="EditPurchaseViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditPurchaseViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="SelectCategory:"/>
-                <relationship kind="action" name="btnUpdate:"/>
-                <relationship kind="action" name="starFiveClicked:"/>
-                <relationship kind="action" name="starFourClicked:"/>
-                <relationship kind="action" name="starOneClicked:"/>
-                <relationship kind="action" name="starThreeClicked:"/>
-                <relationship kind="action" name="starTwoClicked:"/>
-                <relationship kind="action" name="textfieldReutrn:"/>
-                <relationship kind="outlet" name="EditItemCategory" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditItemName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="EditItemPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="EditStar1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="EditStar5" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="GoalDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnEdit:"/>
-            </relationships>
-        </class>
-        <class className="GoalViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tblViewGoal" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MainPageViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="OverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
-        </class>
-        <class className="PurchaseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PurchaseViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="Switch:"/>
-                <relationship kind="action" name="btnEdit:"/>
-                <relationship kind="outlet" name="Edit" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="PurchaseTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="SortBy" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-        </class>
-        <class className="StartPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lblTip" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-        <class className="UpdateBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UpdateBudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnDone:"/>
-                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
-                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="setBudgetViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnClicked:"/>
-                <relationship kind="action" name="pageControl:"/>
-                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

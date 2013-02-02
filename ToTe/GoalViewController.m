@@ -15,6 +15,7 @@
 {
     NSMutableArray *goalArray;
     Goal *g;
+    BOOL editing;
 }
 
 @end
@@ -22,6 +23,7 @@
 @implementation GoalViewController
 
 @synthesize tblViewGoal;
+@synthesize btnReorder;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,9 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.navigationItem.hidesBackButton = YES;
     
+    editing = FALSE;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -79,6 +80,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.showsReorderControl = YES;
         
         lblname = [[UILabel alloc]initWithFrame:CGRectMake(63, 3, 280, 25)];
         lblname.textColor = [UIColor blackColor];
@@ -128,6 +130,33 @@
     return cell;
 }
 
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+
+
+- (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    /*id thing = [things objectAtIndex:sourceIndexPath.row];
+    [things removeObjectAtIndex:sourceIndexPath.row];
+    [things insertObject:thing atIndex:destinationIndexPath.row];*/    
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -173,6 +202,22 @@
     return string;
 }
 
+- (IBAction)btnReorderClicked:(id)sender
+{
+    if (editing)
+    {
+        tblViewGoal.editing = NO;
+        btnReorder.title = @"Reorder";
+        editing = FALSE;
+    }
+    else if(!editing)
+    {
+        tblViewGoal.editing = YES;
+        btnReorder.title = @"Done";
+        editing = TRUE;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -181,6 +226,8 @@
 
 - (void)viewDidUnload {
     [self setTblViewGoal:nil];
+    [self setBtnReorder:nil];
     [super viewDidUnload];
 }
+
 @end

@@ -11,4 +11,8 @@
 @interface GoalViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *tblViewGoal;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnReorder;
+
+- (IBAction)btnReorderClicked:(id)sender;
+
 @end
