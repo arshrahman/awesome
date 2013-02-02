@@ -40,7 +40,6 @@
 -(void)CancelDateSet;
 -(NSString *)documentsPathForFileName:(NSString *)name;
 -(void)ChangelblSave;
--(NSString *)ConvertDateFormatToOriginal:(NSString *)end_date;
 - (void)showConfirmAlert;
 
 @end

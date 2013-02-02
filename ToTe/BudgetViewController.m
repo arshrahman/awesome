@@ -65,11 +65,9 @@
     [self.view addGestureRecognizer:tap];
 }
 
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    //if (userHasCompletedAction) {
-    return YES;
-    //}
-    //return NO;
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    return NO;
 }
 
 

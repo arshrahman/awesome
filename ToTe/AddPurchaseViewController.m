@@ -177,10 +177,6 @@
                  default:
                      break;
              }
-             
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"Tweeted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-             
-             [alert show];
          }];
 	}
 }
@@ -213,10 +209,6 @@
                  default:
                      break;
              }
-             
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Posted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-             
-             [alert show];
          }];
 	}
 }

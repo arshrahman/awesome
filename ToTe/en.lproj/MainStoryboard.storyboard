@@ -353,9 +353,9 @@
                         </subviews>
                         <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Tzb-A0-jD5" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="342" id="1Sz-l6-BVt"/>
                             <constraint firstAttribute="bottom" secondItem="GHd-mK-Mk9" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="4KL-aT-ZyF"/>
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="trailing" secondItem="B00-G3-9TH" secondAttribute="trailing" type="default" id="AmD-tm-3Ig"/>
+                            <constraint firstAttribute="bottom" secondItem="Tzb-A0-jD5" secondAttribute="bottom" constant="9" id="QPH-xr-cxS"/>
                             <constraint firstItem="6go-SC-sRo" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="25" id="QUs-8N-SSU"/>
                             <constraint firstItem="Tzb-A0-jD5" firstAttribute="leading" secondItem="B00-G3-9TH" secondAttribute="leading" type="default" id="bQE-j9-FTH"/>
                             <constraint firstItem="GHd-mK-Mk9" firstAttribute="top" secondItem="B00-G3-9TH" secondAttribute="top" constant="172" id="gVR-do-kU8"/>
@@ -367,7 +367,6 @@
                     <navigationItem key="navigationItem" title="Budget" id="pzJ-Bl-CJg">
                         <barButtonItem key="backBarButtonItem" title="Back" id="gla-xW-XoW"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="OpV-q9-kBE">
-                            <color key="tintColor" red="1" green="0.58823529411764708" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="btnClicked:" destination="p8V-E3-ljz" id="Cqa-jB-Png"/>
                             </connections>
@@ -1711,10 +1710,10 @@
                                                     <color key="textColor" white="0.29907048359999999" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Goal Description" translatesAutoresizingMaskIntoConstraints="NO" id="dCI-Z6-eNE">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCI-Z6-eNE">
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="Ppd-4C-vxO"/>
+                                                        <constraint firstAttribute="height" constant="50" id="RlH-Dq-6CX"/>
                                                         <constraint firstAttribute="width" constant="188" id="gxX-4m-lbj"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1729,7 +1728,7 @@
                                         <constraints>
                                             <constraint firstItem="Psw-2I-E1g" firstAttribute="leading" secondItem="R6u-hX-acD" secondAttribute="leading" constant="21" id="7wa-eK-NRf"/>
                                             <constraint firstItem="dCI-Z6-eNE" firstAttribute="leading" secondItem="R6u-hX-acD" secondAttribute="leading" constant="117" id="AqO-aT-sQ7"/>
-                                            <constraint firstItem="dCI-Z6-eNE" firstAttribute="top" secondItem="R6u-hX-acD" secondAttribute="top" constant="15" id="CIO-eB-aLd"/>
+                                            <constraint firstItem="dCI-Z6-eNE" firstAttribute="centerY" secondItem="Psw-2I-E1g" secondAttribute="centerY" type="default" id="Nen-zV-GQG"/>
                                             <constraint firstItem="Psw-2I-E1g" firstAttribute="top" secondItem="R6u-hX-acD" secondAttribute="top" constant="20" type="default" id="qBq-jw-hB6"/>
                                         </constraints>
                                     </tableViewCell>
@@ -1931,64 +1930,7 @@
                     <view key="view" contentMode="scaleToFill" id="dLV-VJ-170">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Save money for Haj/Umrah to go mecca " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Dqq-15-OmA">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="1uQ-pZ-5OT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Save $1200 by Feb 1, 2020" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="HAm-fo-plV">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="KwU-iL-mm8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Save $100 Weekly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="qry-5o-HtJ">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="UUg-FA-Vmz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twG-R0-mGk">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="7x8-UD-Hg9"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="  Save money for Haj/Umrah to go mecca " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aol-Rz-1Hs">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="U2x-b8-0Jw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="HAm-fo-plV" firstAttribute="leading" secondItem="dLV-VJ-170" secondAttribute="leading" type="default" id="377-e7-ybz"/>
-                            <constraint firstItem="Dqq-15-OmA" firstAttribute="leading" secondItem="dLV-VJ-170" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Blc-7e-KyA"/>
-                            <constraint firstItem="qry-5o-HtJ" firstAttribute="trailing" secondItem="dLV-VJ-170" secondAttribute="trailing" type="default" id="Cif-sw-Dbi"/>
-                            <constraint firstAttribute="bottom" secondItem="qry-5o-HtJ" secondAttribute="bottom" constant="29" id="EoL-Am-mVt"/>
-                            <constraint firstItem="twG-R0-mGk" firstAttribute="trailing" secondItem="dLV-VJ-170" secondAttribute="trailing" type="default" id="J27-gQ-B7t"/>
-                            <constraint firstItem="twG-R0-mGk" firstAttribute="top" secondItem="dLV-VJ-170" secondAttribute="top" type="default" id="Mqf-5g-AvC"/>
-                            <constraint firstItem="Aol-Rz-1Hs" firstAttribute="bottom" secondItem="twG-R0-mGk" secondAttribute="bottom" type="default" id="TeT-ky-OGh"/>
-                            <constraint firstItem="Aol-Rz-1Hs" firstAttribute="leading" secondItem="dLV-VJ-170" secondAttribute="leading" type="default" id="XdB-VZ-0Hr"/>
-                            <constraint firstItem="Aol-Rz-1Hs" firstAttribute="trailing" secondItem="dLV-VJ-170" secondAttribute="trailing" type="default" id="aKA-6V-Cfp"/>
-                            <constraint firstItem="HAm-fo-plV" firstAttribute="trailing" secondItem="dLV-VJ-170" secondAttribute="trailing" type="default" id="c9O-x5-f9j"/>
-                            <constraint firstItem="qry-5o-HtJ" firstAttribute="leading" secondItem="dLV-VJ-170" secondAttribute="leading" type="default" id="cfT-Kd-vbM"/>
-                            <constraint firstItem="twG-R0-mGk" firstAttribute="leading" secondItem="dLV-VJ-170" secondAttribute="leading" type="default" id="ehx-rS-D8E"/>
-                            <constraint firstItem="Dqq-15-OmA" firstAttribute="top" secondItem="dLV-VJ-170" secondAttribute="top" constant="162" id="mh2-uh-msz"/>
-                            <constraint firstAttribute="bottom" secondItem="HAm-fo-plV" secondAttribute="bottom" constant="2" id="qFe-LK-Rae"/>
-                            <constraint firstAttribute="trailing" secondItem="Dqq-15-OmA" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="sdc-Ud-d6m"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Goal" id="c9j-Jp-wOu">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="yN8-A4-0hU">
@@ -1998,13 +1940,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="imgView" destination="twG-R0-mGk" id="TO9-XH-gNG"/>
-                        <outlet property="lblSaveTotal" destination="HAm-fo-plV" id="8cA-gM-fk8"/>
-                        <outlet property="lblSaveWeekly" destination="qry-5o-HtJ" id="JZZ-2w-aae"/>
-                        <outlet property="lblgoalDescription" destination="Dqq-15-OmA" id="ajZ-CO-gIU"/>
-                        <outlet property="lblgoalTitle" destination="Aol-Rz-1Hs" id="7NM-Nk-6ck"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOn-3s-Z45" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2079,7 +2014,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Goal Description" translatesAutoresizingMaskIntoConstraints="NO" id="apO-pk-b4K">
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="Wzg-cU-r1D"/>
+                                                        <constraint firstAttribute="height" constant="50" id="H3U-Jj-SUp"/>
                                                         <constraint firstAttribute="width" constant="188" id="jOK-sl-wR4"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2093,7 +2028,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="uC7-7A-knm" firstAttribute="top" secondItem="6kf-Nl-sew" secondAttribute="top" constant="20" type="default" id="KvA-ze-VIz"/>
-                                            <constraint firstItem="apO-pk-b4K" firstAttribute="top" secondItem="6kf-Nl-sew" secondAttribute="top" constant="15" id="dB9-sJ-gPZ"/>
+                                            <constraint firstItem="apO-pk-b4K" firstAttribute="centerY" secondItem="uC7-7A-knm" secondAttribute="centerY" type="default" id="NH6-vx-4jh"/>
                                             <constraint firstItem="apO-pk-b4K" firstAttribute="leading" secondItem="6kf-Nl-sew" secondAttribute="leading" constant="117" id="hhD-qU-TzN"/>
                                             <constraint firstItem="uC7-7A-knm" firstAttribute="leading" secondItem="6kf-Nl-sew" secondAttribute="leading" constant="21" id="mMd-2R-ifT"/>
                                         </constraints>
@@ -2334,6 +2269,171 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
+    <classes>
+        <class className="AddGoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCancel:"/>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblSave" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AddPurchaseViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="cancelPressed:"/>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="AddItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="BudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
+                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ByMonthViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByMonthViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCalender:"/>
+                <relationship kind="outlet" name="btnCalendar" candidateClass="UIBarItem"/>
+                <relationship kind="outlet" name="customDate" candidateClass="CustomDateUIPickerView"/>
+            </relationships>
+        </class>
+        <class className="CustomDateUIPickerView" superclassName="UIPickerView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomDateUIPickerView.h"/>
+        </class>
+        <class className="EditGoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditGoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCancel:"/>
+                <relationship kind="action" name="btnCancelEdit:"/>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblSave" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="EditPurchaseViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditPurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="btnUpdate:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="EditItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="EditItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="EditStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="GoalDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnEdit:"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tblViewGoal" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MainPageViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="OverviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
+        </class>
+        <class className="PurchaseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Switch:"/>
+                <relationship kind="action" name="btnEdit:"/>
+                <relationship kind="outlet" name="Edit" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="PurchaseTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="SortBy" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+        </class>
+        <class className="StartPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblTip" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
+        </class>
+        <class className="UpdateBudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UpdateBudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
+                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="setBudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnClicked:"/>
+                <relationship kind="action" name="pageControl:"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

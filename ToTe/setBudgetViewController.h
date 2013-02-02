@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CMPopTipView.h"
 
-@interface setBudgetViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, CMPopTipViewDelegate>
+@interface setBudgetViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITabBarControllerDelegate, CMPopTipViewDelegate>
 {
     BOOL pageControlIsChangingPage;
 }

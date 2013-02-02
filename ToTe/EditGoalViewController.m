@@ -23,6 +23,7 @@
     NSString *oldPhotoName;
     Goal *g;
     int toSave;
+    NSMutableArray *photosToDelete;
 }
 
 @synthesize goalArray;
@@ -50,6 +51,9 @@
     [super viewDidLoad];
 	
     g = [[Goal alloc]init];
+    photosToDelete = [[NSMutableArray alloc]init];
+    
+    [self DoDeadline];
     
     oldPhotoName = @"";
     
@@ -57,8 +61,6 @@
     txtDescription.tag = 200;
     txtAmount.tag = 300;
     txtDeadline.tag = 400;
-    
-    txtDescription.backgroundColor = [UIColor clearColor];
     
     photoView.layer.cornerRadius = 5.0;
     photoView.clipsToBounds = YES;
@@ -78,8 +80,8 @@
     
     txtGoal.text = g.goal_title;
     txtDescription.text = g.goal_description;
-    
-    txtDeadline.text = [self ConvertDateFormatToOriginal:g.deadline];
+    txtDeadline.text = [g ConvertDateFormat:g.deadline];
+    self.deadline = [g StringToDate:g.deadline];
     txtAmount.text = [NSString stringWithFormat:@"%d", g.goal_amount];
     toSave = g.amount_tosave;
     lblSave.text = [NSString stringWithFormat:@"Save $%d per week", g.amount_tosave];
@@ -89,21 +91,11 @@
         NSData *imgData = [NSData dataWithContentsOfFile:[self documentsPathForFileName:g.goal_photo]];
         photoView.image = [UIImage imageWithData:imgData];
         oldPhotoName = g.goal_photo;
-        
+        [photosToDelete addObject:oldPhotoName];
         photoLabel.text = @"Edit photo";
         btnCancel.hidden = FALSE;
     }
-    
-    self.navigationItem.hidesBackButton = YES;
-    
-    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeKeyboard:)];
-    leftSwipeGestureRecognizer.numberOfTouchesRequired = 1;
-    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    [addGoalTB addGestureRecognizer:leftSwipeGestureRecognizer];
-    
-    addGoalTB.scrollEnabled = NO;
 }
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,11 +142,8 @@
         NSString *photoName = [NSString stringWithFormat:@"%@.png", [self getImageName]];
         [imageData writeToFile:[self documentsPathForFileName:photoName] atomically:YES];
         
-        if ([oldPhotoName length] > 0 && ![oldPhotoName isEqualToString:g.goal_photo])
-        {
-            [self removeImage:oldPhotoName];
-        }
         oldPhotoName = photoName;
+        [photosToDelete addObject:oldPhotoName];
     }
     
     photoView.image = image;
@@ -208,7 +197,8 @@
     if (textField.tag == 400)
     {
         [self.view endEditing:YES];
-        [self DoDeadline];
+        [dateSheet showInView:self.view];
+        [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
         return NO;
     }
     else
@@ -237,15 +227,9 @@
     [self.view endEditing:YES];
 }
 
-- (void)SwipeKeyboard:(UISwipeGestureRecognizer *)swipeGestureRecognizer
-{
-    [self.view endEditing:YES];
-}
-
-
 -(void)ChangelblSave
 {
-    int weeks = [g WeeksBetweenDate:txtDeadline.text];
+    int weeks = [g WeeksBetweenDate:self.deadline];
     int amount = [txtAmount.text intValue];
     toSave = amount/weeks;
     lblSave.text = [NSString stringWithFormat:@"Save $%d per week", toSave];
@@ -303,8 +287,6 @@
     
     
     [dateSheet addSubview:controlBar];
-    [dateSheet showFromTabBar:self.tabBarController.tabBar];
-    [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
 }
 
 
@@ -338,17 +320,6 @@
     [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
--(NSString *)ConvertDateFormatToOriginal:(NSString *)end_date
-{
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    
-    NSDate *newDate = [dateFormat dateFromString:end_date];
-    [dateFormat setDateFormat:@"MMM dd, yyyy"];
-    
-    return [dateFormat stringFromDate:newDate];
-}
-
 
 -(BOOL)IsEmpty:(NSString *)txt
 {
@@ -367,13 +338,24 @@
 {
     if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
     {
-        NSString *strDeadline = [g ConvertDateFormat:txtDeadline.text];
+        NSString *strDeadline = [g DateToString:self.deadline];
         
         if ([g UpdateGoal:txtGoal.text :txtDescription.text :[txtAmount.text intValue] :strDeadline :oldPhotoName :toSave :g.goal_id])
         {
+            if (photosToDelete.count > 1)
+            {
+                for (int i = 0; i < photosToDelete.count-1; i++)
+                {
+                    [self removeImage:[photosToDelete objectAtIndex:i]];
+                }
+            }
+            
             GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
             gdc.goal_id = g.goal_id;
-            [self.navigationController pushViewController:gdc animated:YES];
+            
+            //[self.navigationController pushViewController:gdc animated:YES];
+            
+            [self dismissModalViewControllerAnimated:YES];
         }
     }
     else
@@ -394,9 +376,19 @@
 
 - (IBAction)btnCancelEdit:(id)sender
 {
-    if (![oldPhotoName isEqualToString:g.goal_photo])
+    int ig = 0;
+    
+    if ([g.goal_photo length] > 0)
     {
-        [self removeImage:oldPhotoName];
+        ig = 1;
+    }
+    
+    if (photosToDelete.count > 1)
+    {
+        for (int i = ig; i < photosToDelete.count; i++)
+        {
+            [self removeImage:[photosToDelete objectAtIndex:i]];
+        }
     }
 
     oldPhotoName = @"";
@@ -409,10 +401,14 @@
     txtAmount.text = @"";
     txtDeadline.text = @"";
     lblSave.text = @"";
-    
+        
     GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
     gdc.goal_id = g.goal_id;
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    //[self.navigationController pushViewController:gdc animated:YES];
+    
+    [self dismissModalViewControllerAnimated:YES];
+
 }
 
 - (void)showConfirmAlert
@@ -432,12 +428,14 @@
 	{
         if ([g DeleteGoal:g.goal_id])
         {
-            if (![oldPhotoName isEqualToString:g.goal_photo])
+            if (photosToDelete.count > 0)
             {
-                [self removeImage:oldPhotoName];
+                for (int i = 0; i < photosToDelete.count; i++)
+                {
+                    [self removeImage:[photosToDelete objectAtIndex:i]];
+                }
             }
-            [self removeImage:g.goal_photo];
-            
+        
             GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
 
             [self.navigationController pushViewController:gvc animated:YES];

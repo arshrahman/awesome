@@ -9,12 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @interface GoalDetailViewController : UIViewController
+{
+    UIScrollView *scroller;
+    UIImageView *imageView;
+    UILabel *lblGoalTitle;
+    UILabel *lblDescription;
+    UILabel *lbltoSaveWeekly;
+    UILabel *lbltoSaveTotal;
+}
 
-@property (strong, nonatomic) IBOutlet UIImageView *imgView;
-@property (strong, nonatomic) IBOutlet UILabel *lblgoalTitle;
-@property (strong, nonatomic) IBOutlet UILabel *lblSaveWeekly;
-@property (strong, nonatomic) IBOutlet UILabel *lblSaveTotal;
-@property (strong, nonatomic) IBOutlet UILabel *lblgoalDescription;
+@property(nonatomic) UIScrollView *scroller;
+@property(nonatomic) UIImageView *imageView;
+@property(nonatomic) UILabel *lblGoalTitle;
+@property(nonatomic) UILabel *lblDescription;
+@property(nonatomic) UILabel *lbltoSaveWeekly;
+@property(nonatomic) UILabel *lbltoSaveTotal;
 
 @property(nonatomic)int goal_id;
 

@@ -23,11 +23,12 @@
 @implementation GoalDetailViewController
 
 @synthesize goal_id;
-@synthesize lblgoalTitle;
-@synthesize lblgoalDescription;
-@synthesize lblSaveWeekly;
-@synthesize lblSaveTotal;
-@synthesize imgView;
+@synthesize scroller;
+@synthesize imageView;
+@synthesize lblGoalTitle;
+@synthesize lblDescription;
+@synthesize lbltoSaveWeekly;
+@synthesize lbltoSaveTotal;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,13 +43,7 @@
 {
     [super viewDidLoad];
     
-    lblgoalTitle.viewForBaselineLayout.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75f];
-    
-    self.navigationItem.leftBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:@"Goals"
-                                     style:UIBarButtonItemStyleBordered
-                                    target:self
-                                    action:@selector(handleBack:)];
+
 }
  
 -(void)ProgressBar
@@ -61,11 +56,11 @@
     double currentWeek = [g WeeksBetweenTwoDate:today :startDate] - 1;
     double weeksMet = g.weeks_met;
     
-    NSLog(@"currenWeek: %g", currentWeek);
+    /*NSLog(@"currenWeek: %g", currentWeek);
     NSLog(@"totalWeeks: %g", totalWeeks);
     NSLog(@"weeksMet: %g", weeksMet);
         
-    /*totalWeeks = 20;
+    totalWeeks = 20;
     currentWeek = 7;
     weeksMet = 4;*/
     
@@ -78,8 +73,8 @@
     if (weeksToGo < 0) weeksToGo = 0;
     
     double totalWidth = 280;
-    double labelHeight = 35;
-    double labelY = 240;
+    double labelHeight = 32;
+    double labelY = 256;
     
     double greenWidth = (weeksMet/totalWeeks)*totalWidth;
     double greyWidth = (weeksToGo/totalWeeks)*totalWidth;
@@ -106,7 +101,15 @@
         }
         
         UIBezierPath *maskPath;
-        maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGreen.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];
+        
+        if (redWidth <= 0 && greyWidth <= 0)
+        {
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGreen.bounds byRoundingCorners:(UIRectCornerAllCorners) cornerRadii:CGSizeMake(6.0, 6.0)];
+        }
+        else
+        {
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGreen.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];    
+        }
         
         CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
         maskLayer.frame = lblGreen.bounds;
@@ -115,7 +118,7 @@
         
         [self.view addSubview:lblGreen];
         
-        NSLog(@"Green Label: %g, %g, %g, %g", lblGreen.frame.origin.x, lblGreen.frame.origin.y, lblGreen.frame.size.width, lblGreen.frame.size.height);
+        //NSLog(@"Green Label: %g, %g, %g, %g", lblGreen.frame.origin.x, lblGreen.frame.origin.y, lblGreen.frame.size.width, lblGreen.frame.size.height);
     }
     
     if (greyWidth > 0 && (currentWeek < totalWeeks))
@@ -151,7 +154,7 @@
         
         [self.view addSubview:lblGrey];
         
-        NSLog(@"Grey Label: %g, %g, %g, %g", lblGrey.frame.origin.x, lblGrey.frame.origin.y, lblGrey.frame.size.width, lblGrey.frame.size.height);
+        //NSLog(@"Grey Label: %g, %g, %g, %g", lblGrey.frame.origin.x, lblGrey.frame.origin.y, lblGrey.frame.size.width, lblGrey.frame.size.height);
     }
     
     
@@ -160,73 +163,98 @@
         lblRed = [[UILabel alloc]initWithFrame:CGRectMake(redX, labelY, redWidth, labelHeight)];
         lblRed.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:0 blue:0 alpha:1.0];
         
-        if (currentWeek >= totalWeeks)
+        UIBezierPath *maskPath;
+        
+        if (currentWeek >= totalWeeks && greenWidth <= 0)
         {
-            UIBezierPath *maskPath;
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerAllCorners) cornerRadii:CGSizeMake(6.0, 6.0)];
+        }
+        else if (currentWeek >= totalWeeks)
+        {
             maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerBottomRight | UIRectCornerTopRight) cornerRadii:CGSizeMake(6.0, 6.0)];
-            
-            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-            maskLayer.frame = lblRed.bounds;
-            maskLayer.path = maskPath.CGPath;
-            lblRed.layer.mask = maskLayer;
+        }
+        else if (greenWidth <= 0)
+        {
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];
         }
         
-        if (greenWidth <= 0)
-        {
-            UIBezierPath *maskPath;
-            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];
-            
-            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-            maskLayer.frame = lblRed.bounds;
-            maskLayer.path = maskPath.CGPath;
-            lblRed.layer.mask = maskLayer;
-        }
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = lblRed.bounds;
+        maskLayer.path = maskPath.CGPath;
+        lblRed.layer.mask = maskLayer;
         
         [self.view addSubview:lblRed];
-        
-        NSLog(@"Red Label: %g, %g, %g, %g", lblRed.frame.origin.x, lblRed.frame.origin.y, lblRed.frame.size.width, lblRed.frame.size.height);
     }
 }
-
--(void)handleBack:(id)sender
-{    
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 
 -(void)viewWillAppear:(BOOL)animated
 {    
     g = [[Goal alloc]init];
     goal_array = [[NSMutableArray alloc]init];
-    
+ 
     for (Goal *gg in [g SelectGoal:goal_id])
     {
         [goal_array addObject:gg];
     }
-    
+ 
     g = [goal_array objectAtIndex:0];
-    
+ 
     NSData *imgData = [NSData dataWithContentsOfFile:[self documentsPathForFileName:g.goal_photo]];
-    imgView.image = [UIImage imageWithData:imgData];
-    lblgoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
-    lblgoalDescription.text = g.goal_description;
-    lblSaveWeekly.text = [NSString stringWithFormat:@"Save $%d Weekly!", g.amount_tosave];
-    lblSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [self ConvertDateFormat:g.deadline]];
+    UIImage *img = [UIImage imageWithData:imgData];
+ 
+    scroller = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 160)];
+    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+    lblGoalTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 126, 320, 35)];
+    lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(20, 160, 280, 85)];
+    lbltoSaveWeekly = [[UILabel alloc]initWithFrame:CGRectMake(0, 293, 320, 36)];
+    lbltoSaveTotal = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, 320, 36)];
     
+    
+    imageView.image = img;
+    
+    [scroller setContentSize:imageView.frame.size];
+    [scroller scrollRectToVisible:imageView.frame animated:YES];
+    scroller.showsVerticalScrollIndicator = NO;
+    scroller.showsHorizontalScrollIndicator = NO;
+    //scroller.bounces = NO;
+    scroller.maximumZoomScale = 2.0f;
+    scroller.minimumZoomScale = 0.5f;
+    
+    lblDescription.numberOfLines = 4;
+    lblDescription.font = [UIFont fontWithName:@"Helvetica-Light" size:15];
+    lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
+    lblDescription.textAlignment = UITextAlignmentCenter;
+    
+    lbltoSaveWeekly.numberOfLines = 1;
+    lbltoSaveWeekly.font = [UIFont fontWithName:@"Helvetica-Light" size:16];
+    lbltoSaveWeekly.textAlignment = UITextAlignmentCenter;
+    
+    lbltoSaveTotal.numberOfLines = 1;
+    lbltoSaveTotal.font = [UIFont fontWithName:@"Helvetica-Light" size:16];
+    lbltoSaveTotal.textAlignment = UITextAlignmentCenter;
+    
+    [self.view addSubview:scroller];
+    [scroller addSubview:imageView];
+    [self.view addSubview:lblGoalTitle];
+    [self.view addSubview:lblDescription];
+    [self.view addSubview:lbltoSaveWeekly];
+    [self.view addSubview:lbltoSaveTotal];
+ 
+
+    lblGoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
+    lblDescription.text = g.goal_description;
+    lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%d Weekly!", g.amount_tosave];
+    lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
+ 
     [self ProgressBar];
+ 
+    lblGoalTitle.viewForBaselineLayout.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75f];
 }
 
--(NSString *)ConvertDateFormat:(NSString *)end_date
+-(void)viewDidDisappear:(BOOL)animated
 {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    
-    NSDate *newDate = [dateFormat dateFromString:end_date];
-    [dateFormat setDateFormat:@"MMM dd, yyyy"];
-    
-    return [dateFormat stringFromDate:newDate];
+    imageView.image = nil;
 }
-
 
 - (NSString *)documentsPathForFileName:(NSString *)name
 {
@@ -242,25 +270,30 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
-    [self setImgView:nil];
-    [self setLblgoalTitle:nil];
-    [self setLblSaveWeekly:nil];
-    [self setLblSaveTotal:nil];
-    [self setLblgoalDescription:nil];
+- (void)viewDidUnload
+{
     [super viewDidUnload];
+    [self setScroller:nil];
+    [self setImageView:nil];
+    [self setLblGoalTitle:nil];
+    [self setLblDescription:nil];
+    [self setLbltoSaveWeekly:nil];
+    [self setLbltoSaveTotal:nil];
 }
 - (IBAction)btnEdit:(id)sender
 {
     EditGoalViewController *egc = [self.storyboard instantiateViewControllerWithIdentifier:@"EditGoalViewController"];
     
     egc.goalArray = [[NSMutableArray alloc]initWithArray:goal_array];
+
+    UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:egc];
+    [navC setModalPresentationStyle:UIModalTransitionStyleCrossDissolve];
     
-    [self.navigationController pushViewController:egc animated:YES];
+    [self.navigationController presentViewController:navC animated:YES completion:nil];
 }
+      
      
 @end
      

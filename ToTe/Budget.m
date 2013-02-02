@@ -395,7 +395,7 @@
             
             NSDate *last_date = [[NSDate alloc]init];
             last_date = [dateFormatter dateFromString:nslast_date];
-            NSLog(@"Last day: %@", last_date);
+            //NSLog(@"Last day: %@", last_date);
             
             NSDate* sourceDate = [NSDate date];
             
@@ -407,11 +407,6 @@
             NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
             
             NSDate* today = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];
-            NSLog(@"today: %@", today);
-            
-            int days = [self daysBetweenDate:last_date andDate:today];
-                        
-            NSLog(@"days: %d", days);
             
             if (today >= last_date)
             {
@@ -439,7 +434,7 @@
                         inst_stmt = [inst_stmt stringByAppendingString:temp];
                     }
                     
-                    NSLog(@"query %@", inst_stmt);
+                    //NSLog(@"query %@", inst_stmt);
                     
                     const char *insert_stmt = [inst_stmt UTF8String];
                     
@@ -453,7 +448,7 @@
                         NSLog(@"Exception %@", exception);
                     }
                 }
-                NSLog(@"days: %d, weeks: %d", days, weeks);
+                //NSLog(@"days: %d, weeks: %d", days, weeks);
             }
         }
     }
@@ -465,7 +460,7 @@
     NSTimeInterval distanceBetweenDates = [toDateTime timeIntervalSinceDate:fromDateTime];
     double secondsInAnHour = 60;
     NSInteger minutes = distanceBetweenDates / secondsInAnHour;
-    NSLog(@"minutes: %d", minutes);
+    //NSLog(@"minutes: %d", minutes);
     
     NSInteger days = minutes/1440;
     

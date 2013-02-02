@@ -35,7 +35,7 @@
     
     [self readAppPlist];
     
-    time = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
+    time = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
     
 }
 

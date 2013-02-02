@@ -25,6 +25,8 @@
     Budget *b;
     double income;
     double expenses;
+    int weekday;
+    BOOL allowEdit;
     
     CMPopTipView *tooltip;
 }
@@ -49,6 +51,7 @@
 {
     [super viewDidLoad];
     
+    [self.tabBarController setDelegate:self];
     sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
     sideView.delegate = self;
     sideView.dataSource = self;
@@ -80,6 +83,17 @@
     sideView.layer.cornerRadius = 10.0f;
     sideView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     sideView.layer.borderWidth = 1.5;
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    weekday = [comp weekday];
+    allowEdit = FALSE;
+    
+    if (weekday == 2 || weekday == 3)
+    {
+        allowEdit = TRUE;
+        topButton.tintColor = [UIColor colorWithRed:255.0/255.0 green:150.0/255.0 blue:0/255.0 alpha:1];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -118,6 +132,11 @@
     pageControl.currentPage = 1;
     [scroller setContentOffset:CGPointMake(320, 0) animated:YES];
    
+}
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    return YES;
 }
 
 - (void)firstPage:(UISwipeGestureRecognizer *)swipeGestureRecognizer
@@ -244,9 +263,22 @@
             lbltotal = (UILabel *)[cell1.contentView viewWithTag:500];
             img = (UIImageView *)[cell1.contentView viewWithTag:600];
         }
-        
+        if (indexPath.row == 0)
+        {
+            if (expenses > [[topArray objectAtIndex:1] doubleValue])
+            {
+                lblcurrent.textColor = [UIColor redColor];
+                lbltotal.textColor = [UIColor redColor];
+            }
+        }
         if (indexPath.row == 1)
         {
+            if ([[bottomArray objectAtIndex:indexPath.row] doubleValue] < 0)
+            {
+                lblcurrent.textColor = [UIColor redColor];
+                lbltotal.textColor = [UIColor redColor];
+            }
+            
             lblcurrent.text = @"Current\nSavings:";
             img.image=[UIImage imageNamed:@"glyphicons_037_coins.png"];
         }
@@ -270,18 +302,18 @@
             cell2 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SideTableCell];
             cell2.selectionStyle = UITableViewCellSelectionStyleGray;
             
-            lblcat = [[UILabel alloc]initWithFrame:CGRectMake(51, 0, 130, 47)];
-            lblcat.textColor = [UIColor blackColor];
-            lblcat.font = [UIFont fontWithName:@"Helvetica" size:17];
+            lblcat = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 130, 50)];
+            lblcat.textColor = [UIColor redColor];
+            lblcat.font = [UIFont fontWithName:@"Helvetica" size:16];
             lblcat.text = @"Current\nExpenses:";
             lblcat.lineBreakMode = UILineBreakModeWordWrap;
             lblcat.numberOfLines = 2;
             lblcat.tag = 700;
             
-            lblcatamount = [[UILabel alloc]initWithFrame:CGRectMake(140, 0, 130, 50)];
-            lblcatamount.textColor = [UIColor blackColor];
-            lblcatamount.font = [UIFont fontWithName:@"Helvetica" size:19];
-            lblcatamount.font = [UIFont boldSystemFontOfSize:19 ];
+            lblcatamount = [[UILabel alloc]initWithFrame:CGRectMake(160, 0, 130, 50)];
+            lblcatamount.textColor = [UIColor redColor];
+            lblcatamount.font = [UIFont fontWithName:@"Helvetica" size:17];
+            lblcatamount.font = [UIFont boldSystemFontOfSize:17 ];
             lblcatamount.tag = 800;
             
             imgv = [[UIImageView alloc]initWithFrame:CGRectMake(13, 12, 25, 25)];
@@ -306,6 +338,17 @@
         
         if (bc.category_amount > 0)
         {
+            if (bc.category_spent < bc.category_amount)
+            {
+                lblcat.textColor = [UIColor blackColor];
+                lblcatamount.textColor = [UIColor blackColor];
+            }
+            else
+            {
+                lblcat.textColor = [UIColor redColor];
+                lblcatamount.textColor = [UIColor redColor];
+            }
+            
             lblcatamount.text = [NSString stringWithFormat:@"$%g / $%g", bc.category_spent, bc.category_amount];
         }
         else
@@ -336,15 +379,9 @@
 
 
 - (IBAction)btnClicked:(id)sender
-{
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comp = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    int weekday = [comp weekday];
-    
-    if (weekday == 2 || weekday == 3)
+{    
+    if (allowEdit)
     {
-        //[b InsertPreviousBudget];
-        
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         [self.navigationController pushViewController:bvc animated:YES];
     }

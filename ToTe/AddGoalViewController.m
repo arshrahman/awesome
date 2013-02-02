@@ -49,17 +49,15 @@
 	
     g = [[Goal alloc]init];
     
+    [self DoDeadline];
+    
     oldPhotoName = @"";
     
     txtGoal.tag = 100;
     txtDescription.tag = 200;
     txtAmount.tag = 300;
     txtDeadline.tag = 400;
-    
-    txtDescription.backgroundColor = [UIColor clearColor];
-    txtDescription.textColor = [UIColor lightGrayColor];
-    txtDescription.text = @"Goal Description";
-    
+        
     photoView.layer.cornerRadius = 5.0;
     photoView.clipsToBounds = YES;
     
@@ -78,18 +76,17 @@
     leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     [addGoalTB addGestureRecognizer:leftSwipeGestureRecognizer];
     
-    addGoalTB.scrollEnabled = NO;
+    //addGoalTB.scrollEnabled = NO;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    //[cell setUserInteractionEnabled:NO];
     
     if (indexPath.section == 1 && indexPath.row == 0)
     {
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-        //[cell setUserInteractionEnabled:YES];
+
     }
 }
 
@@ -177,44 +174,13 @@
 }
 
 
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
-{
-    txtDescription.text = @"";
-    txtDescription.textColor = [UIColor blackColor];
-    return YES;
-}
-
-
--(void) textViewDidChange:(UITextView *)textView
-{
-    if(txtDescription.text.length == 0)
-    {
-        txtDescription.textColor = [UIColor lightGrayColor];
-        txtDescription.text = @"Goal Description";
-        //[txtDescription resignFirstResponder];
-    }
-}
-
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if([text isEqualToString:@"\n"])
-    {
-        txtDescription.textColor = [UIColor lightGrayColor];
-        txtDescription.text = @"Goal Description";
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
-}
-
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField.tag == 400)
     {
         [self.view endEditing:YES];
-        [self DoDeadline];
+        [dateSheet showFromTabBar:self.tabBarController.tabBar];
+        [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
         return NO;
     }
     else
@@ -251,7 +217,7 @@
 
 -(void)ChangelblSave
 {
-    int weeks = [g WeeksBetweenDate:txtDeadline.text];
+    int weeks = [g WeeksBetweenDate:self.deadline];
     int amount = [txtAmount.text intValue];
     toSave = amount/weeks;
     lblSave.text = [NSString stringWithFormat:@"Save $%d per week", toSave];
@@ -309,8 +275,6 @@
     
     
     [dateSheet addSubview:controlBar];
-    [dateSheet showFromTabBar:self.tabBarController.tabBar];
-    [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
 }
 
 

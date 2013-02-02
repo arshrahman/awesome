@@ -35,7 +35,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    self.navigationItem.hidesBackButton = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -120,6 +121,7 @@
     else
     {
         imv.frame = CGRectMake(15, 13, 30, 25);
+        imv.image = [UIImage imageNamed:@"glyphicons_138_picture.png"];
     }
     
     return cell;

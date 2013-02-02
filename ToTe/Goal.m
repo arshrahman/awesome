@@ -177,7 +177,7 @@
             
         if (sqlite3_exec(budgetDB, update_stmt, NULL, NULL, &error)==SQLITE_OK)
         {
-            NSLog(@"Successfully Goal Updated!");
+            //NSLog(@"Successfully Goal Updated!");
             success = TRUE;
         }
         else
@@ -213,7 +213,7 @@
         
         if (sqlite3_exec(budgetDB, delete_stmt, NULL, NULL, &error)==SQLITE_OK)
         {
-            NSLog(@"Goal Deleted!");
+            //NSLog(@"Goal Deleted!");
             success = TRUE;
         }
         else
@@ -228,46 +228,69 @@
 
 -(NSString *)getCurrentDay
 {
-    NSDate *today = [[NSDate alloc]init];
+    NSDate *today = [NSDate date];
     
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
-    [format setDateFormat:@"yyyy-MM-dd"];
-    
+    [format setLocale:[NSLocale currentLocale]];
+    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
     return [format stringFromDate:today];
 }
-
 
 -(NSString *)ConvertDateFormat:(NSString *)end_date
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MMM dd, yyyy"];
+    [dateFormat setLocale:[NSLocale currentLocale]];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     
     NSDate *newDate = [dateFormat dateFromString:end_date];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    [dateFormat setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormat setTimeStyle:NSDateFormatterNoStyle];
     
     return [dateFormat stringFromDate:newDate];
 }
 
--(NSInteger)WeeksBetweenDate:(NSString *)end_date
-{
-    int weeks = 1;
-    int weekday;
-    
+
+-(NSInteger)WeeksBetweenDate:(NSDate *)end_date
+{    
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
     
-    NSDate * lastDay= [[NSDate alloc]init];
-    lastDay = [formatter dateFromString:[self ConvertDateFormat:end_date]];
     NSDate *today  = [formatter dateFromString:[self getCurrentDay]];
     
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:today];
-    weekday = 8 - [comps weekday];
+    int weeks = 0;
+    int Startweekday;
+    int EndWeekDay;
     
-    NSTimeInterval distanceBetweenDates = [lastDay timeIntervalSinceDate:today];
-    NSInteger days = (distanceBetweenDates / (60*1440)) - weekday;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:today];
+    
+    if (comps.weekday == 1)
+    {
+        Startweekday = 1;
+    }
+    else if (comps.weekday == 2)
+    {
+        Startweekday = 0;
+    }
+    else
+    {
+        Startweekday = 7 - ([comps weekday] - 2);
+    }
+    
+    NSDateComponents *comps1 = [calendar components:NSWeekdayCalendarUnit fromDate:end_date];
+    EndWeekDay = [comps1 weekday] - 1;
+    
+    NSTimeInterval distanceBetweenDates = [end_date timeIntervalSinceDate:today];
+    NSInteger days = (distanceBetweenDates / (60*1440)) - (Startweekday + EndWeekDay);
+    
+    if (Startweekday > 0) weeks += 1;
+    if (EndWeekDay > 0) weeks += 1;
+    
     
     weeks += days/7;
     
@@ -276,7 +299,19 @@
         weeks += 1;
     }
     
+    //NSLog(@"StartWeekday: %d, EndWeekday: %d, Days: %d, Weeks: %d", Startweekday, EndWeekDay, days, weeks);
+    
     return weeks;
+}
+
+-(NSString *)DateToString:(NSDate *)dt
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setLocale:[NSLocale currentLocale]];
+    [format setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [format setDateFormat:@"yyyy-MM-dd"];
+    
+    return [format stringFromDate:dt];
 }
 
 -(NSDate *)StringToDate:(NSString *)strDate
@@ -291,15 +326,36 @@
 
 -(NSInteger)WeeksBetweenTwoDate:(NSDate *)start_date:(NSDate *)end_date
 {
-    int weeks = 1;
-    int weekday;
+    int weeks = 0;
+    int Startweekday;
+    int EndWeekDay;
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
     NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:start_date];
-    weekday = 8 - [comps weekday];
+    
+    if (comps.weekday == 1)
+    {
+        Startweekday = 1;
+    }
+    else if (comps.weekday == 2)
+    {
+        Startweekday = 0;
+    }
+    else
+    {
+        Startweekday = 7 - ([comps weekday] - 2);
+    }
+    
+    NSDateComponents *comps1 = [calendar components:NSWeekdayCalendarUnit fromDate:end_date];
+    EndWeekDay = [comps1 weekday] - 1;
     
     NSTimeInterval distanceBetweenDates = [end_date timeIntervalSinceDate:start_date];
-    NSInteger days = (distanceBetweenDates / (60*1440)) - weekday;
+    NSInteger days = (distanceBetweenDates / (60*1440)) - (Startweekday + EndWeekDay);
+    
+    if (Startweekday > 0) weeks += 1;
+    if (EndWeekDay > 0) weeks += 1;
+    
     
     weeks += days/7;
     
@@ -308,7 +364,10 @@
         weeks += 1;
     }
     
+    //NSLog(@"StartWeekday: %d, EndWeekday: %d, Days: %d, Weeks: %d", Startweekday, EndWeekDay, days, weeks);
+    
     return weeks;
+
 }
 
 @end
