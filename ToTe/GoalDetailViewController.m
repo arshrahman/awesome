@@ -56,11 +56,11 @@
     double currentWeek = [g WeeksBetweenTwoDate:today :startDate] - 1;
     double weeksMet = g.weeks_met;
     
-    /*NSLog(@"currenWeek: %g", currentWeek);
+    NSLog(@"Start Date: %@, Last Day: %@, currenWeek: %g", startDate, lastDate, currentWeek);
     NSLog(@"totalWeeks: %g", totalWeeks);
     NSLog(@"weeksMet: %g", weeksMet);
         
-    totalWeeks = 20;
+    /*totalWeeks = 20;
     currentWeek = 7;
     weeksMet = 4;*/
     

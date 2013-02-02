@@ -232,7 +232,7 @@
     
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
     [format setLocale:[NSLocale currentLocale]];
-    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [format setDateFormat:@"yyyy-MM-dd"];
         
     return [format stringFromDate:today];
 }
@@ -255,7 +255,7 @@
 -(NSInteger)WeeksBetweenDate:(NSDate *)end_date
 {    
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
