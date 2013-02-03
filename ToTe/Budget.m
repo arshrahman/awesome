@@ -20,8 +20,11 @@
 -(NSMutableArray*)GetDate
 {
     NSMutableArray *dates = [[NSMutableArray alloc]init];
+    int weekday = 0;
+    int week = 0;
     
     NSDate *today = [NSDate date];
+    //NSLog(@"today: %@", today);
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     [calendar setLocale:[NSLocale currentLocale]];
     [calendar setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -31,7 +34,17 @@
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     
-    NSDateComponents *nowComponents = [calendar components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
+    NSDateComponents *nowComponents = [calendar components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit fromDate:today];
+    
+    weekday = [nowComponents weekday];
+    week = [nowComponents week];
+    //NSLog(@"week: %d", week);
+    
+    if (weekday == 1)
+    {
+        week -= 1;
+        [nowComponents setWeek:week];
+    }
     
     [nowComponents setWeekday:2];
     [nowComponents setHour:0];
@@ -39,7 +52,7 @@
     [nowComponents setSecond:0];
     
     NSDate *monday = [calendar dateFromComponents:nowComponents];
-    NSLog(@"Monday: %@", monday);
+    //NSLog(@"Monday: %@", monday);
     
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
     dayComponent.day = 6;
@@ -48,7 +61,7 @@
     dayComponent.second = 59;
     
     NSDate *sunday = [calendar dateByAddingComponents:dayComponent toDate:monday options:0];
-    NSLog(@"Sunday: %@", sunday);
+    //NSLog(@"Sunday: %@", sunday);
 
     [dates addObject:[formatter stringFromDate:monday]];
     [dates addObject:[formatter stringFromDate:sunday]];
@@ -179,8 +192,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET) UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET))X"];
-        const char *query_sql = [querySql UTF8String];
+        const char *query_sql = "SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET) UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET))X";
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -391,24 +403,16 @@
         {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
             
-            NSDate *last_date = [[NSDate alloc]init];
-            last_date = [dateFormatter dateFromString:nslast_date];
+            //NSDate *last_date = [[NSDate alloc]init];
+            NSDate *last_date = [dateFormatter dateFromString:nslast_date];
             //NSLog(@"Last day: %@", last_date);
             
-            NSDate* sourceDate = [NSDate date];
+            NSDate *today = [[NSDate alloc]init];
+            //today = [NSDate date];
+            //NSLog(@"Today: %@", today);
             
-            NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-            NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
-            
-            NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:sourceDate];
-            NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
-            NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
-            
-            NSDate* today = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];
-            
-            if (today >= last_date)
+            if (today > last_date)
             {
                 int days = [self daysBetweenDate:last_date andDate:today];
                 int weeks = 0;
@@ -416,11 +420,6 @@
                 if (days > 6)
                 {
                     weeks = ceil(days/7);
-                    
-                    if (ceil(days%7) > 0)
-                    {
-                        weeks += 1;
-                    }
                     
                     char *error;
                     int maxId = 0;
@@ -457,10 +456,25 @@
 
 - (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
 {       
+    int daysToMinus = 0;
+    int weekday = 0;
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:toDateTime];
+    weekday = [comps weekday];
+    
+    if (weekday == 1)
+    {
+        daysToMinus = 6;
+    }
+    else if (weekday > 2)
+    {
+        daysToMinus = weekday - 2;
+    }
+    //NSLog(@"days to minus: %d", daysToMinus);
+    
     NSTimeInterval distanceBetweenDates = [toDateTime timeIntervalSinceDate:fromDateTime];
-    double secondsInAnHour = 60;
-    NSInteger minutes = distanceBetweenDates / secondsInAnHour;
-    //NSLog(@"minutes: %d", minutes);
+    NSInteger minutes = distanceBetweenDates / 60;
     
     NSInteger days = minutes/1440;
     
@@ -469,7 +483,7 @@
         days += 1;
     }
     
-    return days;
+    return days - daysToMinus;
 }
 
 @end
