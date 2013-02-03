@@ -14,6 +14,7 @@
 @interface GoalViewController ()
 {
     NSMutableArray *goalArray;
+    NSMutableArray *goalIDArray;
     Goal *g;
     BOOL editing;
 }
@@ -45,10 +46,12 @@
 {
     g = [[Goal alloc]init];
     goalArray = [[NSMutableArray alloc]init];
+    goalIDArray = [[NSMutableArray alloc]init];
     
     for (Goal *gg in [g SelectAllGoals])
     {
         [goalArray addObject:gg];
+        [goalIDArray addObject:[NSNumber numberWithInt:gg.goal_id]];
     }
     
     [tblViewGoal reloadData];
@@ -84,13 +87,13 @@
         
         lblname = [[UILabel alloc]initWithFrame:CGRectMake(63, 3, 280, 25)];
         lblname.textColor = [UIColor blackColor];
-        lblname.font = [UIFont fontWithName:@"Helvetica" size:17];
+        lblname.font = [UIFont fontWithName:@"Bree Serif" size:17];
         lblname.text = @"";
         lblname.tag = 100;
         
         lblamount = [[UILabel alloc]initWithFrame:CGRectMake(63, 26, 280, 25)];
         lblamount.textColor = [UIColor blackColor];
-        lblamount.font = [UIFont fontWithName:@"Helvetica" size:16];
+        lblamount.font = [UIFont fontWithName:@"Bree Serif" size:16];
         lblamount.textColor = [UIColor darkGrayColor];
         lblamount.tag = 200;
         
@@ -152,9 +155,10 @@
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     
-    /*id thing = [things objectAtIndex:sourceIndexPath.row];
-    [things removeObjectAtIndex:sourceIndexPath.row];
-    [things insertObject:thing atIndex:destinationIndexPath.row];*/    
+    NSNumber *g_id = [goalIDArray objectAtIndex:sourceIndexPath.row];
+    [goalIDArray removeObjectAtIndex:sourceIndexPath.row];
+    [goalIDArray insertObject:g_id atIndex:destinationIndexPath.row];
+        
 }
 
 
@@ -204,17 +208,27 @@
 
 - (IBAction)btnReorderClicked:(id)sender
 {
-    if (editing)
+    if (goalArray.count > 0)
     {
-        tblViewGoal.editing = NO;
-        btnReorder.title = @"Reorder";
-        editing = FALSE;
-    }
-    else if(!editing)
-    {
-        tblViewGoal.editing = YES;
-        btnReorder.title = @"Done";
-        editing = TRUE;
+        if (editing)
+        {
+            tblViewGoal.editing = NO;
+            btnReorder.title = @"Reorder";
+            editing = FALSE;
+            
+            [g ReorderPriority:goalIDArray];
+    
+            /*for (int i = 0; i < goalIDArray.count; i++)
+            {
+                NSLog(@"Id: %d, Priority: %d", [[goalIDArray objectAtIndex:i] intValue] , i+1);
+            }*/
+        }
+        else if(!editing)
+        {
+            tblViewGoal.editing = YES;
+            btnReorder.title = @"Done";
+            editing = TRUE;
+        }
     }
 }
 

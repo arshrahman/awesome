@@ -58,11 +58,11 @@
     
     /*NSLog(@"Start Date: %@, Last Day: %@, currenWeek: %g", startDate, lastDate, currentWeek);
     NSLog(@"totalWeeks: %g", totalWeeks);
-    NSLog(@"weeksMet: %g", weeksMet);
+    NSLog(@"weeksMet: %g", weeksMet);*/
         
     totalWeeks = 20;
-    currentWeek = 7;
-    weeksMet = 4;*/
+    currentWeek = 13;
+    weeksMet = 10;
     
     if (currentWeek > totalWeeks) currentWeek = totalWeeks;
     
@@ -118,7 +118,7 @@
         
         [self.view addSubview:lblGreen];
         
-        //NSLog(@"Green Label: %g, %g, %g, %g", lblGreen.frame.origin.x, lblGreen.frame.origin.y, lblGreen.frame.size.width, lblGreen.frame.size.height);
+        NSLog(@"Green Label: %g, %g, %g, %g", lblGreen.frame.origin.x, lblGreen.frame.origin.y, lblGreen.frame.size.width, lblGreen.frame.size.height);
     }
     
     if (greyWidth > 0 && (currentWeek < totalWeeks))
@@ -154,9 +154,8 @@
         
         [self.view addSubview:lblGrey];
         
-        //NSLog(@"Grey Label: %g, %g, %g, %g", lblGrey.frame.origin.x, lblGrey.frame.origin.y, lblGrey.frame.size.width, lblGrey.frame.size.height);
+        NSLog(@"Grey Label: %g, %g, %g, %g", lblGrey.frame.origin.x, lblGrey.frame.origin.y, lblGrey.frame.size.width, lblGrey.frame.size.height);
     }
-    
     
     if (redWidth > 0)
     {        
@@ -168,22 +167,34 @@
         if (currentWeek >= totalWeeks && greenWidth <= 0)
         {
             maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerAllCorners) cornerRadii:CGSizeMake(6.0, 6.0)];
+            
+            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+            maskLayer.frame = lblRed.bounds;
+            maskLayer.path = maskPath.CGPath;
+            lblRed.layer.mask = maskLayer;
         }
         else if (currentWeek >= totalWeeks)
         {
             maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerBottomRight | UIRectCornerTopRight) cornerRadii:CGSizeMake(6.0, 6.0)];
+            
+            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+            maskLayer.frame = lblRed.bounds;
+            maskLayer.path = maskPath.CGPath;
+            lblRed.layer.mask = maskLayer;
         }
         else if (greenWidth <= 0)
         {
             maskPath = [UIBezierPath bezierPathWithRoundedRect:lblRed.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];
+            
+            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+            maskLayer.frame = lblRed.bounds;
+            maskLayer.path = maskPath.CGPath;
+            lblRed.layer.mask = maskLayer;
         }
-        
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = lblRed.bounds;
-        maskLayer.path = maskPath.CGPath;
-        lblRed.layer.mask = maskLayer;
-        
+                
         [self.view addSubview:lblRed];
+        
+        NSLog(@"Red Label: %g, %g, %g, %g", lblRed.frame.origin.x, lblRed.frame.origin.y, lblRed.frame.size.width, lblRed.frame.size.height);
     }
 }
 
@@ -226,17 +237,21 @@
     scroller.maximumZoomScale = 2.0f;
     scroller.minimumZoomScale = 0.5f;
     
+    lblGoalTitle.numberOfLines = 1;
+    lblGoalTitle.font = [UIFont fontWithName:@"Bree Serif" size:17];
+    lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
+    
     lblDescription.numberOfLines = 4;
-    lblDescription.font = [UIFont fontWithName:@"Helvetica-Light" size:15];
+    lblDescription.font = [UIFont fontWithName:@"Bree Serif" size:15];
     lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
     lblDescription.textAlignment = UITextAlignmentCenter;
     
     lbltoSaveWeekly.numberOfLines = 1;
-    lbltoSaveWeekly.font = [UIFont fontWithName:@"Helvetica-Light" size:16];
+    lbltoSaveWeekly.font = [UIFont fontWithName:@"Bree Serif" size:15];
     lbltoSaveWeekly.textAlignment = UITextAlignmentCenter;
     
     lbltoSaveTotal.numberOfLines = 1;
-    lbltoSaveTotal.font = [UIFont fontWithName:@"Helvetica-Light" size:16];
+    lbltoSaveTotal.font = [UIFont fontWithName:@"Bree Serif" size:15];
     lbltoSaveTotal.textAlignment = UITextAlignmentCenter;
     
     [self.view addSubview:scroller];

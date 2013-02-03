@@ -28,40 +28,25 @@
     }
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
-    {
-        sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT ROWID FROM GOAL WHERE GOAL_ID = (SELECT MAX(GOAL_ID) FROM GOAL)"];
-        const char *query_sql = [querySql UTF8String];
-        
-        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+    {            
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO GOAL (TITLE, DESCRIPTION, GOAL_AMOUNT, DEADLINE, GOAL_PHOTO, AMOUNT_TOSAVE, GOAL_START_DATE, PRIORITY) SELECT '%@', '%@', %d, '%@', '%@', %d, '%@', COALESCE(MAX(PRIORITY), 0) + 1 FROM GOAL;", g_title, g_description, g_amount, deadline, g_photo, amount_tosave, [self getCurrentDay]];
+            
+        const char *insert_stmt = [insertStmt UTF8String];
+            
+        if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
         {
-            while (sqlite3_step(statement)==SQLITE_ROW)
-            {
-                rowId = sqlite3_column_int(statement, 0);
-            }
-            
-            sqlite3_finalize(statement);
-            
-            NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO GOAL (TITLE, DESCRIPTION, GOAL_AMOUNT, DEADLINE, GOAL_PHOTO, PRIORITY, AMOUNT_TOSAVE, GOAL_START_DATE) VALUES ('%@', '%@', %d, '%@', '%@', %d, %d, '%@');", g_title, g_description, g_amount, deadline, g_photo, rowId, amount_tosave, [self getCurrentDay]];
-            
-            const char *insert_stmt = [insertStmt UTF8String];
-            
-            if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
-            {
-                rowId = sqlite3_last_insert_rowid(budgetDB);
-            }
-            else
-            {
-                NSLog(@"Error: %s", error);
-            }
+            rowId = sqlite3_last_insert_rowid(budgetDB);
         }
         else
-            
         {
-            NSLog(@"Goal: cannot open db!");
+            NSLog(@"Insert Goal Error: %s", error);
         }
-        sqlite3_close(budgetDB);
     }
+    else
+    {
+        NSLog(@"Insert Goal: cannot open db!");
+    }
+    sqlite3_close(budgetDB);
     
     return rowId;
 }
@@ -79,7 +64,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, GOAL_AMOUNT, GOAL_PHOTO, WEEKS_MET, AMOUNT_TOSAVE FROM GOAL"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, GOAL_AMOUNT, GOAL_PHOTO, WEEKS_MET, AMOUNT_TOSAVE FROM GOAL ORDER BY PRIORITY"];
         
         const char *query_sql = [querySql UTF8String];
         
@@ -222,6 +207,38 @@
         sqlite3_close(budgetDB);
     }
     return success;
+}
+
+
+-(void)ReorderPriority:(NSMutableArray *)gIdArray
+{
+    char *error;
+    NSString *update_stmt = @"";
+    
+    for (int i = 0; i < gIdArray.count; i++)
+    {
+        NSString *temp = [NSString stringWithFormat:@"UPDATE GOAL SET PRIORITY = %d WHERE GOAL_ID = %d; ", i+1, [[gIdArray objectAtIndex:i] intValue]];
+        update_stmt = [update_stmt stringByAppendingString:temp];
+    }
+    
+    const char *updatestmt = [update_stmt UTF8String];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        @try
+        {
+            sqlite3_exec(budgetDB, updatestmt, NULL, NULL, &error);
+        }
+        @catch (NSException *exception)
+        {
+            NSLog(@"Error: %s", error);
+            NSLog(@"Exception %@", exception);
+        }
+        @finally
+        {
+            sqlite3_close(budgetDB);
+        }
+    }
 }
 
 

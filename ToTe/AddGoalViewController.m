@@ -9,6 +9,7 @@
 #import "AddGoalViewController.h"
 #import "Goal.h"
 #import "GoalDetailViewController.h"
+#import "GoalViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AddGoalViewController ()
@@ -331,10 +332,11 @@
         
         if (goalID > 0)
         {
-            GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
-            gdc.goal_id = goalID;
+            /*GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
+            gdc.goal_id = goalID;*/
+            GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
             
-            [self.navigationController pushViewController:gdc animated:YES];
+            [self.navigationController pushViewController:gvc animated:YES];
         }
     }
     else

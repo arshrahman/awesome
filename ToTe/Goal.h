@@ -32,5 +32,6 @@
 -(NSInteger)WeeksBetweenTwoDate:(NSDate *)start_date:(NSDate *)end_date;
 -(NSDate *)StringToDate:(NSString *)strDate;
 -(NSString *)DateToString:(NSDate *)dt;
+-(void)ReorderPriority:(NSMutableArray *)gIdArray;
 
 @end

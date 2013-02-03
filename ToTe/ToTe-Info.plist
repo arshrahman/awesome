@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fabrica.otf</string>
+		<string>BreeSerif_Reg.otf</string>
+		<string>GarageGothic-Bold.otf</string>
+		<string>London-Tube.ttf</string>
+		<string>mentone-semibol.otf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -39,9 +47,9 @@
 			<key>TintColor</key>
 			<dict>
 				<key>Blue</key>
-				<real>0.33673469387755106</real>
+				<real>0.3367346938775511</real>
 				<key>Green</key>
-				<real>0.33267820352428645</real>
+				<real>0.3326782035242865</real>
 				<key>Red</key>
 				<real>0.3313125826898925</real>
 			</dict>
