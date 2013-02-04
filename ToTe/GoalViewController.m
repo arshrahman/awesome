@@ -45,9 +45,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     g = [[Goal alloc]init];
-    
-    [g GoalAchieved];
-    
     goalArray = [[NSMutableArray alloc]init];
     goalIDArray = [[NSMutableArray alloc]init];
     

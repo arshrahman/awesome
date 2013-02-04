@@ -32,9 +32,6 @@
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
     
-    /*Budget *b = [[Budget alloc]init];
-    [b InsertPreviousBudget];*/
-    
     return YES;
 }
 							
@@ -53,9 +50,6 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
-    /*Budget *b = [[Budget alloc]init];
-    [b InsertPreviousBudget];*/
     
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];

@@ -17,6 +17,7 @@
     NSString *dbPathString;
 }
 
+
 -(NSMutableArray*)GetDate
 {
     NSMutableArray *dates = [[NSMutableArray alloc]init];
@@ -69,6 +70,7 @@
     return dates;
 }
 
+
 - (int)InsertBudget:(double)budgetAmount :(double)wkIncome
 {
     char *error;
@@ -95,6 +97,7 @@
     }
     return rowID;
 }
+
 
 -(BOOL)InsertBudgetCategories:(NSMutableArray *)catList
 {
@@ -141,6 +144,7 @@
     return result;
 }
 
+
 -(NSMutableArray *)GetIncomeBudget
 {
     NSMutableArray *incomeBudget = [[NSMutableArray alloc]init];
@@ -179,6 +183,7 @@
     return incomeBudget;
 }
 
+
 -(double)GetExpenses
 {
     double expenses = 0;
@@ -212,6 +217,7 @@
     return expenses;
 }
 
+
 -(NSMutableArray *)GetBudgetCategories
 {
     NSMutableArray *budgetCategories = [[NSMutableArray alloc]init];
@@ -226,10 +232,6 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         maxId = self.GetMaxBudgetID;
-        
-        /*query
-        SELECT X.CATEGORY_ID, X.CATEGORY_NAME, X.CATEGORY_IMAGE, SUM(X.CATEGORY_SPENT), CATEGORY_AMOUNT FROM (SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(I.SHOPPING_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM SHOPPING_ITEM I, CATEGORY C, SHOPPING_LIST L WHERE C.CATEGORY_ID = I.CATEGORY_ID AND I.SHOPPING_ID = L.SHOPPING_ID AND L.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET) GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(P.PURCHASE_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM PURCHASE P, CATEGORY C WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET) GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, '' AS CATEGORY_SPENT, BC.CATEGORY_AMOUNT FROM CATEGORY C, BUDGET_CATEGORY BC WHERE C.CATEGORY_ID = BC.CATEGORY_ID AND BC.BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)) X GROUP BY X.CATEGORY_ID ORDER BY X.CATEGORY_AMOUNT
-        */
         
         sqlite3_stmt *statement;
         NSString *querySql = [NSString stringWithFormat:@"SELECT X.CATEGORY_ID, X.CATEGORY_NAME, X.CATEGORY_IMAGE, SUM(X.CATEGORY_SPENT), CATEGORY_AMOUNT FROM (SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(I.SHOPPING_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM SHOPPING_ITEM I, CATEGORY C, SHOPPING_LIST L WHERE C.CATEGORY_ID = I.CATEGORY_ID AND I.SHOPPING_ID = L.SHOPPING_ID AND L.BUDGET_ID = %d GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(P.PURCHASE_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM PURCHASE P, CATEGORY C WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = %d GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, '' AS CATEGORY_SPENT, BC.CATEGORY_AMOUNT FROM CATEGORY C, BUDGET_CATEGORY BC WHERE C.CATEGORY_ID = BC.CATEGORY_ID AND BC.BUDGET_ID = %d) X GROUP BY X.CATEGORY_ID ORDER BY X.CATEGORY_AMOUNT;", maxId, maxId, maxId];
@@ -262,6 +264,7 @@
     return budgetCategories;
 }
 
+
 -(int)GetMaxBudgetID
 {
     int maxId = 0;
@@ -280,6 +283,7 @@
 
     return maxId;
 }
+
 
 -(NSMutableArray *)SelectAllBudgetCategories
 {
@@ -324,6 +328,7 @@
     return bgCategories;
 }
 
+
 - (void)UpdateBudget:(double)budgetAmount :(double)wkIncome
 {
     char *error;
@@ -347,6 +352,7 @@
     }
 }
 
+
 - (void)DeleteBudgetCategories
 {
     char *error;
@@ -367,123 +373,6 @@
         }
         sqlite3_close(budgetDB);
     }
-}
-
-- (void)InsertPreviousBudget
-{
-    NSString *nslast_date;
-    
-    if(dbPathString == NULL)
-    {
-        Database *d = [[Database alloc]init];
-        dbPathString = d.SetDBPath;
-    }
-    
-    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
-    {
-        sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT START_DATE FROM BUDGET WHERE BUDGET_ID=(SELECT MAX(BUDGET_ID) FROM BUDGET)"];
-        const char *query_sql = [querySql UTF8String];
-        
-        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while (sqlite3_step(statement)==SQLITE_ROW)
-            {
-                nslast_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-                //NSLog(@"date: %@", nslast_date);
-            }
-        }
-        else
-        {
-            NSLog(@"Hi InsertPreviousBudget!");
-        }
-        sqlite3_finalize(statement);
-        
-        if ( [nslast_date length] > 0)
-        {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            
-            //NSDate *last_date = [[NSDate alloc]init];
-            NSDate *last_date = [dateFormatter dateFromString:nslast_date];
-            //NSLog(@"Last day: %@", last_date);
-            
-            NSDate *today = [[NSDate alloc]init];
-            //today = [NSDate date];
-            //NSLog(@"Today: %@", today);
-            
-            if (today > last_date)
-            {
-                int days = [self daysBetweenDate:last_date andDate:today];
-                int weeks = 0;
-                
-                if (days > 6)
-                {
-                    weeks = ceil(days/7);
-                    
-                    char *error;
-                    int maxId = 0;
-                    maxId = self.GetMaxBudgetID;
-                    
-                    NSString *inst_stmt = @"";
-                    
-                    for (int i = 1; i <= weeks; i++)
-                    {
-                        NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET (START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) SELECT DATETIME(START_DATE, '+%d DAYS') AS START_DATE, DATETIME(END_DATE, '+%d DAYS') AS END_DATE, BUDGET_AMOUNT, WINCOME FROM BUDGET WHERE BUDGET_ID = %d; INSERT INTO BUDGET_CATEGORY (BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT)  SELECT %d, CATEGORY_ID, CATEGORY_AMOUNT FROM BUDGET_CATEGORY WHERE BUDGET_ID = %d;", (i*7), (i*7), maxId, (maxId+i), maxId];
-                        inst_stmt = [inst_stmt stringByAppendingString:temp];
-                    }
-                    
-                    //NSLog(@"query %@", inst_stmt);
-                    
-                    const char *insert_stmt = [inst_stmt UTF8String];
-                    
-                    @try
-                    {
-                        sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error);
-                    }
-                    @catch (NSException *exception)
-                    {
-                        NSLog(@"Error: %s", error);
-                        NSLog(@"Exception %@", exception);
-                    }
-                }
-                //NSLog(@"days: %d, weeks: %d", days, weeks);
-            }
-        }
-    }
-    sqlite3_close(budgetDB);
-}
-
-- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
-{       
-    int daysToMinus = 0;
-    int weekday = 0;
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:toDateTime];
-    weekday = [comps weekday];
-    
-    if (weekday == 1)
-    {
-        daysToMinus = 6;
-    }
-    else if (weekday > 2)
-    {
-        daysToMinus = weekday - 2;
-    }
-    //NSLog(@"days to minus: %d", daysToMinus);
-    
-    NSTimeInterval distanceBetweenDates = [toDateTime timeIntervalSinceDate:fromDateTime];
-    NSInteger minutes = distanceBetweenDates / 60;
-    
-    NSInteger days = minutes/1440;
-    
-    if (minutes < 1440 && minutes%1440)
-    {
-        days += 1;
-    }
-    
-    return days - daysToMinus;
 }
 
 @end

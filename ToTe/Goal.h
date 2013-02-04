@@ -33,8 +33,5 @@
 -(NSDate *)StringToDate:(NSString *)strDate;
 -(NSString *)DateToString:(NSDate *)dt;
 -(void)ReorderPriority:(NSMutableArray *)gIdArray;
--(double)GetLastWeekIncome:(int)bId;
--(double)GetSavingsForLastWeek;
--(void)GoalAchieved;
 
 @end
