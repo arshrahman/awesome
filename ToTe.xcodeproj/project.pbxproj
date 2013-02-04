@@ -448,6 +448,7 @@
 		B4CAC25216B162F400626478 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CAC25116B162F400626478 /* CMPopTipView.m */; };
 		B4D4C7A816B6A4FB00D0E12A /* AddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D4C7A716B6A4FB00D0E12A /* AddGoalViewController.m */; };
 		B4D4C7AD16B6CCC000D0E12A /* camera-icon-md.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D4C7AC16B6CCC000D0E12A /* camera-icon-md.png */; };
+		B4DB070516BF904900DE2755 /* AppLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DB070416BF904900DE2755 /* AppLaunch.m */; };
 		B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */; };
 		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
 		B4F2036D16BE4DF100B80872 /* Fabrica.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2036C16BE4DF100B80872 /* Fabrica.otf */; };
@@ -938,6 +939,8 @@
 		B4D4C7A616B6A4FB00D0E12A /* AddGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGoalViewController.h; sourceTree = "<group>"; };
 		B4D4C7A716B6A4FB00D0E12A /* AddGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGoalViewController.m; sourceTree = "<group>"; };
 		B4D4C7AC16B6CCC000D0E12A /* camera-icon-md.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-icon-md.png"; path = "images/camera-icon-md.png"; sourceTree = "<group>"; };
+		B4DB070316BF904900DE2755 /* AppLaunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLaunch.h; sourceTree = "<group>"; };
+		B4DB070416BF904900DE2755 /* AppLaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLaunch.m; sourceTree = "<group>"; };
 		B4E5046416A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		B4E5046816A663610003D0D5 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
@@ -1562,11 +1565,13 @@
 		CEFC835316917DE600F4E2B1 /* ToTe */ = {
 			isa = PBXGroup;
 			children = (
+				B4DB070316BF904900DE2755 /* AppLaunch.h */,
+				B4DB070416BF904900DE2755 /* AppLaunch.m */,
 				B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */,
+				B4F2036C16BE4DF100B80872 /* Fabrica.otf */,
 				B4F2036F16BE52FC00B80872 /* GarageGothic-Bold.otf */,
 				B4F2037016BE52FC00B80872 /* London-Tube.ttf */,
 				B4F2037116BE52FC00B80872 /* mentone-semibol.otf */,
-				B4F2036C16BE4DF100B80872 /* Fabrica.otf */,
 				B4266E8616A05817008FC51F /* Database.h */,
 				B4266E8716A05817008FC51F /* Database.m */,
 				CE36AD8816BA29DE007ACC9B /* SettingsData.h */,
@@ -2130,6 +2135,7 @@
 				B46A481B16BA1AC7009A2E1F /* EditGoalViewController.m in Sources */,
 				B46A481C16BA1AC7009A2E1F /* GoalDetailViewController.m in Sources */,
 				CE36AD8A16BA29DE007ACC9B /* SettingsData.m in Sources */,
+				B4DB070516BF904900DE2755 /* AppLaunch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

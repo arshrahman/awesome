@@ -118,7 +118,7 @@
         
         [self.view addSubview:lblGreen];
         
-        NSLog(@"Green Label: %g, %g, %g, %g", lblGreen.frame.origin.x, lblGreen.frame.origin.y, lblGreen.frame.size.width, lblGreen.frame.size.height);
+        //NSLog(@"Green Label: %g, %g, %g, %g", lblGreen.frame.origin.x, lblGreen.frame.origin.y, lblGreen.frame.size.width, lblGreen.frame.size.height);
     }
     
     if (greyWidth > 0 && (currentWeek < totalWeeks))
@@ -154,7 +154,7 @@
         
         [self.view addSubview:lblGrey];
         
-        NSLog(@"Grey Label: %g, %g, %g, %g", lblGrey.frame.origin.x, lblGrey.frame.origin.y, lblGrey.frame.size.width, lblGrey.frame.size.height);
+        //NSLog(@"Grey Label: %g, %g, %g, %g", lblGrey.frame.origin.x, lblGrey.frame.origin.y, lblGrey.frame.size.width, lblGrey.frame.size.height);
     }
     
     if (redWidth > 0)
@@ -191,10 +191,10 @@
             maskLayer.path = maskPath.CGPath;
             lblRed.layer.mask = maskLayer;
         }
-                
+        
         [self.view addSubview:lblRed];
         
-        NSLog(@"Red Label: %g, %g, %g, %g", lblRed.frame.origin.x, lblRed.frame.origin.y, lblRed.frame.size.width, lblRed.frame.size.height);
+        //NSLog(@"Red Label: %g, %g, %g, %g", lblRed.frame.origin.x, lblRed.frame.origin.y, lblRed.frame.size.width, lblRed.frame.size.height);
     }
 }
 
