@@ -12,6 +12,8 @@
 #import "BudgetCategory.h"
 #import "UpdateBudgetViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Database.h"
+#import "BudgetViewController.h"
 
 @interface setBudgetViewController ()
 
@@ -400,6 +402,26 @@
         //UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         //[self.navigationController pushViewController:bvc animated:YES];
     }
+}
+
+- (IBAction)btnResetClicked:(id)sender
+{
+    NSError *error = nil;
+    Database *d = [[Database alloc]init];
+    NSString *dbpath = [d SetDBPath];
+    
+    @try {
+        [[NSFileManager defaultManager] removeItemAtPath:dbpath error:&error];
+    }
+    @catch (NSException *exception)
+    {
+        NSLog(@"Error: %@", error);
+    }
+    
+    [d CreateDB];
+    
+    BudgetViewController *bc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
+    [self.navigationController pushViewController:bc animated:YES];
 }
 
 - (void) dismissToolTip

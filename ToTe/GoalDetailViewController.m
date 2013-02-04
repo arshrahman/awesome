@@ -238,20 +238,20 @@
     scroller.minimumZoomScale = 0.5f;
     
     lblGoalTitle.numberOfLines = 1;
-    lblGoalTitle.font = [UIFont fontWithName:@"Bree Serif" size:17];
+    lblGoalTitle.font = [UIFont fontWithName:@"Helvetica" size:17];
     lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
     
     lblDescription.numberOfLines = 4;
-    lblDescription.font = [UIFont fontWithName:@"Bree Serif" size:15];
+    lblDescription.font = [UIFont fontWithName:@"Helvetica" size:15];
     lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
     lblDescription.textAlignment = UITextAlignmentCenter;
     
     lbltoSaveWeekly.numberOfLines = 1;
-    lbltoSaveWeekly.font = [UIFont fontWithName:@"Bree Serif" size:15];
+    lbltoSaveWeekly.font = [UIFont fontWithName:@"Helvetica" size:15];
     lbltoSaveWeekly.textAlignment = UITextAlignmentCenter;
     
     lbltoSaveTotal.numberOfLines = 1;
-    lbltoSaveTotal.font = [UIFont fontWithName:@"Bree Serif" size:15];
+    lbltoSaveTotal.font = [UIFont fontWithName:@"Helvetica" size:15];
     lbltoSaveTotal.textAlignment = UITextAlignmentCenter;
     
     [self.view addSubview:scroller];

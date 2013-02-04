@@ -23,5 +23,7 @@
 
 - (IBAction)pageControl:(id)sender;
 - (IBAction)btnClicked:(id)sender;
+- (IBAction)btnResetClicked:(id)sender;
+
 
 @end
