@@ -10,6 +10,7 @@
 #import "Purchase.h"
 #import "PurchaseViewController.h"
 #import "Category.h"
+#import "SettingsData.h"
 
 @interface AddPurchaseViewController ()
 {
@@ -148,9 +149,12 @@
         [newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
         //[self Tweet];
         //[self FacebookPost];
+        //[self Tweet];
+        
         [self dismissModalViewControllerAnimated:YES];
     }
 }
+
 
 -(void)Tweet
 {
@@ -173,13 +177,14 @@
                      output = @"Action Cancelled";
                      break;
                  case SLComposeViewControllerResultDone:
-                     output = @"Tweetted";
+                     output = @"Tweeted";
+                     [self FacebookPost];
                      break;
                  default:
                      break;
              }
              
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"Tweeted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"You have just tweeted on Twitter!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              
              [alert show];
          }];
@@ -209,13 +214,13 @@
                      output = @"Action Cancelled";
                      break;
                  case SLComposeViewControllerResultDone:
-                     output = @"Tweetted";
+                     output = @"Posted";
                      break;
                  default:
                      break;
              }
              
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Posted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"You have just posted on Facebook!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              
              [alert show];
          }];

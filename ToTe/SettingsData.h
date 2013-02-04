@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Social/Social.h>
 
 @interface SettingsData : NSObject
 
@@ -15,5 +16,7 @@
 @property BOOL Share;
 
 -(void)getDataFromSetting;
+-(void)Tweet;
+-(void)FacebookPost;
 
 @end

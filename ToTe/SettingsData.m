@@ -34,4 +34,75 @@
     //[defaults boolForKey:@"ShareSwitch"] = setShare;
 }
 
+-(void)Tweet
+{
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter])
+	{
+		SLComposeViewController *twitter = [[SLComposeViewController alloc]init];
+		
+		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+		[twitter setInitialText:[NSString stringWithFormat:@"Sending a Tweet via iOS Simulator!"]];
+        
+		//[self presentViewController:twitter animated:YES completion:nil];
+        
+		[twitter setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             NSString *output;
+             
+             switch (result) {
+                 case SLComposeViewControllerResultCancelled:
+                     output = @"Action Cancelled";
+                     break;
+                 case SLComposeViewControllerResultDone:
+                     output = @"Tweetted";
+                     break;
+                 default:
+                     break;
+             }
+             
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"Tweeted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+             
+             [alert show];
+         }];
+	}
+}
+
+-(void)FacebookPost
+{
+    //Check for NSUserDefault
+    
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook])
+	{
+		SLComposeViewController *facebook = [[SLComposeViewController alloc]init];
+		
+		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+		[facebook setInitialText:[NSString stringWithFormat:@"Posting on Facebook via iOS Simulator!"]];
+        
+		//[self presentViewController:facebook animated:YES completion:nil];
+        
+		[facebook setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             NSString *output;
+             
+             switch (result) {
+                 case SLComposeViewControllerResultCancelled:
+                     output = @"Action Cancelled";
+                     break;
+                 case SLComposeViewControllerResultDone:
+                     output = @"Tweetted";
+                     break;
+                 default:
+                     break;
+             }
+             
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Posted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+             
+             [alert show];
+         }];
+	}
+}
+
+
 @end
