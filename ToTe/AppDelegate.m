@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "StartPageViewController.h"
-#import "Budget.h"
+#import "AppLaunch.h"
 #import "Database.h"
 #import "SettingsData.h"
 
@@ -29,8 +29,11 @@
     Database *d = [[Database alloc]init];
     [d CreateDB];
     
-    Budget *b = [[Budget alloc]init];
-    [b InsertPreviousBudget];
+    AppLaunch *a = [[AppLaunch alloc]init];
+    [a InsertPreviousBudget];
+    
+    /*Budget *b = [[Budget alloc]init];
+    [b InsertPreviousBudget];*/
     
     return YES;
 }
@@ -51,8 +54,11 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    Budget *b = [[Budget alloc]init];
-    [b InsertPreviousBudget];
+    /*Budget *b = [[Budget alloc]init];
+    [b InsertPreviousBudget];*/
+    
+    AppLaunch *a = [[AppLaunch alloc]init];
+    [a InsertPreviousBudget];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

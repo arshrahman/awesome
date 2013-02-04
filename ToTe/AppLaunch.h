@@ -10,4 +10,12 @@
 
 @interface AppLaunch : NSObject
 
+
+- (void)InsertPreviousBudget;
+-(NSString *)GetStartDate;
+- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
+-(NSMutableArray *)GetBudgetIDIncome;
+-(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks;
+-(double)GetExpensesForLastWeek:(int)lbudget_id;
+
 @end

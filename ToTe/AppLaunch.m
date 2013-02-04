@@ -19,7 +19,13 @@
 
 - (void)InsertPreviousBudget
 {
-    NSString *nslast_date;
+    NSString *nslast_date = @"";
+    NSString *inst_stmt = @"";
+    int days = 0;
+    int weeks = 0;
+    int maxId = 0;
+    char *error;
+    NSMutableArray *budgetArray;
     
     if(dbPathString == NULL)
     {
@@ -29,60 +35,34 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT START_DATE FROM BUDGET WHERE BUDGET_ID=(SELECT MAX(BUDGET_ID) FROM BUDGET)"];
-        const char *query_sql = [querySql UTF8String];
-        
-        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while (sqlite3_step(statement)==SQLITE_ROW)
-            {
-                nslast_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-                //NSLog(@"date: %@", nslast_date);
-            }
-        }
-        else
-        {
-            NSLog(@"Hi InsertPreviousBudget!");
-        }
-        sqlite3_finalize(statement);
+        nslast_date = [self GetStartDate];
         
         if ( [nslast_date length] > 0)
         {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
             
-            //NSDate *last_date = [[NSDate alloc]init];
             NSDate *last_date = [dateFormatter dateFromString:nslast_date];
-            //NSLog(@"Last day: %@", last_date);
-            
             NSDate *today = [[NSDate alloc]init];
-            //today = [NSDate date];
-            //NSLog(@"Today: %@", today);
+            NSLog(@"Last Start Date: %@", last_date);
+            NSLog(@"Today: %@", today);
             
             if (today > last_date)
             {
-                int days = [self daysBetweenDate:last_date andDate:today];
-                int weeks = 0;
+                days = [self daysBetweenDate:last_date andDate:today];
                 
                 if (days > 6)
                 {
                     weeks = ceil(days/7);
-                    
-                    char *error;
-                    int maxId = 0;
-                    maxId = self.GetMaxBudgetID;
-                    
-                    NSString *inst_stmt = @"";
+                    budgetArray = [[NSMutableArray alloc]initWithArray:[self GetBudgetIDIncome]];
+                    maxId = [[budgetArray objectAtIndex:0] intValue];
                     
                     for (int i = 1; i <= weeks; i++)
                     {
                         NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET (START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) SELECT DATETIME(START_DATE, '+%d DAYS') AS START_DATE, DATETIME(END_DATE, '+%d DAYS') AS END_DATE, BUDGET_AMOUNT, WINCOME FROM BUDGET WHERE BUDGET_ID = %d; INSERT INTO BUDGET_CATEGORY (BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT)  SELECT %d, CATEGORY_ID, CATEGORY_AMOUNT FROM BUDGET_CATEGORY WHERE BUDGET_ID = %d;", (i*7), (i*7), maxId, (maxId+i), maxId];
                         inst_stmt = [inst_stmt stringByAppendingString:temp];
                     }
-                    
-                    //NSLog(@"query %@", inst_stmt);
-                    
+                    NSLog(@"query %@", inst_stmt);
                     const char *insert_stmt = [inst_stmt UTF8String];
                     
                     @try
@@ -95,17 +75,41 @@
                         NSLog(@"Exception %@", exception);
                     }
                     
-                    int lastWeekBudgetId = maxId-1;
-                    NSLog(@"Last Week's Budget Id: %d", lastWeekBudgetId);
-                    
-                    [self GoalAchieved:lastWeekBudgetId];
+                    [self GoalAchieved:maxId:[[budgetArray objectAtIndex:1] intValue]:weeks];
+                    NSLog(@"Last Week's Budget Id: %d", maxId);
                 }
-                //NSLog(@"days: %d, weeks: %d", days, weeks);
+                NSLog(@"days: %d, weeks: %d", days, weeks);
             }
         }
     }
     sqlite3_close(budgetDB);
 }
+
+
+-(NSString *)GetStartDate
+{
+    NSString *last_date;
+    sqlite3_stmt *statement;
+    
+    const char *query_sql = "SELECT START_DATE FROM BUDGET WHERE BUDGET_ID=(SELECT MAX(BUDGET_ID) FROM BUDGET)";
+    
+    if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while (sqlite3_step(statement)==SQLITE_ROW)
+        {
+            last_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+            NSLog(@"Last Start date: %@", last_date);
+        }
+    }
+    else
+    {
+        NSLog(@"Error in Get StartDate!");
+    }
+    sqlite3_finalize(statement);
+    
+    return last_date;
+}
+
 
 - (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
 {
@@ -124,7 +128,6 @@
     {
         daysToMinus = weekday - 2;
     }
-    //NSLog(@"days to minus: %d", daysToMinus);
     
     NSTimeInterval distanceBetweenDates = [toDateTime timeIntervalSinceDate:fromDateTime];
     NSInteger minutes = distanceBetweenDates / 60;
@@ -139,103 +142,35 @@
     return days - daysToMinus;
 }
 
--(int)GetMaxBudgetID
+
+-(NSMutableArray *)GetBudgetIDIncome
 {
-    int maxId = 0;
+    NSMutableArray *array = [[NSMutableArray alloc]init];
     
     sqlite3_stmt *st;
-    const char *queryMaxId = "SELECT MAX(BUDGET_ID) FROM BUDGET";
+    const char *queryMaxId = "SELECT BUDGET_ID, WINCOME FROM BUDGET WHERE BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)";
     
     if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
     {
         if (sqlite3_step(st)==SQLITE_ROW)
         {
-            maxId = sqlite3_column_int(st, 0);
+            [array addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 0)]];
+            [array addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 1)]];
         }
     }
     sqlite3_finalize(st);
     
-    return maxId;
-}
-
-/*-(int)GetLastWeekBudgetID
-{
-    int b_id = 0;
-    sqlite3_stmt *st;
-    const char *queryId = "SELECT MAX(BUDGET_ID)-1 FROM BUDGET";
+    //NSLog(@"Budget Id: %d, Income: %d", [[array objectAtIndex:0] intValue], [[array objectAtIndex:1] intValue]);
     
-    if (sqlite3_prepare(budgetDB, queryId, -1, &st, NULL)==SQLITE_OK)
-    {
-        if (sqlite3_step(st)==SQLITE_ROW)
-        {
-            b_id = sqlite3_column_int(st, 0);
-        }
-    }
-    sqlite3_finalize(st);
-    
-    return b_id;
-}*/
-
-
--(double)GetLastWeekIncome:(int)bId
-{
-    double wincome = 0;
-    sqlite3_stmt *st;
-    
-    NSString *queryIncome = [NSString stringWithFormat:@"SELECT WINCOME FROM BUDGET WHERE BUDGET_ID = %d", bId];
-    const char *query_income = [queryIncome UTF8String];
-    
-    if (sqlite3_prepare(budgetDB, query_income, -1, &st, NULL)==SQLITE_OK)
-    {
-        if (sqlite3_step(st)==SQLITE_ROW)
-        {
-            wincome = sqlite3_column_int(st, 0);
-        }
-    }
-    sqlite3_finalize(st);
-    
-    return wincome;
+    return array;
 }
 
 
--(double)GetSavingsForLastWeek:(int)lbudget_id
-{
-    double savings = 0;
-    int lastWeekBudgetId = 0;
-    double expenses = 0;
-    double wincome = 0;
-    
-    lastWeekBudgetId = lbudget_id;
-    wincome = [self GetLastWeekIncome:lastWeekBudgetId];
-    
-    sqlite3_stmt *statement;
-    NSString *query = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = %d UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = %d)X", lastWeekBudgetId, lastWeekBudgetId];
-    
-    const char *query_sql = [query UTF8String];
-    
-    if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
-    {
-        while (sqlite3_step(statement)==SQLITE_ROW)
-        {
-            expenses = sqlite3_column_double(statement, 0);
-        }
-    }
-    else
-    {
-        NSLog(@"Got error in getting last week's savings");
-    }
-    sqlite3_finalize(statement);
-    
-    savings = wincome - expenses;
-    
-    return savings;
-}
-
-
--(void)GoalAchieved:(int)lastBudget_id
+-(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks
 {
     char *error;
     int savings = 0;
+    int expenses = 0;
     BOOL goalsMet = FALSE;
     NSString *delimiter = @"";
     
@@ -247,7 +182,8 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        savings = [self GetSavingsForLastWeek:lastBudget_id];
+        expenses = [self GetExpensesForLastWeek:lastBudget_id];
+        savings = income - expenses;
         NSLog(@"Savings: %d", savings);
         
         if (savings > 0)
@@ -257,7 +193,7 @@
             
             if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
             {
-                NSString *queryWeeksMet = @"UPDATE GOAL SET WEEKS_MET = COALESCE(WEEKS_MET, 0) + 1 WHERE GOAL_ID IN (";
+                NSString *queryWeeksMet = [NSString stringWithFormat:@"UPDATE GOAL SET WEEKS_MET = COALESCE(WEEKS_MET, 0) + %d WHERE GOAL_ID IN (", weeks];
                 
                 while (sqlite3_step(statement)==SQLITE_ROW)
                 {
@@ -282,7 +218,7 @@
                     
                     @try
                     {
-                        sqlite3_exec(budgetDB, weeksMet_stmt, NULL, NULL, &error);
+                        //sqlite3_exec(budgetDB, weeksMet_stmt, NULL, NULL, &error);
                     }
                     @catch (NSException *exception)
                     {
@@ -298,6 +234,32 @@
             sqlite3_finalize(statement);
         }
     }
+}
+
+
+-(double)GetExpensesForLastWeek:(int)lbudget_id
+{
+    double expenses = 0;
+    
+    sqlite3_stmt *statement;
+    NSString *query = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = %d UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = %d)X", lbudget_id, lbudget_id];
+    
+    const char *query_sql = [query UTF8String];
+    
+    if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while (sqlite3_step(statement)==SQLITE_ROW)
+        {
+            expenses = sqlite3_column_double(statement, 0);
+        }
+    }
+    else
+    {
+        NSLog(@"Got error in getting last week's savings");
+    }
+    sqlite3_finalize(statement);
+    
+    return expenses;
 }
 
 
