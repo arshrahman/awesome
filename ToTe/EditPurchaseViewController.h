@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *EditStar4;
 @property (weak, nonatomic) IBOutlet UIButton *EditStar5;
 
+-(IBAction)cancelPressed:(id)sender;
 - (IBAction)SelectCategory:(id)sender;
 -(IBAction)btnUpdate:(id)sender;
 -(IBAction)textfieldReutrn:(id)sender;

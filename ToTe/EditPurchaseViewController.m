@@ -42,10 +42,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
@@ -70,7 +70,7 @@
         [EditStar2 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
         [EditStar3 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
         [EditStar4 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
-
+        
     }
     else if(EditStar == 3)
     {
@@ -95,7 +95,7 @@
         [EditStar4 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
         [EditStar5 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
     }
-
+    
     
     Category *c = [[Category alloc]init];
     CategoryList = [[NSMutableArray alloc]init];
@@ -170,6 +170,7 @@
         self.purchaseItem.priority = EditStar;
         
         [p updatePurchase:self.purchaseItem.uniqueId :self.purchaseItem.name :self.purchaseItem.cateID :self.purchaseItem.price :self.purchaseItem.priority];
+        [self dismissModalViewControllerAnimated:YES];
     }
     
     NSLog(@"Update data");
@@ -179,6 +180,10 @@
     //update method of database
     
     
+}
+
+-(void)cancelPressed:(id)sender{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)textfieldReutrn:(id)sender

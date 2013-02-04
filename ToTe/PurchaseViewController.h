@@ -15,6 +15,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *SortBy;
+@property (nonatomic, strong)NSMutableArray *ThisWeekDate;
 @property (nonatomic, strong)NSMutableArray *PurchaseList;
 @property (nonatomic, strong)NSMutableArray *PurchaseListWeek;
 @property (nonatomic, strong)NSMutableArray *PurchaseListCategory;
@@ -22,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Edit;
 @property (nonatomic) IBOutlet UITableView *PurchaseTableView;
 
+
+-(void)Refresh;
 - (IBAction)btnEdit:(id)sender;
 - (IBAction)Switch:(id)sender;
 @end

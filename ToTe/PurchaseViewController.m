@@ -16,12 +16,17 @@
 @interface PurchaseViewController ()
 {
     NSString *check;
+    Purchase *purchaseItem;
 }
-
+@property (strong, nonatomic) NSMutableDictionary *individualDayPurchase;
+@property (strong, nonatomic) NSArray *sortedDays;
 @end
 
 @implementation PurchaseViewController
 
+@synthesize individualDayPurchase;
+@synthesize sortedDays;
+@synthesize ThisWeekDate = _ThisWeekDate;
 @synthesize PurchaseList = _PurchaseList;
 @synthesize PurchaseListWeek = _PurchaseListWeek;
 @synthesize Edit;
@@ -41,18 +46,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.PurchaseTableView = [[UITableView alloc]init];
-    
     Purchase *p = [[Purchase alloc]init];
     self.PurchaseList = [[NSMutableArray alloc]init];
     self.PurchaseList = [p viewTodayPurchases];
     
-    /*
-     Purchase *pp = [[Purchase alloc]init];
-     self.PurchaseListWeek = [[NSMutableArray alloc]init];
-     self.PurchaseListWeek = [pp viewThisWeekPurchases];
-     */
     
+    Purchase *pp = [[Purchase alloc]init];
+    self.PurchaseListWeek = [[NSMutableArray alloc]init];
+    self.PurchaseListWeek = [pp viewThisWeekPurchases];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +67,7 @@
 {
     if([check isEqualToString:@"This Week"])
     {
-        return 1;
+        return self.sortedDays.count;
     }
     else
     {
@@ -78,7 +79,13 @@
 {
     if([check isEqualToString:@"This Week"])
     {
-        return self.PurchaseListWeek.count;
+        NSString *date = [self.sortedDays objectAtIndex:section];
+        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        return [purchaseOnThisDay count];
+        //return self.PurchaseListWeek.count;
+        //NSString *date = [self.ThisWeekDate objectAtIndex:section];
+        //self.PurchaseListWeek = [self.IndividualDayPurchase objectForKey:date];
+        //return self.PurchaseListWeek.count;
     }
     else
     {
@@ -90,43 +97,67 @@
 {
     if([check isEqualToString:@"This Week"])
     {
-        return @"";
+        NSString *dateRepresentingThisDay = [self.sortedDays objectAtIndex:section];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        NSDate *date = [dateFormatter dateFromString:dateRepresentingThisDay];
+        
+        [dateFormatter setDateFormat:@"EEEE, MMMM dd, yyyy"];
+        NSString *dateWithNewFormat = [dateFormatter stringFromDate:date];
+        
+        return dateWithNewFormat;
+        //self.PurchaseListWeek = [self.IndividualDayPurchase objectForKey:date];
     }
     else
     {
         //get current Date
-        NSDate *date = [NSDate date];
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"dd, MMM yyyy"];
-        
-        NSString *theDate = [dateFormat stringFromDate:date];
-        
-        return theDate;
+        if(self.PurchaseList.count == 0)
+        {
+            return @"";
+        }
+        else
+        {
+            NSDate *date = [NSDate date];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"EEEE, MMMM dd, yyyy"];
+            
+            NSString *theDate = [dateFormat stringFromDate:date];
+            
+            return theDate;
+        }
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *CellIdentifier = @"Cell";
     customCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell ==nil)
     {
         cell = [[customCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
     Purchase *currentPurchaseItem = [[Purchase alloc]init];
+    NSString *date = [[NSString alloc]init];
     
     if([check isEqualToString:@"This Week"])
     {
-        currentPurchaseItem = [self.PurchaseListWeek objectAtIndex:indexPath.row];
+        date = [self.sortedDays objectAtIndex:indexPath.section];
+        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        currentPurchaseItem = [purchaseOnThisDay objectAtIndex:indexPath.row];
     }
     else
     {
         currentPurchaseItem = [self.PurchaseList objectAtIndex:indexPath.row];
+        
     }
     
     // Configure the cell...
     cell.customCellItemName.text = currentPurchaseItem.name;
-    cell.customCellItemPrice.text = [NSString stringWithFormat: @"%.2lf", currentPurchaseItem.price];
+    cell.customCellItemPrice.text = [NSString stringWithFormat: @"$%.2lf", currentPurchaseItem.price];
     cell.customCellItemCategory.text = currentPurchaseItem.category;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
@@ -200,23 +231,52 @@
         
         if([check isEqualToString:@"This Week"])
         {
-            Purchase *p = [self.PurchaseListWeek objectAtIndex:indexPath.row];
+            NSString *date = [self.sortedDays objectAtIndex:indexPath.section];
+            NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+            Purchase *p = [purchaseOnThisDay objectAtIndex:indexPath.row];
+            
+            [self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
+            
             //Call database method
             [p deletePurchase:p.uniqueId];
             
-            // Delete the row from the data source
-            [self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
+            [self Refresh];
+            /*
+             //[self.individualDayPurchase removeObjectForKey:date];
+             NSLog(@"%d", purchaseOnThisDay.count);
+             if(purchaseOnThisDay.count == 1)
+             {
+             
+             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+             
+             [self.sortedDays removeObjectAtIndex:indexPath.section];
+             }
+             else
+             {
+             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+             }
+             NSLog(@"%d", indexPath.section);
+             NSLog(@"%d", indexPath.row);
+             
+             //[self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
+             // Delete the row from the data source
+             //[self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
+             //[purchaseOnThisDay removeObserver:p forKeyPath:date];
+             //[self.individualDayPurchase removeObserver:purchaseOnThisDay forKeyPath:date];
+             //[self.PurchaseList removeAllObjects];
+             */
         }
         else
         {
             Purchase *p = [self.PurchaseList objectAtIndex:indexPath.row];
             //Call database method
             [p deletePurchase:p.uniqueId];
-        
+            
             // Delete the row from the data source
             [self.PurchaseList removeObjectAtIndex:indexPath.row];
+            [self.PurchaseListWeek removeAllObjects];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -252,20 +312,30 @@
     //EditPurchaseViewController *editingView = [[EditPurchaseViewController alloc] initWithNibName:@"EditPurchaseViewController" bundle:nil];
     // ...
     
+    
+    //EditPurchaseViewController *editingView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPurchaseViewController"];
+    
     EditPurchaseViewController *editingView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPurchaseViewController"];
     
     //EditPurchaseViewController *editPuchase = segue.destinationViewController;
+    
     if([check isEqualToString:@"This Week"])
     {
-        editingView.purchaseItem = [self.PurchaseListWeek objectAtIndex:tableView.indexPathForSelectedRow.row];
+        NSString *date = [self.sortedDays objectAtIndex:indexPath.section];
+        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        editingView.purchaseItem = [purchaseOnThisDay objectAtIndex:tableView.indexPathForSelectedRow.row];
+        
+        //editingView.purchaseItem = [self.PurchaseListWeek objectAtIndex:tableView.indexPathForSelectedRow.row];
     }
     else
     {
         editingView.purchaseItem = [self.PurchaseList objectAtIndex:tableView.indexPathForSelectedRow.row];
     }
     
+    [editingView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:editingView animated:YES];
+    [self presentModalViewController:editingView animated:YES];
+    //[self.navigationController pushViewController:editingView animated:YES];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -278,39 +348,32 @@
         add.purchaseViewController = self;
     }
     
-    /*
-     else if([segue.identifier isEqualToString:@"EditPurchaseViewController"])
-     {
-     NSLog(@"push to EditPurchaseViewController");
-     //EditPurchaseViewController *editPuchase = segue.destinationViewController;
-     
-     //editPuchase.purchaseItem = [self.PurchaseList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
-     
-     EditPurchaseViewController *editPuchase = segue.destinationViewController;
-     editPuchase.purchaseItem = [self.PurchaseList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
-     }
-     //NSLog(segue.identifier);
-     */
+    //else if([segue.identifier isEqualToString:@"EditItem"])
+    //{
+    //NSLog(@"push to EditPurchaseViewController");
+    //edit.purchaseItem = self;
+    //EditPurchaseViewController *editPuchase = segue.destinationViewController;
+    
+    //editPuchase.purchaseItem = [self.PurchaseList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+    
+    //EditPurchaseViewController *editPuchase = segue.destinationViewController;
+    //editPuchase.purchaseItem = [self.PurchaseList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+    //}
+    //NSLog(segue.identifier);
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.PurchaseTableView reloadData];
-    
-    SettingsData *s = [[SettingsData alloc]init];
-    [s getDataFromSetting];
-    NSLog(s.Facebook ? @"Yes" : @"No");
+    [self Refresh];
 }
 
-//-(void)refresh:(UITableView *)tableview {
-//[tableview reloadData];
-//}
-
+//Edit cell, curently not require.
 - (IBAction)btnEdit:(id)sender {
     //self.editing = !self.editing;
     self.PurchaseTableView.editing = !self.PurchaseTableView.editing;
 }
+
 - (void)viewDidUnload {
     [self setEdit:nil];
     [self setSortBy:nil];
@@ -319,7 +382,11 @@
 
 - (IBAction)Switch:(id)sender {
     NSLog(@"Switch");
-    
+    [self Refresh];
+}
+
+-(void)Refresh
+{
     if(self.SortBy.selectedSegmentIndex == 0)
     {
         check = @"Today";
@@ -335,6 +402,31 @@
         Purchase *pp = [[Purchase alloc]init];
         //self.PurchaseListWeek = [[NSMutableArray alloc]init];
         self.PurchaseListWeek = [pp viewThisWeekPurchases];
+        
+        self.IndividualDayPurchase = [[NSMutableDictionary alloc]init];
+        
+        NSString *date = [[NSString alloc]init];
+        
+        for(Purchase *ppp in self.PurchaseListWeek)
+        {
+            date = ppp.date;
+            
+            NSMutableArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+            
+            if(purchaseOnThisDay == nil)
+            {
+                purchaseOnThisDay = [NSMutableArray array];
+                
+                [self.individualDayPurchase setObject:purchaseOnThisDay forKey:date];
+            }
+            
+            [purchaseOnThisDay addObject:ppp];
+        }
+        
+        // Create a sorted list of days
+        NSArray *unsortedDays = [self.individualDayPurchase allKeys];
+        self.sortedDays = [unsortedDays sortedArrayUsingSelector:@selector(compare:)];
+        
         NSLog(@"This Week");
         [self.PurchaseTableView reloadData];
     }

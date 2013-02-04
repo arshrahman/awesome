@@ -43,10 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
@@ -141,11 +141,12 @@
         
         [self.purchaseViewController.PurchaseList addObject:newPurchase];
         [self.purchaseViewController.PurchaseListWeek addObject:newPurchase];
+        self.purchaseViewController.SortBy.selectedSegmentIndex = 0;
         //[self.purchaseViewController.PurchaseTableView reloadData];
         
         //add into database
         [newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
-        [self Tweet];
+        //[self Tweet];
         //[self FacebookPost];
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -177,6 +178,10 @@
                  default:
                      break;
              }
+             
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"Tweeted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+             
+             [alert show];
          }];
 	}
 }
@@ -209,6 +214,10 @@
                  default:
                      break;
              }
+             
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Posted" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+             
+             [alert show];
          }];
 	}
 }
@@ -225,7 +234,7 @@
     
     if([check2 isEqualToString:@"Cancel"])
     {
-        [self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];   
+        [self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];
     }
     else
     {
@@ -277,9 +286,9 @@
     {
         [AddStar1 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
         [AddStar2 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
-    
+        
         AddStar = 2;
-    
+        
         [AddStar3 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
         [AddStar4 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
         [AddStar5 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
@@ -299,16 +308,16 @@
         [AddStar3 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
         [AddStar4 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
         [AddStar5 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
-
+        
     }
     else
     {
         [AddStar1 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
         [AddStar2 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
         [AddStar3 setImage:[UIImage imageNamed:@"glyphicons_049_star.png"] forState:UIControlStateNormal];
-    
+        
         AddStar = 3;
-    
+        
         [AddStar4 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
         [AddStar5 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
     }
