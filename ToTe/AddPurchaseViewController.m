@@ -149,7 +149,6 @@
         [newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
         //[self Tweet];
         //[self FacebookPost];
-        //[self Tweet];
         
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -164,7 +163,7 @@
 		
 		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-		[twitter setInitialText:[NSString stringWithFormat:@"Sending a Tweet via iOS Simulator!"]];
+		[twitter setInitialText:[NSString stringWithFormat:@"Testing!"]];
         
 		[self presentViewController:twitter animated:YES completion:nil];
         
@@ -175,20 +174,31 @@
              switch (result) {
                  case SLComposeViewControllerResultCancelled:
                      output = @"Action Cancelled";
+                     //NSLog(output);
+                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  case SLComposeViewControllerResultDone:
                      output = @"Tweeted";
-                     [self FacebookPost];
+                     //NSLog(output);
+                     //[self FacebookPost];
+                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  default:
                      break;
              }
              
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"You have just tweeted on Twitter!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             //[twitter dismissViewControllerAnimated:YES completion:nil];
              
-             [alert show];
+             if([output isEqualToString:@"Tweeted"])
+             {
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"You have just tweeted on Twitter!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             
+                 [alert show];
+             }
          }];
 	}
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)FacebookPost
@@ -201,7 +211,7 @@
 		
 		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-		[facebook setInitialText:[NSString stringWithFormat:@"Posting on Facebook via iOS Simulator!"]];
+		[facebook setInitialText:[NSString stringWithFormat:@"Testing!"]];
         
 		[self presentViewController:facebook animated:YES completion:nil];
         
@@ -212,19 +222,25 @@
              switch (result) {
                  case SLComposeViewControllerResultCancelled:
                      output = @"Action Cancelled";
+                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  case SLComposeViewControllerResultDone:
                      output = @"Posted";
+                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  default:
                      break;
              }
              
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"You have just posted on Facebook!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+             if([output isEqualToString:@"Posted"])
+             {
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"You have just posted on Facebook!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
              
-             [alert show];
+                 [alert show];
+             }
          }];
 	}
+    
 }
 
 -(IBAction)textfieldReutrn:(id)sender
