@@ -5,11 +5,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>BreeSerif_Reg.otf</string>
-		<string>SourceSansPro-Semibold.otf</string>
-		<string>SourceSansPro-Bold.otf</string>
-		<string>segoeuil.ttf</string>
-		<string>Segoe UI Semibold.ttf</string>
-		<string>Cantarell-Bold.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

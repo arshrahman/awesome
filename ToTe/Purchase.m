@@ -331,4 +331,84 @@
     
 }
 
+//Pol
+//View All Purchases
+- (NSMutableArray *) viewAllPurchases
+{
+    NSLog(@"Viewall");
+    purchaseList =[[NSMutableArray alloc]init];
+    
+    Category *c = [[Category alloc]init];
+    categoryList = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        [categoryList addObject:cc];
+    }
+    
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PURCHASE"];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            NSLog(@"Viewall if");
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                Purchase *p = [[Purchase alloc]init];
+                
+                NSString *uniqueId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+                
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
+                
+                NSString *category = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                NSString *date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                
+                NSString *price = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                
+                NSString *priority = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+                
+                double convertPrice = [price doubleValue];
+                int convertId = [uniqueId integerValue];
+                int convertPriority = [priority integerValue];
+                int convertCate = [category integerValue];
+                int checkCate = convertCate - 1;
+                
+                [p setUniqueId:convertId];
+                [p setName:name];
+                [p setDate:date];
+                [p setPrice:convertPrice];
+                [p setPriority:convertPriority];
+                [p setCateID:convertCate];
+                
+                c = [categoryList objectAtIndex:checkCate];
+                
+                [p setCategory: c.category_name];
+                
+                //Array
+                [purchaseList addObject:p];
+                
+                NSLog(@"Show This Week Purchase");
+                
+                //sqlite3_close(budgetDB);
+            }
+            
+            sqlite3_finalize(statement);
+        }
+        else
+        {
+            NSLog(@"Error!");
+        }
+    }
+    sqlite3_close(budgetDB);
+    NSLog(@"%d", purchaseList.count);
+    return purchaseList;
+}
+
 @end

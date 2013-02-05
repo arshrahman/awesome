@@ -15,6 +15,9 @@
 {
     sqlite3 *budgetDB;
     NSString *dbPathString;
+    
+    //Pol
+    NSMutableArray *budgetList;
 }
 
 
@@ -374,5 +377,68 @@
         sqlite3_close(budgetDB);
     }
 }
+
+//Pol
+//View All Budget
+- (NSMutableArray *) viewAllBudget
+{
+    budgetList =[[NSMutableArray alloc]init];
+    
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    NSLog (@"CHECK HERE");
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM BUDGET"];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                Budget *b = [[Budget alloc]init];
+                
+                NSString *uniqueId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+                
+                NSString *startDate = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                
+                NSString *endDate = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                NSString *budgetAmount = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                
+                NSString *wincome = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                
+                double convertbudgetAmount = [budgetAmount doubleValue];
+                double convertwincome = [wincome doubleValue];
+                int convertId = [uniqueId integerValue];
+                
+                [b setBudget_id:convertId];
+                [b setStartDate:startDate];
+                [b setEndDate:endDate];
+                [b setBudget_amount:convertbudgetAmount];
+                [b setWincome:convertwincome];
+                
+                
+                //Array
+                [budgetList addObject:b];
+                
+                NSLog(@"Show Today Budget");
+                
+                //sqlite3_close(budgetDB);
+            }
+            
+            sqlite3_finalize(statement);
+        }
+        else
+        {
+            NSLog(@"Error!");
+        }
+    }
+    sqlite3_close(budgetDB);
+    return budgetList;
+}
+
 
 @end

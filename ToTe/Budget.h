@@ -27,4 +27,7 @@
 - (void)UpdateBudget:(double)budgetAmount :(double)wkIncome;
 - (void)DeleteBudgetCategories;
 
+//Pol
+-(NSMutableArray *) viewAllBudget;
+
 @end

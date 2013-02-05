@@ -10,6 +10,7 @@
 #import "Goal.h"
 #import "EditGoalViewController.h"
 #import "GoalViewController.h"
+#import "GoalViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface GoalDetailViewController ()
@@ -43,9 +44,9 @@
 {
     [super viewDidLoad];
     
-
+    
 }
- 
+
 -(void)ProgressBar
 {
     NSDate *today = [NSDate date];
@@ -57,12 +58,12 @@
     double weeksMet = g.weeks_met;
     
     /*NSLog(@"Start Date: %@, Last Day: %@, currenWeek: %g", startDate, lastDate, currentWeek);
-    NSLog(@"totalWeeks: %g", totalWeeks);
-    NSLog(@"weeksMet: %g", weeksMet);*/
-        
+     NSLog(@"totalWeeks: %g", totalWeeks);
+     NSLog(@"weeksMet: %g", weeksMet);*/
+    
     /*totalWeeks = 20;
-    currentWeek = 13;
-    weeksMet = 10;*/
+     currentWeek = 13;
+     weeksMet = 10;*/
     
     if (currentWeek < 0) currentWeek = 0;
     if (currentWeek > totalWeeks) currentWeek = totalWeeks;
@@ -109,7 +110,7 @@
         }
         else
         {
-            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGreen.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];    
+            maskPath = [UIBezierPath bezierPathWithRoundedRect:lblGreen.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerTopLeft) cornerRadii:CGSizeMake(6.0, 6.0)];
         }
         
         CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -159,7 +160,7 @@
     }
     
     if (redWidth > 0)
-    {        
+    {
         lblRed = [[UILabel alloc]initWithFrame:CGRectMake(redX, labelY, redWidth, labelHeight)];
         lblRed.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:0 blue:0 alpha:1.0];
         
@@ -200,17 +201,24 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated
-{    
+{
+    
+    /*if (goal_id == 0)
+    {
+        GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
+        [self.navigationController pushViewController:gvc animated:YES];
+    }*/
+    
     g = [[Goal alloc]init];
     goal_array = [[NSMutableArray alloc]init];
- 
+    
     for (Goal *gg in [g SelectGoal:goal_id])
     {
         [goal_array addObject:gg];
     }
- 
+    
     g = [goal_array objectAtIndex:0];
- 
+    
     NSData *imgData = [NSData dataWithContentsOfFile:[self documentsPathForFileName:g.goal_photo]];
     UIImage *img = [UIImage imageWithData:imgData];
     
@@ -219,7 +227,7 @@
     {
         width = img.size.width;
     }
- 
+    
     scroller = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 160)];
     imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img.size.height)];
     lblGoalTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 126, 320, 35)];
@@ -261,15 +269,15 @@
     [self.view addSubview:lblDescription];
     [self.view addSubview:lbltoSaveWeekly];
     [self.view addSubview:lbltoSaveTotal];
- 
-
+    
+    
     lblGoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
     lblDescription.text = g.goal_description;
     lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%d Weekly!", g.amount_tosave];
     lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
- 
+    
     [self ProgressBar];
- 
+    
     lblGoalTitle.viewForBaselineLayout.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75f];
 }
 
@@ -309,18 +317,18 @@
     EditGoalViewController *egc = [self.storyboard instantiateViewControllerWithIdentifier:@"EditGoalViewController"];
     
     egc.goalArray = [[NSMutableArray alloc]initWithArray:goal_array];
-
+    
     UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:egc];
     //[navC setModalPresentationStyle:UIModalTransitionStyleCrossDissolve];
     
     [self.navigationController presentViewController:navC animated:YES completion:nil];
 }
-      
-     
+
+
 @end
-     
-     
-     
-     
-     
-     
+
+
+
+
+
+

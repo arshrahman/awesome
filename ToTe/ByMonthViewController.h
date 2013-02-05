@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 @class CustomDateUIPickerView;
 
-@interface ByMonthViewController : UIViewController
+@interface ByMonthViewController : UIViewController//<CPTPlotDataSource>
 {
     IBOutlet  UIBarItem *btnCalendar;
 }
 
 @property (nonatomic) IBOutlet CustomDateUIPickerView *customDate;
+//@property (nonatomic, strong) CPTGraphHostingView *hostView;
 
 - (IBAction)btnCalender:(id)sender;
 

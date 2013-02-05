@@ -44,7 +44,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        
     }
     return self;
 }
@@ -133,7 +133,7 @@
 {
     pageControl.currentPage = 1;
     [scroller setContentOffset:CGPointMake(320, 0) animated:YES];
-   
+    
 }
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
@@ -149,7 +149,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{    
+{
 	return 1;
 }
 
@@ -236,7 +236,7 @@
         {
             cell1 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BottomTableCell];
             cell1.selectionStyle = UITableViewCellSelectionStyleGray;
-                        
+            
             lblcurrent = [[UILabel alloc]initWithFrame:CGRectMake(65, 0, 157, 60)];
             lblcurrent.textColor = [UIColor blackColor];
             lblcurrent.font = [UIFont fontWithName:@"Helvetica" size:17];
@@ -284,9 +284,9 @@
             lblcurrent.text = @"Current\nSavings:";
             img.image=[UIImage imageNamed:@"glyphicons_037_coins.png"];
         }
-
+        
         lbltotal.text = [NSString stringWithFormat:@"$%g",[[bottomArray objectAtIndex:indexPath.row] doubleValue]];
-
+        
         
         return cell1;
     }
@@ -381,12 +381,12 @@
 
 
 - (IBAction)btnClicked:(id)sender
-{    
+{
     if (allowEdit)
     {
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         
-        UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:bvc];        
+        UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:bvc];
         [self.navigationController presentViewController:navC animated:YES completion:nil];
         
         //[self.navigationController pushViewController:bvc animated:YES];
@@ -394,7 +394,7 @@
     else
     {
         tooltip = [[CMPopTipView alloc]
-                                      initWithMessage:@"Weekly Budget is only editable on start of weeks.\n(Monday & Tuesday)"] ;
+                   initWithMessage:@"Weekly Budget is only editable on start of weeks.\n(Monday & Tuesday)"] ;
         tooltip.delegate = self;
         tooltip.backgroundColor = [UIColor lightGrayColor];
         tooltip.textColor = [UIColor whiteColor];

@@ -17,13 +17,6 @@
 		B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B429520516A2828B004F5D5E /* roundedrectangle.png */; };
 		B4470E8216A7A4120045EEC8 /* BudgetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4470E8116A7A4120045EEC8 /* BudgetCategory.m */; };
 		B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B452204A16A54F74006209A7 /* OverviewViewController.m */; };
-		B46494D616C0BB2E00228A77 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B46494D416C0BB2E00228A77 /* SourceSansPro-Regular.otf */; };
-		B46494D716C0BB2E00228A77 /* SourceSansPro-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B46494D516C0BB2E00228A77 /* SourceSansPro-Semibold.otf */; };
-		B46494D916C0BBF800228A77 /* SourceSansPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B46494D816C0BBF800228A77 /* SourceSansPro-Bold.otf */; };
-		B46494DB16C0C0FB00228A77 /* Segoe UI Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DA16C0C0FB00228A77 /* Segoe UI Semibold.ttf */; };
-		B46494DD16C0C10900228A77 /* segoeuil.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DC16C0C10900228A77 /* segoeuil.ttf */; };
-		B46494E016C0C44100228A77 /* Cantarell-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DE16C0C44100228A77 /* Cantarell-Bold.ttf */; };
-		B46494E116C0C44100228A77 /* Cantarell-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DF16C0C44100228A77 /* Cantarell-Regular.ttf */; };
 		B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */; };
 		B4664389169C020D00C83739 /* glyphicons_000_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E5169C020C00C83739 /* glyphicons_000_glass.png */; };
 		B466438A169C020D00C83739 /* glyphicons_001_leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E6169C020C00C83739 /* glyphicons_001_leaf.png */; };
@@ -461,6 +454,10 @@
 		B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */; };
 		CE36AD8A16BA29DE007ACC9B /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE36AD8916BA29DE007ACC9B /* SettingsData.m */; };
 		CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D8CBB16B8FE690071FC79 /* Social.framework */; };
+		CE41601616C0B11100D7E2BC /* ByWeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601416C0B11100D7E2BC /* ByWeekViewController.m */; };
+		CE41601E16C0B14200D7E2BC /* ByCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */; };
+		CE41601F16C0B14200D7E2BC /* ViewBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */; };
+		CE41602016C0B14200D7E2BC /* PurchasedItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */; };
 		CE60261316A6BD3D0065EABB /* ByMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261016A6BD3D0065EABB /* ByMonthViewController.m */; };
 		CE60261416A6BD3D0065EABB /* CustomDateUIPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261216A6BD3D0065EABB /* CustomDateUIPickerView.m */; };
 		CE6BA68A16B64C8D00E828CD /* AddPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68116B64C8D00E828CD /* AddPurchaseViewController.m */; };
@@ -504,13 +501,6 @@
 		B4470E8116A7A4120045EEC8 /* BudgetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetCategory.m; sourceTree = "<group>"; };
 		B452204916A54F73006209A7 /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
 		B452204A16A54F74006209A7 /* OverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewViewController.m; sourceTree = "<group>"; };
-		B46494D416C0BB2E00228A77 /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
-		B46494D516C0BB2E00228A77 /* SourceSansPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.otf"; sourceTree = "<group>"; };
-		B46494D816C0BBF800228A77 /* SourceSansPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.otf"; sourceTree = "<group>"; };
-		B46494DA16C0C0FB00228A77 /* Segoe UI Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe UI Semibold.ttf"; sourceTree = "<group>"; };
-		B46494DC16C0C10900228A77 /* segoeuil.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = segoeuil.ttf; sourceTree = "<group>"; };
-		B46494DE16C0C44100228A77 /* Cantarell-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Bold.ttf"; sourceTree = "<group>"; };
-		B46494DF16C0C44100228A77 /* Cantarell-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Regular.ttf"; sourceTree = "<group>"; };
 		B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		B46641E5169C020C00C83739 /* glyphicons_000_glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_000_glass.png; path = Images/glyphicons_000_glass.png; sourceTree = "<group>"; };
 		B46641E6169C020C00C83739 /* glyphicons_001_leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_001_leaf.png; path = Images/glyphicons_001_leaf.png; sourceTree = "<group>"; };
@@ -959,6 +949,14 @@
 		CE36AD8816BA29DE007ACC9B /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsData.h; sourceTree = "<group>"; };
 		CE36AD8916BA29DE007ACC9B /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsData.m; sourceTree = "<group>"; };
 		CE3D8CBB16B8FE690071FC79 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CE41601416C0B11100D7E2BC /* ByWeekViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByWeekViewController.m; sourceTree = "<group>"; };
+		CE41601516C0B11100D7E2BC /* ByWeekViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByWeekViewController.h; sourceTree = "<group>"; };
+		CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByCategoryViewController.m; sourceTree = "<group>"; };
+		CE41601916C0B14200D7E2BC /* ByCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByCategoryViewController.h; sourceTree = "<group>"; };
+		CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewBudgetViewController.m; sourceTree = "<group>"; };
+		CE41601B16C0B14200D7E2BC /* ViewBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewBudgetViewController.h; sourceTree = "<group>"; };
+		CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchasedItemsViewController.m; sourceTree = "<group>"; };
+		CE41601D16C0B14200D7E2BC /* PurchasedItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchasedItemsViewController.h; sourceTree = "<group>"; };
 		CE60260F16A6BD3D0065EABB /* ByMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByMonthViewController.h; sourceTree = "<group>"; };
 		CE60261016A6BD3D0065EABB /* ByMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByMonthViewController.m; sourceTree = "<group>"; };
 		CE60261116A6BD3D0065EABB /* CustomDateUIPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateUIPickerView.h; sourceTree = "<group>"; };
@@ -1018,16 +1016,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B46494D316C0BB1100228A77 /* Fonts */ = {
+		B46494EB16C0CDE100228A77 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				B46494DE16C0C44100228A77 /* Cantarell-Bold.ttf */,
-				B46494DF16C0C44100228A77 /* Cantarell-Regular.ttf */,
-				B46494DC16C0C10900228A77 /* segoeuil.ttf */,
-				B46494DA16C0C0FB00228A77 /* Segoe UI Semibold.ttf */,
-				B46494D816C0BBF800228A77 /* SourceSansPro-Bold.otf */,
-				B46494D416C0BB2E00228A77 /* SourceSansPro-Regular.otf */,
-				B46494D516C0BB2E00228A77 /* SourceSansPro-Semibold.otf */,
 				B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */,
 			);
 			name = Fonts;
@@ -1109,6 +1100,14 @@
 		CEB06CEF169573F100F96FD4 /* Overview */ = {
 			isa = PBXGroup;
 			children = (
+				CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */,
+				CE41601916C0B14200D7E2BC /* ByCategoryViewController.h */,
+				CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */,
+				CE41601B16C0B14200D7E2BC /* ViewBudgetViewController.h */,
+				CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */,
+				CE41601D16C0B14200D7E2BC /* PurchasedItemsViewController.h */,
+				CE41601416C0B11100D7E2BC /* ByWeekViewController.m */,
+				CE41601516C0B11100D7E2BC /* ByWeekViewController.h */,
 				CE60260F16A6BD3D0065EABB /* ByMonthViewController.h */,
 				CE60261016A6BD3D0065EABB /* ByMonthViewController.m */,
 				CE60261116A6BD3D0065EABB /* CustomDateUIPickerView.h */,
@@ -1586,7 +1585,7 @@
 		CEFC835316917DE600F4E2B1 /* ToTe */ = {
 			isa = PBXGroup;
 			children = (
-				B46494D316C0BB1100228A77 /* Fonts */,
+				B46494EB16C0CDE100228A77 /* Fonts */,
 				B4DB070316BF904900DE2755 /* AppLaunch.h */,
 				B4DB070416BF904900DE2755 /* AppLaunch.m */,
 				B4266E8616A05817008FC51F /* Database.h */,
@@ -2108,13 +2107,6 @@
 				B407A3EF16B80358008E47D5 /* button-delete.png in Resources */,
 				B4C8688516BB7305008171FD /* TipOfDay.plist in Resources */,
 				B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */,
-				B46494D616C0BB2E00228A77 /* SourceSansPro-Regular.otf in Resources */,
-				B46494D716C0BB2E00228A77 /* SourceSansPro-Semibold.otf in Resources */,
-				B46494D916C0BBF800228A77 /* SourceSansPro-Bold.otf in Resources */,
-				B46494DB16C0C0FB00228A77 /* Segoe UI Semibold.ttf in Resources */,
-				B46494DD16C0C10900228A77 /* segoeuil.ttf in Resources */,
-				B46494E016C0C44100228A77 /* Cantarell-Bold.ttf in Resources */,
-				B46494E116C0C44100228A77 /* Cantarell-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2156,6 +2148,10 @@
 				B46A481C16BA1AC7009A2E1F /* GoalDetailViewController.m in Sources */,
 				CE36AD8A16BA29DE007ACC9B /* SettingsData.m in Sources */,
 				B4DB070516BF904900DE2755 /* AppLaunch.m in Sources */,
+				CE41601616C0B11100D7E2BC /* ByWeekViewController.m in Sources */,
+				CE41601E16C0B14200D7E2BC /* ByCategoryViewController.m in Sources */,
+				CE41601F16C0B14200D7E2BC /* ViewBudgetViewController.m in Sources */,
+				CE41602016C0B14200D7E2BC /* PurchasedItemsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
