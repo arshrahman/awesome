@@ -98,6 +98,7 @@
     }
 }
 
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -111,6 +112,7 @@
         
     }
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,6 +130,7 @@
         [self showConfirmAlert];
     }
 }
+
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -158,6 +161,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 - (NSString *)documentsPathForFileName:(NSString *)name
 {
     NSString *documentsPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"Images"];
@@ -168,6 +172,7 @@
     
     return [documentsPath stringByAppendingPathComponent:name];
 }
+
 
 - (void)removeImage:(NSString*)fileName
 {
@@ -181,6 +186,7 @@
         NSLog(@"Delete failed:%@", error);
     }
 }
+
 
 -(NSString*)getImageName
 {
@@ -217,16 +223,48 @@
     }
 }
 
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [textField resignFirstResponder];
     return YES;
 }
 
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 100)
+    {
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (newString.length > 51)
+        {
+            textField.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1];
+            textField.layer.cornerRadius = 7.0f;
+            textField.layer.masksToBounds = YES;
+            textField.layer.borderColor=[[UIColor redColor]CGColor];
+            textField.layer.borderWidth= 2.0f;
+            return NO;
+        }
+        else
+        {
+            textField.layer.borderColor = [[UIColor clearColor]CGColor];
+            textField.backgroundColor = [UIColor clearColor];
+            return YES;
+        }
+        
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+
 -(void)dismissKeyboard
 {
     [self.view endEditing:YES];
 }
+
 
 -(void)ChangelblSave
 {
@@ -368,6 +406,7 @@
     }
 }
 
+
 - (IBAction)btnCancel:(id)sender
 {
     [self removeImage:oldPhotoName];
@@ -376,6 +415,7 @@
     photoLabel.text = @"Add photo";
     btnCancel.hidden = YES;
 }
+
 
 - (IBAction)btnCancelEdit:(id)sender
 {
@@ -409,6 +449,7 @@
 
 }
 
+
 - (void)showConfirmAlert
 {
 	UIAlertView *alert = [[UIAlertView alloc] init];
@@ -419,6 +460,7 @@
 	[alert addButtonWithTitle:@"No"];
 	[alert show];
 }
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -449,11 +491,13 @@
 	}
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)viewDidUnload {
     [self setAddGoalTB:nil];
