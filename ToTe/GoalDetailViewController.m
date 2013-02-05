@@ -281,7 +281,7 @@
         
         lblGoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
         lblDescription.text = g.goal_description;
-        lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%d Weekly!", g.amount_tosave];
+        lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%g Weekly!", g.amount_tosave];
         lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
         
         [self ProgressBar];

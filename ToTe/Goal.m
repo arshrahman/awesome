@@ -17,7 +17,7 @@
 }
 
 
--(int)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave
+-(int)InsertGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(double)amount_tosave
 {
     char *error;
     int rowId = 1;
@@ -30,7 +30,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {            
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO GOAL (TITLE, DESCRIPTION, GOAL_AMOUNT, DEADLINE, GOAL_PHOTO, AMOUNT_TOSAVE, GOAL_START_DATE, PRIORITY) SELECT '%@', '%@', %d, '%@', '%@', %d, '%@', COALESCE(MAX(PRIORITY), 0) + 1 FROM GOAL;", g_title, g_description, g_amount, deadline, g_photo, amount_tosave, [self getCurrentDay]];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO GOAL (TITLE, DESCRIPTION, GOAL_AMOUNT, DEADLINE, GOAL_PHOTO, AMOUNT_TOSAVE, GOAL_START_DATE, PRIORITY) SELECT '%@', '%@', %d, '%@', '%@', %g, '%@', COALESCE(MAX(PRIORITY), 0) + 1 FROM GOAL;", g_title, g_description, g_amount, deadline, g_photo, amount_tosave, [self getCurrentDay]];
             
         const char *insert_stmt = [insertStmt UTF8String];
             
@@ -78,7 +78,7 @@
                 
                 gg.goal_id = sqlite3_column_int(statement, 0);
                 gg.goal_title = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
-                gg.goal_amount = sqlite3_column_int(statement, 2);
+                gg.goal_amount = sqlite3_column_double(statement, 2);
                 gg.goal_photo = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
                 gg.weeks_met = sqlite3_column_int(statement, 4);
                 gg.amount_tosave = sqlite3_column_int(statement, 5);
@@ -128,7 +128,7 @@
                 gg.deadline = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
                 gg.goal_photo = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
                 gg.weeks_met = sqlite3_column_int(statement, 6);
-                gg.amount_tosave = sqlite3_column_int(statement, 7);
+                gg.amount_tosave = sqlite3_column_double(statement, 7);
                 gg.goal_start_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 8)];
                 
                 [goal addObject:gg];
@@ -146,7 +146,7 @@
 }
 
 
--(BOOL)UpdateGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(int)amount_tosave:(int)g_id
+-(BOOL)UpdateGoal:(NSString *)g_title:(NSString *)g_description:(int)g_amount:(NSString *)deadline:(NSString *)g_photo:(double)amount_tosave:(int)g_id
 {
     char *error;
     BOOL success = FALSE;
@@ -159,7 +159,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {            
-        NSString *updateStmt = [NSString stringWithFormat:@"UPDATE GOAL SET TITLE = '%@', DESCRIPTION = '%@', GOAL_AMOUNT = %d, DEADLINE = '%@', GOAL_PHOTO = '%@',  AMOUNT_TOSAVE = %d WHERE GOAL_ID = %d", g_title, g_description, g_amount, deadline, g_photo, amount_tosave, g_id];
+        NSString *updateStmt = [NSString stringWithFormat:@"UPDATE GOAL SET TITLE = '%@', DESCRIPTION = '%@', GOAL_AMOUNT = %d, DEADLINE = '%@', GOAL_PHOTO = '%@',  AMOUNT_TOSAVE = %g WHERE GOAL_ID = %d", g_title, g_description, g_amount, deadline, g_photo, amount_tosave, g_id];
             
         const char *update_stmt = [updateStmt UTF8String];
             

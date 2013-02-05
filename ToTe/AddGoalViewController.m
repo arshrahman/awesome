@@ -22,7 +22,7 @@
     NSData *imageData;
     NSString *oldPhotoName;
     Goal *g;
-    int toSave;
+    double toSave;
 }
 
 @synthesize txtGoal;
@@ -190,6 +190,7 @@
     }
 }
 
+
 -(void)textEditingChanged:(UITextField *)textField
 {
     if([txtDeadline.text length] > 0 && [txtAmount.text length] > 0)
@@ -198,11 +199,42 @@
     }
 }
 
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [textField resignFirstResponder];
     return YES;
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 100)
+    {
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (newString.length > 51)
+        {
+            textField.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1];
+            textField.layer.cornerRadius = 7.0f;
+            textField.layer.masksToBounds = YES;
+            textField.layer.borderColor=[[UIColor redColor]CGColor];
+            textField.layer.borderWidth= 2.0f;
+            return NO;
+        }
+        else
+        {
+            textField.layer.borderColor = [[UIColor clearColor]CGColor];
+            textField.backgroundColor = [UIColor clearColor];
+            return YES;
+        }
+
+    }
+    else
+    {
+        return YES;
+    }
+}
+
 
 -(void)dismissKeyboard
 {
@@ -220,8 +252,15 @@
 {
     int weeks = [g WeeksBetweenDate:self.deadline];
     int amount = [txtAmount.text intValue];
-    toSave = amount/weeks;
-    lblSave.text = [NSString stringWithFormat:@"Save $%d per week", toSave];
+    
+    toSave = amount/(double)weeks;
+    
+    if (toSave != (int)toSave)
+    {
+        toSave = [[NSString stringWithFormat:@"%.2f",toSave] doubleValue];
+    }
+    
+    lblSave.text = [NSString stringWithFormat:@"Save $%g per week", toSave];
 }
 
 
@@ -332,10 +371,7 @@
         
         if (goalID > 0)
         {
-            /*GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
-            gdc.goal_id = goalID;*/
             GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
-            
             [self.navigationController pushViewController:gvc animated:YES];
         }
     }

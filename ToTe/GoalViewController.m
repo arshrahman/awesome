@@ -117,7 +117,7 @@
     Goal *gl = [goalArray objectAtIndex:indexPath.row];
     
     lblname.text = [self TruncateString:gl.goal_title];
-    lblamount.text = [NSString stringWithFormat:@"$%d/ $%d", (gl.amount_tosave * gl.weeks_met), gl.goal_amount];
+    lblamount.text = [NSString stringWithFormat:@"$%g/ $%d", (gl.amount_tosave * gl.weeks_met), gl.goal_amount];
     
     if ([gl.goal_photo length] > 0)
     {

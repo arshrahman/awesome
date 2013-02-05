@@ -23,7 +23,7 @@
     NSData *imageData;
     NSString *oldPhotoName;
     Goal *g;
-    int toSave;
+    double toSave;
     NSMutableArray *photosToDelete;
 }
 
@@ -85,7 +85,7 @@
     self.deadline = [g StringToDate:g.deadline];
     txtAmount.text = [NSString stringWithFormat:@"%d", g.goal_amount];
     toSave = g.amount_tosave;
-    lblSave.text = [NSString stringWithFormat:@"Save $%d per week", g.amount_tosave];
+    lblSave.text = [NSString stringWithFormat:@"Save $%g per week", g.amount_tosave];
     
     if ([g.goal_photo length] > 0)
     {
@@ -232,8 +232,15 @@
 {
     int weeks = [g WeeksBetweenDate:self.deadline];
     int amount = [txtAmount.text intValue];
-    toSave = amount/weeks;
-    lblSave.text = [NSString stringWithFormat:@"Save $%d per week", toSave];
+    
+    toSave = amount/(double)weeks;
+    
+    if (toSave != (int)toSave)
+    {
+        toSave = [[NSString stringWithFormat:@"%.2f",toSave] doubleValue];
+    }
+    
+    lblSave.text = [NSString stringWithFormat:@"Save $%g per week", toSave];
 }
 
 

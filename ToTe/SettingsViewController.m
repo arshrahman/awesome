@@ -43,7 +43,7 @@
     if (FirstTimeUse != 3)
     {
         BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
-        [self.navigationController pushViewController:svc animated:YES];
+        [self.navigationController pushViewController:svc animated:NO];
         
     }
     else

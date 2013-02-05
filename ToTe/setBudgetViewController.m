@@ -53,6 +53,8 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.hidesBackButton = YES;
+    
     [self.tabBarController setDelegate:self];
     sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
     sideView.delegate = self;
@@ -100,9 +102,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    animated = NO;
-    self.navigationItem.hidesBackButton = YES;
-    
     topArray = [[NSMutableArray alloc]init];
     bottomArray = [[NSMutableArray alloc]init];
     catList = [[NSMutableArray alloc]init];
@@ -272,6 +271,11 @@
                 lblcurrent.textColor = [UIColor redColor];
                 lbltotal.textColor = [UIColor redColor];
             }
+            else
+            {
+                lblcurrent.textColor = [UIColor blackColor];
+                lbltotal.textColor = [UIColor blackColor];
+            }
         }
         if (indexPath.row == 1)
         {
@@ -279,6 +283,11 @@
             {
                 lblcurrent.textColor = [UIColor redColor];
                 lbltotal.textColor = [UIColor redColor];
+            }
+            else
+            {
+                lblcurrent.textColor = [UIColor blackColor];
+                lbltotal.textColor = [UIColor blackColor];
             }
             
             lblcurrent.text = @"Current\nSavings:";
