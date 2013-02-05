@@ -87,13 +87,13 @@
         
         lblname = [[UILabel alloc]initWithFrame:CGRectMake(63, 3, 280, 25)];
         lblname.textColor = [UIColor blackColor];
-        lblname.font = [UIFont fontWithName:@"Helvetica" size:17];
+        lblname.font = [UIFont fontWithName:@"Helvetica" size:16];
         lblname.text = @"";
         lblname.tag = 100;
         
         lblamount = [[UILabel alloc]initWithFrame:CGRectMake(63, 26, 280, 25)];
         lblamount.textColor = [UIColor blackColor];
-        lblamount.font = [UIFont fontWithName:@"Helvetica" size:16];
+        lblamount.font = [UIFont fontWithName:@"Helvetica" size:15];
         lblamount.textColor = [UIColor darkGrayColor];
         lblamount.tag = 200;
         

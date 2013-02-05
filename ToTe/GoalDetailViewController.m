@@ -60,10 +60,11 @@
     NSLog(@"totalWeeks: %g", totalWeeks);
     NSLog(@"weeksMet: %g", weeksMet);*/
         
-    totalWeeks = 20;
+    /*totalWeeks = 20;
     currentWeek = 13;
-    weeksMet = 10;
+    weeksMet = 10;*/
     
+    if (currentWeek < 0) currentWeek = 0;
     if (currentWeek > totalWeeks) currentWeek = totalWeeks;
     
     double weeksNotMet = currentWeek - weeksMet;

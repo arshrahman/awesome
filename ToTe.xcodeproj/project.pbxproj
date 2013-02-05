@@ -17,6 +17,13 @@
 		B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B429520516A2828B004F5D5E /* roundedrectangle.png */; };
 		B4470E8216A7A4120045EEC8 /* BudgetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4470E8116A7A4120045EEC8 /* BudgetCategory.m */; };
 		B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B452204A16A54F74006209A7 /* OverviewViewController.m */; };
+		B46494D616C0BB2E00228A77 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B46494D416C0BB2E00228A77 /* SourceSansPro-Regular.otf */; };
+		B46494D716C0BB2E00228A77 /* SourceSansPro-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B46494D516C0BB2E00228A77 /* SourceSansPro-Semibold.otf */; };
+		B46494D916C0BBF800228A77 /* SourceSansPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B46494D816C0BBF800228A77 /* SourceSansPro-Bold.otf */; };
+		B46494DB16C0C0FB00228A77 /* Segoe UI Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DA16C0C0FB00228A77 /* Segoe UI Semibold.ttf */; };
+		B46494DD16C0C10900228A77 /* segoeuil.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DC16C0C10900228A77 /* segoeuil.ttf */; };
+		B46494E016C0C44100228A77 /* Cantarell-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DE16C0C44100228A77 /* Cantarell-Bold.ttf */; };
+		B46494E116C0C44100228A77 /* Cantarell-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B46494DF16C0C44100228A77 /* Cantarell-Regular.ttf */; };
 		B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */; };
 		B4664389169C020D00C83739 /* glyphicons_000_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E5169C020C00C83739 /* glyphicons_000_glass.png */; };
 		B466438A169C020D00C83739 /* glyphicons_001_leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E6169C020C00C83739 /* glyphicons_001_leaf.png */; };
@@ -451,10 +458,6 @@
 		B4DB070516BF904900DE2755 /* AppLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DB070416BF904900DE2755 /* AppLaunch.m */; };
 		B4E5046616A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */; };
 		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
-		B4F2036D16BE4DF100B80872 /* Fabrica.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2036C16BE4DF100B80872 /* Fabrica.otf */; };
-		B4F2037216BE52FC00B80872 /* GarageGothic-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2036F16BE52FC00B80872 /* GarageGothic-Bold.otf */; };
-		B4F2037316BE52FC00B80872 /* London-Tube.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2037016BE52FC00B80872 /* London-Tube.ttf */; };
-		B4F2037416BE52FC00B80872 /* mentone-semibol.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2037116BE52FC00B80872 /* mentone-semibol.otf */; };
 		B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */; };
 		CE36AD8A16BA29DE007ACC9B /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE36AD8916BA29DE007ACC9B /* SettingsData.m */; };
 		CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D8CBB16B8FE690071FC79 /* Social.framework */; };
@@ -501,6 +504,13 @@
 		B4470E8116A7A4120045EEC8 /* BudgetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetCategory.m; sourceTree = "<group>"; };
 		B452204916A54F73006209A7 /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
 		B452204A16A54F74006209A7 /* OverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewViewController.m; sourceTree = "<group>"; };
+		B46494D416C0BB2E00228A77 /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
+		B46494D516C0BB2E00228A77 /* SourceSansPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.otf"; sourceTree = "<group>"; };
+		B46494D816C0BBF800228A77 /* SourceSansPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.otf"; sourceTree = "<group>"; };
+		B46494DA16C0C0FB00228A77 /* Segoe UI Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe UI Semibold.ttf"; sourceTree = "<group>"; };
+		B46494DC16C0C10900228A77 /* segoeuil.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = segoeuil.ttf; sourceTree = "<group>"; };
+		B46494DE16C0C44100228A77 /* Cantarell-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Bold.ttf"; sourceTree = "<group>"; };
+		B46494DF16C0C44100228A77 /* Cantarell-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Regular.ttf"; sourceTree = "<group>"; };
 		B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		B46641E5169C020C00C83739 /* glyphicons_000_glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_000_glass.png; path = Images/glyphicons_000_glass.png; sourceTree = "<group>"; };
 		B46641E6169C020C00C83739 /* glyphicons_001_leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_001_leaf.png; path = Images/glyphicons_001_leaf.png; sourceTree = "<group>"; };
@@ -945,10 +955,6 @@
 		B4E5046516A656BF0003D0D5 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		B4E5046816A663610003D0D5 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
 		B4E5046916A663610003D0D5 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
-		B4F2036C16BE4DF100B80872 /* Fabrica.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fabrica.otf; sourceTree = "<group>"; };
-		B4F2036F16BE52FC00B80872 /* GarageGothic-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GarageGothic-Bold.otf"; sourceTree = "<group>"; };
-		B4F2037016BE52FC00B80872 /* London-Tube.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "London-Tube.ttf"; sourceTree = "<group>"; };
-		B4F2037116BE52FC00B80872 /* mentone-semibol.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mentone-semibol.otf"; sourceTree = "<group>"; };
 		B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreeSerif_Reg.otf; sourceTree = "<group>"; };
 		CE36AD8816BA29DE007ACC9B /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsData.h; sourceTree = "<group>"; };
 		CE36AD8916BA29DE007ACC9B /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsData.m; sourceTree = "<group>"; };
@@ -1012,6 +1018,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B46494D316C0BB1100228A77 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B46494DE16C0C44100228A77 /* Cantarell-Bold.ttf */,
+				B46494DF16C0C44100228A77 /* Cantarell-Regular.ttf */,
+				B46494DC16C0C10900228A77 /* segoeuil.ttf */,
+				B46494DA16C0C0FB00228A77 /* Segoe UI Semibold.ttf */,
+				B46494D816C0BBF800228A77 /* SourceSansPro-Bold.otf */,
+				B46494D416C0BB2E00228A77 /* SourceSansPro-Regular.otf */,
+				B46494D516C0BB2E00228A77 /* SourceSansPro-Semibold.otf */,
+				B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		CEB06CE216954CD900F96FD4 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
@@ -1565,13 +1586,9 @@
 		CEFC835316917DE600F4E2B1 /* ToTe */ = {
 			isa = PBXGroup;
 			children = (
+				B46494D316C0BB1100228A77 /* Fonts */,
 				B4DB070316BF904900DE2755 /* AppLaunch.h */,
 				B4DB070416BF904900DE2755 /* AppLaunch.m */,
-				B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */,
-				B4F2036C16BE4DF100B80872 /* Fabrica.otf */,
-				B4F2036F16BE52FC00B80872 /* GarageGothic-Bold.otf */,
-				B4F2037016BE52FC00B80872 /* London-Tube.ttf */,
-				B4F2037116BE52FC00B80872 /* mentone-semibol.otf */,
 				B4266E8616A05817008FC51F /* Database.h */,
 				B4266E8716A05817008FC51F /* Database.m */,
 				CE36AD8816BA29DE007ACC9B /* SettingsData.h */,
@@ -2090,11 +2107,14 @@
 				B4D4C7AD16B6CCC000D0E12A /* camera-icon-md.png in Resources */,
 				B407A3EF16B80358008E47D5 /* button-delete.png in Resources */,
 				B4C8688516BB7305008171FD /* TipOfDay.plist in Resources */,
-				B4F2036D16BE4DF100B80872 /* Fabrica.otf in Resources */,
-				B4F2037216BE52FC00B80872 /* GarageGothic-Bold.otf in Resources */,
-				B4F2037316BE52FC00B80872 /* London-Tube.ttf in Resources */,
-				B4F2037416BE52FC00B80872 /* mentone-semibol.otf in Resources */,
 				B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */,
+				B46494D616C0BB2E00228A77 /* SourceSansPro-Regular.otf in Resources */,
+				B46494D716C0BB2E00228A77 /* SourceSansPro-Semibold.otf in Resources */,
+				B46494D916C0BBF800228A77 /* SourceSansPro-Bold.otf in Resources */,
+				B46494DB16C0C0FB00228A77 /* Segoe UI Semibold.ttf in Resources */,
+				B46494DD16C0C10900228A77 /* segoeuil.ttf in Resources */,
+				B46494E016C0C44100228A77 /* Cantarell-Bold.ttf in Resources */,
+				B46494E116C0C44100228A77 /* Cantarell-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

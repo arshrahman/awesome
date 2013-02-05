@@ -4,11 +4,12 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Fabrica.otf</string>
 		<string>BreeSerif_Reg.otf</string>
-		<string>GarageGothic-Bold.otf</string>
-		<string>London-Tube.ttf</string>
-		<string>mentone-semibol.otf</string>
+		<string>SourceSansPro-Semibold.otf</string>
+		<string>SourceSansPro-Bold.otf</string>
+		<string>segoeuil.ttf</string>
+		<string>Segoe UI Semibold.ttf</string>
+		<string>Cantarell-Bold.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

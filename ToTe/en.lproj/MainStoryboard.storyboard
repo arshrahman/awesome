@@ -1050,8 +1050,8 @@
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Goal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPk-AI-NES">
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="1Wm-ps-TkF"/>
                                                         <constraint firstAttribute="width" constant="87" id="eLI-2C-zSW"/>
-                                                        <constraint firstAttribute="height" constant="21" id="w7a-Y7-ccA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                                                     <color key="textColor" white="0.29784443430000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -1061,11 +1061,11 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="aPk-AI-NES" firstAttribute="top" secondItem="8cJ-39-yYn" secondAttribute="top" constant="13" id="TVo-Nn-CQy"/>
                                             <constraint firstItem="zpM-uH-sIn" firstAttribute="leading" secondItem="8cJ-39-yYn" secondAttribute="leading" constant="125" id="j2o-dy-GKq"/>
                                             <constraint firstItem="aPk-AI-NES" firstAttribute="baseline" secondItem="zpM-uH-sIn" secondAttribute="baseline" type="default" id="l2b-nC-62J"/>
                                             <constraint firstItem="aPk-AI-NES" firstAttribute="leading" secondItem="8cJ-39-yYn" secondAttribute="leading" constant="22" id="o7p-lw-ZzP"/>
                                             <constraint firstItem="zpM-uH-sIn" firstAttribute="top" secondItem="8cJ-39-yYn" secondAttribute="top" constant="4" id="uFn-2Z-dla"/>
-                                            <constraint firstItem="aPk-AI-NES" firstAttribute="centerY" secondItem="zpM-uH-sIn" secondAttribute="centerY" type="default" id="zBF-dM-D5N"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="R6u-hX-acD">
