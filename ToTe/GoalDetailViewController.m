@@ -311,7 +311,7 @@
     egc.goalArray = [[NSMutableArray alloc]initWithArray:goal_array];
 
     UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:egc];
-    [navC setModalPresentationStyle:UIModalTransitionStyleCrossDissolve];
+    //[navC setModalPresentationStyle:UIModalTransitionStyleCrossDissolve];
     
     [self.navigationController presentViewController:navC animated:YES completion:nil];
 }

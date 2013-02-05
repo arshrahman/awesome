@@ -22,7 +22,7 @@
     {
         //[[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
     }
-    //[[UINavigationBar appearance]setTintColor:[UIColor lightGrayColor]];
+    [[UINavigationBar appearance]setTintColor:[UIColor blackColor]];
     //[[UINavigationBar appearance]setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     //[[UITabBar appearance]setTintColor:[UIColor blackColor]];
     

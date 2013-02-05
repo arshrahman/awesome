@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 
 -(IBAction)btnDone:(id)sender;
+- (IBAction)btnCancel:(id)sender;
 
 
 @end

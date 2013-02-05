@@ -385,7 +385,11 @@
     if (allowEdit)
     {
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
-        [self.navigationController pushViewController:bvc animated:YES];
+        
+        UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:bvc];        
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+        
+        //[self.navigationController pushViewController:bvc animated:YES];
     }
     else
     {

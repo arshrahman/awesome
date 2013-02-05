@@ -44,7 +44,7 @@
     [super viewDidLoad];
     
     [self.tabBarController setDelegate:self];
-    //self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.hidesBackButton = YES;
         
     budgetCat.layer.cornerRadius = 5.0f;
     budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -92,23 +92,18 @@
 
 }
 
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    //if (userHasCompletedAction) {
-    return YES;
-    //}
-    //return NO;
-}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1 + [bgCat count];
 }
+
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -237,7 +232,7 @@
         [as addButtonWithTitle:@"Cancel"];
         as.cancelButtonIndex = as.numberOfButtons-1;
         
-        [as showFromTabBar:self.tabBarController.tabBar];
+        [as showInView:self.view];
     }
 }
 
@@ -319,8 +314,10 @@
                 [bb DeleteBudgetCategories];
                 [bb InsertBudgetCategories:bgCat];
                 
-                setBudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
-                [self.navigationController pushViewController:svc animated:YES];
+                //setBudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
+                //[self.navigationController pushViewController:svc animated:YES];
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
         else
@@ -335,6 +332,11 @@
         [alert show];
         
     }
+}
+
+- (IBAction)btnCancel:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
