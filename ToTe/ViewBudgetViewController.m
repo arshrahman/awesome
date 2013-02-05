@@ -53,7 +53,6 @@
     
     self.navigationItem.title = self.dateWeek;
 
-    [self.tabBarController setDelegate:self];
     sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
     sideView.delegate = self;
     sideView.dataSource = self;
@@ -134,11 +133,6 @@
     pageControl.currentPage = 1;
     [scroller setContentOffset:CGPointMake(320, 0) animated:YES];
     
-}
-
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
-{
-    return YES;
 }
 
 - (void)firstPage:(UISwipeGestureRecognizer *)swipeGestureRecognizer
@@ -378,31 +372,6 @@
         [scroller setContentOffset:CGPointMake(0, 0) animated:YES];
     }
 }
-
-
-//- (IBAction)btnClicked:(id)sender
-//{
-//    if (allowEdit)
-//    {
-//        UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
-//        [self.navigationController pushViewController:bvc animated:YES];
-//    }
-//    else
-//    {
-//        tooltip = [[CMPopTipView alloc]
-//                   initWithMessage:@"Weekly Budget is only editable on start of weeks.\n(Monday & Tuesday)"] ;
-//        tooltip.delegate = self;
-//        tooltip.backgroundColor = [UIColor lightGrayColor];
-//        tooltip.textColor = [UIColor whiteColor];
-//        [tooltip presentPointingAtBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
-//        
-//        NSTimer *timerShowToolTip;
-//        timerShowToolTip = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(dismissToolTip) userInfo:nil repeats:NO];
-//        
-//        //UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
-//        //[self.navigationController pushViewController:bvc animated:YES];
-//    }
-//}
 
 
 - (void)didReceiveMemoryWarning
