@@ -10,6 +10,7 @@
 #import "Goal.h"
 #import "GoalDetailViewController.h"
 #import "GoalViewController.h"
+#import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface EditGoalViewController ()
@@ -124,7 +125,7 @@
     }
     else if (indexPath.section == 1 && indexPath.row == 2)
     {
-        //[self showConfirmAlert];
+        [self showConfirmAlert];
     }
 }
 
@@ -349,12 +350,7 @@
                     [self removeImage:[photosToDelete objectAtIndex:i]];
                 }
             }
-            
-            GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
-            gdc.goal_id = g.goal_id;
-            
-            //[self.navigationController pushViewController:gdc animated:YES];
-            
+                        
             [self dismissModalViewControllerAnimated:YES];
         }
     }
@@ -401,12 +397,7 @@
     txtAmount.text = @"";
     txtDeadline.text = @"";
     lblSave.text = @"";
-        
-    GoalDetailViewController *gdc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalDetailViewController"];
-    gdc.goal_id = g.goal_id;
-    
-    //[self.navigationController pushViewController:gdc animated:YES];
-    
+            
     [self dismissModalViewControllerAnimated:YES];
 
 }
@@ -435,12 +426,10 @@
                     [self removeImage:[photosToDelete objectAtIndex:i]];
                 }
             }
-        
-            //GoalDetailViewController *gdc = [[GoalDetailViewController alloc]init];
-            //gdc.goal_id = 0;
-            GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
-            [self.navigationController pushViewController:gvc animated:YES];
-            //[self dismissViewControllerAnimated:YES completion:nil];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:1] forKey:@"GoalDeleted"];
+            
+            [self dismissModalViewControllerAnimated:YES];
         }
         else
         {

@@ -203,82 +203,91 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-    /*if (goal_id == 0)
+    NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"GoalDeleted"];
+    int navigate = [ns intValue];
+    
+    NSLog(@"Navigate: %d", navigate);
+    
+    if (navigate == 1)
     {
+        [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:0] forKey:@"GoalDeleted"];
+        
         GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
         [self.navigationController pushViewController:gvc animated:YES];
-    }*/
-    
-    g = [[Goal alloc]init];
-    goal_array = [[NSMutableArray alloc]init];
-    
-    for (Goal *gg in [g SelectGoal:goal_id])
-    {
-        [goal_array addObject:gg];
     }
-    
-    g = [goal_array objectAtIndex:0];
-    
-    NSData *imgData = [NSData dataWithContentsOfFile:[self documentsPathForFileName:g.goal_photo]];
-    UIImage *img = [UIImage imageWithData:imgData];
-    
-    double width = 320;
-    if (img.size.width <= 300)
+    else
     {
-        width = img.size.width;
+        g = [[Goal alloc]init];
+        goal_array = [[NSMutableArray alloc]init];
+        
+        for (Goal *gg in [g SelectGoal:goal_id])
+        {
+            [goal_array addObject:gg];
+        }
+        
+        g = [goal_array objectAtIndex:0];
+        
+        NSData *imgData = [NSData dataWithContentsOfFile:[self documentsPathForFileName:g.goal_photo]];
+        UIImage *img = [UIImage imageWithData:imgData];
+        
+        double width = 320;
+        if (img.size.width <= 300)
+        {
+            width = img.size.width;
+        }
+        
+        scroller = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 160)];
+        imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img.size.height)];
+        lblGoalTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 126, 320, 35)];
+        lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(20, 160, 280, 85)];
+        lbltoSaveWeekly = [[UILabel alloc]initWithFrame:CGRectMake(0, 293, 320, 36)];
+        lbltoSaveTotal = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, 320, 36)];
+        
+        
+        imageView.image = img;
+        
+        [scroller setContentSize:imageView.frame.size];
+        [scroller scrollRectToVisible:imageView.frame animated:YES];
+        scroller.showsVerticalScrollIndicator = NO;
+        scroller.showsHorizontalScrollIndicator = NO;
+        //scroller.bounces = NO;
+        scroller.maximumZoomScale = 2.0f;
+        scroller.minimumZoomScale = 0.5f;
+        
+        lblGoalTitle.numberOfLines = 1;
+        lblGoalTitle.font = [UIFont fontWithName:@"Helvetica" size:17];
+        lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
+        
+        lblDescription.numberOfLines = 4;
+        lblDescription.font = [UIFont fontWithName:@"Helvetica" size:15];
+        lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
+        lblDescription.textAlignment = UITextAlignmentCenter;
+        
+        lbltoSaveWeekly.numberOfLines = 1;
+        lbltoSaveWeekly.font = [UIFont fontWithName:@"Helvetica" size:15];
+        lbltoSaveWeekly.textAlignment = UITextAlignmentCenter;
+        
+        lbltoSaveTotal.numberOfLines = 1;
+        lbltoSaveTotal.font = [UIFont fontWithName:@"Helvetica" size:15];
+        lbltoSaveTotal.textAlignment = UITextAlignmentCenter;
+        
+        [self.view addSubview:scroller];
+        [scroller addSubview:imageView];
+        [self.view addSubview:lblGoalTitle];
+        [self.view addSubview:lblDescription];
+        [self.view addSubview:lbltoSaveWeekly];
+        [self.view addSubview:lbltoSaveTotal];
+        
+        
+        lblGoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
+        lblDescription.text = g.goal_description;
+        lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%d Weekly!", g.amount_tosave];
+        lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
+        
+        [self ProgressBar];
+        
+        lblGoalTitle.viewForBaselineLayout.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75f];
     }
-    
-    scroller = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 160)];
-    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, img.size.height)];
-    lblGoalTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 126, 320, 35)];
-    lblDescription = [[UILabel alloc]initWithFrame:CGRectMake(20, 160, 280, 85)];
-    lbltoSaveWeekly = [[UILabel alloc]initWithFrame:CGRectMake(0, 293, 320, 36)];
-    lbltoSaveTotal = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, 320, 36)];
-    
-    
-    imageView.image = img;
-    
-    [scroller setContentSize:imageView.frame.size];
-    [scroller scrollRectToVisible:imageView.frame animated:YES];
-    scroller.showsVerticalScrollIndicator = NO;
-    scroller.showsHorizontalScrollIndicator = NO;
-    //scroller.bounces = NO;
-    scroller.maximumZoomScale = 2.0f;
-    scroller.minimumZoomScale = 0.5f;
-    
-    lblGoalTitle.numberOfLines = 1;
-    lblGoalTitle.font = [UIFont fontWithName:@"Helvetica" size:17];
-    lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
-    
-    lblDescription.numberOfLines = 4;
-    lblDescription.font = [UIFont fontWithName:@"Helvetica" size:15];
-    lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
-    lblDescription.textAlignment = UITextAlignmentCenter;
-    
-    lbltoSaveWeekly.numberOfLines = 1;
-    lbltoSaveWeekly.font = [UIFont fontWithName:@"Helvetica" size:15];
-    lbltoSaveWeekly.textAlignment = UITextAlignmentCenter;
-    
-    lbltoSaveTotal.numberOfLines = 1;
-    lbltoSaveTotal.font = [UIFont fontWithName:@"Helvetica" size:15];
-    lbltoSaveTotal.textAlignment = UITextAlignmentCenter;
-    
-    [self.view addSubview:scroller];
-    [scroller addSubview:imageView];
-    [self.view addSubview:lblGoalTitle];
-    [self.view addSubview:lblDescription];
-    [self.view addSubview:lbltoSaveWeekly];
-    [self.view addSubview:lbltoSaveTotal];
-    
-    
-    lblGoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
-    lblDescription.text = g.goal_description;
-    lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%d Weekly!", g.amount_tosave];
-    lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
-    
-    [self ProgressBar];
-    
-    lblGoalTitle.viewForBaselineLayout.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75f];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
