@@ -13,13 +13,21 @@
 
 @interface PurchasedItemsViewController ()
 
+@property (strong, nonatomic) NSMutableDictionary *individualDayPurchase;
+@property (strong, nonatomic) NSArray *sortedDays;
+
 @end
+
 
 @implementation PurchasedItemsViewController
 
 @synthesize PurchasedItemsUITableView;
 @synthesize PurchaseList = _PurchaseList;
 @synthesize PurchaseListWeek = _PurchaseListWeek;
+
+@synthesize individualDayPurchase;
+@synthesize sortedDays;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,13 +64,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.sortedDays.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.PurchaseList.count;   
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.PurchaseList.count;   
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -145,5 +153,115 @@
 //    // Pass the selected object to the new view controller.
 //    [self.navigationController pushViewController:datePurchased animated:YES];
 //}
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+//    if([check isEqualToString:@"This Week"])
+//    {
+        NSString *date = [self.sortedDays objectAtIndex:section];
+        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        return [purchaseOnThisDay count];
+        //return self.PurchaseListWeek.count;
+        //NSString *date = [self.ThisWeekDate objectAtIndex:section];
+        //self.PurchaseListWeek = [self.IndividualDayPurchase objectForKey:date];
+        //return self.PurchaseListWeek.count;
+//    }
+//    else
+//    {
+//        return self.PurchaseList.count;
+//    }
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+//    if([check isEqualToString:@"This Week"])
+//    {
+        NSString *dateRepresentingThisDay = [self.sortedDays objectAtIndex:section];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        NSDate *date = [dateFormatter dateFromString:dateRepresentingThisDay];
+        
+        [dateFormatter setDateFormat:@"EEEE, MMMM dd, yyyy"];
+        NSString *dateWithNewFormat = [dateFormatter stringFromDate:date];
+        
+        return dateWithNewFormat;
+        //self.PurchaseListWeek = [self.IndividualDayPurchase objectForKey:date];
+//    }
+//    else
+//    {
+//        //get current Date
+//        if(self.PurchaseList.count == 0)
+//        {
+//            return @"";
+//        }
+//        else
+//        {
+//            NSDate *date = [NSDate date];
+//            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//            [dateFormat setDateFormat:@"EEEE, MMMM dd, yyyy"];
+//            
+//            NSString *theDate = [dateFormat stringFromDate:date];
+//            
+//            return theDate;
+//        }
+//    }
+}
+
+
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self Refresh];
+}
+
+
+- (void)viewDidUnload {
+//    [self setEdit:nil];
+//    [self setSortBy:nil];
+    [super viewDidUnload];
+}
+
+
+-(void)Refresh
+{
+        Purchase *pp = [[Purchase alloc]init];
+        //self.PurchaseListWeek = [[NSMutableArray alloc]init];
+        self.PurchaseListWeek = [pp viewThisWeekPurchases];
+        
+        self.IndividualDayPurchase = [[NSMutableDictionary alloc]init];
+        
+        NSString *date = [[NSString alloc]init];
+        
+        for(Purchase *ppp in self.PurchaseListWeek)
+        {
+            date = ppp.date;
+            
+            NSMutableArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+            
+            if(purchaseOnThisDay == nil)
+            {
+                purchaseOnThisDay = [NSMutableArray array];
+                
+                [self.individualDayPurchase setObject:purchaseOnThisDay forKey:date];
+            }
+            
+            [purchaseOnThisDay addObject:ppp];
+        }
+        
+        // Create a sorted list of days
+        NSArray *unsortedDays = [self.individualDayPurchase allKeys];
+        self.sortedDays = [unsortedDays sortedArrayUsingSelector:@selector(compare:)];
+        
+        NSLog(@"This Week");
+        [self.PurchasedItemsUITableView reloadData];
+    
+}
+
 
 @end

@@ -24,6 +24,7 @@
 - (void)addPurchase:(double)price :(int)category : (NSString *)name: (int)priority;
 -(void)updatePurchase:(int)uniqueId :(NSString *)name :(int)category :(double)price: (int)priority;
 
+//pol
 - (NSMutableArray *) viewAllPurchases;
 
 @end
