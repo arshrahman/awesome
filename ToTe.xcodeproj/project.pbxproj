@@ -458,6 +458,10 @@
 		CE41601E16C0B14200D7E2BC /* ByCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */; };
 		CE41601F16C0B14200D7E2BC /* ViewBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */; };
 		CE41602016C0B14200D7E2BC /* PurchasedItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */; };
+		CE5292BF16C213790006BED4 /* ShoppingTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */; };
+		CE5292C216C213930006BED4 /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C116C213930006BED4 /* EditTripViewController.m */; };
+		CE5292C516C213B80006BED4 /* EditShoppingItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C416C213B80006BED4 /* EditShoppingItemViewController.m */; };
+		CE5292C816C213CC0006BED4 /* AddShoppingItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C716C213CC0006BED4 /* AddShoppingItemViewController.m */; };
 		CE60261316A6BD3D0065EABB /* ByMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261016A6BD3D0065EABB /* ByMonthViewController.m */; };
 		CE60261416A6BD3D0065EABB /* CustomDateUIPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60261216A6BD3D0065EABB /* CustomDateUIPickerView.m */; };
 		CE6BA68A16B64C8D00E828CD /* AddPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68116B64C8D00E828CD /* AddPurchaseViewController.m */; };
@@ -469,8 +473,6 @@
 		CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */; };
 		CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CF11695743F00F96FD4 /* GoalViewController.m */; };
 		CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */; };
-		CEB07044169B9B4400F96FD4 /* shoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07043169B9B4400F96FD4 /* shoppingListViewController.m */; };
-		CEB07047169B9B6200F96FD4 /* editShoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */; };
 		CEB0704E169BC85C00F96FD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEB0704D169BC85B00F96FD4 /* Settings.bundle */; };
 		CEFC834E16917DE600F4E2B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC834D16917DE600F4E2B1 /* UIKit.framework */; };
 		CEFC835016917DE600F4E2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFC834F16917DE600F4E2B1 /* Foundation.framework */; };
@@ -957,6 +959,14 @@
 		CE41601B16C0B14200D7E2BC /* ViewBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewBudgetViewController.h; sourceTree = "<group>"; };
 		CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchasedItemsViewController.m; sourceTree = "<group>"; };
 		CE41601D16C0B14200D7E2BC /* PurchasedItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchasedItemsViewController.h; sourceTree = "<group>"; };
+		CE5292BD16C213790006BED4 /* ShoppingTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTripViewController.h; sourceTree = "<group>"; };
+		CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTripViewController.m; sourceTree = "<group>"; };
+		CE5292C016C213920006BED4 /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTripViewController.h; sourceTree = "<group>"; };
+		CE5292C116C213930006BED4 /* EditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTripViewController.m; sourceTree = "<group>"; };
+		CE5292C316C213B80006BED4 /* EditShoppingItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditShoppingItemViewController.h; sourceTree = "<group>"; };
+		CE5292C416C213B80006BED4 /* EditShoppingItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditShoppingItemViewController.m; sourceTree = "<group>"; };
+		CE5292C616C213CC0006BED4 /* AddShoppingItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddShoppingItemViewController.h; sourceTree = "<group>"; };
+		CE5292C716C213CC0006BED4 /* AddShoppingItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShoppingItemViewController.m; sourceTree = "<group>"; };
 		CE60260F16A6BD3D0065EABB /* ByMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByMonthViewController.h; sourceTree = "<group>"; };
 		CE60261016A6BD3D0065EABB /* ByMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByMonthViewController.m; sourceTree = "<group>"; };
 		CE60261116A6BD3D0065EABB /* CustomDateUIPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDateUIPickerView.h; sourceTree = "<group>"; };
@@ -978,10 +988,6 @@
 		CEB06CF11695743F00F96FD4 /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		CEB0703C169B9A5100F96FD4 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
-		CEB07042169B9B4400F96FD4 /* shoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shoppingListViewController.h; sourceTree = "<group>"; };
-		CEB07043169B9B4400F96FD4 /* shoppingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shoppingListViewController.m; sourceTree = "<group>"; };
-		CEB07045169B9B6200F96FD4 /* editShoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editShoppingListViewController.h; sourceTree = "<group>"; };
-		CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editShoppingListViewController.m; sourceTree = "<group>"; };
 		CEB0704D169BC85B00F96FD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CEFC834916917DE600F4E2B1 /* ToTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFC834D16917DE600F4E2B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1071,10 +1077,14 @@
 		CEB06CED169573DE00F96FD4 /* Shopping List */ = {
 			isa = PBXGroup;
 			children = (
-				CEB07042169B9B4400F96FD4 /* shoppingListViewController.h */,
-				CEB07043169B9B4400F96FD4 /* shoppingListViewController.m */,
-				CEB07045169B9B6200F96FD4 /* editShoppingListViewController.h */,
-				CEB07046169B9B6200F96FD4 /* editShoppingListViewController.m */,
+				CE5292BD16C213790006BED4 /* ShoppingTripViewController.h */,
+				CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */,
+				CE5292C016C213920006BED4 /* EditTripViewController.h */,
+				CE5292C116C213930006BED4 /* EditTripViewController.m */,
+				CE5292C316C213B80006BED4 /* EditShoppingItemViewController.h */,
+				CE5292C416C213B80006BED4 /* EditShoppingItemViewController.m */,
+				CE5292C616C213CC0006BED4 /* AddShoppingItemViewController.h */,
+				CE5292C716C213CC0006BED4 /* AddShoppingItemViewController.m */,
 			);
 			name = "Shopping List";
 			sourceTree = "<group>";
@@ -2122,8 +2132,6 @@
 				CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */,
 				CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */,
 				CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */,
-				CEB07044169B9B4400F96FD4 /* shoppingListViewController.m in Sources */,
-				CEB07047169B9B6200F96FD4 /* editShoppingListViewController.m in Sources */,
 				B4664530169C067300C83739 /* StartPageViewController.m in Sources */,
 				B4266E8816A05817008FC51F /* Database.m in Sources */,
 				B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */,
@@ -2152,6 +2160,10 @@
 				CE41601E16C0B14200D7E2BC /* ByCategoryViewController.m in Sources */,
 				CE41601F16C0B14200D7E2BC /* ViewBudgetViewController.m in Sources */,
 				CE41602016C0B14200D7E2BC /* PurchasedItemsViewController.m in Sources */,
+				CE5292BF16C213790006BED4 /* ShoppingTripViewController.m in Sources */,
+				CE5292C216C213930006BED4 /* EditTripViewController.m in Sources */,
+				CE5292C516C213B80006BED4 /* EditShoppingItemViewController.m in Sources */,
+				CE5292C816C213CC0006BED4 /* AddShoppingItemViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
