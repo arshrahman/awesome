@@ -182,7 +182,7 @@
     
 }
 
--(void)cancelPressed:(id)sender{
+-(IBAction)cancelPressed:(id)sender{
     [self dismissModalViewControllerAnimated:YES];
 }
 
