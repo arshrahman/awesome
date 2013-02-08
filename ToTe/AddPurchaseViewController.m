@@ -174,20 +174,13 @@
              switch (result) {
                  case SLComposeViewControllerResultCancelled:
                      output = @"Action Cancelled";
-                     //NSLog(output);
-                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  case SLComposeViewControllerResultDone:
-                     output = @"Tweeted";
-                     //NSLog(output);
-                     //[self FacebookPost];
-                     //[self dismissModalViewControllerAnimated:YES];
+                     output = @"Tweeted";;
                      break;
                  default:
                      break;
              }
-             
-             //[twitter dismissViewControllerAnimated:YES completion:nil];
              
              if([output isEqualToString:@"Tweeted"])
              {
@@ -195,10 +188,12 @@
              
                  [alert show];
              }
+             
+             [self dismissModalViewControllerAnimated:YES];
          }];
 	}
     
-    [self dismissModalViewControllerAnimated:YES];
+    
 }
 
 -(void)FacebookPost
@@ -222,11 +217,9 @@
              switch (result) {
                  case SLComposeViewControllerResultCancelled:
                      output = @"Action Cancelled";
-                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  case SLComposeViewControllerResultDone:
                      output = @"Posted";
-                     //[self dismissModalViewControllerAnimated:YES];
                      break;
                  default:
                      break;
@@ -238,6 +231,8 @@
              
                  [alert show];
              }
+             
+             [self Tweet];
          }];
 	}
     
@@ -251,7 +246,6 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *check2 = [actionSheet buttonTitleAtIndex:buttonIndex];
-    NSLog(check2);
     
     if([check2 isEqualToString:@"Cancel"])
     {

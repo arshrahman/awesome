@@ -27,7 +27,7 @@
 -(void)setData :(BOOL)setFacebook :(BOOL)setTwitter : (BOOL)setShare
 {
     //Get data
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     //[defaults boolForKey:@"FacebookSwitch"] = setFacebook;
     //[defaults boolForKey:@"TwitterSwitch"] = setTwitter;

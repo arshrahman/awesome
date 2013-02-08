@@ -49,7 +49,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSLog([NSString stringWithFormat: @"%d", self.purchaseItem.uniqueId]);
     self.EditItemName.text = self.purchaseItem.name;
     self.EditItemPrice.text = [NSString stringWithFormat: @"%.2lf", self.purchaseItem.price];
     [self.EditItemCategory setTitle:self.purchaseItem.category forState:UIControlStateNormal];
@@ -194,7 +193,6 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *check2 = [actionSheet buttonTitleAtIndex:buttonIndex];
-    NSLog(check2);
     
     if([check2 isEqualToString:@"Cancel"])
     {
