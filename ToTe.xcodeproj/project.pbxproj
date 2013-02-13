@@ -457,6 +457,7 @@
 		CE195F2116CB580D0071197F /* CPDConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F1E16CB580D0071197F /* CPDConstants.m */; };
 		CE195F2216CB580D0071197F /* CPDStockPriceStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F2016CB580D0071197F /* CPDStockPriceStore.m */; };
 		CE195F2516CB63C30071197F /* Shopping.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F2416CB63C30071197F /* Shopping.m */; };
+		CE195F3216CB7C180071197F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE195F3116CB7C170071197F /* MainStoryboard.storyboard */; };
 		CE36AD8A16BA29DE007ACC9B /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE36AD8916BA29DE007ACC9B /* SettingsData.m */; };
 		CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D8CBB16B8FE690071FC79 /* Social.framework */; };
 		CE41601616C0B11100D7E2BC /* ByWeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601416C0B11100D7E2BC /* ByWeekViewController.m */; };
@@ -488,7 +489,6 @@
 		CEFC836016917DE600F4E2B1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC835F16917DE600F4E2B1 /* Default.png */; };
 		CEFC836216917DE600F4E2B1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC836116917DE600F4E2B1 /* Default@2x.png */; };
 		CEFC836416917DE700F4E2B1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC836316917DE700F4E2B1 /* Default-568h@2x.png */; };
-		CEFC836716917DE700F4E2B1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFC836516917DE700F4E2B1 /* MainStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1036,6 +1036,7 @@
 		CE195F2016CB580D0071197F /* CPDStockPriceStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDStockPriceStore.m; sourceTree = "<group>"; };
 		CE195F2316CB63C30071197F /* Shopping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shopping.h; sourceTree = "<group>"; };
 		CE195F2416CB63C30071197F /* Shopping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shopping.m; sourceTree = "<group>"; };
+		CE195F3116CB7C170071197F /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CE36AD8816BA29DE007ACC9B /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsData.h; sourceTree = "<group>"; };
 		CE36AD8916BA29DE007ACC9B /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsData.m; sourceTree = "<group>"; };
 		CE3D8CBB16B8FE690071FC79 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1090,7 +1091,6 @@
 		CEFC835F16917DE600F4E2B1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		CEFC836116917DE600F4E2B1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CEFC836316917DE700F4E2B1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		CEFC836616917DE700F4E2B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1302,14 +1302,14 @@
 		CEB06CEF169573F100F96FD4 /* Overview */ = {
 			isa = PBXGroup;
 			children = (
-				CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */,
 				CE41601916C0B14200D7E2BC /* ByCategoryViewController.h */,
-				CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */,
+				CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */,
 				CE41601B16C0B14200D7E2BC /* ViewBudgetViewController.h */,
-				CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */,
+				CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */,
 				CE41601D16C0B14200D7E2BC /* PurchasedItemsViewController.h */,
-				CE41601416C0B11100D7E2BC /* ByWeekViewController.m */,
+				CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */,
 				CE41601516C0B11100D7E2BC /* ByWeekViewController.h */,
+				CE41601416C0B11100D7E2BC /* ByWeekViewController.m */,
 				CE60260F16A6BD3D0065EABB /* ByMonthViewController.h */,
 				CE60261016A6BD3D0065EABB /* ByMonthViewController.m */,
 				CE60261116A6BD3D0065EABB /* CustomDateUIPickerView.h */,
@@ -1805,7 +1805,7 @@
 				CEB06CEF169573F100F96FD4 /* Overview */,
 				CEFC835C16917DE600F4E2B1 /* AppDelegate.h */,
 				CEFC835D16917DE600F4E2B1 /* AppDelegate.m */,
-				CEFC836516917DE700F4E2B1 /* MainStoryboard.storyboard */,
+				CE195F3116CB7C170071197F /* MainStoryboard.storyboard */,
 				CEB0703C169B9A5100F96FD4 /* MainPageViewController.h */,
 				CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */,
 				CEFC835416917DE600F4E2B1 /* Supporting Files */,
@@ -1883,7 +1883,6 @@
 				CEFC836016917DE600F4E2B1 /* Default.png in Resources */,
 				CEFC836216917DE600F4E2B1 /* Default@2x.png in Resources */,
 				CEFC836416917DE700F4E2B1 /* Default-568h@2x.png in Resources */,
-				CEFC836716917DE700F4E2B1 /* MainStoryboard.storyboard in Resources */,
 				CEB0704E169BC85C00F96FD4 /* Settings.bundle in Resources */,
 				B4664389169C020D00C83739 /* glyphicons_000_glass.png in Resources */,
 				B466438A169C020D00C83739 /* glyphicons_001_leaf.png in Resources */,
@@ -2313,6 +2312,7 @@
 				B407A3EF16B80358008E47D5 /* button-delete.png in Resources */,
 				B4C8688516BB7305008171FD /* TipOfDay.plist in Resources */,
 				B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */,
+				CE195F3216CB7C180071197F /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2376,14 +2376,6 @@
 				CEFC835716917DE600F4E2B1 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		CEFC836516917DE700F4E2B1 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEFC836616917DE700F4E2B1 /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

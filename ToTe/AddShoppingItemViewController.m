@@ -72,14 +72,29 @@
     [self setAddStar3:nil];
     [self setAddStar4:nil];
     [self setAddStar5:nil];
+    [self setAddItemCategory:nil];
+    [self setAddItemPrice:nil];
+    [self setAddItemPrice:nil];
+    [self setAddItemName:nil];
+    [self setAddStar1:nil];
+    [self setAddStar2:nil];
+    [self setAddStar3:nil];
+    [self setAddStar4:nil];
+    [self setAddStar5:nil];
+    [self setAddNewItem:nil];
     [super viewDidUnload];
 }
 - (IBAction)Cancel:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)AddNewItem:(id)sender {
+
+- (IBAction)textfieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
 }
+
+
 
 - (IBAction)SelectCategory:(id)sender
 {
@@ -97,10 +112,6 @@
     //[as showFromTabBar:self.tabBarController.tabBar];
 }
 
-- (IBAction)TextFieldReturn:(id)sender
-{
-    [sender resignFirstResponder];
-}
 
 -(IBAction)starOneClicked:(id)sender
 {
