@@ -16,7 +16,5 @@
 @property BOOL Share;
 
 -(void)getDataFromSetting;
--(void)Tweet;
--(void)FacebookPost;
 
 @end

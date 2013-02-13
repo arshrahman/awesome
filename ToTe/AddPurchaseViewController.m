@@ -16,6 +16,9 @@
 {
     NSMutableArray *CategoryList;
     int catID;
+    BOOL checkFB;
+    BOOL checkTwitter;
+    BOOL checkShare;
 }
 
 @end
@@ -147,6 +150,19 @@
         
         //add into database
         [newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
+        
+        
+        //Testing
+        SettingsData *s = [[SettingsData alloc]init];
+        
+        [s getDataFromSetting];
+        NSLog(s.Facebook ? @"True" : @"False");
+        NSLog(s.Twitter ? @"True" : @"False");
+        NSLog(s.Share ? @"True" : @"False");
+        
+        checkFB = s.Facebook;
+        checkShare = s.Share;
+        checkTwitter = s.Twitter;
         //[self Tweet];
         //[self FacebookPost];
         
@@ -157,7 +173,7 @@
 
 -(void)Tweet
 {
-	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter])
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter] && checkTwitter == TRUE)
 	{
 		SLComposeViewController *twitter = [[SLComposeViewController alloc]init];
 		
@@ -200,7 +216,7 @@
 {
     //Check for NSUserDefault
     
-	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook])
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook] && checkFB == TRUE)
 	{
 		SLComposeViewController *facebook = [[SLComposeViewController alloc]init];
 		

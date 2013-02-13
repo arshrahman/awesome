@@ -11,7 +11,6 @@
 #import "Database.h"
 #import "SecureUDID.h"
 
-
 @interface NSURLRequest (DummyInterface)
 
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
