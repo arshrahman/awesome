@@ -7,6 +7,7 @@
 //
 
 #import "EditTripViewController.h"
+#import "AddShoppingItemViewController.h"
 
 @interface EditTripViewController ()
 

@@ -11,6 +11,7 @@
 #import "Budget.h"
 #import "BudgetCategory.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ByWeekGraphViewController.h"
 
 @interface ViewBudgetViewController ()
 
@@ -385,5 +386,15 @@
     [self setScroller:nil];
     [self setTopButton:nil];
     [super viewDidUnload];
+}
+- (IBAction)btnClicked:(id)sender
+{
+    
+        ByWeekGraphViewController *bwg = [self.storyboard instantiateViewControllerWithIdentifier:@"ByWeekGraphViewController"];
+        
+        UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:bwg];
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+        
+        //[self.navigationController pushViewController:bvc animated:YES];
 }
 @end

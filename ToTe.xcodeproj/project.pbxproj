@@ -453,6 +453,10 @@
 		B4E5046A16A663610003D0D5 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5046916A663610003D0D5 /* Category.m */; };
 		B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4F2037516BE530A00B80872 /* BreeSerif_Reg.otf */; };
 		CE195ECD16CB3F3B0071197F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE195ECC16CB3F3B0071197F /* libCorePlot-CocoaTouch.a */; };
+		CE195F1B16CB56350071197F /* ByWeekGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F1A16CB56350071197F /* ByWeekGraphViewController.m */; };
+		CE195F2116CB580D0071197F /* CPDConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F1E16CB580D0071197F /* CPDConstants.m */; };
+		CE195F2216CB580D0071197F /* CPDStockPriceStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F2016CB580D0071197F /* CPDStockPriceStore.m */; };
+		CE195F2516CB63C30071197F /* Shopping.m in Sources */ = {isa = PBXBuildFile; fileRef = CE195F2416CB63C30071197F /* Shopping.m */; };
 		CE36AD8A16BA29DE007ACC9B /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE36AD8916BA29DE007ACC9B /* SettingsData.m */; };
 		CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D8CBB16B8FE690071FC79 /* Social.framework */; };
 		CE41601616C0B11100D7E2BC /* ByWeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601416C0B11100D7E2BC /* ByWeekViewController.m */; };
@@ -1024,6 +1028,14 @@
 		CE195F1616CB3F590071197F /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		CE195F1716CB3F590071197F /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		CE195F1816CB3F590071197F /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
+		CE195F1916CB56350071197F /* ByWeekGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByWeekGraphViewController.h; sourceTree = "<group>"; };
+		CE195F1A16CB56350071197F /* ByWeekGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByWeekGraphViewController.m; sourceTree = "<group>"; };
+		CE195F1D16CB580D0071197F /* CPDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDConstants.h; sourceTree = "<group>"; };
+		CE195F1E16CB580D0071197F /* CPDConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDConstants.m; sourceTree = "<group>"; };
+		CE195F1F16CB580D0071197F /* CPDStockPriceStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDStockPriceStore.h; sourceTree = "<group>"; };
+		CE195F2016CB580D0071197F /* CPDStockPriceStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDStockPriceStore.m; sourceTree = "<group>"; };
+		CE195F2316CB63C30071197F /* Shopping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shopping.h; sourceTree = "<group>"; };
+		CE195F2416CB63C30071197F /* Shopping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shopping.m; sourceTree = "<group>"; };
 		CE36AD8816BA29DE007ACC9B /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsData.h; sourceTree = "<group>"; };
 		CE36AD8916BA29DE007ACC9B /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsData.m; sourceTree = "<group>"; };
 		CE3D8CBB16B8FE690071FC79 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1197,6 +1209,17 @@
 			name = CorePlotHeaders;
 			sourceTree = "<group>";
 		};
+		CE195F1C16CB57F40071197F /* StarterFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CE195F1D16CB580D0071197F /* CPDConstants.h */,
+				CE195F1E16CB580D0071197F /* CPDConstants.m */,
+				CE195F1F16CB580D0071197F /* CPDStockPriceStore.h */,
+				CE195F2016CB580D0071197F /* CPDStockPriceStore.m */,
+			);
+			name = StarterFiles;
+			sourceTree = "<group>";
+		};
 		CEB06CE216954CD900F96FD4 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,6 +1275,8 @@
 				CE5292C416C213B80006BED4 /* EditShoppingItemViewController.m */,
 				CE5292C616C213CC0006BED4 /* AddShoppingItemViewController.h */,
 				CE5292C716C213CC0006BED4 /* AddShoppingItemViewController.m */,
+				CE195F2316CB63C30071197F /* Shopping.h */,
+				CE195F2416CB63C30071197F /* Shopping.m */,
 			);
 			name = "Shopping List";
 			sourceTree = "<group>";
@@ -1291,6 +1316,8 @@
 				CE60261216A6BD3D0065EABB /* CustomDateUIPickerView.m */,
 				B452204916A54F73006209A7 /* OverviewViewController.h */,
 				B452204A16A54F74006209A7 /* OverviewViewController.m */,
+				CE195F1916CB56350071197F /* ByWeekGraphViewController.h */,
+				CE195F1A16CB56350071197F /* ByWeekGraphViewController.m */,
 			);
 			name = Overview;
 			sourceTree = "<group>";
@@ -1762,6 +1789,7 @@
 		CEFC835316917DE600F4E2B1 /* ToTe */ = {
 			isa = PBXGroup;
 			children = (
+				CE195F1C16CB57F40071197F /* StarterFiles */,
 				CE195ECA16CB3F1D0071197F /* CorePlot */,
 				B46494EB16C0CDE100228A77 /* Fonts */,
 				B4DB070316BF904900DE2755 /* AppLaunch.h */,
@@ -2332,6 +2360,10 @@
 				CE5292C216C213930006BED4 /* EditTripViewController.m in Sources */,
 				CE5292C516C213B80006BED4 /* EditShoppingItemViewController.m in Sources */,
 				CE5292C816C213CC0006BED4 /* AddShoppingItemViewController.m in Sources */,
+				CE195F1B16CB56350071197F /* ByWeekGraphViewController.m in Sources */,
+				CE195F2116CB580D0071197F /* CPDConstants.m in Sources */,
+				CE195F2216CB580D0071197F /* CPDStockPriceStore.m in Sources */,
+				CE195F2516CB63C30071197F /* Shopping.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

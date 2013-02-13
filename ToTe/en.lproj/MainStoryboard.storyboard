@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evB-30-7pf">
+>>>>>>> shopping add
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Overview View Controller - History-->
@@ -922,7 +926,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bMG-3F-4aR" kind="modal" id="Xna-kv-m4L"/>
+                                    <segue destination="bMG-3F-4aR" kind="modal" id="B19-by-igT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1206,7 +1210,7 @@
         <!--Add Shopping Item View Controller-->
         <scene sceneID="NVr-wY-ddi">
             <objects>
-                <tableViewController id="bMG-3F-4aR" customClass="AddShoppingItemViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="" id="bMG-3F-4aR" customClass="AddShoppingItemViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="dR6-Of-cHR">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1224,6 +1228,9 @@
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" systemItem="done" id="5N7-w4-15y">
                                         <color key="tintColor" red="0.0" green="0.7843137255" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="donePressed:" destination="bMG-3F-4aR" id="pmy-Pz-PVx"/>
+                                        </connections>
                                     </barButtonItem>
                                 </navigationItem>
                             </items>
@@ -1251,6 +1258,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="SelectCategory:" destination="bMG-3F-4aR" eventType="touchUpInside" id="c90-ae-Sxf"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Azs-GT-kFG">
                                                     <constraints>
@@ -1284,6 +1294,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="TextFieldReturn:" destination="bMG-3F-4aR" eventType="editingDidEnd" id="SxI-RS-cbK"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C50-NL-xsI">
                                                     <constraints>
@@ -1318,6 +1331,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="TextFieldReturn:" destination="bMG-3F-4aR" eventType="editingDidEnd" id="OLC-mk-O1v"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-15-qcc">
                                                     <constraints>
@@ -1358,6 +1374,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starOneClicked:" destination="bMG-3F-4aR" eventType="touchUpInside" id="2Tj-Ey-hHv"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEU-tN-gfc">
                                                     <constraints>
@@ -1371,6 +1390,10 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="StarTwoClicked:" destination="bMG-3F-4aR" eventType="touchUpInside" id="V1K-zj-P7k"/>
+                                                        <action selector="starTwoClicked:" destination="bMG-3F-4aR" eventType="touchUpInside" id="sd8-Zu-06p"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghf-lN-TOy">
                                                     <constraints>
@@ -1384,6 +1407,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starThreeClicked:" destination="bMG-3F-4aR" eventType="touchUpInside" id="lX5-TX-Jhc"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-3j-fv3">
                                                     <constraints>
@@ -1397,6 +1423,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starFourClicked:" destination="bMG-3F-4aR" eventType="touchUpInside" id="ePZ-wz-Ibb"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oos-C7-Dkd">
                                                     <constraints>
@@ -1410,6 +1439,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starFiveClicked:" destination="bMG-3F-4aR" eventType="touchUpInside" id="AJO-GO-cxo"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1455,9 +1487,6 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="AddNewItem:" destination="bMG-3F-4aR" eventType="touchUpInside" id="8qb-3g-yiR"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1475,10 +1504,20 @@
                             <outlet property="delegate" destination="bMG-3F-4aR" id="yZE-Tv-QPG"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="AddItemCategory" destination="JEo-66-acr" id="OcT-BF-YCK"/>
+                        <outlet property="AddItemName" destination="Qrd-8Q-ofL" id="5v9-Fq-m2S"/>
+                        <outlet property="AddItemPrice" destination="EAe-LY-ecZ" id="lon-FW-hff"/>
+                        <outlet property="AddStar1" destination="reM-k2-Bvl" id="oAW-cb-AHj"/>
+                        <outlet property="AddStar2" destination="bEU-tN-gfc" id="KYZ-jB-OIN"/>
+                        <outlet property="AddStar3" destination="Ghf-lN-TOy" id="RGJ-rz-b0h"/>
+                        <outlet property="AddStar4" destination="z6c-3j-fv3" id="pzf-M6-DD0"/>
+                        <outlet property="AddStar5" destination="Oos-C7-Dkd" id="a2m-m4-RZI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXO-UJ-SkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1165" y="892"/>
+            <point key="canvasLocation" x="1229" y="1104"/>
         </scene>
         <!--Update Budget View Controller - Update Budget-->
         <scene sceneID="Lrg-uq-5fK">
@@ -2085,7 +2124,7 @@
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="B8y-9O-3A8">
-                                        <rect key="frame" x="0.0" y="164" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="164" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -2202,7 +2241,7 @@
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="L9h-OH-kBk">
-                                        <rect key="frame" x="0.0" y="313" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="313" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -3034,7 +3073,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Budget" id="cU2-BP-S0o">
                         <barButtonItem key="backBarButtonItem" title="Back" id="HLp-hx-fmZ"/>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="compose" id="6I8-p0-J8x">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="6I8-p0-J8x">
                             <connections>
                                 <action selector="btnClicked:" destination="pX6-D8-lbj" id="343-ND-EJR"/>
                             </connections>
@@ -3052,6 +3091,34 @@
             </objects>
             <point key="canvasLocation" x="1596" y="2032"/>
         </scene>
+        <!--By Week Graph View Controller-->
+        <scene sceneID="sKI-wE-szK">
+            <objects>
+                <viewController storyboardIdentifier="ByWeekGraphViewController" id="kbn-C6-8yS" customClass="ByWeekGraphViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vtv-o1-4bV">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AtC-Pq-QgS" customClass="GPTGraphViewHostingView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AtC-Pq-QgS" firstAttribute="leading" secondItem="Vtv-o1-4bV" secondAttribute="leading" type="default" id="YyD-ut-zDW"/>
+                            <constraint firstItem="AtC-Pq-QgS" firstAttribute="trailing" secondItem="Vtv-o1-4bV" secondAttribute="trailing" type="default" id="ZDT-tT-gA8"/>
+                            <constraint firstItem="AtC-Pq-QgS" firstAttribute="bottom" secondItem="Vtv-o1-4bV" secondAttribute="bottom" type="default" id="ZVu-7q-wOJ"/>
+                            <constraint firstItem="AtC-Pq-QgS" firstAttribute="top" secondItem="Vtv-o1-4bV" secondAttribute="top" type="default" id="sn4-fD-ct0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="hostView" destination="AtC-Pq-QgS" id="GLO-lg-46V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Udc-hv-o4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1988" y="1868"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Default.png" width="320" height="480"/>
@@ -3067,6 +3134,7 @@
         <image name="logo.jpeg" width="970" height="938"/>
         <image name="roundedrectangle.jpg" width="450" height="125"/>
     </resources>
+<<<<<<< HEAD
     <classes>
         <class className="AddGoalViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
@@ -3287,6 +3355,8 @@
             </relationships>
         </class>
     </classes>
+=======
+>>>>>>> shopping add
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
