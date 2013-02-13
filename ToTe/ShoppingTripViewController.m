@@ -7,6 +7,7 @@
 //
 
 #import "ShoppingTripViewController.h"
+#import "customCell.h"
 
 @interface ShoppingTripViewController ()
 
