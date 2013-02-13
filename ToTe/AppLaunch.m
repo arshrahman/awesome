@@ -9,6 +9,16 @@
 #import "AppLaunch.h"
 #import "sqlite3.h"
 #import "Database.h"
+#import "SecureUDID.h"
+
+
+@interface NSURLRequest (DummyInterface)
+
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
++ (void)setAllowsAnyHTTPSCertificate:(BOOL)allow forHost:(NSString*)host;
+
+@end
+
 
 @implementation AppLaunch
 {
@@ -44,8 +54,8 @@
             
             NSDate *last_date = [dateFormatter dateFromString:nslast_date];
             NSDate *today = [[NSDate alloc]init];
-            NSLog(@"Last Start Date: %@", last_date);
-            NSLog(@"Today: %@", today);
+            //NSLog(@"Last Start Date: %@", last_date);
+            //NSLog(@"Today: %@", today);
             
             if (today > last_date)
             {
@@ -62,7 +72,7 @@
                         NSString *temp = [NSString stringWithFormat:@"INSERT INTO BUDGET (START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) SELECT DATETIME(START_DATE, '+%d DAYS') AS START_DATE, DATETIME(END_DATE, '+%d DAYS') AS END_DATE, BUDGET_AMOUNT, WINCOME FROM BUDGET WHERE BUDGET_ID = %d; INSERT INTO BUDGET_CATEGORY (BUDGET_ID, CATEGORY_ID, CATEGORY_AMOUNT)  SELECT %d, CATEGORY_ID, CATEGORY_AMOUNT FROM BUDGET_CATEGORY WHERE BUDGET_ID = %d;", (i*7), (i*7), maxId, (maxId+i), maxId];
                         inst_stmt = [inst_stmt stringByAppendingString:temp];
                     }
-                    NSLog(@"query %@", inst_stmt);
+                    //NSLog(@"query %@", inst_stmt);
                     const char *insert_stmt = [inst_stmt UTF8String];
                     
                     @try
@@ -76,9 +86,12 @@
                     }
                     
                     [self GoalAchieved:maxId:[[budgetArray objectAtIndex:1] intValue]:weeks];
-                    NSLog(@"Last Week's Budget Id: %d", maxId);
+                    //NSLog(@"Last Week's Budget Id: %d", maxId);
+                    
+                    [self PostBudget:weeks];
+                    
                 }
-                NSLog(@"days: %d, weeks: %d", days, weeks);
+                //NSLog(@"days: %d, weeks: %d", days, weeks);
             }
         }
     }
@@ -98,7 +111,7 @@
         while (sqlite3_step(statement)==SQLITE_ROW)
         {
             last_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-            NSLog(@"Last Start date: %@", last_date);
+            //NSLog(@"Last Start date: %@", last_date);
         }
     }
     else
@@ -184,7 +197,7 @@
     {
         expenses = [self GetExpensesForLastWeek:lastBudget_id];
         savings = income - expenses;
-        NSLog(@"Savings: %d", savings);
+        //NSLog(@"Savings: %d", savings);
         
         if (savings > 0)
         {
@@ -210,7 +223,7 @@
                 }
                 
                 queryWeeksMet = [queryWeeksMet stringByAppendingString:@")"];
-                NSLog(@"Query: %@", queryWeeksMet);
+                //NSLog(@"Query: %@", queryWeeksMet);
                 
                 if (goalsMet)
                 {
@@ -263,4 +276,63 @@
 }
 
 
+-(void)PostBudget:(int)weeks
+{
+    //NSString *userId = [self GetSecureUID];
+    
+    
+}
+
+
+-(NSString *)GetSecureUID
+{
+    NSString *domain = NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"];
+    NSString *key        = @"arshrahmanPolhusayZarakukayo";
+    NSString *identifier = [SecureUDID UDIDForDomain:domain usingKey:key];
+    
+    NSLog(@"id: %@", identifier);
+    
+    return identifier;
+}
+
+
+-(void)PostToGoogleDocs
+{
+    NSString *post = @"entry.1=Hannan&entry.2=Affan";
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    //NSURL *url = [NSURL URLWithString:@"https://docs.google.com/forms/d/1AoPxG5hQEUaxnPN-RJwmL3sk6YxdtijO7LkFfYAuS3E/formResponse"];
+    NSURL *url = [NSURL URLWithString:@"https://docs.google.com/forms/d/1Vg-q9TeKA03dP2atPg_tz9SAI5zRhqXvWtdDJDcyWF0/formResponse"];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+    
+    NSError *error;
+    NSURLResponse *response;
+    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    NSString *data=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",data);
+}
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+

@@ -16,6 +16,7 @@
 		B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42951FB16A27563004F5D5E /* BudgetViewController.m */; };
 		B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B429520516A2828B004F5D5E /* roundedrectangle.png */; };
 		B4470E8216A7A4120045EEC8 /* BudgetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4470E8116A7A4120045EEC8 /* BudgetCategory.m */; };
+		B45042EB16CBBA6000C6536E /* SecureUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = B45042EA16CBBA6000C6536E /* SecureUDID.m */; };
 		B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B452204A16A54F74006209A7 /* OverviewViewController.m */; };
 		B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */; };
 		B4664389169C020D00C83739 /* glyphicons_000_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B46641E5169C020C00C83739 /* glyphicons_000_glass.png */; };
@@ -506,6 +507,8 @@
 		B429520516A2828B004F5D5E /* roundedrectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = roundedrectangle.png; path = Images/roundedrectangle.png; sourceTree = "<group>"; };
 		B4470E8016A7A4120045EEC8 /* BudgetCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetCategory.h; sourceTree = "<group>"; };
 		B4470E8116A7A4120045EEC8 /* BudgetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetCategory.m; sourceTree = "<group>"; };
+		B45042E916CBBA6000C6536E /* SecureUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecureUDID.h; sourceTree = "<group>"; };
+		B45042EA16CBBA6000C6536E /* SecureUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureUDID.m; sourceTree = "<group>"; };
 		B452204916A54F73006209A7 /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
 		B452204A16A54F74006209A7 /* OverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewViewController.m; sourceTree = "<group>"; };
 		B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -1798,6 +1801,8 @@
 				B4266E8716A05817008FC51F /* Database.m */,
 				CE36AD8816BA29DE007ACC9B /* SettingsData.h */,
 				CE36AD8916BA29DE007ACC9B /* SettingsData.m */,
+				B45042E916CBBA6000C6536E /* SecureUDID.h */,
+				B45042EA16CBBA6000C6536E /* SecureUDID.m */,
 				CEB06CE216954CD900F96FD4 /* Budget */,
 				CEB06CEC169573BD00F96FD4 /* Goal Setting */,
 				CEB06CED169573DE00F96FD4 /* Shopping List */,
@@ -2364,6 +2369,7 @@
 				CE195F2116CB580D0071197F /* CPDConstants.m in Sources */,
 				CE195F2216CB580D0071197F /* CPDStockPriceStore.m in Sources */,
 				CE195F2516CB63C30071197F /* Shopping.m in Sources */,
+				B45042EB16CBBA6000C6536E /* SecureUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

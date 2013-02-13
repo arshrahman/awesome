@@ -17,5 +17,9 @@
 -(NSMutableArray *)GetBudgetIDIncome;
 -(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks;
 -(double)GetExpensesForLastWeek:(int)lbudget_id;
+-(NSString *)GetSecureUID;
+-(void)PostToGoogleDocs;
+-(void)PostBudget:(int)weeks;
+
 
 @end
