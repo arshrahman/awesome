@@ -31,8 +31,8 @@
     
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
-    [a GetSecureUID];
-    [a PostToGoogleDocs];
+    //[a GetSecureUID];
+    //[a PostToGoogleDocs];
     
     return YES;
 }
@@ -56,8 +56,8 @@
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
     
-    [a GetSecureUID];
-    [a PostToGoogleDocs];
+    //[a GetSecureUID];
+    //[a PostToGoogleDocs];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
