@@ -9,12 +9,19 @@
 #import "EditTripViewController.h"
 #import "AddShoppingItemViewController.h"
 #import "ShoppingTripItem.h"
+#import "ShoppingTrip.h"
+#import "EditShoppingItemViewController.h"
 
 @interface EditTripViewController ()
 
 @end
 
 @implementation EditTripViewController
+
+@synthesize ShoppingTripBudget;
+@synthesize ShoppingTripDuration;
+@synthesize ShoppingTripItemTV;
+@synthesize ShoppingTripTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +47,10 @@
 }
 
 - (void)viewDidUnload {
+    [self setShoppingTripTitle:nil];
+    [self setShoppingTripBudget:nil];
+    [self setShoppingTripDuration:nil];
+    [self setShoppingTripItemTV:nil];
     [super viewDidUnload];
 }
 
@@ -112,16 +123,48 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    EditShoppingItemViewController *editingView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditShoppingItemViewController"];
+    
+    editingView.ShoppingItem = [self.ShoppingTripItemList objectAtIndex:tableView.indexPathForSelectedRow.row];
+    
+    [editingView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    // Pass the selected object to the new view controller.
+    [self presentModalViewController:editingView animated:YES];
 }
 
 - (IBAction)Cancel:(id)sender {
+    //remove all items using it's shopping id
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)Done:(id)sender {
+    
+    //Add shopping Trip
+    ShoppingTrip *st = [[ShoppingTrip alloc]init];
+    
+    //Shopping Trip Name
+    st.shoppingTripName = ShoppingTripTitle.text;
+    
+    //Shopping Trip Budget
+    st.shoppingBudget = [ShoppingTripBudget.text doubleValue];
+
+    //Shopping Trip Duration
+    //st.Duration;
+    
+    //Shopping Trip total item price
+    double i = 0;
+    for(ShoppingTripItem *item in self.ShoppingTripItemList)
+    {
+        i = i + item.shoppingItemPrice;
+    }
+    
+    st.shoppingTotal = i;
+    
+    //Current Date
+    NSDate *date = [NSDate date];
+    st.shoppingDate = date;
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 @end

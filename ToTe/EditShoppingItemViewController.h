@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShoppingTripItem.h"
 
 @interface EditShoppingItemViewController : UITableViewController
+
+@property (nonatomic, strong) ShoppingTripItem *ShoppingItem;
+
 - (IBAction)Cancel:(id)sender;
 
 @end

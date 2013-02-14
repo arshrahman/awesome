@@ -63,7 +63,6 @@
         [self.AddDeleteTrip setTitle:@"Delete Trip"];
         [self.AddDeleteTrip setTintColor:[UIColor colorWithRed:0.8 green:0 blue:0 alpha:1.0]];
     }
-    
 
 }
 
