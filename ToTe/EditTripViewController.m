@@ -8,6 +8,7 @@
 
 #import "EditTripViewController.h"
 #import "AddShoppingItemViewController.h"
+#import "ShoppingTripItem.h"
 
 @interface EditTripViewController ()
 
@@ -27,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"Edit Shopping Trip");
 	// Do any additional setup after loading the view.
 }
 

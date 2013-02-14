@@ -8,12 +8,20 @@
 
 #import "ShoppingTripViewController.h"
 #import "customCell.h"
+#import "ShoppingTrip.h"
+#import "ShoppingTripItem.h"
 
 @interface ShoppingTripViewController ()
 
 @end
 
 @implementation ShoppingTripViewController
+
+@synthesize ShoppingTripItemList;
+@synthesize ShoppingTripList;
+@synthesize ShoppingTripTV;
+@synthesize AddDeleteTrip;
+@synthesize StartEndTrip;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,7 +35,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"Shopping Trip");
 	// Do any additional setup after loading the view.
+    
+    //Retrieve Data
+    ShoppingTrip *st = [[ShoppingTrip alloc]init];
+    ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
+    
+    if(self.ShoppingTripItemList.count != 0)
+    {
+        [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
+        [self.StartEndTrip setTintColor:[UIColor colorWithRed:0 green:0.6 blue:0.2 alpha:1.0]];
+    }
+    else
+    {
+        self.StartEndTrip.hidden = TRUE;
+    }
+    
+    if(self.ShoppingTripItemList.count == 0)
+    {
+        [self.AddDeleteTrip setTitle:@"+"];
+        [self.AddDeleteTrip setTintColor:[UIColor colorWithRed:0 green:0.6 blue:0.2 alpha:1.0]];
+    }
+    else
+    {
+        [self.AddDeleteTrip setTitle:@"Delete Trip"];
+        [self.AddDeleteTrip setTintColor:[UIColor colorWithRed:0.8 green:0 blue:0 alpha:1.0]];
+    }
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,4 +151,21 @@
      */
 }
 
+- (void)viewDidUnload {
+    [self setShoppingTripTV:nil];
+    [self setAddDeleteTrip:nil];
+    [self setStartEndTrip:nil];
+    [super viewDidUnload];
+}
+- (IBAction)StartEndPressed:(id)sender {
+    
+    //Start and End Trip
+    
+}
+
+- (IBAction)AddDeletePressed:(id)sender {
+    
+    //Add and Delete Trip
+    //[self.EditItemCategory setTitle:c.category_name forState:UIControlStateNormal];
+}
 @end

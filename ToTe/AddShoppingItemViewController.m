@@ -42,7 +42,7 @@
 {
     [super viewDidLoad];
 
-    NSLog(@"hi rahman");
+    NSLog(@"Add Shopping Trip Item");
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -262,8 +262,5 @@
         [self.AddItemCategory setTitle:c.category_name forState:UIControlStateNormal];
     }
 }
-
-
-
 
 @end

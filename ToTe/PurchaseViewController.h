@@ -18,6 +18,8 @@
 @property (nonatomic, strong)NSMutableArray *ThisWeekDate;
 @property (nonatomic, strong)NSMutableArray *PurchaseList;
 @property (nonatomic, strong)NSMutableArray *PurchaseListWeek;
+
+//Sorting by Category/Price
 @property (nonatomic, strong)NSMutableArray *PurchaseListCategory;
 @property (nonatomic, strong)NSMutableArray *PurchaseListPrice;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Edit;
