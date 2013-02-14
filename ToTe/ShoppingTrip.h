@@ -14,9 +14,12 @@
 @property(assign)int shoppingID;
 @property(assign)int budgetID;
 @property(nonatomic, strong)NSString *shoppingTripName;
-@property(nonatomic,strong)NSDate *shoppingDate;
+@property(nonatomic,strong)NSString *shoppingDate;
 @property(assign)double shoppingBudget;
 @property(nonatomic, strong)NSString *Duration;
 @property(assign)double shoppingTotal;
+
+//Get current shopping trip
+-(NSMutableArray *) checkShoppingTrip;
 
 @end

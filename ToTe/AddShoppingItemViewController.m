@@ -244,6 +244,9 @@
 
 
 - (IBAction)donePressed:(id)sender {
+    
+    //Add shopping item into database
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 

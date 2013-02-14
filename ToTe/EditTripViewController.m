@@ -165,6 +165,8 @@
     NSDate *date = [NSDate date];
     st.shoppingDate = date;
     
+    //call database code
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 @end

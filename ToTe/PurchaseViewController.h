@@ -20,8 +20,9 @@
 @property (nonatomic, strong)NSMutableArray *PurchaseListWeek;
 
 //Sorting by Category/Price
-@property (nonatomic, strong)NSMutableArray *PurchaseListCategory;
-@property (nonatomic, strong)NSMutableArray *PurchaseListPrice;
+//@property (nonatomic, strong)NSMutableArray *PurchaseListCategory;
+//@property (nonatomic, strong)NSMutableArray *PurchaseListPrice;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *Edit;
 @property (nonatomic) IBOutlet UITableView *PurchaseTableView;
 
