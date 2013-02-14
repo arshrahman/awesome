@@ -18,8 +18,8 @@
 -(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks;
 -(double)GetExpensesForLastWeek:(int)lbudget_id;
 -(NSString *)GetSecureUID;
--(void)PostToGoogleDocs;
--(void)PostBudget:(int)weeks;
-
+-(void)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl;
+-(void)PostBudget;
+-(NSMutableArray *)GetBudgetByWeeks:(int)weeks;
 
 @end

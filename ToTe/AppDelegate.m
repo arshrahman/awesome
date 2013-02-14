@@ -31,7 +31,9 @@
     
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
-    //[a GetSecureUID];
+    
+    [a GetBudgetByWeeks:3];
+    //[a PostBudget];
     //[a PostToGoogleDocs];
     
     return YES;
