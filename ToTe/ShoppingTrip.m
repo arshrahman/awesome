@@ -9,6 +9,7 @@
 #import "ShoppingTrip.h"
 #import "Database.h"
 #import "sqlite3.h"
+#import "ShoppingTrip.h"
 
 @implementation ShoppingTrip
 {
@@ -18,31 +19,39 @@
 }
 
 //Get current shopping trip
--(NSMutableArray *) checkShoppingTrip
+-(ShoppingTrip *) checkShoppingTrip
 {
     shoppingList =[[NSMutableArray alloc]init];
     
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
-    
-    //get current Date
-    NSDate *date = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    
-    NSString *theDate = [dateFormat stringFromDate:date];
+    int maxID = 0;
+    ShoppingTrip *trip = [[ShoppingTrip alloc]init];
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
+        sqlite3_stmt *st;
+        const char *queryMaxId = "SELECT MAX(SHOPPING_ID) FROM SHOPPING_LIST";
+        
+        if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(st)==SQLITE_ROW)
+            {
+                maxID = sqlite3_column_int(st, 0);
+            }
+        }
+        sqlite3_finalize(st);
+        
+        NSLog(@"%d",maxID);
+        
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE SHOPPING_DATE = '%@'", theDate];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE SHOPPING_ID = '%d'", maxID];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
         {
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
-                ShoppingTrip *st = [[ShoppingTrip alloc]init];
                 
                 NSString *shoppingId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                 
@@ -63,18 +72,15 @@
                 int convertBudgetId = [budgetId integerValue];
                 double convertShoppingBudget = [shoppingBudget doubleValue];
                 
-                [st setShoppingID:convertShoppingId];
-                [st setBudgetID:convertBudgetId];
-                [st setShoppingDate:shoppingDate];
-                [st setShoppingTotal:convertTotal];
-                [st setShoppingTripName:shoppingName];
-                [st setShoppingBudget:convertShoppingBudget];
-                [st setDuration:Duration];
+                [trip setShoppingID:convertShoppingId];
+                [trip setBudgetID:convertBudgetId];
+                [trip setShoppingDate:shoppingDate];
+                [trip setShoppingTotal:convertTotal];
+                [trip setShoppingTripName:shoppingName];
+                [trip setShoppingBudget:convertShoppingBudget];
+                [trip setDuration:Duration];
                 
-                //Array
-                [shoppingList addObject:st];
-                
-                NSLog(@"Show Today Purchase");
+                NSLog(@"Show Shopping Trip");
                 
                 //sqlite3_close(budgetDB);
             }
@@ -87,7 +93,7 @@
         }
     }
     sqlite3_close(budgetDB);
-    return shoppingList;
+    return trip;
 }
 
 - (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal

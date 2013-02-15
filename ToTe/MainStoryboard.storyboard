@@ -766,11 +766,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="C0e-bi-Xka">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="C0e-bi-Xka">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="JmE-Ma-Ogz"/>
                                 </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rDE-Eu-Lg9">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="ual-Hn-Mq3" id="MDo-8V-GA4"/>
                                     <outlet property="delegate" destination="ual-Hn-Mq3" id="CJ2-Rs-EKF"/>
@@ -886,6 +897,9 @@
                         <outlet property="ShoppingItemList" destination="C0e-bi-Xka" id="kx3-Ce-ajW"/>
                         <outlet property="ShoppingTripTV" destination="C0e-bi-Xka" id="hH3-HL-Ojt"/>
                         <outlet property="StartEndTrip" destination="AGv-kM-wfe" id="NyO-GE-wqR"/>
+                        <outlet property="lbBudget" destination="bmk-DQ-8KG" id="2f6-JT-mfO"/>
+                        <outlet property="lbDuration" destination="XGX-b7-vg0" id="Co0-AR-HGy"/>
+                        <outlet property="lbTripName" destination="EcO-9T-FN0" id="yap-B7-nej"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaa-bL-9EA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3414,6 +3428,9 @@
                 <relationship kind="outlet" name="ShoppingItemList" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="ShoppingTripTV" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="StartEndTrip" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lbBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbDuration" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbTripName" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="StartPageViewController" superclassName="UIViewController">

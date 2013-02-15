@@ -20,7 +20,7 @@
 @property(assign)double shoppingTotal;
 
 //Get current shopping trip
--(NSMutableArray *) checkShoppingTrip;
+-(ShoppingTrip *) checkShoppingTrip;
 - (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal;
 
 

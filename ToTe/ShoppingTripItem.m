@@ -60,14 +60,14 @@
                 
                 NSString *necessity = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
                 
-                NSString *itemBought = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+                //NSString *itemBought = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                 
                 double convertPrice = [shoppingItemPrice doubleValue];
                 int convertItemId = [itemId integerValue];
                 int convertShoppingId = [shoppingId integerValue];
                 int convertNecessity = [necessity integerValue];
                 int convertCate = [category integerValue];
-                int convertItemBought = [itemBought integerValue];
+                //int convertItemBought = [itemBought integerValue];
                 int checkCate = convertCate - 1;
                 
                 [sti setItemID:convertItemId];
@@ -76,7 +76,7 @@
                 [sti setShoppingItemPrice:convertPrice];
                 [sti setNecessity:convertNecessity];
                 [sti setCategoryID:convertCate];
-                [sti setItemsBought:convertItemBought];
+                //[sti setItemsBought:convertItemBought];
                 
                 c = [categoryList objectAtIndex:checkCate];
                 

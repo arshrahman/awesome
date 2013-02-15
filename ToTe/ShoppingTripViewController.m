@@ -22,6 +22,9 @@
 @synthesize ShoppingTripTV;
 @synthesize AddDeleteTrip;
 @synthesize StartEndTrip;
+@synthesize lbBudget;
+@synthesize lbDuration;
+@synthesize lbTripName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +45,15 @@
     //Retrieve Data
     ShoppingTrip *st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
+    
+    st = [st checkShoppingTrip];
+    ShoppingTripItemList = [sti viewCurrentShoppingTrip:st.shoppingID];
+    
+    self.lbDuration.text = st.Duration;
+    self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", st.shoppingBudget];
+    self.lbTripName.text = st.shoppingTripName;
+    NSLog(st.Duration);
+    NSLog(st.shoppingTripName);
     
     if(self.ShoppingTripItemList.count != 0)
     {
@@ -76,24 +88,83 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.ShoppingTripItemList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    customCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell ==nil)
+    {
+        cell = [[customCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    ShoppingTripItem *currentItem = [[ShoppingTripItem alloc]init];
+    currentItem = [self.ShoppingTripItemList objectAtIndex:indexPath.row];
     
     // Configure the cell...
+    cell.customCellItemName.text = currentItem.shoppingItemName;
+    cell.customCellItemPrice.text = [NSString stringWithFormat: @"$%.2lf", currentItem.shoppingItemPrice];
+    cell.customCellItemCategory.text = currentItem.category;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    
+    //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
+    if(currentItem.necessity == 5)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+    }
+    else if(currentItem.necessity == 4)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else if(currentItem.necessity == 3)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else if(currentItem.necessity == 2)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else if(currentItem.necessity == 1)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
     
     return cell;
 }
@@ -154,6 +225,9 @@
     [self setShoppingTripTV:nil];
     [self setAddDeleteTrip:nil];
     [self setStartEndTrip:nil];
+    [self setLbDuration:nil];
+    [self setLbTripName:nil];
+    [self setLbBudget:nil];
     [super viewDidUnload];
 }
 - (IBAction)StartEndPressed:(id)sender {

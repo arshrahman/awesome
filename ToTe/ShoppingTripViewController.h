@@ -19,6 +19,9 @@
 @property (nonatomic) IBOutlet UITableView *ShoppingTripTV;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *AddDeleteTrip;
 @property (strong, nonatomic) IBOutlet UIButton *StartEndTrip;
+@property (weak, nonatomic) IBOutlet UILabel *lbDuration;
+@property (weak, nonatomic) IBOutlet UILabel *lbTripName;
+@property (weak, nonatomic) IBOutlet UILabel *lbBudget;
 
 - (IBAction)StartEndPressed:(id)sender;
 - (IBAction)AddDeletePressed:(id)sender;
