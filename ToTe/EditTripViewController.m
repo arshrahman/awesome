@@ -158,18 +158,24 @@
     
     //Shopping Trip total item price
     double i = 0;
+    ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
     for(ShoppingTripItem *item in self.ShoppingTripItemList)
     {
         i = i + item.shoppingItemPrice;
+        
+        //add item into database
+        [sti addshoppingItem:item.shoppingItemName :item.shoppingItemPrice :item.categoryID :item.necessity :item.itemsBought];
     }
     
     st.shoppingTotal = i;
     
     //Current Date
-    NSDate *date = [NSDate date];
-    st.shoppingDate = date;
+    st.shoppingDate = [NSDate date];
     
     //call database code
+    //Add Trip
+    
+    
     
     [self dismissModalViewControllerAnimated:YES];
 }

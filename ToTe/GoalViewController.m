@@ -9,6 +9,7 @@
 #import "GoalViewController.h"
 #import "Goal.h"
 #import "GoalDetailViewController.h"
+#import "SettingsData.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface GoalViewController ()
@@ -17,6 +18,9 @@
     NSMutableArray *goalIDArray;
     Goal *g;
     BOOL editing;
+    BOOL checkFB;
+    BOOL checkTwitter;
+    BOOL goalMet;
 }
 
 @end
@@ -42,8 +46,113 @@
     editing = FALSE;
 }
 
+//Twitter and facebook code
+-(void)Tweet
+{
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter] && checkTwitter == TRUE)
+	{
+		SLComposeViewController *twitter = [[SLComposeViewController alloc]init];
+		
+		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+        if(goalMet == FALSE)
+        {
+            //apppend goal title
+            [twitter setInitialText:[NSString stringWithFormat:@"Dang! I didn’t manage to save this week for (__________________):( Please continue to encourage & remind me! Let’s achieve our financial goals!"]];
+        }
+        else
+        {
+            //append goal title and weeks
+            [twitter setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for (__________________)! _____ weeks to go! I can achieve my goal! :D"]];
+        }
+        
+		[self presentViewController:twitter animated:YES completion:nil];
+        
+		[twitter setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             NSString *output;
+             
+             switch (result) {
+                 case SLComposeViewControllerResultCancelled:
+                     output = @"Action Cancelled";
+                     break;
+                 case SLComposeViewControllerResultDone:
+                     output = @"Tweeted";;
+                     break;
+                 default:
+                     break;
+             }
+             
+             if([output isEqualToString:@"Tweeted"])
+             {
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"You have just tweeted on Twitter!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 
+                 [alert show];
+             }
+             
+             [self dismissModalViewControllerAnimated:YES];
+         }];
+	}
+    
+    
+}
+
+-(void)FacebookPost
+{
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook] && checkFB == TRUE)
+	{
+		SLComposeViewController *facebook = [[SLComposeViewController alloc]init];
+		
+		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+		if(goalMet == FALSE)
+        {
+            //append goal title
+            [facebook setInitialText:[NSString stringWithFormat:@"Dang! I didn’t manage to save this week for (__________________):( Please continue to encourage & remind me! Let’s achieve our financial goals!"]];
+        }
+        else
+        {
+            //append goal title and weeks
+            [facebook setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for (__________________)! _____ weeks to go! I can achieve my goal! :D"]];
+        }
+        
+		[self presentViewController:facebook animated:YES completion:nil];
+        
+		[facebook setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             NSString *output;
+             
+             switch (result) {
+                 case SLComposeViewControllerResultCancelled:
+                     output = @"Action Cancelled";
+                     break;
+                 case SLComposeViewControllerResultDone:
+                     output = @"Posted";
+                     break;
+                 default:
+                     break;
+             }
+             
+             if([output isEqualToString:@"Posted"])
+             {
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"You have just posted on Facebook!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 
+                 [alert show];
+             }
+             
+             [self Tweet];
+         }];
+	}
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
+    //check if ns got something & ns > 0
+    SettingsData *s = [[SettingsData alloc]init];
+    checkFB = s.Facebook;
+    checkTwitter = s.Twitter;
+    
     g = [[Goal alloc]init];
     goalArray = [[NSMutableArray alloc]init];
     goalIDArray = [[NSMutableArray alloc]init];
@@ -54,7 +163,17 @@
         [goalIDArray addObject:[NSNumber numberWithInt:gg.goal_id]];
     }
     
+    //loop goalarray
+    //if goalarray goal id == ns id
+    //get goal title
+    //do fb & twitter
+    //set ns to zero
+    
     [tblViewGoal reloadData];
+    
+    //goalMet == TRUE or FALSE
+    
+    //[self FacebookPost];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

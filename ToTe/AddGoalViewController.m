@@ -369,8 +369,10 @@
         int goalID = 0;
         goalID = [g InsertGoal:txtGoal.text :txtDescription.text :[txtAmount.text intValue] :strDeadline :oldPhotoName :toSave];
         
+        //nsusedefault with goal id
+        
         if (goalID > 0)
-        {
+        {            
             GoalViewController *gvc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoalViewController"];
             [self.navigationController pushViewController:gvc animated:YES];
         }

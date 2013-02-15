@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Database.h"
 #import "BudgetViewController.h"
+#import "SettingsData.h"
 
 @interface setBudgetViewController ()
 
@@ -29,6 +30,8 @@
     double expenses;
     int weekday;
     BOOL allowEdit;
+    BOOL checkFB;
+    BOOL checkTwitter;
     
     CMPopTipView *tooltip;
 }
@@ -49,9 +52,99 @@
     return self;
 }
 
+//Twitter and facebook code
+-(void)Tweet
+{
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter] && checkTwitter == TRUE)
+	{
+		SLComposeViewController *twitter = [[SLComposeViewController alloc]init];
+		
+		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+        //append budget/goal title/end date
+		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $_____ for my goal (__________________) by __.__.__!Please support me by encouraging and reminding me!:D"]];
+        
+		[self presentViewController:twitter animated:YES completion:nil];
+        
+		[twitter setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             NSString *output;
+             
+             switch (result) {
+                 case SLComposeViewControllerResultCancelled:
+                     output = @"Action Cancelled";
+                     break;
+                 case SLComposeViewControllerResultDone:
+                     output = @"Tweeted";;
+                     break;
+                 default:
+                     break;
+             }
+             
+             if([output isEqualToString:@"Tweeted"])
+             {
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Twitter" message:@"You have just tweeted on Twitter!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 
+                 [alert show];
+             }
+             
+             [self dismissModalViewControllerAnimated:YES];
+         }];
+	}
+    
+    
+}
+
+-(void)FacebookPost
+{
+	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook] && checkFB == TRUE)
+	{
+		SLComposeViewController *facebook = [[SLComposeViewController alloc]init];
+		
+		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        //append budget/goal title/end date
+		[facebook setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $_____ for my goal (__________________) by __.__.__!Please support me by encouraging and reminding me!:D!"]];
+        
+		[self presentViewController:facebook animated:YES completion:nil];
+        
+		[facebook setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             NSString *output;
+             
+             switch (result) {
+                 case SLComposeViewControllerResultCancelled:
+                     output = @"Action Cancelled";
+                     break;
+                 case SLComposeViewControllerResultDone:
+                     output = @"Posted";
+                     break;
+                 default:
+                     break;
+             }
+             
+             if([output isEqualToString:@"Posted"])
+             {
+                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"You have just posted on Facebook!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                 
+                 [alert show];
+             }
+             
+             [self Tweet];
+         }];
+	}
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //NsDefault
+    SettingsData *s = [[SettingsData alloc]init];
+    checkFB = s.Facebook;
+    checkTwitter = s.Twitter;
+    //[self FacebookPost];
     
     self.navigationItem.hidesBackButton = YES;
     

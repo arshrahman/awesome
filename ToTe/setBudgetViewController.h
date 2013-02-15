@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Social/Social.h>
 #import "CMPopTipView.h"
 
 @interface setBudgetViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITabBarControllerDelegate, CMPopTipViewDelegate>

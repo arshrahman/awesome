@@ -105,10 +105,29 @@
 {
     
 }
-- (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity :(int)itemBought
+- (void)addshoppingItem:(NSString *)shoppingItemName :(int)shoppingID :(double)shoppingItemPrice :(int)categoryID :(int)necessity :(int)itemBought
 {
+    char *error;
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
     
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_ITEM(SHOPPING_ID, CATEGORY_ID, SHOPPING_ITEM_NAME, SHOPPING_ITEM_PRICE, NECESSITY, ITEMS_BOUGHT) VALUES ('%d','%d', '%@','%2f', '%d', '%d')",shoppingID, categoryID, shoppingItemName, shoppingItemPrice, necessity, itemBought];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Item Added!");
+        }
+        else
+        {
+            NSLog(@"Shopping Item not complete!");
+        }
+    }
+    sqlite3_close(budgetDB);
 }
+
 -(void)updateShoppingItem:(int)uniqueId :(NSString *)shoppingItemName :(int)categoryID :(double)ShoppngItemPrice: (int)necessity :(int)itemBought
 {
     

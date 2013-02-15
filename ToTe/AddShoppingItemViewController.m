@@ -287,11 +287,6 @@
         
         [self.editTripViewController.ShoppingTripItemList addObject:newItem];
         
-        //[self.purchaseViewController.PurchaseTableView reloadData];
-        
-        //add into database
-        //[newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
-        
         [self dismissModalViewControllerAnimated:YES];
     }
 }
