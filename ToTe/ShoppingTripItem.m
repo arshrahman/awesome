@@ -105,15 +105,30 @@
 {
     
 }
-- (void)addshoppingItem:(NSString *)shoppingItemName :(int)shoppingID :(double)shoppingItemPrice :(int)categoryID :(int)necessity :(int)itemBought
+
+- (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity
 {
     char *error;
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
     
+    int maxID = 0;
+    
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_ITEM(SHOPPING_ID, CATEGORY_ID, SHOPPING_ITEM_NAME, SHOPPING_ITEM_PRICE, NECESSITY, ITEMS_BOUGHT) VALUES ('%d','%d', '%@','%2f', '%d', '%d')",shoppingID, categoryID, shoppingItemName, shoppingItemPrice, necessity, itemBought];
+        sqlite3_stmt *st;
+        const char *queryMaxId = "SELECT MAX(SHOPPING_ID) FROM SHOPPING_LIST";
+        
+        if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(st)==SQLITE_ROW)
+            {
+                maxID = sqlite3_column_int(st, 0);
+            }
+        }
+        sqlite3_finalize(st);
+        
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_ITEM(SHOPPING_ID, CATEGORY_ID, SHOPPING_ITEM_NAME, SHOPPING_ITEM_PRICE, NECESSITY) VALUES ('%d','%d', '%@','%2f', '%d')",maxID, categoryID, shoppingItemName, shoppingItemPrice, necessity];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)

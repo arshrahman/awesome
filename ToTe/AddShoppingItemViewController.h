@@ -26,7 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *AddStar5;
 @property (strong, nonatomic) IBOutlet UIButton *AddNewItem;
 
-
 - (IBAction)Cancel:(id)sender;
 - (IBAction)SelectCategory:(id)sender;
 - (IBAction)textfieldReturn:(id)sender;

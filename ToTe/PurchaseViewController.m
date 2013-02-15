@@ -46,14 +46,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    Purchase *p = [[Purchase alloc]init];
-    self.PurchaseList = [[NSMutableArray alloc]init];
-    self.PurchaseList = [p viewTodayPurchases];
-    
-    
-    Purchase *pp = [[Purchase alloc]init];
-    self.PurchaseListWeek = [[NSMutableArray alloc]init];
-    self.PurchaseListWeek = [pp viewThisWeekPurchases];
 }
 
 - (void)didReceiveMemoryWarning
@@ -391,7 +383,7 @@
     {
         check = @"Today";
         Purchase *p = [[Purchase alloc]init];
-        //self.PurchaseList = [[NSMutableArray alloc]init];
+        self.PurchaseList = [[NSMutableArray alloc]init];
         self.PurchaseList = [p viewTodayPurchases];
         NSLog(@"Today");
         [self.PurchaseTableView reloadData];
@@ -400,7 +392,7 @@
     {
         check = @"This Week";
         Purchase *pp = [[Purchase alloc]init];
-        //self.PurchaseListWeek = [[NSMutableArray alloc]init];
+        self.PurchaseListWeek = [[NSMutableArray alloc]init];
         self.PurchaseListWeek = [pp viewThisWeekPurchases];
         
         self.IndividualDayPurchase = [[NSMutableDictionary alloc]init];

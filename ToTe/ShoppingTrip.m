@@ -90,4 +90,50 @@
     return shoppingList;
 }
 
+- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal
+{
+    char *error;
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    
+    int maxID = 0;
+    
+    //get current Date
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *theDate = [dateFormat stringFromDate:date];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        
+        sqlite3_stmt *st;
+        const char *queryMaxId = "SELECT MAX(BUDGET_ID) FROM BUDGET";
+        
+        if (sqlite3_prepare(budgetDB, queryMaxId, -1, &st, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(st)==SQLITE_ROW)
+            {
+                maxID = sqlite3_column_int(st, 0);
+            }
+        }
+        sqlite3_finalize(st);
+        
+        
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_LIST(BUDGET_ID, SHOPPING_NAME, SHOPPING_DATE, SHOPPING_BUDGET, DURATION, SHOPPING_TOTAL) VALUES ('%d','%@', '%@','%2f', '%@', '%2f')",maxID, shoppingName, theDate, shoppingBudget, Duration, shoppingTotal];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Trip Added!");
+        }
+        else
+        {
+            NSLog(@"Shopping Trip not complete!");
+        }
+    }
+    sqlite3_close(budgetDB);
+}
+
 @end

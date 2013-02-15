@@ -21,7 +21,7 @@
 
 //Get current shopping trip
 -(NSMutableArray *) checkShoppingTrip;
-- (void)addshoppingTrip:(NSString *)shoppingName :(NSString *)shoppingDate :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal;
+- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal;
 
 
 @end

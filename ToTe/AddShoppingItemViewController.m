@@ -45,11 +45,6 @@
     [super viewDidLoad];
 
     NSLog(@"Add Shopping Trip Item");
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     Category *c = [[Category alloc]init];
     CategoryList = [[NSMutableArray alloc]init];
     
@@ -74,18 +69,10 @@
     [self setAddStar3:nil];
     [self setAddStar4:nil];
     [self setAddStar5:nil];
-    [self setAddItemCategory:nil];
-    [self setAddItemPrice:nil];
-    [self setAddItemPrice:nil];
-    [self setAddItemName:nil];
-    [self setAddStar1:nil];
-    [self setAddStar2:nil];
-    [self setAddStar3:nil];
-    [self setAddStar4:nil];
-    [self setAddStar5:nil];
     [self setAddNewItem:nil];
     [super viewDidUnload];
 }
+
 - (IBAction)Cancel:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -253,19 +240,19 @@
     if(([price length] == 0 || [price doubleValue] == 0) && [category isEqualToString:@"Select Category"])
     {
         NSLog(@"Call alert");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the price of the item and the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the price of the item and the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
     else if([price length] == 0 || [price doubleValue] == 0)
     {
         NSLog(@"Call alert");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the price of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the price of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
     else if([category isEqualToString:@"Select Category"])
     {
         NSLog(@"Call alert");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
     else
@@ -285,7 +272,9 @@
         newItem.necessity = AddStar;
         newItem.categoryID = catID;
         
+        
         [self.editTripViewController.ShoppingTripItemList addObject:newItem];
+        NSLog(@"%d", self.editTripViewController.ShoppingTripItemList.count);
         
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -306,5 +295,67 @@
         [self.AddItemCategory setTitle:c.category_name forState:UIControlStateNormal];
     }
 }
+
+-(IBAction)newItem:(id)sender
+{
+    //Add shopping item into database
+    ShoppingTripItem *newItem = [[ShoppingTripItem alloc] init];
+    //NSLog([NSString stringWithFormat: @"%d", self.purchaseItem.uniqueId]);
+    
+    NSString *price = self.AddItemPrice.text;
+    NSString *category = self.AddItemCategory.currentTitle;
+    if(([price length] == 0 || [price doubleValue] == 0) && [category isEqualToString:@"Select Category"])
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the price of the item and the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([price length] == 0 || [price doubleValue] == 0)
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the price of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([category isEqualToString:@"Select Category"])
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        //Add to database
+        if([self.AddItemName.text length] == 0)
+        {
+            newItem.shoppingItemName = self.AddItemCategory.currentTitle;
+        }
+        else
+        {
+            newItem.shoppingItemName = self.AddItemName.text;
+        }
+        
+        newItem.shoppingItemPrice = [self.AddItemPrice.text doubleValue];
+        newItem.category = self.AddItemCategory.currentTitle;
+        newItem.necessity = AddStar;
+        newItem.categoryID = catID;
+        
+        [self.editTripViewController.ShoppingTripItemList addObject:newItem];
+        NSLog(@"%d", self.editTripViewController.ShoppingTripItemList.count);
+        
+        AddStar = 0;
+        [AddStar1 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
+        [AddStar2 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
+        [AddStar3 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
+        [AddStar4 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
+        [AddStar5 setImage:[UIImage imageNamed:@"glyphicons_048_dislikes.png"] forState:UIControlStateNormal];
+        
+        [self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+        [self.AddItemPrice setText:@""];
+        [self.AddItemName setText:@""];
+        
+    }
+}
+
+
 
 @end

@@ -145,6 +145,7 @@
         
         [self.purchaseViewController.PurchaseList addObject:newPurchase];
         [self.purchaseViewController.PurchaseListWeek addObject:newPurchase];
+        NSLog(@"%d", self.purchaseViewController.PurchaseList.count);
         self.purchaseViewController.SortBy.selectedSegmentIndex = 0;
         //[self.purchaseViewController.PurchaseTableView reloadData];
         

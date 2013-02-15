@@ -11,11 +11,10 @@
 #import "ShoppingTripItem.h"
 #import "ShoppingTrip.h"
 #import "EditShoppingItemViewController.h"
+#import "customCell.h"
 
 @interface EditTripViewController ()
-{
-    ShoppingTripItem *Item;
-}
+
 @end
 
 @implementation EditTripViewController
@@ -24,8 +23,8 @@
 @synthesize ShoppingTripDuration;
 @synthesize ShoppingTripItemTV;
 @synthesize ShoppingTripTitle;
-@synthesize ShoppingTripItemList;
-@synthesize ShoppingTripList;
+@synthesize ShoppingTripItemList = _ShoppingTripItemList;
+@synthesize ShoppingTripList = _ShoppingTripList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +40,8 @@
     [super viewDidLoad];
     
     NSLog(@"Edit Shopping Trip");
+    self.ShoppingTripItemList = [[NSMutableArray alloc]init];
+    self.ShoppingTripList = [[NSMutableArray alloc]init];
 	// Do any additional setup after loading the view.
 }
 
@@ -62,26 +63,86 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.ShoppingTripItemList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    customCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell ==nil)
+    {
+        cell = [[customCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    ShoppingTripItem *currentItem = [[ShoppingTripItem alloc]init];
+    currentItem = [self.ShoppingTripItemList objectAtIndex:indexPath.row];
     
     // Configure the cell...
+    cell.customCellItemName.text = currentItem.shoppingItemName;
+    cell.customCellItemPrice.text = [NSString stringWithFormat: @"$%.2lf", currentItem.shoppingItemPrice];
+    cell.customCellItemCategory.text = currentItem.category;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    
+    //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
+    if(currentItem.necessity == 5)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+    }
+    else if(currentItem.necessity == 4)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else if(currentItem.necessity == 3)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else if(currentItem.necessity == 2)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else if(currentItem.necessity == 1)
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
+    else
+    {
+        cell.Star1.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+    }
     
     return cell;
+
 }
 
 /*
@@ -144,39 +205,87 @@
 
 - (IBAction)Done:(id)sender {
     
-    //Add shopping Trip
+    //Add shopping Trip and shopping Trip Item
     ShoppingTrip *st = [[ShoppingTrip alloc]init];
-    
-    //Shopping Trip Name
-    st.shoppingTripName = ShoppingTripTitle.text;
-    
-    //Shopping Trip Budget
-    st.shoppingBudget = [ShoppingTripBudget.text doubleValue];
-
-    //Shopping Trip Duration
-    //st.Duration;
-    
-    //Shopping Trip total item price
-    double i = 0;
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
-    for(ShoppingTripItem *item in self.ShoppingTripItemList)
+    
+    NSString *checkTripName = self.ShoppingTripTitle.text;
+    //NSString checkTripDuration = self.ShoppingTripDuration.text;
+    NSString *checkTripBudget = self.ShoppingTripBudget.text;
+    
+    if([checkTripName length] == 0 || [checkTripBudget doubleValue] == 0)
     {
-        i = i + item.shoppingItemPrice;
-        
-        //add item into database
-        [sti addshoppingItem:item.shoppingItemName :item.shoppingItemPrice :item.categoryID :item.necessity :item.itemsBought];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
     }
+    else
+    {
+        //Shopping Trip Name
+        st.shoppingTripName = ShoppingTripTitle.text;
     
-    st.shoppingTotal = i;
+        //Shopping Trip Budget
+        st.shoppingBudget = [ShoppingTripBudget.text doubleValue];
+
+        //Shopping Trip Duration
+        st.Duration = @"00:00";
     
-    //Current Date
-    st.shoppingDate = [NSDate date];
+        //Shopping Trip total item price
+        double i = 0;
+        for(ShoppingTripItem *item in self.ShoppingTripItemList)
+        {
+            i = i + item.shoppingItemPrice;
+        }
     
-    //call database code
-    //Add Trip
+        st.shoppingTotal = i;
     
+        //Current Date
+        st.shoppingDate = [NSDate date];
+    
+        //call database code
+        //Add Trip
+        [st addshoppingTrip:st.shoppingTripName :st.shoppingBudget :st.Duration :st.shoppingTotal];
+        
+        NSLog(@"WENT IN TO THE LOOP");
+        NSLog(@"%d", self.ShoppingTripItemList.count);
+        for(ShoppingTripItem *item in self.ShoppingTripItemList)
+        {
+            //add item into database
+            [sti addshoppingItem:item.shoppingItemName :item.shoppingItemPrice :item.categoryID :item.necessity];
+        }
+    }
     
     
     [self dismissModalViewControllerAnimated:YES];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([segue.identifier isEqualToString:@"AddShoppingItem"]){
+        NSLog(@"push to editTripViewController");
+        UINavigationController *nav = segue.destinationViewController;
+        
+        AddShoppingItemViewController *add = [nav.viewControllers objectAtIndex:0];
+        add.editTripViewController = self;
+    }
+    
+    //else if([segue.identifier isEqualToString:@"EditItem"])
+    //{
+    //NSLog(@"push to EditPurchaseViewController");
+    //edit.purchaseItem = self;
+    //EditPurchaseViewController *editPuchase = segue.destinationViewController;
+    
+    //editPuchase.purchaseItem = [self.PurchaseList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+    
+    //EditPurchaseViewController *editPuchase = segue.destinationViewController;
+    //editPuchase.purchaseItem = [self.PurchaseList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+    //}
+    //NSLog(segue.identifier);
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.ShoppingTripItemTV reloadData];
+}
+
 @end
