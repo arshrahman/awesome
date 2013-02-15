@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 
-@class PurchaseListViewController;
 @class PurchaseViewController;
 
 @interface AddPurchaseViewController : UITableViewController<UIActionSheetDelegate>
@@ -19,7 +18,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *AddItemName;
 @property (strong, nonatomic) IBOutlet UITextField *AddItemPrice;
-@property (nonatomic, strong) PurchaseListViewController *purchaseListViewController;
 @property (nonatomic, strong) PurchaseViewController *purchaseViewController;
 @property (strong, nonatomic) IBOutlet UIButton *AddItemCategory;
 @property (weak, nonatomic) IBOutlet UIButton *AddStar1;

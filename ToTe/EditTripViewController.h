@@ -10,7 +10,7 @@
 
 @interface EditTripViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    IBOutlet UITableView *ShoppingItemList;
+    //IBOutlet UITableView *ShoppingItemList;
     int numStar;
 }
 
@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *ShoppingTripBudget;
 @property (weak, nonatomic) IBOutlet UIButton *ShoppingTripDuration;
 @property (weak, nonatomic) IBOutlet UITableView *ShoppingTripItemTV;
+
 - (IBAction)Cancel:(id)sender;
 - (IBAction)Done:(id)sender;
+
 @end

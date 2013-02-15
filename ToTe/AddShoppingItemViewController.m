@@ -7,7 +7,8 @@
 //
 
 #import "AddShoppingItemViewController.h"
-#import "Purchase.h"
+#import "EditTripViewController.h"
+#import "ShoppingTripItem.h"
 #import "Category.h"
 
 @interface AddShoppingItemViewController ()
@@ -23,6 +24,7 @@
 @synthesize AddItemName = _AddItemName;
 @synthesize AddItemPrice = _AddItemPrice;
 @synthesize AddItemCategory = _AddItemCategory;
+@synthesize editTripViewController = _editTripViewController;
 @synthesize AddStar1;
 @synthesize AddStar2;
 @synthesize AddStar3;
@@ -93,8 +95,6 @@
 {
     [sender resignFirstResponder];
 }
-
-
 
 - (IBAction)SelectCategory:(id)sender
 {
@@ -242,12 +242,58 @@
     }
 }
 
-
 - (IBAction)donePressed:(id)sender {
     
     //Add shopping item into database
+    ShoppingTripItem *newItem = [[ShoppingTripItem alloc] init];
+    //NSLog([NSString stringWithFormat: @"%d", self.purchaseItem.uniqueId]);
     
-    [self dismissModalViewControllerAnimated:YES];
+    NSString *price = self.AddItemPrice.text;
+    NSString *category = self.AddItemCategory.currentTitle;
+    if(([price length] == 0 || [price doubleValue] == 0) && [category isEqualToString:@"Select Category"])
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the price of the item and the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([price length] == 0 || [price doubleValue] == 0)
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the price of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([category isEqualToString:@"Select Category"])
+    {
+        NSLog(@"Call alert");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Purchase"message:@"Please specify the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        //Add to database
+        if([self.AddItemName.text length] == 0)
+        {
+            newItem.shoppingItemName = self.AddItemCategory.currentTitle;
+        }
+        else
+        {
+            newItem.shoppingItemName = self.AddItemName.text;
+        }
+        
+        newItem.shoppingItemPrice = [self.AddItemPrice.text doubleValue];
+        newItem.category = self.AddItemCategory.currentTitle;
+        newItem.necessity = AddStar;
+        newItem.categoryID = catID;
+        
+        [self.editTripViewController.ShoppingTripItemList addObject:newItem];
+        
+        //[self.purchaseViewController.PurchaseTableView reloadData];
+        
+        //add into database
+        //[newPurchase addPurchase:newPurchase.price: newPurchase.cateID : newPurchase.name : newPurchase.priority];
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

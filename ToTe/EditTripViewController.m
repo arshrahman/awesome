@@ -13,7 +13,9 @@
 #import "EditShoppingItemViewController.h"
 
 @interface EditTripViewController ()
-
+{
+    ShoppingTripItem *Item;
+}
 @end
 
 @implementation EditTripViewController
@@ -22,6 +24,8 @@
 @synthesize ShoppingTripDuration;
 @synthesize ShoppingTripItemTV;
 @synthesize ShoppingTripTitle;
+@synthesize ShoppingTripItemList;
+@synthesize ShoppingTripList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

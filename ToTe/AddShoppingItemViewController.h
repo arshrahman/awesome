@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class EditTripViewController;
+
 @interface AddShoppingItemViewController : UITableViewController<UIActionSheetDelegate>
 {
     int AddStar;
 }
 
-
-
+@property (nonatomic, strong) EditTripViewController *editTripViewController;
 @property (strong, nonatomic) IBOutlet UIButton *AddItemCategory;
 @property (strong, nonatomic) IBOutlet UITextField *AddItemPrice;
 @property (strong, nonatomic) IBOutlet UITextField *AddItemName;
@@ -24,7 +25,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *AddStar4;
 @property (strong, nonatomic) IBOutlet UIButton *AddStar5;
 @property (strong, nonatomic) IBOutlet UIButton *AddNewItem;
-
 
 
 - (IBAction)Cancel:(id)sender;
@@ -37,11 +37,6 @@
 - (IBAction)starFiveClicked:(id)sender;
 - (IBAction)donePressed:(id)sender;
 - (IBAction)newItem:(id)sender;
-
-
-
-
-
 
 
 @end
