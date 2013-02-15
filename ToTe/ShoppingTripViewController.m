@@ -20,7 +20,7 @@
 @synthesize ShoppingTripItemList;
 @synthesize ShoppingTripList;
 @synthesize ShoppingTripTV;
-@synthesize AddDeleteTrip;
+@synthesize AddTrip;
 @synthesize StartEndTrip;
 @synthesize lbBudget;
 @synthesize lbDuration;
@@ -48,12 +48,12 @@
     
     st = [st checkShoppingTrip];
     ShoppingTripItemList = [sti viewCurrentShoppingTrip:st.shoppingID];
-    
-    self.lbDuration.text = st.Duration;
-    self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", st.shoppingBudget];
-    self.lbTripName.text = st.shoppingTripName;
-    NSLog(st.Duration);
-    NSLog(st.shoppingTripName);
+    if(st.shoppingID != 0)
+    {
+        self.lbDuration.text = st.Duration;
+        self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", st.shoppingBudget];
+        self.lbTripName.text = st.shoppingTripName;
+    }
     
     if(self.ShoppingTripItemList.count != 0)
     {
@@ -67,13 +67,13 @@
     
     if(self.ShoppingTripItemList.count == 0)
     {
-        [self.AddDeleteTrip setTitle:@"+"];
-        [self.AddDeleteTrip setTintColor:[UIColor colorWithRed:0 green:0.6 blue:0.2 alpha:1.0]];
+        self.AddTrip.enabled =TRUE;
+        self.DeleteTrip.enabled =FALSE;
     }
     else
     {
-        [self.AddDeleteTrip setTitle:@"Delete Trip"];
-        [self.AddDeleteTrip setTintColor:[UIColor colorWithRed:0.8 green:0 blue:0 alpha:1.0]];
+        self.AddTrip.enabled = FALSE;
+        self.DeleteTrip.enabled =TRUE;
     }
 
 }
@@ -223,20 +223,27 @@
 
 - (void)viewDidUnload {
     [self setShoppingTripTV:nil];
-    [self setAddDeleteTrip:nil];
+    [self setAddTrip:nil];
     [self setStartEndTrip:nil];
     [self setLbDuration:nil];
     [self setLbTripName:nil];
     [self setLbBudget:nil];
+    [self setDeleteTrip:nil];
     [super viewDidUnload];
 }
+- (IBAction)DeleteTrip:(id)sender {
+}
+
+- (IBAction)DeletePressed:(id)sender {
+}
+
 - (IBAction)StartEndPressed:(id)sender {
     
     //Start and End Trip
     
 }
 
-- (IBAction)AddDeletePressed:(id)sender {
+- (IBAction)AddPressed:(id)sender {
     
     //Add and Delete Trip
     //[self.EditItemCategory setTitle:c.category_name forState:UIControlStateNormal];
