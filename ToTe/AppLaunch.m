@@ -10,10 +10,8 @@
 #import "sqlite3.h"
 #import "Database.h"
 #import "SecureUDID.h"
-#import "Budget.h"
-#import "BudgetCategory.h"
 #import "Goal.h"
-#import "Purchase.h"
+#import "Reachability.h"
 
 @interface NSURLRequest (DummyInterface)
 
@@ -82,7 +80,27 @@
                     {
                         sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error);
                         
-                        [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:weeks] forKey:@"Weeks"];
+                        BOOL ShareData = [[NSUserDefaults standardUserDefaults]boolForKey:@"ShareSwitch"];
+                        
+                        if (ShareData)
+                        {
+                            int num = [[[NSUserDefaults standardUserDefaults]objectForKey:@"Weeks"] intValue];
+                            
+                            NSLog(@"Num: %d", num);
+                            
+                            num += weeks;
+                            
+                            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:num] forKey:@"Weeks"];
+                            NSLog(@"Num1: %d", num);
+                        }
+                        else
+                        {
+                            if ([[NSUserDefaults standardUserDefaults]objectForKey:@"Weeks"])
+                            {
+                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Weeks"];
+                                [[NSUserDefaults standardUserDefaults]synchronize];
+                            }
+                        }
                         
                         [self GoalAchieved:maxId:[[budgetArray objectAtIndex:1] intValue]:weeks];
                                                 
@@ -189,6 +207,7 @@
     int expenses = 0;
     BOOL goalsMet = FALSE;
     NSString *delimiter = @"";
+    NSMutableArray *goalIdArray;
     
     if(dbPathString == NULL)
     {
@@ -205,7 +224,9 @@
         if (savings > 0)
         {
             sqlite3_stmt *statement;
-            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE FROM GOAL ORDER BY PRIORITY";
+            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE FROM GOAL WHERE DATE('NOW') < DEADLINE ORDER BY PRIORITY";
+            
+            goalIdArray = [[NSMutableArray alloc]init];
             
             if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
             {
@@ -219,6 +240,7 @@
                     {
                         queryWeeksMet = [queryWeeksMet stringByAppendingString:[NSString stringWithFormat:@"%@%d", delimiter, sqlite3_column_int(statement, 0)]];
                         
+                        [goalIdArray addObject:[NSNumber numberWithInt:sqlite3_column_int(statement, 0)]];
                         delimiter = @", ";
                         savings -= toSave;
                         goalsMet = TRUE;
@@ -235,6 +257,9 @@
                     @try
                     {
                         sqlite3_exec(budgetDB, weeksMet_stmt, NULL, NULL, &error);
+                        
+                        [[NSUserDefaults standardUserDefaults]setObject:goalIdArray forKey:@"PostSMGoals"];
+                        [[NSUserDefaults standardUserDefaults]synchronize];
                     }
                     @catch (NSException *exception)
                     {
@@ -288,11 +313,25 @@
     
     if (weeks > 0)
     {
-        
-        
-        NSString *userId = [self GetSecureUID];
-        
+        if([self connected])
+        {
+            NSString *userId = [self GetSecureUID];
+            
+            [self PostBudgets:weeks :userId];
+            [self PostGoals:userId];
+            [self PostExpenses:weeks :userId];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:0] forKey:@"Weeks"];
+        }
     }
+}
+
+
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
 }
 
 
@@ -305,10 +344,10 @@
     return identifier;
 }
 
--(NSMutableArray *)GetBudgetByWeeks:(int)weeks
+
+-(void)PostBudgets:(int)weeks:(NSString *)userId
 {
     NSMutableArray *allBudget = [[NSMutableArray alloc]init];
-    NSString *userId = [self GetSecureUID];
     
     if(dbPathString == NULL)
     {
@@ -392,7 +431,7 @@
             sqlite3_finalize(st);
         }
         
-        /*for (int i = allBudget.count-1; i >= 0; i--)
+        for (int i = allBudget.count-1; i >= 0; i--)
         {
             NSMutableArray *a = [allBudget objectAtIndex:i];
             
@@ -400,24 +439,21 @@
             
             NSString *postUrl = @"https://docs.google.com/forms/d/1HYdL3f7O9mU0X1g1xbBG4wvPU2-oZRHTmhYK8404Hqg/formResponse";
             
-            //[self PostToGoogleDocs:postData :postUrl];
+            [self PostToGoogleDocs:postData :postUrl];
             
             //NSLog(@"count: %d", a.count);
             
             //NSLog(@"id: %d, st_dt: %@, wincome: %.2f, b_amount: %.2f, expense: %@, amount1: %@, spent1: %@, amount2: %@, spent2: %@, amount3: %@, spent3: %@, amount4: %@, spent4: %@, amount5: %@, spent5: %@, amount6: %@, spent6: %@", [[a objectAtIndex:0] intValue], [a objectAtIndex:1], [[a objectAtIndex:2] doubleValue], [[a objectAtIndex:3] doubleValue], [a objectAtIndex:4], [a objectAtIndex:5], [a objectAtIndex:6], [a objectAtIndex:7], [a objectAtIndex:8], [a objectAtIndex:9], [a objectAtIndex:10], [a objectAtIndex:11], [a objectAtIndex:12], [a objectAtIndex:13], [a objectAtIndex:14], [a objectAtIndex:15], [a objectAtIndex:16]);
-        }*/
+        }
         
         sqlite3_close(budgetDB);
     }
-
-    return allBudget;
 }
 
 
--(void)PostGoals:(int)weeks
+-(void)PostGoals:(NSString *)userId
 {
     Goal *g = [[Goal alloc]init];
-    NSString *userId = [self GetSecureUID];
     
     if(dbPathString == NULL)
     {
@@ -492,16 +528,13 @@
     [nowComponents setSecond:0];
     
     NSDate *monday = [calendar dateFromComponents:nowComponents];
-    //NSLog(@"Monday: %@", monday);
     
     return [formatter stringFromDate:monday];
 }
 
 
--(void)PostAllExpenses:(int)weeks
-{
-    NSString *userId = [self GetSecureUID];
-    
+-(void)PostExpenses:(int)weeks:(NSString *)userId
+{    
     if(dbPathString == NULL)
     {
         d = [[Database alloc]init];
@@ -577,8 +610,9 @@
 }
 
 
--(void)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl
+-(BOOL)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl
 {
+    BOOL success = FALSE;
     NSString *post = data;
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
@@ -597,9 +631,14 @@
     NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     NSString *ReturnHTML=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",ReturnHTML);
+    
+    if (ReturnHTML.length > 0)
+    {
+        success = TRUE;
+    }
+    
+    return success;
 }
-
 
 @end
 

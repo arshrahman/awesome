@@ -54,10 +54,11 @@
     
     BOOL ShareData = [[NSUserDefaults standardUserDefaults]boolForKey:@"ShareSwitch"];
     
-    NSLog(ShareData ? @"True" : @"False");
-    
-    AppLaunch *a = [[AppLaunch alloc]init];
-    //[a PostAllExpenses:3];
+    if (ShareData)
+    {
+        AppLaunch *a = [[AppLaunch alloc]init];
+        [a PrepareToPostGoogle];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

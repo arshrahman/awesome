@@ -146,6 +146,19 @@
     checkTwitter = s.Twitter;
     //[self FacebookPost];
     
+    NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
+    
+    if (goalIDArray.count > 0)
+    {
+        //EDWIN
+        //Retrieve the goal title from database with the goal id in the array and post to social media
+        
+        NSLog(@"Goal ID count: %d", goalIDArray.count);
+        //remove all the data from the array (Make sure its empty)!
+        [[NSUserDefaults standardUserDefaults]setObject:goalIDArray forKey:@"PostSMGoals"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    
     self.navigationItem.hidesBackButton = YES;
     
     [self.tabBarController setDelegate:self];

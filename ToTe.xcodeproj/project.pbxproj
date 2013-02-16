@@ -1804,8 +1804,6 @@
 		CEFC835316917DE600F4E2B1 /* ToTe */ = {
 			isa = PBXGroup;
 			children = (
-				B413211A16CF908B00FEA52B /* Reachability.h */,
-				B413211B16CF908B00FEA52B /* Reachability.m */,
 				CE195F1C16CB57F40071197F /* StarterFiles */,
 				CE195ECA16CB3F1D0071197F /* CorePlot */,
 				B46494EB16C0CDE100228A77 /* Fonts */,
@@ -1815,6 +1813,8 @@
 				CEFC835D16917DE600F4E2B1 /* AppDelegate.m */,
 				B4266E8616A05817008FC51F /* Database.h */,
 				B4266E8716A05817008FC51F /* Database.m */,
+				B413211A16CF908B00FEA52B /* Reachability.h */,
+				B413211B16CF908B00FEA52B /* Reachability.m */,
 				CE36AD8816BA29DE007ACC9B /* SettingsData.h */,
 				CE36AD8916BA29DE007ACC9B /* SettingsData.m */,
 				B45042E916CBBA6000C6536E /* SecureUDID.h */,
