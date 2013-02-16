@@ -10,7 +10,8 @@
 		B400904C16A3B6C900BFD732 /* roundedrectangle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */; };
 		B407A3EF16B80358008E47D5 /* button-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = B407A3EE16B80358008E47D5 /* button-delete.png */; };
 		B407A3F316B82163008E47D5 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = B407A3F216B82163008E47D5 /* Goal.m */; };
-		B413211C16CF908B00FEA52B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B413211B16CF908B00FEA52B /* Reachability.m */; };
+		B413211C16CF908B00FEA52B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B413211B16CF908B00FEA52B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B413212316CF917E00FEA52B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B413212216CF917E00FEA52B /* SystemConfiguration.framework */; };
 		B419EC8416B27DCF00AD458D /* UpdateBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */; };
 		B4266E8816A05817008FC51F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = B4266E8716A05817008FC51F /* Database.m */; };
 		B426C3C116BACB9D00C251CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B426C3C016BACB9D00C251CB /* QuartzCore.framework */; };
@@ -501,6 +502,7 @@
 		B407A3F216B82163008E47D5 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
 		B413211A16CF908B00FEA52B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		B413211B16CF908B00FEA52B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B413212216CF917E00FEA52B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B419EC8216B27DCE00AD458D /* UpdateBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBudgetViewController.h; sourceTree = "<group>"; };
 		B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBudgetViewController.m; sourceTree = "<group>"; };
 		B4266E8616A05817008FC51F /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -1107,6 +1109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B413212316CF917E00FEA52B /* SystemConfiguration.framework in Frameworks */,
 				B426C3C116BACB9D00C251CB /* QuartzCore.framework in Frameworks */,
 				CE3D8CBC16B8FE690071FC79 /* Social.framework in Frameworks */,
 				B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */,
@@ -1768,6 +1771,7 @@
 		CEFC833E16917DE600F4E2B1 = {
 			isa = PBXGroup;
 			children = (
+				B413212216CF917E00FEA52B /* SystemConfiguration.framework */,
 				B426C3C016BACB9D00C251CB /* QuartzCore.framework */,
 				B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */,
 				CEB0704D169BC85B00F96FD4 /* Settings.bundle */,
