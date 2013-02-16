@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface StartPageViewController : UIViewController
-{
-    NSTimer *time;
-}
 
 @property (strong, nonatomic) IBOutlet UILabel *lblTip;
 

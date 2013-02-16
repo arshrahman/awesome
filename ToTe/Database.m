@@ -85,7 +85,7 @@
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
                 count = sqlite3_column_int(statement, 0);
-                NSLog(@"count : %d", count);
+                //NSLog(@"count : %d", count);
             }
         }
         else

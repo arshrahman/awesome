@@ -206,6 +206,7 @@
     }
 }
 
+
 -(void)viewWillAppear:(BOOL)animated
 {
     topArray = [[NSMutableArray alloc]init];
@@ -232,19 +233,23 @@
     [topView reloadData];
     [bottomView reloadData];
     [sideView reloadData];
+    
+    pageControl.currentPage = 0;
 }
+
 
 - (void)secondPage:(UISwipeGestureRecognizer *)swipeGestureRecognizer
 {
     pageControl.currentPage = 1;
     [scroller setContentOffset:CGPointMake(320, 0) animated:YES];
-    
 }
+
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     return YES;
 }
+
 
 - (void)firstPage:(UISwipeGestureRecognizer *)swipeGestureRecognizer
 {
@@ -258,6 +263,7 @@
 	return 1;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger rows;
@@ -268,6 +274,7 @@
 	
 	return rows;
 }
+
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -523,6 +530,7 @@
     }
 }
 
+
 - (IBAction)btnResetClicked:(id)sender
 {
     NSError *error = nil;
@@ -543,10 +551,12 @@
     [self.navigationController pushViewController:bc animated:YES];
 }
 
+
 - (void) dismissToolTip
 {
     [tooltip dismissAnimated:YES];
 }
+
 
 - (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView
 {

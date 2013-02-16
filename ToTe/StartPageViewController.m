@@ -10,6 +10,9 @@
 #import "Database.h"
 
 @interface StartPageViewController ()
+{
+    NSTimer *timer;
+}
 
 @end
 
@@ -35,13 +38,17 @@
     
     [self readAppPlist];
     
-    time = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(navigatePage)];
+    [self.view addGestureRecognizer:tap];
     
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
 }
 
 
-- (void) navigatePage
+-(void)navigatePage
 {
+    [timer invalidate];
+    
     UITabBarController *tabBar = [self.storyboard instantiateViewControllerWithIdentifier:@"MainTab"];
     [self.navigationController pushViewController:tabBar animated:YES];    
 }
@@ -57,6 +64,7 @@
     
     lblTip.text = [propertyDict objectForKey:[NSString stringWithFormat:@"%d", randomNum]];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

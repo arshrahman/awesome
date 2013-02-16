@@ -224,7 +224,7 @@
         if (savings > 0)
         {
             sqlite3_stmt *statement;
-            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE FROM GOAL WHERE DATE('NOW') < DEADLINE ORDER BY PRIORITY";
+            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE FROM GOAL WHERE DATE('NOW', '-7 DAY') < DEADLINE ORDER BY PRIORITY";
             
             goalIdArray = [[NSMutableArray alloc]init];
             
@@ -278,6 +278,8 @@
         sqlite3_close(budgetDB);
     }
 }
+
+
 
 
 -(double)GetExpensesForLastWeek:(int)lbudget_id
@@ -528,6 +530,7 @@
     [nowComponents setSecond:0];
     
     NSDate *monday = [calendar dateFromComponents:nowComponents];
+    NSLog(@"Day: %@", monday);
     
     return [formatter stringFromDate:monday];
 }
