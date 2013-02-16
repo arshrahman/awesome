@@ -86,7 +86,7 @@
                         
                         [self GoalAchieved:maxId:[[budgetArray objectAtIndex:1] intValue]:weeks];
                                                 
-                        [self PostBudget];
+                        //[self PostBudget];
                     }
                     @catch (NSException *exception)
                     {
@@ -249,6 +249,8 @@
             }
             sqlite3_finalize(statement);
         }
+        
+        sqlite3_close(budgetDB);
     }
 }
 
@@ -279,20 +281,16 @@
 }
 
 
--(void)PostBudget
+-(void)PrepareToPostGoogle
 {
     NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"Weeks"];
     int weeks = [ns intValue];
     
     if (weeks > 0)
     {
+        
+        
         NSString *userId = [self GetSecureUID];
-        
-        NSString *postData = [NSString stringWithFormat:@"entry.152079890=%@&entry.2099356811=startdate&entry.1090870720=weeklyIncome&entry.58372674=totalbudget&entry.887497858=totalExenses&entry.1309306391=budgetClothes&entry.763272716=budgetFood&entry.1367868194=budgetEntertainment&entry.1886459060=budgetNecessities&entry.169362762=budgetTransport&entry.1285347822=budgetOthers&entry.685118874=ExpensesClothes&entry.717710273=ExpensesFood&entry.1955738301=ExpensesEntertainment&entry.26182424=ExpensesNecessities&entry.426598365=ExpensesTransport&entry.1028591383=ExpensesOthers", userId];
-        
-        NSString *postUrl = @"https://docs.google.com/forms/d/1HYdL3f7O9mU0X1g1xbBG4wvPU2-oZRHTmhYK8404Hqg/formResponse";
-        
-        [self PostToGoogleDocs:postData :postUrl];
         
     }
 }
@@ -303,8 +301,6 @@
     NSString *domain = NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"];
     NSString *key        = @"arshrahmanPolhusayZarakukayo";
     NSString *identifier = [SecureUDID UDIDForDomain:domain usingKey:key];
-    
-    //NSLog(@"id: %@", identifier);
     
     return identifier;
 }
@@ -396,7 +392,7 @@
             sqlite3_finalize(st);
         }
         
-        for (int i = allBudget.count-1; i >= 0; i--)
+        /*for (int i = allBudget.count-1; i >= 0; i--)
         {
             NSMutableArray *a = [allBudget objectAtIndex:i];
             
@@ -406,21 +402,183 @@
             
             //[self PostToGoogleDocs:postData :postUrl];
             
-            /*NSLog(@"count: %d", a.count);
+            //NSLog(@"count: %d", a.count);
             
-            NSLog(@"id: %d, st_dt: %@, wincome: %.2f, b_amount: %.2f, expense: %@, amount1: %@, spent1: %@, amount2: %@, spent2: %@, amount3: %@, spent3: %@, amount4: %@, spent4: %@, amount5: %@, spent5: %@, amount6: %@, spent6: %@", [[a objectAtIndex:0] intValue], [a objectAtIndex:1], [[a objectAtIndex:2] doubleValue], [[a objectAtIndex:3] doubleValue], [a objectAtIndex:4], [a objectAtIndex:5], [a objectAtIndex:6], [a objectAtIndex:7], [a objectAtIndex:8], [a objectAtIndex:9], [a objectAtIndex:10], [a objectAtIndex:11], [a objectAtIndex:12], [a objectAtIndex:13], [a objectAtIndex:14], [a objectAtIndex:15], [a objectAtIndex:16]);*/
-        }
+            //NSLog(@"id: %d, st_dt: %@, wincome: %.2f, b_amount: %.2f, expense: %@, amount1: %@, spent1: %@, amount2: %@, spent2: %@, amount3: %@, spent3: %@, amount4: %@, spent4: %@, amount5: %@, spent5: %@, amount6: %@, spent6: %@", [[a objectAtIndex:0] intValue], [a objectAtIndex:1], [[a objectAtIndex:2] doubleValue], [[a objectAtIndex:3] doubleValue], [a objectAtIndex:4], [a objectAtIndex:5], [a objectAtIndex:6], [a objectAtIndex:7], [a objectAtIndex:8], [a objectAtIndex:9], [a objectAtIndex:10], [a objectAtIndex:11], [a objectAtIndex:12], [a objectAtIndex:13], [a objectAtIndex:14], [a objectAtIndex:15], [a objectAtIndex:16]);
+        }*/
+        
+        sqlite3_close(budgetDB);
     }
 
     return allBudget;
 }
 
 
+-(void)PostGoals:(int)weeks
+{
+    Goal *g = [[Goal alloc]init];
+    NSString *userId = [self GetSecureUID];
+    
+    if(dbPathString == NULL)
+    {
+        d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *stmt;
+        const char *goal_query = "SELECT * FROM (SELECT START_DATE FROM BUDGET WHERE BUDGET_ID = (SELECT CASE WHEN MAX(BUDGET_ID) = 1 THEN 1 ELSE MAX(BUDGET_ID) - 1 END FROM BUDGET)) JOIN (SELECT * FROM GOAL)";
+        
+        if (sqlite3_prepare(budgetDB, goal_query, -1, &stmt, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(stmt)==SQLITE_ROW)
+            {
+                NSDate *today = [NSDate date];
+                NSDate *startDate = [g StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 10)]];
+                NSDate *lastDate = [g StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)]];
+                
+                double totalWeeks = [g WeeksBetweenTwoDate:startDate :lastDate];
+                double currentWeek = [g WeeksBetweenTwoDate:startDate :today] - 1;
+                
+                int weeksMet = sqlite3_column_int(stmt, 8);
+                int WeeksNotMet = currentWeek - weeksMet;
+                
+                NSString *postData = [NSString stringWithFormat:@"entry.1261645413=%@&entry.360723927=%@&entry.1203475284=%@&entry.900055872=%@&entry.1258465337=%@&entry.299703273=%@&entry.999414664=%d&entry.1402876013=%d&entry.1176602381=%g&entry.1525126050=%g&entry.665489647=%d&entry.223088735=%d", userId, [self GetMonday], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 4)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)], sqlite3_column_int(stmt, 7), sqlite3_column_int(stmt, 9), totalWeeks, currentWeek, weeksMet, WeeksNotMet];
+                
+                NSString *postUrl = @"https://docs.google.com/forms/d/1EDKzdw1zuapQdRPRMX6eGlrJKBJ3h08fDoUbxgHzFpA/formResponse";
+                
+                [self PostToGoogleDocs:postData :postUrl];
+                
+                //NSLog(@"Today: %@, StartDate: %@, LastDate: %@, Total Weeks: %g, Current Week: %g, WeeksMet: %d, WeeksNotMet: %d", today, startDate, lastDate, totalWeeks, currentWeek, weeksMet, WeeksNotMet);
+            }
+        }
+        
+        sqlite3_close(budgetDB);
+    }
+}
+
+
+-(NSString *)GetMonday
+{
+    int weekday = 0;
+    int week = 0;
+    
+    NSDate *today = [NSDate date];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [calendar setLocale:[NSLocale currentLocale]];
+    [calendar setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+    NSDateComponents *nowComponents = [calendar components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit fromDate:today];
+    
+    weekday = [nowComponents weekday];
+    week = [nowComponents week];
+    
+    if (weekday == 1)
+    {
+        week -= 1;
+        [nowComponents setWeek:week];
+    }
+    
+    [nowComponents setWeekday:2];
+    [nowComponents setHour:0];
+    [nowComponents setMinute:0];
+    [nowComponents setSecond:0];
+    
+    NSDate *monday = [calendar dateFromComponents:nowComponents];
+    //NSLog(@"Monday: %@", monday);
+    
+    return [formatter stringFromDate:monday];
+}
+
+
+-(void)PostAllExpenses:(int)weeks
+{
+    NSString *userId = [self GetSecureUID];
+    
+    if(dbPathString == NULL)
+    {
+        d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *stmt;
+        NSString *purhcaseQuery = [NSString stringWithFormat:@"SELECT B.START_DATE, P.PURCHASE_DATE, C.CATEGORY_NAME, P.PURCHASE_ITEM_NAME, P.PURCHASE_ITEM_PRICE, P.PURCHASE_ITEM_PRIORITY FROM PURCHASE P, CATEGORY C, BUDGET B WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = B.BUDGET_ID AND P.BUDGET_ID IN (SELECT BUDGET_ID FROM BUDGET ORDER BY BUDGET_ID DESC LIMIT 1, %d) ORDER BY B.START_DATE ASC", weeks];
+        
+        const char *purchase_query = [purhcaseQuery UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, purchase_query, -1, &stmt, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(stmt)==SQLITE_ROW)
+            {
+                NSString *postData = [NSString stringWithFormat:@"entry.395258719=%@&entry.1972562077=%@&entry.1195554600=%@&entry.1561213365=%@&entry.2104599426=%@&entry.1563488957=%@&entry.973034644=%@&entry.1844750374=NA&entry.1008128023=%.2f&entry.1588387965=%d&entry.1581699001=NA&entry.405367472=NA&entry.1877571082=NA&entry.58475353=NA", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)], @"Ad-Hoc Purchase", @"Ad-Hoc Purchase", [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], sqlite3_column_double(stmt, 4), sqlite3_column_int(stmt, 5)];
+                
+                NSString *postUrl = @"https://docs.google.com/forms/d/18TiQ4aDTmjQ2q2z-IMaFHAGEzJ9BCkUdCNgQez0Ckys/formResponse";
+                
+                [self PostToGoogleDocs:postData :postUrl];
+            }
+        }
+        sqlite3_finalize(stmt);
+        
+        
+        sqlite3_stmt *s;
+        NSString *shoppingQuery = [NSString stringWithFormat:@"SELECT L.SHOPPING_ID, B.START_DATE, L.SHOPPING_DATE, L.SHOPPING_NAME,  L.SHOPPING_BUDGET, L.SHOPPING_TOTAL, L.DURATION FROM SHOPPING_LIST L, BUDGET B WHERE B.BUDGET_ID  = L.BUDGET_ID AND l.BUDGET_ID IN (SELECT BUDGET_ID FROM BUDGET ORDER BY BUDGET_ID DESC LIMIT 1, %d) ORDER BY B.START_DATE ASC", weeks];
+        
+        const char *shopping_query = [shoppingQuery UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, shopping_query, -1, &s, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(s)==SQLITE_ROW)
+            {
+                sqlite3_stmt *st;
+                BOOL firstRow = TRUE;
+                
+                NSString *itemQuery = [NSString stringWithFormat:@"SELECT C.CATEGORY_NAME, I.SHOPPING_ITEM_NAME, I.SHOPPING_ITEM_PRICE, I.NECESSITY FROM SHOPPING_ITEM I, CATEGORY C WHERE C.CATEGORY_ID = I.CATEGORY_ID AND SHOPPING_ID = %d", sqlite3_column_int(s, 0)];
+                
+                const char *item_query = [itemQuery UTF8String];
+                
+                if (sqlite3_prepare(budgetDB, item_query, -1, &st, NULL)==SQLITE_OK)
+                {
+                    while (sqlite3_step(st)==SQLITE_ROW)
+                    {
+                        NSString *postData = @"";
+                        if (firstRow)
+                        {
+                            postData = [NSString stringWithFormat:@"entry.395258719=%@&entry.1972562077=%@&entry.1195554600=%@&entry.1561213365=%@&entry.2104599426=%@&entry.1563488957=%@&entry.973034644=%@&entry.1844750374=%.2f&entry.1008128023=%.2f&entry.1588387965=%d&entry.1581699001=%.2f&entry.405367472=%.2f&entry.1877571082=%.2f&entry.58475353=%.2f", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 1)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 2)], @"Shopping Trip", [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 1)], sqlite3_column_double(st, 2), sqlite3_column_double(st, 2), sqlite3_column_int(st, 3), sqlite3_column_double(s, 4), sqlite3_column_double(s, 5), sqlite3_column_double(s, 6), sqlite3_column_double(s, 6)];
+                            
+                            firstRow = FALSE;
+                        }
+                        else
+                        {
+                            postData = [NSString stringWithFormat:@"entry.395258719=%@&entry.1563488957=%@&entry.973034644=%@&entry.1844750374=%.2f&entry.1008128023=%.2f&entry.1588387965=%d", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 1)], sqlite3_column_double(st, 2), sqlite3_column_double(st, 2), sqlite3_column_int(st, 3)];
+                        }
+                        
+                        NSString *postUrl = @"https://docs.google.com/forms/d/18TiQ4aDTmjQ2q2z-IMaFHAGEzJ9BCkUdCNgQez0Ckys/formResponse";
+                        
+                        [self PostToGoogleDocs:postData :postUrl];
+                    }
+                }
+                sqlite3_finalize(st);
+            }
+        }
+        sqlite3_finalize(s);
+        
+        
+        sqlite3_close(budgetDB);
+    }
+}
+
+
 -(void)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl
 {
-    //NSString *post = @"entry.1=Hannan&entry.2=Affan";
-    // Bismillah Spreadsheet - Testing Purposes NSURL *url = [NSURL URLWithString:@"https://docs.google.com/forms/d/1Vg-q9TeKA03dP2atPg_tz9SAI5zRhqXvWtdDJDcyWF0/formResponse"];
-    
     NSString *post = data;
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
@@ -436,10 +594,10 @@
     
     NSError *error;
     NSURLResponse *response;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     NSString *ReturnHTML=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@",ReturnHTML);
+    NSLog(@"%@",ReturnHTML);
 }
 
 

@@ -11,15 +11,19 @@
 @interface AppLaunch : NSObject
 
 
-- (void)InsertPreviousBudget;
+-(void)InsertPreviousBudget;
 -(NSString *)GetStartDate;
-- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
+-(NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
 -(NSMutableArray *)GetBudgetIDIncome;
 -(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks;
 -(double)GetExpensesForLastWeek:(int)lbudget_id;
 -(NSString *)GetSecureUID;
 -(void)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl;
--(void)PostBudget;
+-(void)PrepareToPostGoogle;
 -(NSMutableArray *)GetBudgetByWeeks:(int)weeks;
+-(void)PostGoals:(int)weeks;
+-(NSString *)GetMonday;
+-(void)PostAllExpenses:(int)weeks;
+
 
 @end

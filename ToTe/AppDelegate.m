@@ -32,7 +32,9 @@
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
     
-    [a GetBudgetByWeeks:3];
+    //[a PostAllExpenses:3];
+    //[a PostGoals:1];
+    //[a GetBudgetByWeeks:3];
     //[a PostBudget];
     //[a PostToGoogleDocs];
     
@@ -49,6 +51,13 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    BOOL ShareData = [[NSUserDefaults standardUserDefaults]boolForKey:@"ShareSwitch"];
+    
+    NSLog(ShareData ? @"True" : @"False");
+    
+    AppLaunch *a = [[AppLaunch alloc]init];
+    //[a PostAllExpenses:3];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

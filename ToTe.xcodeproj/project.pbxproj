@@ -10,6 +10,7 @@
 		B400904C16A3B6C900BFD732 /* roundedrectangle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */; };
 		B407A3EF16B80358008E47D5 /* button-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = B407A3EE16B80358008E47D5 /* button-delete.png */; };
 		B407A3F316B82163008E47D5 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = B407A3F216B82163008E47D5 /* Goal.m */; };
+		B413211C16CF908B00FEA52B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B413211B16CF908B00FEA52B /* Reachability.m */; };
 		B419EC8416B27DCF00AD458D /* UpdateBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */; };
 		B4266E8816A05817008FC51F /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = B4266E8716A05817008FC51F /* Database.m */; };
 		B426C3C116BACB9D00C251CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B426C3C016BACB9D00C251CB /* QuartzCore.framework */; };
@@ -498,6 +499,8 @@
 		B407A3EE16B80358008E47D5 /* button-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-delete.png"; path = "images/button-delete.png"; sourceTree = "<group>"; };
 		B407A3F116B82163008E47D5 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
 		B407A3F216B82163008E47D5 /* Goal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		B413211A16CF908B00FEA52B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B413211B16CF908B00FEA52B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B419EC8216B27DCE00AD458D /* UpdateBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBudgetViewController.h; sourceTree = "<group>"; };
 		B419EC8316B27DCE00AD458D /* UpdateBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBudgetViewController.m; sourceTree = "<group>"; };
 		B4266E8616A05817008FC51F /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -1797,11 +1800,15 @@
 		CEFC835316917DE600F4E2B1 /* ToTe */ = {
 			isa = PBXGroup;
 			children = (
+				B413211A16CF908B00FEA52B /* Reachability.h */,
+				B413211B16CF908B00FEA52B /* Reachability.m */,
 				CE195F1C16CB57F40071197F /* StarterFiles */,
 				CE195ECA16CB3F1D0071197F /* CorePlot */,
 				B46494EB16C0CDE100228A77 /* Fonts */,
 				B4DB070316BF904900DE2755 /* AppLaunch.h */,
 				B4DB070416BF904900DE2755 /* AppLaunch.m */,
+				CEFC835C16917DE600F4E2B1 /* AppDelegate.h */,
+				CEFC835D16917DE600F4E2B1 /* AppDelegate.m */,
 				B4266E8616A05817008FC51F /* Database.h */,
 				B4266E8716A05817008FC51F /* Database.m */,
 				CE36AD8816BA29DE007ACC9B /* SettingsData.h */,
@@ -1813,8 +1820,6 @@
 				CEB06CED169573DE00F96FD4 /* Shopping List */,
 				CEB06CEE169573E900F96FD4 /* Purchases */,
 				CEB06CEF169573F100F96FD4 /* Overview */,
-				CEFC835C16917DE600F4E2B1 /* AppDelegate.h */,
-				CEFC835D16917DE600F4E2B1 /* AppDelegate.m */,
 				CE195F3116CB7C170071197F /* MainStoryboard.storyboard */,
 				CEB0703C169B9A5100F96FD4 /* MainPageViewController.h */,
 				CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */,
@@ -2376,6 +2381,7 @@
 				B45042EB16CBBA6000C6536E /* SecureUDID.m in Sources */,
 				CE5694A916CBEED2007A0F05 /* ShoppingTripItem.m in Sources */,
 				CE5694AC16CBEEE2007A0F05 /* ShoppingTrip.m in Sources */,
+				B413211C16CF908B00FEA52B /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

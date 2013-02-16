@@ -54,12 +54,12 @@
     NSDate *lastDate = [g StringToDate:g.deadline];
     
     double totalWeeks = [g WeeksBetweenTwoDate:startDate :lastDate];
-    double currentWeek = [g WeeksBetweenTwoDate:today :startDate] - 1;
+    double currentWeek = [g WeeksBetweenTwoDate:startDate :today] - 1;
     double weeksMet = g.weeks_met;
     
     /*NSLog(@"Start Date: %@, Last Day: %@, currenWeek: %g", startDate, lastDate, currentWeek);
-     NSLog(@"totalWeeks: %g", totalWeeks);
-     NSLog(@"weeksMet: %g", weeksMet);*/
+    NSLog(@"totalWeeks: %g", totalWeeks);
+    NSLog(@"weeksMet: %g", weeksMet);*/
     
     /*totalWeeks = 20;
      currentWeek = 13;
@@ -206,7 +206,7 @@
     NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"GoalDeleted"];
     int navigate = [ns intValue];
     
-    NSLog(@"Navigate: %d", navigate);
+    //NSLog(@"Navigate: %d", navigate);
     
     if (navigate == 1)
     {
