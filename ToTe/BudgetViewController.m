@@ -298,7 +298,7 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Budget"message:@"Please Enter your weekly income and categories!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Budget"message:@"Please enter your weekly income and categories!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
 
     }
