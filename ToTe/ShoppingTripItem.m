@@ -161,9 +161,28 @@
     sqlite3_close(budgetDB);
 }
 
--(void)updateShoppingItem:(int)uniqueId :(NSString *)shoppingItemName :(int)categoryID :(double)ShoppngItemPrice: (int)necessity :(int)itemBought
+-(void)updateShoppingItem:(int)ItemID :(NSString *)shoppingItemName :(int)categoryID :(double)shoppingItemPrice: (int)necessity
 {
+    char *error;
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
     
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_ITEM SET CATEGORY_ID = '%d', SHOPPING_ITEM_NAME = '%@', SHOPPING_ITEM_PRICE ='%2f', NECESSITY = '%d' WHERE ITEM_ID = '%d'", categoryID, shoppingItemName, shoppingItemPrice, necessity, ItemID];
+        
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Item Updated!");
+        }
+        else
+        {
+            NSLog(@"Shopping Item Not Updated!");
+        }
+        sqlite3_close(budgetDB);
+    }
 }
 
 @end

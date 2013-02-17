@@ -1101,6 +1101,9 @@
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" systemItem="done" id="man-Jl-OfM">
                                         <color key="tintColor" red="0.0" green="0.7843137255" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="btnUpdate:" destination="579-MX-tAV" id="sjj-a2-G6z"/>
+                                        </connections>
                                     </barButtonItem>
                                 </navigationItem>
                             </items>
@@ -1128,6 +1131,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="SelectCategory:" destination="579-MX-tAV" eventType="touchUpInside" id="gkr-Cz-7NJ"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvB-dF-8hk">
                                                     <constraints>
@@ -1161,6 +1167,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textfieldReutrn:" destination="579-MX-tAV" eventType="editingDidEnd" id="77q-zH-zgn"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzu-oq-Ihi">
                                                     <constraints>
@@ -1195,6 +1204,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <connections>
+                                                        <action selector="textfieldReutrn:" destination="579-MX-tAV" eventType="editingDidEnd" id="xBr-fI-2Kt"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkP-xB-mxr">
                                                     <constraints>
@@ -1235,6 +1247,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starOneClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="0BM-d0-lRM"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUt-Pk-PTk">
                                                     <constraints>
@@ -1248,6 +1263,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starTwoClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="qkX-wg-K8Y"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdi-n5-oXc">
                                                     <constraints>
@@ -1261,6 +1279,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starThreeClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="Sdy-G2-MJU"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCG-PN-Llh">
                                                     <constraints>
@@ -1274,6 +1295,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starFourClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="YY5-hw-e4I"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPv-SL-gww">
                                                     <constraints>
@@ -1287,6 +1311,9 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="starFiveClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="8wJ-tE-bDu"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1316,6 +1343,16 @@
                             <outlet property="delegate" destination="579-MX-tAV" id="noQ-OW-5cx"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="EditStar1" destination="26X-Id-wfJ" id="1dd-0H-69b"/>
+                        <outlet property="EditStar2" destination="AUt-Pk-PTk" id="Kld-FZ-n7o"/>
+                        <outlet property="EditStar3" destination="Sdi-n5-oXc" id="SUt-IX-Phv"/>
+                        <outlet property="EditStar4" destination="gCG-PN-Llh" id="K4O-xG-alQ"/>
+                        <outlet property="EditStar5" destination="NPv-SL-gww" id="Ede-Gq-cgq"/>
+                        <outlet property="editCategory" destination="1L5-og-zkq" id="Jbc-9r-8kD"/>
+                        <outlet property="editItemName" destination="te8-A1-Iex" id="dPP-Dq-8Ae"/>
+                        <outlet property="editItemPrice" destination="wsG-aF-oqd" id="Djm-Dn-ZWq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7tt-CF-90W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

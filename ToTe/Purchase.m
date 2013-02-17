@@ -328,7 +328,6 @@
         }
         sqlite3_close(budgetDB);
     }
-    
 }
 
 //Pol

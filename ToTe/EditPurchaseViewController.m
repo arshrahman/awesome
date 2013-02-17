@@ -175,10 +175,6 @@
     NSLog(@"Update data");
     
     [self.view endEditing:YES];
-    
-    //update method of database
-    
-    
 }
 
 -(IBAction)cancelPressed:(id)sender{

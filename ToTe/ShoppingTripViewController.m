@@ -10,10 +10,12 @@
 #import "customCell.h"
 #import "ShoppingTrip.h"
 #import "ShoppingTripItem.h"
+#import "EditShoppingItemViewController.h"
 
 @interface ShoppingTripViewController ()
 {
     ShoppingTrip *st;
+    ShoppingTripItem *shoppingItem;
 }
 
 @end
@@ -231,6 +233,15 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    EditShoppingItemViewController *editingView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditShoppingItemViewController"];
+    
+    editingView.shoppingItem = [self.ShoppingTripItemList objectAtIndex:tableView.indexPathForSelectedRow.row];
+    
+    [editingView setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    // Pass the selected object to the new view controller.
+    [self presentModalViewController:editingView animated:YES];
+    //[self.navigationController pushViewController:editingView animated:YES];
 }
 
 - (void)viewDidUnload {
