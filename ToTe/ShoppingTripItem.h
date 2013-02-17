@@ -18,7 +18,6 @@
 @property(assign)int categoryID;
 @property(assign)double shoppingItemPrice;
 @property(assign)int necessity;
-@property(assign)int itemsBought;
 
 - (NSMutableArray *) viewCurrentShoppingTrip:(int)shoppingID;
 - (void)deleteShoppingItem:(int)shoppingID :(int)itemID;

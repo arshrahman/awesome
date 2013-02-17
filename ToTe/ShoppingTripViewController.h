@@ -10,7 +10,6 @@
 
 @interface ShoppingTripViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    IBOutlet UITableView *ShoppingItemList;
     int numStar;
 }
 

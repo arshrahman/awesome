@@ -42,6 +42,12 @@
     NSLog(@"Shopping Trip");
 	// Do any additional setup after loading the view.
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.ShoppingTripTV reloadData];
     //Retrieve Data
     ShoppingTrip *st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
@@ -75,7 +81,6 @@
         self.AddTrip.enabled = FALSE;
         self.DeleteTrip.enabled =TRUE;
     }
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -231,16 +236,30 @@
     [self setDeleteTrip:nil];
     [super viewDidUnload];
 }
-- (IBAction)DeleteTrip:(id)sender {
-}
 
 - (IBAction)DeletePressed:(id)sender {
+    
 }
 
 - (IBAction)StartEndPressed:(id)sender {
     
     //Start and End Trip
-    
+    if(self.StartEndTrip.titleLabel.text == @"Start Trip")
+    {
+        //Duration count down start
+        
+        [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
+    }
+    else if(self.StartEndTrip.titleLabel.text == @"End Trip")
+    {
+        //Duration count down stop
+        
+        [self.StartEndTrip setTitle:@"Complete Trip" forState:UIControlStateNormal];
+    }
+    else
+    {
+        //Update Shopping Trip and Shopping Trip item
+    }
 }
 
 - (IBAction)AddPressed:(id)sender {

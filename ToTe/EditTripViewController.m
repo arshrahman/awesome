@@ -240,10 +240,12 @@
     
         //Current Date
         st.shoppingDate = [NSDate date];
+        
+        st.shoppingTripCompleted = FALSE;
     
         //call database code
         //Add Trip
-        [st addshoppingTrip:st.shoppingTripName :st.shoppingBudget :st.Duration :st.shoppingTotal];
+        [st addshoppingTrip:st.shoppingTripName :st.shoppingBudget :st.Duration :st.shoppingTotal :st.shoppingTripCompleted];
         
         NSLog(@"WENT IN TO THE LOOP");
         NSLog(@"%d", self.ShoppingTripItemList.count);

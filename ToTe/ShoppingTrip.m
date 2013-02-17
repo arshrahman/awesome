@@ -45,7 +45,7 @@
         NSLog(@"%d",maxID);
         
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE SHOPPING_ID = '%d'", maxID];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == FALSE", maxID];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -96,7 +96,7 @@
     return trip;
 }
 
-- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal
+- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(BOOL)shoppingTripCompleted
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -127,7 +127,7 @@
         sqlite3_finalize(st);
         
         
-        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_LIST(BUDGET_ID, SHOPPING_NAME, SHOPPING_DATE, SHOPPING_BUDGET, DURATION, SHOPPING_TOTAL) VALUES ('%d','%@', '%@','%2f', '%@', '%2f')",maxID, shoppingName, theDate, shoppingBudget, Duration, shoppingTotal];
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_LIST(BUDGET_ID, SHOPPING_NAME, SHOPPING_DATE, SHOPPING_BUDGET, DURATION, SHOPPING_TOTAL, SHOPPING_TRIP_COMPLETED) VALUES ('%d','%@', '%@','%2f', '%@', '%2f', '%c')",maxID, shoppingName, theDate, shoppingBudget, Duration, shoppingTotal, shoppingTripCompleted];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
