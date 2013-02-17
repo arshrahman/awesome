@@ -189,7 +189,7 @@
         if (sqlite3_step(st)==SQLITE_ROW)
         {
             [array addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 0)]];
-            [array addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 1)]];
+            [array addObject:[NSNumber numberWithInt:sqlite3_column_double(st, 1)]];
         }
     }
     sqlite3_finalize(st);
@@ -200,14 +200,15 @@
 }
 
 
--(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks
+-(void)GoalAchieved:(int)lastBudget_id:(double)income:(int)weeks
 {
     char *error;
-    int savings = 0;
-    int expenses = 0;
+    double savings = 0;
+    double expenses = 0;
     BOOL goalsMet = FALSE;
     NSString *delimiter = @"";
     NSMutableArray *goalIdArray;
+    Goal *gg;
     
     if(dbPathString == NULL)
     {
@@ -218,15 +219,17 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         expenses = [self GetExpensesForLastWeek:lastBudget_id];
+        //NSLog(@"expenses: %g", expenses);
         savings = income - expenses;
-        //NSLog(@"Savings: %d", savings);
+        //NSLog(@"Savings: %g", savings);
         
         if (savings > 0)
         {
             sqlite3_stmt *statement;
-            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE FROM GOAL WHERE DATE('NOW', '-7 DAY') < DEADLINE ORDER BY PRIORITY";
+            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE, GOAL_START_DATE, DEADLINE FROM GOAL ORDER BY PRIORITY";
             
             goalIdArray = [[NSMutableArray alloc]init];
+            gg = [[Goal alloc]init];
             
             if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
             {
@@ -238,12 +241,24 @@
                     
                     if (savings >= toSave)
                     {
-                        queryWeeksMet = [queryWeeksMet stringByAppendingString:[NSString stringWithFormat:@"%@%d", delimiter, sqlite3_column_int(statement, 0)]];
+                        NSDate *today = [NSDate date];
+                        NSDate *stDate = [gg StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)]];
+                        NSDate *ltDate = [gg StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)]];
                         
-                        [goalIdArray addObject:[NSNumber numberWithInt:sqlite3_column_int(statement, 0)]];
-                        delimiter = @", ";
-                        savings -= toSave;
-                        goalsMet = TRUE;
+                        double totalWeeks = [gg WeeksBetweenTwoDate:stDate :ltDate];
+                        double currentWeek = [gg WeeksBetweenTwoDate:stDate :today] - 1;
+                        
+                        //NSLog(@"Total Weeks: %g, Current Weeks: %g", totalWeeks, currentWeek);
+                        
+                        if (totalWeeks >= currentWeek)
+                        {
+                            queryWeeksMet = [queryWeeksMet stringByAppendingString:[NSString stringWithFormat:@"%@%d", delimiter, sqlite3_column_int(statement, 0)]];
+                            
+                            [goalIdArray addObject:[NSNumber numberWithInt:sqlite3_column_int(statement, 0)]];
+                            delimiter = @", ";
+                            savings -= toSave;
+                            goalsMet = TRUE;
+                        }
                     }
                 }
                 
@@ -278,8 +293,6 @@
         sqlite3_close(budgetDB);
     }
 }
-
-
 
 
 -(double)GetExpensesForLastWeek:(int)lbudget_id
@@ -371,8 +384,8 @@
                 
                 [ar addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 0)]];
                 [ar addObject:[[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(st, 1)]];
-                [ar addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 2)]];
-                [ar addObject:[NSNumber numberWithInt:sqlite3_column_int(st, 3)]];
+                [ar addObject:[NSNumber numberWithInt:sqlite3_column_double(st, 2)]];
+                [ar addObject:[NSNumber numberWithInt:sqlite3_column_double(st, 3)]];
                 
                 [allBudget addObject:ar];
             }
@@ -482,7 +495,7 @@
                 int weeksMet = sqlite3_column_int(stmt, 8);
                 int WeeksNotMet = currentWeek - weeksMet;
                 
-                NSString *postData = [NSString stringWithFormat:@"entry.1261645413=%@&entry.360723927=%@&entry.1203475284=%@&entry.900055872=%@&entry.1258465337=%@&entry.299703273=%@&entry.999414664=%d&entry.1402876013=%d&entry.1176602381=%g&entry.1525126050=%g&entry.665489647=%d&entry.223088735=%d", userId, [self GetMonday], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 4)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)], sqlite3_column_int(stmt, 7), sqlite3_column_int(stmt, 9), totalWeeks, currentWeek, weeksMet, WeeksNotMet];
+                NSString *postData = [NSString stringWithFormat:@"entry.1261645413=%@&entry.360723927=%@&entry.1203475284=%@&entry.900055872=%@&entry.1258465337=%@&entry.299703273=%@&entry.999414664=%d&entry.1402876013=%.2g&entry.1176602381=%g&entry.1525126050=%g&entry.665489647=%d&entry.223088735=%d", userId, [self GetMonday], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 4)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)], sqlite3_column_int(stmt, 7), sqlite3_column_double(stmt, 9), totalWeeks, currentWeek, weeksMet, WeeksNotMet];
                 
                 NSString *postUrl = @"https://docs.google.com/forms/d/1EDKzdw1zuapQdRPRMX6eGlrJKBJ3h08fDoUbxgHzFpA/formResponse";
                 

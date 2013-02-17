@@ -41,7 +41,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(navigatePage)];
     [self.view addGestureRecognizer:tap];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(navigatePage) userInfo:nil repeats:NO];
 }
 
 

@@ -22,20 +22,15 @@
         //[[UITabBar appearance] setSelectedImageTintColor:[UIColor redColor]];
     }
     [[UINavigationBar appearance]setTintColor:[UIColor blackColor]];
-    //[[UINavigationBar appearance]setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    //[[UITabBar appearance]setTintColor:[UIColor blackColor]];
+    //[[UINavigationBar appearance]setTintColor:[UIColor lightGrayColor]];
+    //NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor darkGrayColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, nil];
+    //[[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
     
     Database *d = [[Database alloc]init];
     [d CreateDB];
     
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
-    
-    //[a PostAllExpenses:3];
-    //[a PostGoals:1];
-    //[a GetBudgetByWeeks:3];
-    //[a PostBudget];
-    //[a PostToGoogleDocs];
     
     return YES;
 }
@@ -66,9 +61,6 @@
     
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
-    
-    //[a GetSecureUID];
-    //[a PostToGoogleDocs];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

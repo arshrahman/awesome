@@ -83,7 +83,7 @@
     txtDescription.text = g.goal_description;
     txtDeadline.text = [g ConvertDateFormat:g.deadline];
     self.deadline = [g StringToDate:g.deadline];
-    txtAmount.text = [NSString stringWithFormat:@"%d", g.goal_amount];
+    txtAmount.text = [NSString stringWithFormat:@"%.2f", g.goal_amount];
     toSave = g.amount_tosave;
     lblSave.text = [NSString stringWithFormat:@"Save $%g per week", g.amount_tosave];
     
@@ -269,7 +269,7 @@
 -(void)ChangelblSave
 {
     int weeks = [g WeeksBetweenDate:self.deadline];
-    int amount = [txtAmount.text intValue];
+    double amount = [txtAmount.text doubleValue];
     
     toSave = amount/(double)weeks;
     
@@ -278,7 +278,7 @@
         toSave = [[NSString stringWithFormat:@"%.2f",toSave] doubleValue];
     }
     
-    lblSave.text = [NSString stringWithFormat:@"Save $%g per week", toSave];
+    lblSave.text = [NSString stringWithFormat:@"Save $%.2f per week", toSave];
 }
 
 
@@ -367,7 +367,7 @@
 }
 
 
--(BOOL)IsEmpty:(NSString *)txt
+-(BOOL)IsNotEmpty:(NSString *)txt
 {
     if([txt length] > 0)
     {
@@ -382,11 +382,11 @@
 
 - (IBAction)btnDone:(id)sender
 {
-    if ([self IsEmpty:txtGoal.text] && [self IsEmpty:txtAmount.text] && [self IsEmpty:txtDeadline.text])
+    if ([self IsNotEmpty:txtGoal.text] && [self IsNotEmpty:txtAmount.text] && [self IsNotEmpty:txtDeadline.text])
     {
         NSString *strDeadline = [g DateToString:self.deadline];
         
-        if ([g UpdateGoal:txtGoal.text :txtDescription.text :[txtAmount.text intValue] :strDeadline :oldPhotoName :toSave :g.goal_id])
+        if ([g UpdateGoal:txtGoal.text :txtDescription.text :[txtAmount.text doubleValue] :strDeadline :oldPhotoName :toSave :g.goal_id])
         {
             if (photosToDelete.count > 1)
             {
@@ -401,8 +401,23 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Goal"message:@"Please fill in all the fields!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
-        [alert show];
+        if (![self IsNotEmpty:txtGoal.text])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Goal"message:@"Please fill in the goal title!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+            [alert show];
+            
+        }
+        else if (![self IsNotEmpty:txtAmount.text])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Goal"message:@"Please fill in the goal amount!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+            [alert show];
+            
+        }
+        else if (![self IsNotEmpty:txtDeadline.text])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Goal"message:@"Please fill in the deadline!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+            [alert show];
+        }
     }
 }
 

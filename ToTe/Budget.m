@@ -88,7 +88,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO BUDGET(START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) VALUES ('%@','%@','%g', '%g')",[dates objectAtIndex:0], [dates objectAtIndex:1], budgetAmount, wkIncome];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO BUDGET(START_DATE, END_DATE, BUDGET_AMOUNT, WINCOME) VALUES ('%@','%@','%.2f', '%.2f')",[dates objectAtIndex:0], [dates objectAtIndex:1], budgetAmount, wkIncome];
         const char *insert_stmt = [insertStmt UTF8String];
 
         if (sqlite3_exec(budgetDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK)
@@ -344,7 +344,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *updateStmt = [NSString stringWithFormat:@"UPDATE BUDGET SET BUDGET_AMOUNT = '%g', WINCOME = '%g' WHERE BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)", budgetAmount, wkIncome];
+        NSString *updateStmt = [NSString stringWithFormat:@"UPDATE BUDGET SET BUDGET_AMOUNT = '%.2f', WINCOME = '%.2f' WHERE BUDGET_ID = (SELECT MAX(BUDGET_ID) FROM BUDGET)", budgetAmount, wkIncome];
         const char *update_stmt = [updateStmt UTF8String];
         
         if (sqlite3_exec(budgetDB, update_stmt, NULL, NULL, &error)==SQLITE_OK)

@@ -97,9 +97,9 @@
         {
             lblGreen.textColor = [UIColor whiteColor];
             lblGreen.textAlignment = NSTextAlignmentCenter;
-            lblGreen.font = [UIFont fontWithName:@"Helvetica" size:16];
+            lblGreen.font = [UIFont fontWithName:@"Gill Sans" size:16];
             lblGreen.font = [UIFont boldSystemFontOfSize:16 ];
-            lblGreen.text = [NSString stringWithFormat:@"$%g", weeksMet * g.amount_tosave];
+            lblGreen.text = [NSString stringWithFormat:@"$%.2f", weeksMet * g.amount_tosave];
         }
         
         UIBezierPath *maskPath;
@@ -125,7 +125,7 @@
     
     if (greyWidth > 0 && (currentWeek < totalWeeks))
     {
-        lblGrey = [[UILabel alloc]initWithFrame:CGRectMake(greenWidth + redWidth + 20, labelY, greyWidth, labelHeight)];
+        lblGrey = [[UILabel alloc]initWithFrame:CGRectMake(greenWidth + redWidth + 19, labelY, greyWidth, labelHeight)];
         
         lblGrey.backgroundColor = [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0];
         
@@ -133,9 +133,9 @@
         {
             lblGrey.textColor = [UIColor whiteColor];
             lblGrey.textAlignment = NSTextAlignmentCenter;
-            lblGrey.font = [UIFont fontWithName:@"Helvetica" size:16];
+            lblGrey.font = [UIFont fontWithName:@"Gill Sans" size:16];
             lblGrey.font = [UIFont boldSystemFontOfSize:16 ];
-            lblGrey.text = [NSString stringWithFormat:@"$%d", g.goal_amount];
+            lblGrey.text = [NSString stringWithFormat:@"$%g", g.goal_amount];
         }
         
         UIBezierPath *maskPath;
@@ -255,20 +255,20 @@
         scroller.minimumZoomScale = 0.5f;
         
         lblGoalTitle.numberOfLines = 1;
-        lblGoalTitle.font = [UIFont fontWithName:@"Helvetica" size:17];
+        lblGoalTitle.font = [UIFont fontWithName:@"Gill Sans" size:18];
         lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
         
         lblDescription.numberOfLines = 4;
-        lblDescription.font = [UIFont fontWithName:@"Helvetica" size:15];
+        lblDescription.font = [UIFont fontWithName:@"Gill Sans" size:17];
         lblDescription.lineBreakMode = UILineBreakModeTailTruncation;
         lblDescription.textAlignment = UITextAlignmentCenter;
         
         lbltoSaveWeekly.numberOfLines = 1;
-        lbltoSaveWeekly.font = [UIFont fontWithName:@"Helvetica" size:15];
+        lbltoSaveWeekly.font = [UIFont fontWithName:@"Gill Sans" size:17];
         lbltoSaveWeekly.textAlignment = UITextAlignmentCenter;
         
         lbltoSaveTotal.numberOfLines = 1;
-        lbltoSaveTotal.font = [UIFont fontWithName:@"Helvetica" size:15];
+        lbltoSaveTotal.font = [UIFont fontWithName:@"Gill Sans" size:17];
         lbltoSaveTotal.textAlignment = UITextAlignmentCenter;
         
         [self.view addSubview:scroller];
@@ -282,7 +282,7 @@
         lblGoalTitle.text = [NSString stringWithFormat:@"  %@", g.goal_title];
         lblDescription.text = g.goal_description;
         lbltoSaveWeekly.text = [NSString stringWithFormat:@"Save $%g Weekly!", g.amount_tosave];
-        lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%d by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
+        lbltoSaveTotal.text = [NSString stringWithFormat:@"Save $%g by %@", g.goal_amount, [g ConvertDateFormat:g.deadline]];
         
         [self ProgressBar];
         

@@ -29,6 +29,7 @@
 @synthesize budgetCat;
 @synthesize scrollView;
 @synthesize txtBudget;
+@synthesize tbWeeklyIncome;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +58,10 @@
     budgetCat.layer.cornerRadius = 5.0f;
     budgetCat.layer.borderColor = [UIColor lightGrayColor].CGColor;
     budgetCat.layer.borderWidth = 1;
+    
+    tbWeeklyIncome.layer.cornerRadius = 5.0f;
+    tbWeeklyIncome.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    tbWeeklyIncome.layer.borderWidth = 1;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -188,7 +193,7 @@
     bgc.category_amount = [textField.text doubleValue];
     budgetValue += bgc.category_amount;
     
-    lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
+    lblBudget.text =  [NSString stringWithFormat:@"$%.2f",budgetValue];
 }
 
 
@@ -227,7 +232,7 @@
             
             [bgCat removeObjectAtIndex:indexPath.row-1];
             [otherButtons addObject:c];
-            lblBudget.text =  [NSString stringWithFormat:@"$%g",budgetValue];
+            lblBudget.text =  [NSString stringWithFormat:@"$%.2f",budgetValue];
             
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
         }
@@ -263,7 +268,7 @@
 
     if (txtBudget.text.length > 0 && bgCat.count > 0)
     {
-        int wkIncome = [txtBudget.text intValue];
+        double wkIncome = [txtBudget.text doubleValue];
         
         if (wkIncome > budgetValue)
         {
@@ -315,6 +320,7 @@
     [self setBudgetCat:nil];
     lblBudget = nil;
     [self setScrollView:nil];
+    [self setTbWeeklyIncome:nil];
     [super viewDidUnload];
 }
 

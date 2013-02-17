@@ -17,6 +17,7 @@
 @property (nonatomic) IBOutlet UITableView *budgetCat;
 @property (strong, nonatomic) IBOutlet UITextField *txtBudget;
 @property (strong, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UITableView *tbWeeklyIncome;
 
 -(IBAction)btnDone:(id)sender;
 - (IBAction)btnCancel:(id)sender;

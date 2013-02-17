@@ -15,7 +15,7 @@
 -(NSString *)GetStartDate;
 -(NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
 -(NSMutableArray *)GetBudgetIDIncome;
--(void)GoalAchieved:(int)lastBudget_id:(int)income:(int)weeks;
+-(void)GoalAchieved:(int)lastBudget_id:(double)income:(int)weeks;
 -(double)GetExpensesForLastWeek:(int)lbudget_id;
 -(NSString *)GetSecureUID;
 -(BOOL)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl;

@@ -63,7 +63,7 @@
 		
 		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        NSString *amount = [NSString stringWithFormat: @"%d", g.goal_amount];
+        NSString *amount = [NSString stringWithFormat: @"%.2f", g.goal_amount];
         
         //append budget/goal title/end date
 		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal (%@) by %@!Please support me by encouraging and reminding me!:D", amount, g.goal_title, g.deadline]];
@@ -110,7 +110,7 @@
         //append budget/goal title/end date
         //NSString * message = [NSString stringWithFormat:@"%@%@%@", fileName, str, extension];
         
-        NSString *amount = [NSString stringWithFormat: @"%d", g.goal_amount];
+        NSString *amount = [NSString stringWithFormat: @"%.2f", g.goal_amount];
         //NSString *amount = [NSString stringWithFormat: @"$%.2lf", g.goal_amount];
         
         //append budget/goal title/end date
@@ -157,27 +157,27 @@
     //[self FacebookPost];
     
     NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
-    NSLog(@"Goal ID count: %d", goalIDArray.count);
+    //NSLog(@"Goal ID count: %d", goalIDArray.count);
     if (goalIDArray.count > 0)
     {
         //EDWIN
         //Retrieve the goal title from database with the goal id in the array and post to social media
         
-        NSLog(@"Goal ID count: %d", goalIDArray.count);
-        //remove all the data from the array (Make sure its empty)!
-        [[NSUserDefaults standardUserDefaults]setObject:goalIDArray forKey:@"PostSMGoals"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        
         //Retrieve goal
-        for(Goal *i in goalIDArray)
+        /*for(Goal *i in goalIDArray)
         {
             [g SelectGoal:i.goal_id];
             [self FacebookPost];
         }
+        [goalIDArray removeAllObjects];*/
         
         //Last step
-        //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
-        [goalIDArray removeAllObjects];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        //remove all the data from the array (Make sure its empty)!
+        //[[NSUserDefaults standardUserDefaults]setObject:goalIDArray forKey:@"PostSMGoals"];
+        //[[NSUserDefaults standardUserDefaults]synchronize];
     }
     
     self.navigationItem.hidesBackButton = YES;
@@ -352,7 +352,7 @@
             imv.image=[UIImage imageNamed:@"glyphicons_325_wallet.png"];
             
         }
-        lblamount.text = [NSString stringWithFormat:@"$%g", [[topArray objectAtIndex:indexPath.row] doubleValue]];
+        lblamount.text = [NSString stringWithFormat:@"$%.2f", [[topArray objectAtIndex:indexPath.row] doubleValue]];
         
         return cell;
     }
@@ -410,6 +410,8 @@
                 lblcurrent.textColor = [UIColor blackColor];
                 lbltotal.textColor = [UIColor blackColor];
             }
+            
+            lbltotal.text = [NSString stringWithFormat:@"$%.2f",[[bottomArray objectAtIndex:indexPath.row] doubleValue]];
         }
         if (indexPath.row == 1)
         {
@@ -426,10 +428,21 @@
             
             lblcurrent.text = @"Current\nSavings:";
             img.image=[UIImage imageNamed:@"glyphicons_037_coins.png"];
+            
+            double savings = [[bottomArray objectAtIndex:indexPath.row] doubleValue];
+            NSString *strSavings = @"";
+            
+            if (savings < 0)
+            {
+                strSavings = [NSString stringWithFormat:@"-$%.2f", fabs(savings)];
+            }
+            else
+            {
+                strSavings = [NSString stringWithFormat:@"$%.2f", savings];
+            }
+            
+            lbltotal.text = strSavings;
         }
-        
-        lbltotal.text = [NSString stringWithFormat:@"$%g",[[bottomArray objectAtIndex:indexPath.row] doubleValue]];
-        
         
         return cell1;
     }
@@ -525,7 +538,7 @@
 
 - (IBAction)btnClicked:(id)sender
 {
-    if (!allowEdit)
+    if (allowEdit)
     {
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         
