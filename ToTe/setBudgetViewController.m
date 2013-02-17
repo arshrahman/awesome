@@ -15,6 +15,7 @@
 #import "Database.h"
 #import "BudgetViewController.h"
 #import "SettingsData.h"
+#import "Goal.h"
 
 @interface setBudgetViewController ()
 
@@ -26,6 +27,7 @@
     NSMutableArray *bottomArray;
     NSMutableArray *catList;
     Budget *b;
+    Goal *g;
     double income;
     double expenses;
     int weekday;
@@ -61,8 +63,10 @@
 		
 		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
+        NSString *amount = [NSString stringWithFormat: @"%d", g.goal_amount];
+        
         //append budget/goal title/end date
-		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $_____ for my goal (__________________) by __.__.__!Please support me by encouraging and reminding me!:D"]];
+		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal (%@) by %@!Please support me by encouraging and reminding me!:D", amount, g.goal_title, g.deadline]];
         
 		[self presentViewController:twitter animated:YES completion:nil];
         
@@ -104,7 +108,13 @@
 		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
         //append budget/goal title/end date
-		[facebook setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $_____ for my goal (__________________) by __.__.__!Please support me by encouraging and reminding me!:D!"]];
+        //NSString * message = [NSString stringWithFormat:@"%@%@%@", fileName, str, extension];
+        
+        NSString *amount = [NSString stringWithFormat: @"%d", g.goal_amount];
+        //NSString *amount = [NSString stringWithFormat: @"$%.2lf", g.goal_amount];
+        
+        //append budget/goal title/end date
+		[facebook setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal (%@) by %@!Please support me by encouraging and reminding me!:D", amount, g.goal_title, g.deadline]];
         
 		[self presentViewController:facebook animated:YES completion:nil];
         
@@ -147,7 +157,7 @@
     //[self FacebookPost];
     
     NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
-    
+    NSLog(@"Goal ID count: %d", goalIDArray.count);
     if (goalIDArray.count > 0)
     {
         //EDWIN
@@ -157,6 +167,17 @@
         //remove all the data from the array (Make sure its empty)!
         [[NSUserDefaults standardUserDefaults]setObject:goalIDArray forKey:@"PostSMGoals"];
         [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        //Retrieve goal
+        for(Goal *i in goalIDArray)
+        {
+            [g SelectGoal:i.goal_id];
+            [self FacebookPost];
+        }
+        
+        //Last step
+        //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
+        [goalIDArray removeAllObjects];
     }
     
     self.navigationItem.hidesBackButton = YES;
