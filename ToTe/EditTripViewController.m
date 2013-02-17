@@ -241,7 +241,7 @@
         //Current Date
         st.shoppingDate = [NSDate date];
         
-        st.shoppingTripCompleted = FALSE;
+        st.shoppingTripCompleted = @"FALSE";
     
         //call database code
         //Add Trip

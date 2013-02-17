@@ -18,11 +18,11 @@
 @property(assign)double shoppingBudget;
 @property(nonatomic, strong)NSString *Duration;
 @property(assign)double shoppingTotal;
-@property BOOL shoppingTripCompleted;
+@property(nonatomic, strong)NSString *shoppingTripCompleted;
 
 //Get current shopping trip
 -(ShoppingTrip *) checkShoppingTrip;
-- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(BOOL)shoppingTripCompleted;
+- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(NSString *)shoppingTripCompleted;
 
 
 @end
