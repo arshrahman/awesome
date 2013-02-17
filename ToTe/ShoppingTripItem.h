@@ -20,7 +20,7 @@
 @property(assign)int necessity;
 
 - (NSMutableArray *) viewCurrentShoppingTrip:(int)shoppingID;
-- (void)deleteShoppingItem:(int)shoppingID :(int)itemID;
+- (void)deleteShoppingItem:(int)itemID;
 - (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity;
 -(void)updateShoppingItem:(int)uniqueId :(NSString *)shoppingItemName :(int)categoryID :(double)ShoppngItemPrice: (int)necessity :(int)itemBought;
 

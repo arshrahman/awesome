@@ -145,4 +145,41 @@
     sqlite3_close(budgetDB);
 }
 
+//Delete
+- (void)deleteShoppingTrip:(int)shoppingID;
+{
+    char *error;
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *querySql = [NSString stringWithFormat:@"DELETE FROM SHOPPING_LIST WHERE SHOPPING_ID = '%d'", shoppingID];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Trip Deleted!");
+        }
+        else
+        {
+            NSLog(@"Shopping Trip Not Deleted!");
+        }
+        
+        NSString *querySql2 = [NSString stringWithFormat:@"DELETE FROM SHOPPING_ITEM WHERE SHOPPING_ID = '%d'", shoppingID];
+        const char *query_sql2 = [querySql2 UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql2, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Item Deleted!");
+        }
+        else
+        {
+            NSLog(@"Shopping Item Not Deleted!");
+        }
+        
+        sqlite3_close(budgetDB);
+    }
+}
+
 @end

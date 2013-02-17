@@ -12,6 +12,9 @@
 #import "ShoppingTripItem.h"
 
 @interface ShoppingTripViewController ()
+{
+    ShoppingTrip *st;
+}
 
 @end
 
@@ -47,13 +50,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.ShoppingTripTV reloadData];
     //Retrieve Data
-    ShoppingTrip *st = [[ShoppingTrip alloc]init];
+    st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
     
     st = [st checkShoppingTrip];
-    ShoppingTripItemList = [sti viewCurrentShoppingTrip:st.shoppingID];
+    self.ShoppingTripItemList = [sti viewCurrentShoppingTrip:st.shoppingID];
+    
+    [self.ShoppingTripTV reloadData];
+    
+    NSLog(@"%d",self.ShoppingTripItemList.count);
+    
     if(st.shoppingID != 0)
     {
         self.lbDuration.text = st.Duration;
@@ -61,10 +68,10 @@
         self.lbTripName.text = st.shoppingTripName;
     }
     
-    if(self.ShoppingTripItemList.count != 0)
+    if(self.ShoppingTripItemList.count > 0)
     {
+        self.StartEndTrip.hidden = FALSE;
         [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
-        [self.StartEndTrip setTintColor:[UIColor colorWithRed:0 green:0.6 blue:0.2 alpha:1.0]];
     }
     else
     {
@@ -239,18 +246,37 @@
 
 - (IBAction)DeletePressed:(id)sender {
     
+    [st deleteShoppingTrip:st.shoppingID];
+    [self.ShoppingTripItemList removeAllObjects];
+    self.lbDuration.text = @"Duration";
+    self.lbBudget.text = @"Budget";
+    self.lbTripName.text = @"Trip Name";
+    [self.ShoppingTripTV reloadData];
+    
+    self.StartEndTrip.hidden = TRUE;
+
+    if(self.ShoppingTripItemList.count == 0)
+    {
+        self.AddTrip.enabled =TRUE;
+        self.DeleteTrip.enabled =FALSE;
+    }
+    else
+    {
+        self.AddTrip.enabled = FALSE;
+        self.DeleteTrip.enabled =TRUE;
+    }
 }
 
 - (IBAction)StartEndPressed:(id)sender {
-    
+    NSLog(@"Sart");
     //Start and End Trip
-    if(self.StartEndTrip.titleLabel.text == @"Start Trip")
+    if([self.StartEndTrip.titleLabel.text isEqualToString:@"Start Trip"])
     {
         //Duration count down start
         
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
     }
-    else if(self.StartEndTrip.titleLabel.text == @"End Trip")
+    else if([self.StartEndTrip.titleLabel.text isEqualToString:@"End Trip"])
     {
         //Duration count down stop
         
@@ -259,6 +285,13 @@
     else
     {
         //Update Shopping Trip and Shopping Trip item
+        //Update Shopping Trip and set ShoppingTripCompleted to TRUE
+        
+        [self.ShoppingTripItemList removeAllObjects];
+        self.lbDuration.text = @"Duration";
+        self.lbBudget.text = @"Budget";
+        self.lbTripName.text = @"Trip Name";
+        [self.ShoppingTripTV reloadData];
     }
 }
 

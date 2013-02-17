@@ -101,9 +101,27 @@
     return shoppingItemList;
 }
 
-- (void)deleteShoppingItem:(int)shoppingID :(int)itemID
+- (void)deleteShoppingItem:(int)itemID
 {
+    char *error;
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
     
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *querySql = [NSString stringWithFormat:@"DELETE FROM SHOPPING_ITEM WHERE ITEM_ID = '%d'", itemID];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Item Deleted!");
+        }
+        else
+        {
+            NSLog(@"Shopping Item Not Deleted!");
+        }
+        sqlite3_close(budgetDB);
+    }
 }
 
 - (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity

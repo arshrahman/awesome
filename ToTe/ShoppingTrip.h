@@ -23,6 +23,6 @@
 //Get current shopping trip
 -(ShoppingTrip *) checkShoppingTrip;
 - (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(NSString *)shoppingTripCompleted;
-
+- (void)deleteShoppingTrip:(int)uniqueId;
 
 @end
