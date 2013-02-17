@@ -73,7 +73,17 @@
     if(self.ShoppingTripItemList.count > 0)
     {
         self.StartEndTrip.hidden = FALSE;
-        [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
+        //Not Started
+        //Progressing
+        //Completed - will not appear in shopping trip
+        if([st.shoppingTripCompleted isEqualToString:@"Not Started"])
+        {
+            [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
+        }
+        else if([st.shoppingTripCompleted isEqualToString:@"Progessing"])
+        {
+            [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
+        }
     }
     else
     {
@@ -279,30 +289,31 @@
 }
 
 - (IBAction)StartEndPressed:(id)sender {
-    NSLog(@"Sart");
     //Start and End Trip
     if([self.StartEndTrip.titleLabel.text isEqualToString:@"Start Trip"])
     {
         //Duration count down start
-        
+        st.shoppingTripCompleted = @"Progressing";
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
     }
     else if([self.StartEndTrip.titleLabel.text isEqualToString:@"End Trip"])
     {
         //Duration count down stop
-        
         [self.StartEndTrip setTitle:@"Complete Trip" forState:UIControlStateNormal];
     }
     else
     {
         //Update Shopping Trip and Shopping Trip item
         //Update Shopping Trip and set ShoppingTripCompleted to TRUE
-        
+        st.shoppingTripCompleted = @"Completed";
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.ShoppingTripItemList removeAllObjects];
         self.lbDuration.text = @"Duration";
         self.lbBudget.text = @"Budget";
         self.lbTripName.text = @"Trip Name";
         [self.ShoppingTripTV reloadData];
+        self.StartEndTrip.hidden = TRUE;
     }
 }
 

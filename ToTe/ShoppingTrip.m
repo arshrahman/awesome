@@ -45,7 +45,7 @@
         NSLog(@"%d",maxID);
         
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 'FALSE'", maxID];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 'Not Started') OR (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 'Progressing')", maxID, maxID];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -181,5 +181,30 @@
         sqlite3_close(budgetDB);
     }
 }
+
+-(void)updateShoppingTrip:(int)shoppingID :(NSString *)shoppingTripCompleted
+{
+    char *error;
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_LIST SET SHOPPING_TRIP_COMPLETED = '%@' WHERE SHOPPING_ID = '%d'", shoppingTripCompleted, shoppingID];
+        
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
+        {
+            NSLog(@"Shopping Trip Updated!");
+        }
+        else
+        {
+            NSLog(@"Shopping Trip Not Updated!");
+        }
+        sqlite3_close(budgetDB);
+    }
+}
+
 
 @end

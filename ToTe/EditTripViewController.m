@@ -154,19 +154,25 @@
  }
  */
 
-/*
+
  // Override to support editing the table view.
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
  {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+     if (editingStyle == UITableViewCellEditingStyleDelete) {
+         
+         ShoppingTripItem *s = [self.ShoppingTripItemList objectAtIndex:indexPath.row];
+         //Call database method
+         [s deleteShoppingItem:s.itemID];
+         
+         // Delete the row from the data source
+         [self.ShoppingTripItemList removeObjectAtIndex:indexPath.row];
+         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+     }
+     else if (editingStyle == UITableViewCellEditingStyleInsert) {
+         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
  }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+ 
 
 /*
  // Override to support rearranging the table view.
@@ -213,9 +219,24 @@
     //NSString checkTripDuration = self.ShoppingTripDuration.text;
     NSString *checkTripBudget = self.ShoppingTripBudget.text;
     
-    if([checkTripName length] == 0 || [checkTripBudget doubleValue] == 0)
+    if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([checkTripName length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if(self.ShoppingTripItemList.count == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please add at least one item for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
     else
@@ -241,7 +262,7 @@
         //Current Date
         st.shoppingDate = [NSDate date];
         
-        st.shoppingTripCompleted = @"FALSE";
+        st.shoppingTripCompleted = @"Not Started";
     
         //call database code
         //Add Trip
@@ -254,10 +275,9 @@
             //add item into database
             [sti addshoppingItem:item.shoppingItemName :item.shoppingItemPrice :item.categoryID :item.necessity];
         }
+        
+        [self dismissModalViewControllerAnimated:YES];
     }
-    
-    
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
