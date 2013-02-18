@@ -19,6 +19,7 @@
 
 @implementation EditTripViewController
 
+@synthesize timeline;
 @synthesize ShoppingTripBudget;
 @synthesize ShoppingTripDuration;
 @synthesize ShoppingTripItemTV;
@@ -40,6 +41,7 @@
     [super viewDidLoad];
     
     NSLog(@"Edit Shopping Trip");
+    [self DoTimeline];
     self.ShoppingTripItemList = [[NSMutableArray alloc]init];
     self.ShoppingTripList = [[NSMutableArray alloc]init];
 	// Do any additional setup after loading the view.
@@ -204,6 +206,11 @@
     [self presentModalViewController:editingView animated:YES];
 }
 
+- (IBAction)TimerPicker:(id)sender {
+    [dateSheet showInView:self.view];
+    [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
+}
+
 - (IBAction)Cancel:(id)sender {
     //remove all items using it's shopping id
     [self dismissModalViewControllerAnimated:YES];
@@ -262,7 +269,7 @@
         //Current Date
         st.shoppingDate = [NSDate date];
         
-        st.shoppingTripCompleted = @"Not Started";
+        st.shoppingTripCompleted = 0;
     
         //call database code
         //Add Trip
@@ -278,6 +285,11 @@
         
         [self dismissModalViewControllerAnimated:YES];
     }
+}
+
+- (IBAction)AddItem:(id)sender {
+    [self.ShoppingTripBudget resignFirstResponder];
+    [self.ShoppingTripTitle resignFirstResponder];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -309,5 +321,91 @@
     [super viewWillAppear:animated];
     [self.ShoppingTripItemTV reloadData];
 }
+
+-(IBAction)textfieldReutrn:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
+-(void)DoTimeline
+{
+    dateSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    [dateSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    
+    CGRect pickerFrame = CGRectMake(0, 44, 0, 0);
+    UIDatePicker *deadlinePicker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
+    
+    [deadlinePicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    //[df setLocale:[NSLocale currentLocale]];
+    //[df setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [df setDateFormat:@"HH:mm:ss"];
+    
+    [dateSheet addSubview:deadlinePicker];
+    
+    UIToolbar *controlBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, dateSheet.bounds.size.width, 44)];
+    [[UIToolbar appearance] setTintColor:[UIColor lightGrayColor]];
+    
+    [controlBar sizeToFit];
+    
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIBarButtonItem *setButton = [[UIBarButtonItem alloc]initWithTitle:@"Set" style:UIBarButtonItemStyleDone target:self action:@selector(DismissTimeSet)];
+    [setButton setTintColor:[UIColor colorWithRed:(0/255.0) green:(200/255.0) blue:(255/255.0) alpha:1]];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(CancelTimeSet)];
+    [cancelButton setTintColor:[UIColor colorWithRed:(230/255.0) green:(0/255.0) blue:(0/255.0) alpha:1]];
+    
+    [controlBar setItems:[NSArray arrayWithObjects:spacer, cancelButton, setButton, nil] animated:YES];
+    
+    
+    [dateSheet addSubview:controlBar];
+}
+
+
+-(void)DismissTimeSet
+{
+    NSArray *listOfViews = [dateSheet subviews];
+    
+    for(UIView *subView in listOfViews)
+    {
+        if([subView isKindOfClass:[UIDatePicker class]])
+        {
+            self.timeline = [(UIDatePicker *)subView date];
+            
+            NSLog(@"%@", self.timeline);
+            
+            NSDateFormatter *df = [[NSDateFormatter alloc]init];
+            [df setDateFormat:@"HH:mm:ss"];
+            NSString *formattedDateString = [df stringFromDate:self.timeline];
+            
+            NSDateFormatter *dr = [[NSDateFormatter alloc]init];
+            [dr setDateFormat:@"HH:mm:ss"];
+            self.timeline = [dr dateFromString:formattedDateString];
+        }
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    
+    [self.ShoppingTripDuration setTitle:[dateFormatter stringFromDate:self.timeline] forState:UIControlStateNormal];
+    //[txtDeadline setText:[dateFormatter stringFromDate:self.deadline]];
+    
+    //if([txtAmount.text length] > 0)[self ChangelblSave];
+    
+    [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+
+-(void)CancelTimeSet
+{
+    [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
 
 @end

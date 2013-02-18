@@ -18,12 +18,12 @@
 @property(assign)double shoppingBudget;
 @property(nonatomic, strong)NSString *Duration;
 @property(assign)double shoppingTotal;
-@property(nonatomic, strong)NSString *shoppingTripCompleted;
+@property(assign)int shoppingTripCompleted;
 
 //Get current shopping trip
 -(ShoppingTrip *) checkShoppingTrip;
-- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(NSString *)shoppingTripCompleted;
+- (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(int)shoppingTripCompleted;
 - (void)deleteShoppingTrip:(int)shoppingID;
--(void)updateShoppingTrip:(int)shoppingID: (NSString *)shoppingTripCompleted;
+-(void)updateShoppingTrip:(int)shoppingID: (int)shoppingTripCompleted;
 
 @end

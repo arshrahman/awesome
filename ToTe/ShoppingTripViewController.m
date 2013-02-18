@@ -73,14 +73,14 @@
     if(self.ShoppingTripItemList.count > 0)
     {
         self.StartEndTrip.hidden = FALSE;
-        //Not Started
-        //Progressing
-        //Completed - will not appear in shopping trip
-        if([st.shoppingTripCompleted isEqualToString:@"Not Started"])
+        //Not Started - 0
+        //Progressing - 1
+        //Completed - 2
+        if(st.shoppingTripCompleted == 0)
         {
             [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
         }
-        else if([st.shoppingTripCompleted isEqualToString:@"Progessing"])
+        else if(st.shoppingTripCompleted == 1)
         {
             [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
         }
@@ -293,7 +293,7 @@
     if([self.StartEndTrip.titleLabel.text isEqualToString:@"Start Trip"])
     {
         //Duration count down start
-        st.shoppingTripCompleted = @"Progressing";
+        st.shoppingTripCompleted = 1;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
     }
@@ -306,7 +306,7 @@
     {
         //Update Shopping Trip and Shopping Trip item
         //Update Shopping Trip and set ShoppingTripCompleted to TRUE
-        st.shoppingTripCompleted = @"Completed";
+        st.shoppingTripCompleted = 2;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.ShoppingTripItemList removeAllObjects];
         self.lbDuration.text = @"Duration";

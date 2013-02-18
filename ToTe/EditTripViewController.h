@@ -10,7 +10,8 @@
 
 @interface EditTripViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    //IBOutlet UITableView *ShoppingItemList;
+    NSDate *timeline;
+    UIActionSheet *dateSheet;
     int numStar;
 }
 
@@ -20,8 +21,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *ShoppingTripBudget;
 @property (weak, nonatomic) IBOutlet UIButton *ShoppingTripDuration;
 @property (weak, nonatomic) IBOutlet UITableView *ShoppingTripItemTV;
+@property (nonatomic, retain) NSDate *timeline;
 
+- (IBAction)TimerPicker:(id)sender;
 - (IBAction)Cancel:(id)sender;
+-(IBAction)textfieldReutrn:(id)sender;
 - (IBAction)Done:(id)sender;
+- (IBAction)AddItem:(id)sender;
+-(void)DoTimeline;
+-(void)DismissTimeSet;
+-(void)CancelTimeSet;
 
 @end

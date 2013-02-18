@@ -73,6 +73,10 @@
     [super viewDidUnload];
 }
 
+- (IBAction)DownKeyPad:(id)sender {
+   
+}
+
 - (IBAction)Cancel:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -298,7 +302,9 @@
 
 -(IBAction)newItem:(id)sender
 {
-    [sender resignFirstResponder];
+    [self.AddItemPrice resignFirstResponder];
+    [self.AddItemName resignFirstResponder];
+    
     //Add shopping item into database
     ShoppingTripItem *newItem = [[ShoppingTripItem alloc] init];
     //NSLog([NSString stringWithFormat: @"%d", self.purchaseItem.uniqueId]);
