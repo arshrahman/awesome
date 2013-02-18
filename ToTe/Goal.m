@@ -147,6 +147,53 @@
 }
 
 
+-(Goal *)SelectGoalForSMPosting:(int)g_id
+{
+    Goal *gg = [[Goal alloc]init];
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, DEADLINE, GOAL_START_DATE FROM GOAL WHERE GOAL_ID = %d", g_id];
+        
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                NSDate *today = [NSDate date];
+                
+                gg.goal_id = sqlite3_column_int(statement, 0);
+                gg.goal_title = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                NSDate *lsdate = [gg StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)]];
+                NSDate *stdate = [gg StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)]];
+                
+                double totalWeeks = [gg WeeksBetweenTwoDate:stdate :lsdate];
+                double currentWeek = [gg WeeksBetweenTwoDate:stdate :today] - 1;
+                
+                double WeeksToGo = totalWeeks - currentWeek;
+                gg.goal_amount = WeeksToGo;
+            }
+        }
+        else
+        {
+            NSLog(@"Got Error in select goal");
+        }
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(budgetDB);
+    
+    return gg;
+}
+
+
 -(BOOL)UpdateGoal:(NSString *)g_title:(NSString *)g_description:(double)g_amount:(NSString *)deadline:(NSString *)g_photo:(double)amount_tosave:(int)g_id
 {
     char *error;

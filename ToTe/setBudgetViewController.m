@@ -16,6 +16,7 @@
 #import "BudgetViewController.h"
 #import "SettingsData.h"
 #import "Goal.h"
+#import "AppLaunch.h"
 
 @interface setBudgetViewController ()
 
@@ -54,19 +55,14 @@
     return self;
 }
 
-//Twitter and facebook code
--(void)Tweet
+
+-(void)Tweet:(NSString *)post
 {
 	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter] && checkTwitter == TRUE)
 	{
-		SLComposeViewController *twitter = [[SLComposeViewController alloc]init];
-		
-		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+		SLComposeViewController *twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        NSString *amount = [NSString stringWithFormat: @"%.2f", g.goal_amount];
-        
-        //append budget/goal title/end date
-		[twitter setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for ()! _ weeks to go! I can achieve my goal! :D"]];
+		[twitter setInitialText:post];
         
 		[self presentViewController:twitter animated:YES completion:nil];
         
@@ -99,22 +95,12 @@
     
 }
 
--(void)FacebookPost
+-(void)FacebookPost:(NSString *)post
 {
 	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook] && checkFB == TRUE)
 	{
-		SLComposeViewController *facebook = [[SLComposeViewController alloc]init];
-		
-		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        
-        //append budget/goal title/end date
-        //NSString * message = [NSString stringWithFormat:@"%@%@%@", fileName, str, extension];
-        
-        NSString *amount = [NSString stringWithFormat: @"%.2f", g.goal_amount];
-        //NSString *amount = [NSString stringWithFormat: @"$%.2lf", g.goal_amount];
-        
-        //append budget/goal title/end date
-		[facebook setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for ()! _ weeks to go! I can achieve my goal! :D"]];
+		SLComposeViewController *facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [facebook setInitialText:post];
         
 		[self presentViewController:facebook animated:YES completion:nil];
         
@@ -140,7 +126,7 @@
                  [alert show];
              }
              
-             [self Tweet];
+             [self Tweet:post];
          }];
 	}
     
@@ -150,32 +136,42 @@
 {
     [super viewDidLoad];
     
-    //NsDefault
-    SettingsData *s = [[SettingsData alloc]init];
-    [s getDataFromSetting];
-    checkFB = s.Facebook;
-    checkTwitter = s.Twitter;
-    //[self FacebookPost];
+    AppLaunch *a = [[AppLaunch alloc]init];
+    
+    [a GoalAchieved:2 :80 :1];
     
     NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
-    //NSLog(@"Goal ID count: %d", goalIDArray.count);
+    
+    NSLog(@"Goal ID count: %d", goalIDArray.count);
+    
     if (goalIDArray.count > 0)
     {
-        //EDWIN
-        //Retrieve the goal title from database with the goal id in the array and post to social media
-        
-        //Retrieve goal
-        /*for(Goal *i in goalIDArray)
-        {
-            [g SelectGoal:i.goal_id];
-            [self FacebookPost];
-        }
-        [goalIDArray removeAllObjects];*/
-        
-        //Last step
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
+        g = [[Goal alloc]init];
+        
+        SettingsData *s = [[SettingsData alloc]init];
+        [s getDataFromSetting];
+        
+        checkFB = s.Facebook;
+        checkTwitter = s.Twitter;
+        
+        NSString *toPost =@"";
+        
+        if (goalIDArray.count == 1)
+        {
+            Goal *gl = [g SelectGoalForSMPosting:[[goalIDArray objectAtIndex:0] integerValue]];
+            
+            toPost = [NSString stringWithFormat:@"Yes! I have successfully saved this week for my goal, \"%@\"! %g weeks to go! I can achieve my goal! :D", gl.goal_title, gl.goal_amount];
+        }
+        else
+        {
+            toPost = [NSString stringWithFormat:@"Yes! I have successfully saved %d goals for this week!", goalIDArray.count];
+        }
+        
+        [self FacebookPost:toPost];
+
         //remove all the data from the array (Make sure its empty)!
         //[[NSUserDefaults standardUserDefaults]setObject:goalIDArray forKey:@"PostSMGoals"];
         //[[NSUserDefaults standardUserDefaults]synchronize];

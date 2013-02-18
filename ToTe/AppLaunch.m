@@ -271,7 +271,7 @@
                     
                     @try
                     {
-                        sqlite3_exec(budgetDB, weeksMet_stmt, NULL, NULL, &error);
+                        //sqlite3_exec(budgetDB, weeksMet_stmt, NULL, NULL, &error);
                         
                         [[NSUserDefaults standardUserDefaults]setObject:goalIdArray forKey:@"PostSMGoals"];
                         [[NSUserDefaults standardUserDefaults]synchronize];
