@@ -66,7 +66,7 @@
         NSString *amount = [NSString stringWithFormat: @"%.2f", g.goal_amount];
         
         //append budget/goal title/end date
-		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal (%@) by %@!Please support me by encouraging and reminding me!:D", amount, g.goal_title, g.deadline]];
+		[twitter setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for ()! _ weeks to go! I can achieve my goal! :D"]];
         
 		[self presentViewController:twitter animated:YES completion:nil];
         
@@ -114,7 +114,7 @@
         //NSString *amount = [NSString stringWithFormat: @"$%.2lf", g.goal_amount];
         
         //append budget/goal title/end date
-		[facebook setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal (%@) by %@!Please support me by encouraging and reminding me!:D", amount, g.goal_title, g.deadline]];
+		[facebook setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for ()! _ weeks to go! I can achieve my goal! :D"]];
         
 		[self presentViewController:facebook animated:YES completion:nil];
         
