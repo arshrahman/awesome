@@ -370,6 +370,7 @@
         goalID = [g InsertGoal:txtGoal.text :txtDescription.text :[txtAmount.text doubleValue] :strDeadline :oldPhotoName :toSave];
         
         //nsusedefault with goal id
+        [[NSUserDefaults standardUserDefaults]setInteger:goalID forKey:@"NewGoal"];
         
         if (goalID > 0)
         {            

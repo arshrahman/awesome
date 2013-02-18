@@ -66,7 +66,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, GOAL_AMOUNT, GOAL_PHOTO, WEEKS_MET, AMOUNT_TOSAVE FROM GOAL WHERE DATE('NOW') < DEADLINE ORDER BY PRIORITY"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, GOAL_AMOUNT, GOAL_PHOTO, WEEKS_MET, AMOUNT_TOSAVE, DEADLINE FROM GOAL WHERE DATE('NOW') < DEADLINE ORDER BY PRIORITY"];
         
         const char *query_sql = [querySql UTF8String];
         
@@ -82,6 +82,7 @@
                 gg.goal_photo = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
                 gg.weeks_met = sqlite3_column_int(statement, 4);
                 gg.amount_tosave = sqlite3_column_double(statement, 5);
+                gg.deadline = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                 
                 [goals addObject:gg];
             }

@@ -298,6 +298,7 @@
 
 -(IBAction)newItem:(id)sender
 {
+    [sender resignFirstResponder];
     //Add shopping item into database
     ShoppingTripItem *newItem = [[ShoppingTripItem alloc] init];
     //NSLog([NSString stringWithFormat: @"%d", self.purchaseItem.uniqueId]);

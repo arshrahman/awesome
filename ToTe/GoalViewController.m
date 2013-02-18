@@ -47,7 +47,7 @@
 }
 
 //Twitter and facebook code
--(void)Tweet
+-(void)Tweet:(Goal *)goal
 {
 	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeTwitter] && checkTwitter == TRUE)
 	{
@@ -55,16 +55,10 @@
 		
 		twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        if(goalMet == FALSE)
-        {
-            //apppend goal title
-            [twitter setInitialText:[NSString stringWithFormat:@"Dang! I didn’t manage to save this week for (__________________):( Please continue to encourage & remind me! Let’s achieve our financial goals!"]];
-        }
-        else
-        {
-            //append goal title and weeks
-            [twitter setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for (__________________)! _____ weeks to go! I can achieve my goal! :D"]];
-        }
+        NSString *amount = [NSString stringWithFormat: @"%.2f", goal.goal_amount];
+        
+        //append budget/goal title/end date
+		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal, %@ by %@! Please support me by encouraging and reminding me!:D", amount, goal.goal_title, goal.deadline]];
         
 		[self presentViewController:twitter animated:YES completion:nil];
         
@@ -97,7 +91,7 @@
     
 }
 
--(void)FacebookPost
+-(void)FacebookPost:(Goal *)goal
 {
 	if([SLComposeViewController  isAvailableForServiceType:SLServiceTypeFacebook] && checkFB == TRUE)
 	{
@@ -105,16 +99,10 @@
 		
 		facebook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-		if(goalMet == FALSE)
-        {
-            //append goal title
-            [facebook setInitialText:[NSString stringWithFormat:@"Dang! I didn’t manage to save this week for (__________________):( Please continue to encourage & remind me! Let’s achieve our financial goals!"]];
-        }
-        else
-        {
-            //append goal title and weeks
-            [facebook setInitialText:[NSString stringWithFormat:@"Yes! I have successfully saved this week for (__________________)! _____ weeks to go! I can achieve my goal! :D"]];
-        }
+		NSString *amount = [NSString stringWithFormat: @"%.2f", goal.goal_amount];
+        
+        //append budget/goal title/end date
+		[facebook setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal, %@ by %@! Please support me by encouraging and reminding me!:D", amount, goal.goal_title, goal.deadline]];
         
 		[self presentViewController:facebook animated:YES completion:nil];
         
@@ -140,7 +128,7 @@
                  [alert show];
              }
              
-             [self Tweet];
+             [self Tweet:goal];
          }];
 	}
     
@@ -149,7 +137,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     //check if ns got something & ns > 0
+    int newGoalID = [[[NSUserDefaults standardUserDefaults]objectForKey:@"NewGoal"] integerValue];
+
     SettingsData *s = [[SettingsData alloc]init];
+    [s getDataFromSetting];
     checkFB = s.Facebook;
     checkTwitter = s.Twitter;
     
@@ -163,17 +154,25 @@
         [goalIDArray addObject:[NSNumber numberWithInt:gg.goal_id]];
     }
     
-    //loop goalarray
-    //if goalarray goal id == ns id
-    //get goal title
-    //do fb & twitter
-    //set ns to zero
-    
     [tblViewGoal reloadData];
     
-    //goalMet == TRUE or FALSE
-    
-    //[self FacebookPost];
+    if (newGoalID > 0)
+    {
+        for (int i = goalArray.count-1; i >= 0; i--)
+        {
+            Goal *gl = [goalArray objectAtIndex:i];
+            NSLog(@"gl: %d, newgoal: %d", gl.goal_id, newGoalID);
+            
+            if (gl.goal_id == newGoalID)
+            {
+                NSLog(@"%d", newGoalID);
+                [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"NewGoal"];
+                [self FacebookPost:gl];
+                
+                break;
+            }
+        }
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
