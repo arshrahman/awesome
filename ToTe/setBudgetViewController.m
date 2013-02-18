@@ -29,6 +29,7 @@
     NSMutableArray *catList;
     Budget *b;
     Goal *g;
+    AppLaunch *a;
     double income;
     double expenses;
     int weekday;
@@ -135,48 +136,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //AppLaunch *a = [[AppLaunch alloc]init];
-    
-    //[a GoalAchieved:2 :80 :1];
-    
-    NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
-    
-    NSLog(@"Goal ID count: %d", goalIDArray.count);
-    
-    if (goalIDArray.count > 0)
-    {
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
         
-        g = [[Goal alloc]init];
-        
-        SettingsData *s = [[SettingsData alloc]init];
-        [s getDataFromSetting];
-        
-        checkFB = s.Facebook;
-        checkTwitter = s.Twitter;
-        
-        NSString *toPost =@"";
-        
-        if (goalIDArray.count == 1)
-        {
-            Goal *gl = [g SelectGoalForSMPosting:[[goalIDArray objectAtIndex:0] integerValue]];
-            
-            toPost = [NSString stringWithFormat:@"Yes! I have successfully saved this week for my goal, \"%@\"! %g weeks to go! I can achieve my goal! :D", gl.goal_title, gl.goal_amount];
-        }
-        else
-        {
-            toPost = [NSString stringWithFormat:@"Yes! I have successfully saved %d goals for this week!", goalIDArray.count];
-        }
-        
-        [self FacebookPost:toPost];
-
-        //remove all the data from the array (Make sure its empty)!
-        //[[NSUserDefaults standardUserDefaults]setObject:goalIDArray forKey:@"PostSMGoals"];
-        //[[NSUserDefaults standardUserDefaults]synchronize];
-    }
-    
     self.navigationItem.hidesBackButton = YES;
     
     //self.view.backgroundColor = [UIColor clearColor];
@@ -227,6 +187,100 @@
 }
 
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    a = [[AppLaunch alloc]init];
+    
+    BOOL ShareData = [[NSUserDefaults standardUserDefaults]boolForKey:@"ShareSwitch"];
+    
+    //NSLog(ShareData ? @"True" : @"False");
+    
+    if (ShareData)
+    {
+        //[[NSUserDefaults standardUserDefaults]setInteger:1 forKey:@"Weeks"];
+        //int weeks = [[NSUserDefaults standardUserDefaults]integerForKey:@"Weeks"];
+        
+        int weeks = [a ShouldPostToGoogle];
+        
+        //NSLog(@"%d", weeks);
+        if (weeks)
+        {
+            /*activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            
+            [activity setFrame:self.view.frame];
+            [activity.layer setBackgroundColor:[[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:.60] CGColor]];
+            activity.center = self.view.center;
+            [self.view addSubview:activity];
+            [activity startAnimating];*/
+            
+            activityView = [[UIView alloc] initWithFrame:CGRectMake(85, 120, 150, 100)];
+            activityView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+            activityView.clipsToBounds = YES;
+            activityView.layer.cornerRadius = 10.0;
+            
+            activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            activity.frame = CGRectMake(55, 20, activity.bounds.size.width, activity.bounds.size.height);
+            [activityView addSubview:activity];
+            [activity startAnimating];
+            
+            UILabel *lblActivity = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 150, 32)];
+            lblActivity.backgroundColor = [UIColor clearColor];
+            lblActivity.textColor = [UIColor whiteColor];
+            lblActivity.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+            lblActivity.textAlignment = UITextAlignmentCenter;
+            lblActivity.text = @"Sharing data...";
+            [activityView addSubview:lblActivity];
+            
+            [self.view addSubview:activityView];
+            
+            [self performSelector:@selector(PostGoogle:) withObject:[NSNumber numberWithInt:weeks] afterDelay:1.0];
+        }
+    }
+    
+    //[a GoalAchieved:2 :200 :2];
+    
+    NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
+    
+    if (goalIDArray.count > 0)
+    {
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        g = [[Goal alloc]init];
+        
+        SettingsData *s = [[SettingsData alloc]init];
+        [s getDataFromSetting];
+        
+        checkFB = s.Facebook;
+        checkTwitter = s.Twitter;
+        
+        NSString *toPost =@"";
+        
+        if (goalIDArray.count == 1)
+        {
+            Goal *gl = [g SelectGoalForSMPosting:[[goalIDArray objectAtIndex:0] integerValue]];
+            
+            if (gl.goal_amount > 0)
+            {
+                toPost = [NSString stringWithFormat:@"Yes! I have successfully saved this week for my goal, \"%@\"! %g weeks to go! I can achieve my goal! :D", gl.goal_title, gl.goal_amount];
+            }
+            else
+            {
+                toPost = [NSString stringWithFormat:@"Yay! After %d weeks, I have managed to save %.2g%% of my goal, %@! Thanks everyone for your support! :D", gl.weeks_met, gl.amount_tosave, gl.goal_title];
+                
+                NSLog(@"%@, id: %d", toPost, [[goalIDArray objectAtIndex:0] integerValue]);
+            }
+        }
+        else
+        {
+            toPost = [NSString stringWithFormat:@"Yes! I have successfully saved %d goals for this week!", goalIDArray.count];
+        }
+        
+        [self FacebookPost:toPost];
+    }
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     topArray = [[NSMutableArray alloc]init];
@@ -255,6 +309,13 @@
     [sideView reloadData];
     
     pageControl.currentPage = 0;
+}
+
+
+-(void)PostGoogle:(NSNumber *)weeks
+{
+    [a PrepareToPostGoogle:[weeks intValue]];
+    [activityView removeFromSuperview];
 }
 
 

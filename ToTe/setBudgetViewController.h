@@ -13,6 +13,8 @@
 @interface setBudgetViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITabBarControllerDelegate, CMPopTipViewDelegate>
 {
     BOOL pageControlIsChangingPage;
+    UIActivityIndicatorView *activity;
+    UIView *activityView;
 }
 
 @property(nonatomic, retain)IBOutlet UITableView *topView;

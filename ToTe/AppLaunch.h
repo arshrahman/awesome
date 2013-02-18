@@ -19,11 +19,12 @@
 -(double)GetExpensesForLastWeek:(int)lbudget_id;
 -(NSString *)GetSecureUID;
 -(BOOL)PostToGoogleDocs:(NSString *)data :(NSString *)postUrl;
--(void)PrepareToPostGoogle;
+-(BOOL)PrepareToPostGoogle:(int)weeks;
 -(void)PostBudgets:(int)weeks:(NSString *)userId;
 -(void)PostGoals:(NSString *)userId;
 -(NSString *)GetMonday;
 -(void)PostExpenses:(int)weeks:(NSString *)userId;
 -(BOOL)connected;
+-(int)ShouldPostToGoogle;
 
 @end

@@ -160,7 +160,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, DEADLINE, GOAL_START_DATE FROM GOAL WHERE GOAL_ID = %d", g_id];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, DEADLINE, GOAL_START_DATE, AMOUNT_TOSAVE, WEEKS_MET, GOAL_AMOUNT FROM GOAL WHERE GOAL_ID = %d", g_id];
         
         const char *query_sql = [querySql UTF8String];
         
@@ -175,11 +175,29 @@
                 NSDate *lsdate = [gg StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)]];
                 NSDate *stdate = [gg StringToDate:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)]];
                 
+                double amount_tosave = sqlite3_column_double(statement, 4);
+                int weeksMet = sqlite3_column_int(statement, 5);
+                double amount = sqlite3_column_double(statement, 6);
+                double percentSaved = 0;
+                
                 double totalWeeks = [gg WeeksBetweenTwoDate:stdate :lsdate];
                 double currentWeek = [gg WeeksBetweenTwoDate:stdate :today] - 1;
                 
                 double WeeksToGo = totalWeeks - currentWeek;
+                
+                if (WeeksToGo < 0)
+                {
+                    percentSaved = (amount_tosave * weeksMet * 100)/(double)amount;
+                }
+                
                 gg.goal_amount = WeeksToGo;
+                gg.amount_tosave = percentSaved;
+                gg.weeks_met = totalWeeks;
+                
+                //for convenience purposes
+                //gg.goal_amount is used to save the number of weeks to go to complete the goal
+                //gg.amount_tosave is used the percentage of goal amount saved during the course of time
+                //gg.weeks_met is used to save the total weeks from goal start date to the end date
             }
         }
         else

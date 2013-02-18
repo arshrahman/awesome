@@ -84,18 +84,18 @@
                         
                         if (ShareData)
                         {
-                            int num = [[[NSUserDefaults standardUserDefaults]objectForKey:@"Weeks"] intValue];
+                            int num = [[NSUserDefaults standardUserDefaults]integerForKey:@"Weeks"];
                             
-                            NSLog(@"Num: %d", num);
+                            //NSLog(@"Num: %d", num);
                             
                             num += weeks;
                             
-                            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:num] forKey:@"Weeks"];
-                            NSLog(@"Num1: %d", num);
+                            [[NSUserDefaults standardUserDefaults]setInteger:num forKey:@"Weeks"];
+                            //NSLog(@"Num1: %d", num);
                         }
                         else
                         {
-                            if ([[NSUserDefaults standardUserDefaults]objectForKey:@"Weeks"])
+                            if ([[NSUserDefaults standardUserDefaults]integerForKey:@"Weeks"])
                             {
                                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Weeks"];
                                 [[NSUserDefaults standardUserDefaults]synchronize];
@@ -207,6 +207,7 @@
     double expenses = 0;
     BOOL goalsMet = FALSE;
     NSString *delimiter = @"";
+    NSMutableArray *lastgoalArray;
     NSMutableArray *goalIdArray;
     Goal *gg;
     
@@ -226,9 +227,10 @@
         if (savings > 0)
         {
             sqlite3_stmt *statement;
-            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE, GOAL_START_DATE, DEADLINE FROM GOAL ORDER BY PRIORITY";
+            const char *query_sql = "SELECT GOAL_ID, AMOUNT_TOSAVE, GOAL_START_DATE, DEADLINE FROM GOAL WHERE GOAL_COMPLETED IS NULL ORDER BY PRIORITY";
             
             goalIdArray = [[NSMutableArray alloc]init];
+            lastgoalArray = [[NSMutableArray alloc]init];
             gg = [[Goal alloc]init];
             
             if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -259,6 +261,26 @@
                             savings -= toSave;
                             goalsMet = TRUE;
                         }
+                        else
+                        {
+                            if (weeks > 0)
+                            {
+                                int weeksmet = currentWeek - totalWeeks;
+                                
+                                if (weeksmet <= weeks)
+                                {
+                                    int goalID = sqlite3_column_int(statement, 0);
+                                    
+                                    NSString *query = [NSString stringWithFormat:@"UPDATE GOAL SET WEEKS_MET = COALESCE(WEEKS_MET, 0) + %d, GOAL_COMPLETED = 1 WHERE GOAL_ID = %d", weeksmet, goalID];
+                                    savings -= toSave;
+                                    goalsMet = TRUE;
+                                    [goalIdArray addObject:[NSNumber numberWithInt:goalID]];
+                                    [lastgoalArray addObject:query];
+                                    
+                                    //NSLog(@"query: %@, count: %d", query, lastgoalArray.count);
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -272,6 +294,18 @@
                     @try
                     {
                         sqlite3_exec(budgetDB, weeksMet_stmt, NULL, NULL, &error);
+                        sqlite3_finalize(statement);
+                        
+                        if (lastgoalArray.count > 0)
+                        {
+                            for (int i = 0; i < lastgoalArray.count; i++)
+                            {
+                                const char *lastGoalMet_query = [[lastgoalArray objectAtIndex:i] UTF8String];
+                                
+                                sqlite3_exec(budgetDB, lastGoalMet_query, NULL, NULL, &error);
+                                sqlite3_finalize(statement);
+                            }
+                        }
                         
                         [[NSUserDefaults standardUserDefaults]setObject:goalIdArray forKey:@"PostSMGoals"];
                         [[NSUserDefaults standardUserDefaults]synchronize];
@@ -287,7 +321,7 @@
             {
                 NSLog(@"Got error in getting last week's savings");
             }
-            sqlite3_finalize(statement);
+            
         }
         
         sqlite3_close(budgetDB);
@@ -321,24 +355,27 @@
 }
 
 
--(void)PrepareToPostGoogle
+-(int)ShouldPostToGoogle
 {
     NSString *ns = [[NSUserDefaults standardUserDefaults]objectForKey:@"Weeks"];
-    int weeks = [ns intValue];
-    
-    if (weeks > 0)
+    return [ns intValue];
+}
+
+
+-(BOOL)PrepareToPostGoogle:(int)weeks
+{
+    if([self connected])
     {
-        if([self connected])
-        {
-            NSString *userId = [self GetSecureUID];
+        NSString *userId = [self GetSecureUID];
             
-            //[self PostBudgets:weeks :userId];
-            [self PostGoals:userId];
-            [self PostExpenses:weeks :userId];
+        [self PostBudgets:weeks :userId];
+        [self PostGoals:userId];
+        [self PostExpenses:weeks :userId];
             
-            [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:0] forKey:@"Weeks"];
-        }
+        [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"Weeks"];
     }
+    
+    return TRUE;
 }
 
 
@@ -375,7 +412,7 @@
         sqlite3_stmt *st;
         NSString *budgetQuery = [NSString stringWithFormat:@"SELECT BUDGET_ID, START_DATE, WINCOME, BUDGET_AMOUNT FROM BUDGET ORDER BY BUDGET_ID  DESC LIMIT 1, %d", weeks];
         const char *budget_query = [budgetQuery UTF8String];
-        
+
         if (sqlite3_prepare(budgetDB, budget_query, -1, &st, NULL)==SQLITE_OK)
         {
             while (sqlite3_step(st)==SQLITE_ROW)
@@ -423,7 +460,7 @@
             NSMutableArray *ray = [allBudget objectAtIndex:i];
             int b_id = [[ray objectAtIndex:0] intValue];
             
-            NSString * categoriesQuery = [NSString stringWithFormat:@"SELECT Y.CATEGORY_ID, CATEGORY_AMOUNT, SUM(Y.CATEGORY_SPENT) FROM (SELECT C.CATEGORY_ID, '' AS CATEGORY_SPENT, BC.CATEGORY_AMOUNT FROM CATEGORY C, BUDGET_CATEGORY BC WHERE C.CATEGORY_ID = BC.CATEGORY_ID AND BC.BUDGET_ID = %d UNION SELECT X.CATEGORY_ID, SUM(X.CATEGORY_SPENT), '' FROM (SELECT CATEGORY_ID, '' AS CATEGORY_SPENT, '' FROM CATEGORY UNION SELECT C.CATEGORY_ID,  SUM(I.SHOPPING_ITEM_PRICE) AS CATEGORY_SPENT, '' FROM SHOPPING_ITEM I, CATEGORY C, SHOPPING_LIST L WHERE C.CATEGORY_ID = I.CATEGORY_ID AND I.SHOPPING_ID = L.SHOPPING_ID AND S.SHOPPING_TRIP_COMPLETED = 2 L.BUDGET_ID = %d GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID,  SUM(P.PURCHASE_ITEM_PRICE) AS CATEGORY_SPENT, '' FROM PURCHASE P, CATEGORY C WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = %d GROUP BY C.CATEGORY_ID) X GROUP BY X.CATEGORY_ID) Y GROUP BY Y.CATEGORY_ID", b_id, b_id, b_id];
+            NSString * categoriesQuery = [NSString stringWithFormat:@"SELECT Y.CATEGORY_ID, CATEGORY_AMOUNT, SUM(Y.CATEGORY_SPENT) FROM (SELECT C.CATEGORY_ID, '' AS CATEGORY_SPENT, BC.CATEGORY_AMOUNT FROM CATEGORY C, BUDGET_CATEGORY BC WHERE C.CATEGORY_ID = BC.CATEGORY_ID AND BC.BUDGET_ID = %d UNION SELECT X.CATEGORY_ID, SUM(X.CATEGORY_SPENT), '' FROM (SELECT CATEGORY_ID, '' AS CATEGORY_SPENT, '' FROM CATEGORY UNION SELECT C.CATEGORY_ID,  SUM(I.SHOPPING_ITEM_PRICE) AS CATEGORY_SPENT, '' FROM SHOPPING_ITEM I, CATEGORY C, SHOPPING_LIST L WHERE C.CATEGORY_ID = I.CATEGORY_ID AND I.SHOPPING_ID = L.SHOPPING_ID AND L.SHOPPING_TRIP_COMPLETED = 2 AND L.BUDGET_ID = %d GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID,  SUM(P.PURCHASE_ITEM_PRICE) AS CATEGORY_SPENT, '' FROM PURCHASE P, CATEGORY C WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = %d GROUP BY C.CATEGORY_ID) X GROUP BY X.CATEGORY_ID) Y GROUP BY Y.CATEGORY_ID", b_id, b_id, b_id];
             
             const char *categories_query = [categoriesQuery UTF8String];
             
@@ -543,7 +580,7 @@
     [nowComponents setSecond:0];
     
     NSDate *monday = [calendar dateFromComponents:nowComponents];
-    NSLog(@"Day: %@", monday);
+    //NSLog(@"Day: %@", monday);
     
     return [formatter stringFromDate:monday];
 }
@@ -579,7 +616,7 @@
         
         
         sqlite3_stmt *s;
-        NSString *shoppingQuery = [NSString stringWithFormat:@"SELECT L.SHOPPING_ID, B.START_DATE, L.SHOPPING_DATE, L.SHOPPING_NAME,  L.SHOPPING_BUDGET, L.SHOPPING_TOTAL, L.DURATION FROM SHOPPING_LIST L, BUDGET B WHERE B.BUDGET_ID  = L.BUDGET_ID AND l.BUDGET_ID IN (SELECT BUDGET_ID FROM BUDGET ORDER BY BUDGET_ID DESC LIMIT 1, %d) ORDER BY B.START_DATE ASC", weeks];
+        NSString *shoppingQuery = [NSString stringWithFormat:@"SELECT L.SHOPPING_ID, B.START_DATE, L.SHOPPING_DATE, L.SHOPPING_NAME,  L.SHOPPING_BUDGET, L.SHOPPING_TOTAL, L.DURATION FROM SHOPPING_LIST L, BUDGET B WHERE B.BUDGET_ID  = L.BUDGET_ID AND L.SHOPPING_TRIP_COMPLETED = 2 AND l.BUDGET_ID IN (SELECT BUDGET_ID FROM BUDGET ORDER BY BUDGET_ID DESC LIMIT 1, %d) ORDER BY B.START_DATE ASC", weeks];
         
         const char *shopping_query = [shoppingQuery UTF8String];
         

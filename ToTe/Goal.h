@@ -20,6 +20,7 @@
 @property(nonatomic)int weeks_met;
 @property(nonatomic)double amount_tosave;
 @property(nonatomic)NSString* goal_start_date;
+@property(nonatomic)int goal_completed;
 
 -(int)InsertGoal:(NSString *)g_title:(NSString *)g_description:(double)g_amount:(NSString *)deadline:(NSString *)g_photo:(double)amount_tosave;
 -(NSString *)ConvertDateFormat:(NSString *)end_date;
