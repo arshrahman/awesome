@@ -152,6 +152,7 @@
     
     //NsDefault
     SettingsData *s = [[SettingsData alloc]init];
+    [s getDataFromSetting];
     checkFB = s.Facebook;
     checkTwitter = s.Twitter;
     //[self FacebookPost];
