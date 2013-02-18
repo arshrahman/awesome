@@ -136,9 +136,9 @@
 {
     [super viewDidLoad];
     
-    AppLaunch *a = [[AppLaunch alloc]init];
+    //AppLaunch *a = [[AppLaunch alloc]init];
     
-    [a GoalAchieved:2 :80 :1];
+    //[a GoalAchieved:2 :80 :1];
     
     NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
     
