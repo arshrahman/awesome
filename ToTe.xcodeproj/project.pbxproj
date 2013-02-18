@@ -18,6 +18,10 @@
 		B42951FC16A27563004F5D5E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42951FB16A27563004F5D5E /* BudgetViewController.m */; };
 		B429520616A2828B004F5D5E /* roundedrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B429520516A2828B004F5D5E /* roundedrectangle.png */; };
 		B4470E8216A7A4120045EEC8 /* BudgetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4470E8116A7A4120045EEC8 /* BudgetCategory.m */; };
+		B4472EE416D1352900904163 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B4472EE316D1352900904163 /* bg.png */; };
+		B4472EE616D1374B00904163 /* bground.png in Resources */ = {isa = PBXBuildFile; fileRef = B4472EE516D1374B00904163 /* bground.png */; };
+		B4472EE916D13C5E00904163 /* navbar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4472EE716D13C5E00904163 /* navbar.jpg */; };
+		B4472EEA16D13C5E00904163 /* bground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4472EE816D13C5E00904163 /* bground.jpg */; };
 		B45042EB16CBBA6000C6536E /* SecureUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = B45042EA16CBBA6000C6536E /* SecureUDID.m */; };
 		B452204B16A54F74006209A7 /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B452204A16A54F74006209A7 /* OverviewViewController.m */; };
 		B46641DF169BFFF900C83739 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */; };
@@ -513,6 +517,10 @@
 		B429520516A2828B004F5D5E /* roundedrectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = roundedrectangle.png; path = Images/roundedrectangle.png; sourceTree = "<group>"; };
 		B4470E8016A7A4120045EEC8 /* BudgetCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetCategory.h; sourceTree = "<group>"; };
 		B4470E8116A7A4120045EEC8 /* BudgetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetCategory.m; sourceTree = "<group>"; };
+		B4472EE316D1352900904163 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = images/bg.png; sourceTree = "<group>"; };
+		B4472EE516D1374B00904163 /* bground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bground.png; path = images/bground.png; sourceTree = "<group>"; };
+		B4472EE716D13C5E00904163 /* navbar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = navbar.jpg; path = images/navbar.jpg; sourceTree = "<group>"; };
+		B4472EE816D13C5E00904163 /* bground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bground.jpg; path = images/bground.jpg; sourceTree = "<group>"; };
 		B45042E916CBBA6000C6536E /* SecureUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecureUDID.h; sourceTree = "<group>"; };
 		B45042EA16CBBA6000C6536E /* SecureUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureUDID.m; sourceTree = "<group>"; };
 		B452204916A54F73006209A7 /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
@@ -1339,6 +1347,10 @@
 		CEB06CF31696860F00F96FD4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B4472EE716D13C5E00904163 /* navbar.jpg */,
+				B4472EE816D13C5E00904163 /* bground.jpg */,
+				B4472EE516D1374B00904163 /* bground.png */,
+				B4472EE316D1352900904163 /* bg.png */,
 				B407A3EE16B80358008E47D5 /* button-delete.png */,
 				B4D4C7AC16B6CCC000D0E12A /* camera-icon-md.png */,
 				B400904B16A3B6C900BFD732 /* roundedrectangle.jpg */,
@@ -2332,6 +2344,10 @@
 				B4C8688516BB7305008171FD /* TipOfDay.plist in Resources */,
 				B4F2037616BE530A00B80872 /* BreeSerif_Reg.otf in Resources */,
 				CE195F3216CB7C180071197F /* MainStoryboard.storyboard in Resources */,
+				B4472EE416D1352900904163 /* bg.png in Resources */,
+				B4472EE616D1374B00904163 /* bground.png in Resources */,
+				B4472EE916D13C5E00904163 /* navbar.jpg in Resources */,
+				B4472EEA16D13C5E00904163 /* bground.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

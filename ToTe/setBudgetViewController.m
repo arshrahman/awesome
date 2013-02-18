@@ -182,6 +182,8 @@
     
     self.navigationItem.hidesBackButton = YES;
     
+    //self.view.backgroundColor = [UIColor clearColor];
+    
     [self.tabBarController setDelegate:self];
     sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
     sideView.delegate = self;

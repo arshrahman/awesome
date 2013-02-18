@@ -13,6 +13,8 @@
 
 @implementation AppDelegate
 
+@synthesize window;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -25,6 +27,10 @@
     //[[UINavigationBar appearance]setTintColor:[UIColor lightGrayColor]];
     //NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor darkGrayColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, nil];
     //[[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
+    
+    //window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bground.jpg"]];
+    
+    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.jpg"] forBarMetrics:UIBarMetricsDefault];
     
     Database *d = [[Database alloc]init];
     [d CreateDB];
@@ -47,6 +53,8 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     BOOL ShareData = [[NSUserDefaults standardUserDefaults]boolForKey:@"ShareSwitch"];
+    
+    //NSLog(ShareData ? @"True" : @"False");
     
     if (ShareData)
     {
