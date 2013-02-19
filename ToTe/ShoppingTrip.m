@@ -45,7 +45,7 @@
         NSLog(@"%d",maxID);
         
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 0) OR (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 1)", maxID, maxID];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 0) OR (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 1) OR (SHOPPING_ID = '%d' AND SHOPPING_TRIP_COMPLETED == 3)", maxID, maxID, maxID];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
@@ -73,6 +73,7 @@
                 int convertShoppingId = [shoppingId integerValue];
                 int convertBudgetId = [budgetId integerValue];
                 double convertShoppingBudget = [shoppingBudget doubleValue];
+                int convertShoppingTripCompleted = [shoppingTripCompleted integerValue];
                 
                 [trip setShoppingID:convertShoppingId];
                 [trip setBudgetID:convertBudgetId];
@@ -81,7 +82,7 @@
                 [trip setShoppingTripName:shoppingName];
                 [trip setShoppingBudget:convertShoppingBudget];
                 [trip setDuration:Duration];
-                [trip setShoppingTripCompleted:shoppingTripCompleted];
+                [trip setShoppingTripCompleted:convertShoppingTripCompleted];
                 
                 NSLog(@"Show Shopping Trip");
                 

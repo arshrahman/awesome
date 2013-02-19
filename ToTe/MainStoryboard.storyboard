@@ -963,14 +963,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="|" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnP-iZ-NdD">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="78" id="Eoq-LW-LoQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="VUK-DV-6oR">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -989,10 +981,7 @@
                                     <outlet property="delegate" destination="1Rt-iz-bQJ" id="BB3-fb-BLt"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Budget" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tqu-GC-x4c">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="qJT-80-MtT"/>
-                                </constraints>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Shopping Budget" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tqu-GC-x4c">
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -1009,23 +998,6 @@
                                     <action selector="textfieldReutrn:" destination="1Rt-iz-bQJ" eventType="editingDidEndOnExit" id="Jnn-Iu-BdK"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98c-ZE-PLy">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="7Zr-fC-eht"/>
-                                    <constraint firstAttribute="height" constant="30" id="azD-mb-JCz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Duration">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="TimerPicker:" destination="1Rt-iz-bQJ" eventType="touchUpInside" id="PAt-DV-mvM"/>
-                                </connections>
-                            </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X26-Xn-erC">
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
@@ -1066,7 +1038,6 @@
                         <color key="backgroundColor" red="0.87246890939999999" green="0.87246890939999999" blue="0.87246890939999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5y4-2m-yBV" firstAttribute="top" secondItem="X26-Xn-erC" secondAttribute="bottom" type="default" id="66c-7R-cBA"/>
-                            <constraint firstItem="dBx-bU-FN4" firstAttribute="top" secondItem="vnP-iZ-NdD" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="6uc-wd-Uvf"/>
                             <constraint firstAttribute="trailing" secondItem="Tqu-GC-x4c" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CA8-PV-aox"/>
                             <constraint firstItem="dBx-bU-FN4" firstAttribute="leading" secondItem="RN6-on-baY" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LYl-Zl-nEc"/>
                             <constraint firstItem="Tqu-GC-x4c" firstAttribute="top" secondItem="5y4-2m-yBV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Q0J-nS-CSX"/>
@@ -1075,19 +1046,15 @@
                             <constraint firstItem="X26-Xn-erC" firstAttribute="leading" secondItem="RN6-on-baY" secondAttribute="leading" type="default" id="W4V-yu-Osh"/>
                             <constraint firstAttribute="trailing" secondItem="dBx-bU-FN4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Xor-1w-RNJ"/>
                             <constraint firstItem="VUK-DV-6oR" firstAttribute="leading" secondItem="RN6-on-baY" secondAttribute="leading" type="default" id="Xs7-Nt-Ygp"/>
-                            <constraint firstItem="98c-ZE-PLy" firstAttribute="baseline" secondItem="Tqu-GC-x4c" secondAttribute="baseline" type="default" id="YyO-bS-PeP"/>
                             <constraint firstItem="X26-Xn-erC" firstAttribute="top" secondItem="RN6-on-baY" secondAttribute="top" type="default" id="aEv-19-aJU"/>
-                            <constraint firstItem="dBx-bU-FN4" firstAttribute="centerX" secondItem="vnP-iZ-NdD" secondAttribute="centerX" type="default" id="bmO-HM-FVL"/>
                             <constraint firstItem="5y4-2m-yBV" firstAttribute="trailing" secondItem="RN6-on-baY" secondAttribute="trailing" type="default" id="bnW-yV-3qR"/>
-                            <constraint firstItem="98c-ZE-PLy" firstAttribute="top" secondItem="5y4-2m-yBV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="del-0p-xzs"/>
                             <constraint firstItem="VUK-DV-6oR" firstAttribute="top" secondItem="dBx-bU-FN4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="hSh-tO-Ad0"/>
-                            <constraint firstItem="98c-ZE-PLy" firstAttribute="leading" secondItem="RN6-on-baY" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="int-Iv-lmR"/>
                             <constraint firstItem="vch-5y-6Bp" firstAttribute="centerY" secondItem="5y4-2m-yBV" secondAttribute="centerY" type="default" id="kPG-vn-SEd"/>
                             <constraint firstItem="5y4-2m-yBV" firstAttribute="leading" secondItem="RN6-on-baY" secondAttribute="leading" type="default" id="nbC-fZ-jzR"/>
                             <constraint firstItem="X26-Xn-erC" firstAttribute="trailing" secondItem="RN6-on-baY" secondAttribute="trailing" type="default" id="pcQ-Bp-3f0"/>
                             <constraint firstItem="vch-5y-6Bp" firstAttribute="centerX" secondItem="5y4-2m-yBV" secondAttribute="centerX" type="default" id="s1G-fH-JMH"/>
-                            <constraint firstItem="vnP-iZ-NdD" firstAttribute="top" secondItem="5y4-2m-yBV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="vQK-2d-ynn"/>
-                            <constraint firstItem="dBx-bU-FN4" firstAttribute="top" secondItem="98c-ZE-PLy" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zPb-Vk-hZ0"/>
+                            <constraint firstItem="dBx-bU-FN4" firstAttribute="top" secondItem="Tqu-GC-x4c" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="vnV-QO-omA"/>
+                            <constraint firstItem="Tqu-GC-x4c" firstAttribute="leading" secondItem="RN6-on-baY" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="wi3-ch-Hko"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Trip" id="f9w-me-Dn0">
@@ -1096,7 +1063,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ShoppingTripBudget" destination="Tqu-GC-x4c" id="IU5-JX-qMH"/>
-                        <outlet property="ShoppingTripDuration" destination="98c-ZE-PLy" id="vKO-PY-rkZ"/>
                         <outlet property="ShoppingTripItemTV" destination="VUK-DV-6oR" id="GJl-Ye-F2o"/>
                         <outlet property="ShoppingTripTitle" destination="vch-5y-6Bp" id="TtA-Jz-WzB"/>
                     </connections>

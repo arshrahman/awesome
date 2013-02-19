@@ -18,11 +18,12 @@
 @property(assign)int categoryID;
 @property(assign)double shoppingItemPrice;
 @property(assign)int necessity;
+@property(assign)int check;
 
 - (NSMutableArray *) viewCurrentShoppingTrip:(int)shoppingID;
 - (void)deleteShoppingItem:(int)itemID;
-- (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity;
--(void)updateShoppingItem:(int)ItemID :(NSString *)shoppingItemName :(int)categoryID :(double)ShoppngItemPrice: (int)necessity;
+- (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity: (int)check;
+-(void)updateShoppingItem:(int)ItemID :(NSString *)shoppingItemName :(int)categoryID :(double)ShoppngItemPrice: (int)necessity: (int)check;
 
 
 @end

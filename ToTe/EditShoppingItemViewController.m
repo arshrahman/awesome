@@ -304,7 +304,7 @@
         self.shoppingItem.categoryID = catID;
         self.shoppingItem.necessity = EditStar;
         
-        [sti updateShoppingItem:self.shoppingItem.itemID :self.shoppingItem.shoppingItemName :self.shoppingItem.categoryID :self.shoppingItem.shoppingItemPrice :self.shoppingItem.necessity];
+        [sti updateShoppingItem:self.shoppingItem.itemID :self.shoppingItem.shoppingItemName :self.shoppingItem.categoryID :self.shoppingItem.shoppingItemPrice :self.shoppingItem.necessity :self.shoppingItem.check];
         
         [self dismissModalViewControllerAnimated:YES];
     }

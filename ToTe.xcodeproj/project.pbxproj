@@ -484,6 +484,10 @@
 		CE6BA68D16B64C8D00E828CD /* Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68716B64C8D00E828CD /* Purchase.m */; };
 		CE6BA68E16B64C8D00E828CD /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BA68916B64C8D00E828CD /* PurchaseViewController.m */; };
 		CE6BA69016B64C9E00E828CD /* customCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6BA68F16B64C9E00E828CD /* customCell.xib */; };
+		CE9A046B16D3B0B00038E904 /* customCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9A046A16D3B0AF0038E904 /* customCell2.xib */; };
+		CE9A046F16D3B3290038E904 /* customCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A046E16D3B3290038E904 /* customCell2.m */; };
+		CE9A047216D3D5870038E904 /* customCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A047116D3D5860038E904 /* customCell1.m */; };
+		CE9A047616D3D5E90038E904 /* customCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9A047516D3D5E80038E904 /* customCell1.xib */; };
 		CEB06CE516954DFD00F96FD4 /* setBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */; };
 		CEB06CF21695743F00F96FD4 /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB06CF11695743F00F96FD4 /* GoalViewController.m */; };
 		CEB0703E169B9A5200F96FD4 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */; };
@@ -1090,6 +1094,12 @@
 		CE6BA68816B64C8D00E828CD /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseViewController.h; sourceTree = "<group>"; };
 		CE6BA68916B64C8D00E828CD /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		CE6BA68F16B64C9E00E828CD /* customCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = customCell.xib; sourceTree = "<group>"; };
+		CE9A046A16D3B0AF0038E904 /* customCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = customCell2.xib; sourceTree = "<group>"; };
+		CE9A046D16D3B3290038E904 /* customCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customCell2.h; sourceTree = "<group>"; };
+		CE9A046E16D3B3290038E904 /* customCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customCell2.m; sourceTree = "<group>"; };
+		CE9A047016D3D5860038E904 /* customCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customCell1.h; sourceTree = "<group>"; };
+		CE9A047116D3D5860038E904 /* customCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customCell1.m; sourceTree = "<group>"; };
+		CE9A047516D3D5E80038E904 /* customCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = customCell1.xib; sourceTree = "<group>"; };
 		CEB06CE316954DFD00F96FD4 /* setBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setBudgetViewController.h; sourceTree = "<group>"; };
 		CEB06CE416954DFD00F96FD4 /* setBudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setBudgetViewController.m; sourceTree = "<group>"; };
 		CEB06CF01695743F00F96FD4 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -1299,6 +1309,12 @@
 				CE5694A816CBEED2007A0F05 /* ShoppingTripItem.m */,
 				CE5694AA16CBEEE2007A0F05 /* ShoppingTrip.h */,
 				CE5694AB16CBEEE2007A0F05 /* ShoppingTrip.m */,
+				CE9A046A16D3B0AF0038E904 /* customCell2.xib */,
+				CE9A046D16D3B3290038E904 /* customCell2.h */,
+				CE9A046E16D3B3290038E904 /* customCell2.m */,
+				CE9A047016D3D5860038E904 /* customCell1.h */,
+				CE9A047116D3D5860038E904 /* customCell1.m */,
+				CE9A047516D3D5E80038E904 /* customCell1.xib */,
 			);
 			name = "Shopping List";
 			sourceTree = "<group>";
@@ -2348,6 +2364,8 @@
 				B4472EE616D1374B00904163 /* bground.png in Resources */,
 				B4472EE916D13C5E00904163 /* navbar.jpg in Resources */,
 				B4472EEA16D13C5E00904163 /* bground.jpg in Resources */,
+				CE9A046B16D3B0B00038E904 /* customCell2.xib in Resources */,
+				CE9A047616D3D5E90038E904 /* customCell1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2402,6 +2420,8 @@
 				CE5694A916CBEED2007A0F05 /* ShoppingTripItem.m in Sources */,
 				CE5694AC16CBEEE2007A0F05 /* ShoppingTrip.m in Sources */,
 				B413211C16CF908B00FEA52B /* Reachability.m in Sources */,
+				CE9A046F16D3B3290038E904 /* customCell2.m in Sources */,
+				CE9A047216D3D5870038E904 /* customCell1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

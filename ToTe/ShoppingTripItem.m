@@ -124,7 +124,7 @@
     }
 }
 
-- (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity
+- (void)addshoppingItem:(NSString *)shoppingItemName :(double)shoppingItemPrice :(int)categoryID :(int)necessity: (int)check
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -146,7 +146,7 @@
         }
         sqlite3_finalize(st);
         
-        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_ITEM(SHOPPING_ID, CATEGORY_ID, SHOPPING_ITEM_NAME, SHOPPING_ITEM_PRICE, NECESSITY) VALUES ('%d','%d', '%@','%2f', '%d')",maxID, categoryID, shoppingItemName, shoppingItemPrice, necessity];
+        NSString *querySql = [NSString stringWithFormat:@"INSERT INTO SHOPPING_ITEM(SHOPPING_ID, CATEGORY_ID, SHOPPING_ITEM_NAME, SHOPPING_ITEM_PRICE, NECESSITY, SHOPPING_CHECK) VALUES ('%d','%d', '%@','%2f', '%d', '%d')",maxID, categoryID, shoppingItemName, shoppingItemPrice, necessity, check];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_exec(budgetDB, query_sql, NULL, NULL, &error)==SQLITE_OK)
@@ -161,7 +161,7 @@
     sqlite3_close(budgetDB);
 }
 
--(void)updateShoppingItem:(int)ItemID :(NSString *)shoppingItemName :(int)categoryID :(double)shoppingItemPrice: (int)necessity
+-(void)updateShoppingItem:(int)ItemID :(NSString *)shoppingItemName :(int)categoryID :(double)shoppingItemPrice: (int)necessity: (int)check
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -169,7 +169,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_ITEM SET CATEGORY_ID = '%d', SHOPPING_ITEM_NAME = '%@', SHOPPING_ITEM_PRICE ='%2f', NECESSITY = '%d' WHERE ITEM_ID = '%d'", categoryID, shoppingItemName, shoppingItemPrice, necessity, ItemID];
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_ITEM SET CATEGORY_ID = '%d', SHOPPING_ITEM_NAME = '%@', SHOPPING_ITEM_PRICE ='%2f', NECESSITY = '%d', SHOPPING_CHECK = '%d' WHERE ITEM_ID = '%d'", categoryID, shoppingItemName, shoppingItemPrice, necessity, check, ItemID];
         
         const char *query_sql = [querySql UTF8String];
         

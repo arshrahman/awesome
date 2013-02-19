@@ -7,15 +7,17 @@
 //
 
 #import "ShoppingTripViewController.h"
-#import "customCell.h"
 #import "ShoppingTrip.h"
 #import "ShoppingTripItem.h"
 #import "EditShoppingItemViewController.h"
+#import "customCell2.h"
+#import "customCell1.h"
 
 @interface ShoppingTripViewController ()
 {
     ShoppingTrip *st;
     ShoppingTripItem *shoppingItem;
+    NSMutableArray *isCheckedArr;
 }
 
 @end
@@ -72,17 +74,26 @@
     
     if(self.ShoppingTripItemList.count > 0)
     {
-        self.StartEndTrip.hidden = FALSE;
         //Not Started - 0
         //Progressing - 1
         //Completed - 2
+        //Ended but not complete - 3
+        NSLog(@"%d", st.shoppingTripCompleted);
         if(st.shoppingTripCompleted == 0)
         {
             [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
+            self.StartEndTrip.hidden = FALSE;
+
         }
         else if(st.shoppingTripCompleted == 1)
         {
             [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
+            self.StartEndTrip.hidden = FALSE;
+        }
+        else if(st.shoppingTripCompleted == 3)
+        {
+            [self.StartEndTrip setTitle:@"Complete Trip" forState:UIControlStateNormal];
+            self.StartEndTrip.hidden = FALSE;
         }
     }
     else
@@ -99,6 +110,12 @@
     {
         self.AddTrip.enabled = FALSE;
         self.DeleteTrip.enabled =TRUE;
+    }
+    
+    isCheckedArr = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<[self.ShoppingTripItemList count]; i++) {
+        [isCheckedArr addObject:@"0"];
     }
 }
 
@@ -125,72 +142,185 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    customCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(cell ==nil)
-    {
-        cell = [[customCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
     
-    ShoppingTripItem *currentItem = [[ShoppingTripItem alloc]init];
-    currentItem = [self.ShoppingTripItemList objectAtIndex:indexPath.row];
+    if(st.shoppingTripCompleted == 0){
+        
+        customCell1 *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if(cell ==nil)
+        {
+            cell = [[customCell1 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
     
-    // Configure the cell...
-    cell.customCellItemName.text = currentItem.shoppingItemName;
-    cell.customCellItemPrice.text = [NSString stringWithFormat: @"$%.2lf", currentItem.shoppingItemPrice];
-    cell.customCellItemCategory.text = currentItem.category;
-    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        ShoppingTripItem *currentItem = [[ShoppingTripItem alloc]init];
+        currentItem = [self.ShoppingTripItemList objectAtIndex:indexPath.row];
     
-    //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
-    if(currentItem.necessity == 5)
-    {
-        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star5.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-    }
-    else if(currentItem.necessity == 4)
-    {
-        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-    }
-    else if(currentItem.necessity == 3)
-    {
-        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-    }
-    else if(currentItem.necessity == 2)
-    {
-        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-    }
-    else if(currentItem.necessity == 1)
-    {
-        cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
-        cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        // Configure the cell...
+        cell.customCellItemName.text = currentItem.shoppingItemName;
+        cell.customCellItemPrice.text = [NSString stringWithFormat: @"$%.2lf", currentItem.shoppingItemPrice];
+        cell.customCellItemCategory.text = currentItem.category;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        
+    
+        //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
+        if(currentItem.necessity == 5)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        }
+        else if(currentItem.necessity == 4)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else if(currentItem.necessity == 3)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else if(currentItem.necessity == 2)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else if(currentItem.necessity == 1)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        
+        return cell;
     }
     else
     {
-        cell.Star1.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
-        cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        customCell2 *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if(cell ==nil)
+        {
+            cell = [[customCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        ShoppingTripItem *currentItem = [[ShoppingTripItem alloc]init];
+        currentItem = [self.ShoppingTripItemList objectAtIndex:indexPath.row];
+        
+        // Configure the cell...
+        cell.customCellItemName.text = currentItem.shoppingItemName;
+        cell.customCellItemPrice.text = [NSString stringWithFormat: @"$%.2lf", currentItem.shoppingItemPrice];
+        cell.customCellItemCategory.text = currentItem.category;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        
+        [cell.checkBox setTag:indexPath.row];
+        
+        [cell.checkBox addTarget:self action:@selector(CheckBoxTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([[isCheckedArr objectAtIndex:indexPath.row] isEqualToString:@"1"])
+        {
+            [cell.checkBox setImage:[UIImage imageNamed:@"glyphicons_152_check.png"] forState:UIControlStateNormal];
+            currentItem.check = 1;
+        }
+        else
+        {
+            [cell.checkBox setImage:[UIImage imageNamed:@"glyphicons_153_unchecked.png"] forState:UIControlStateNormal];
+            currentItem.check = 0;
+        }
+        
+        //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
+        if(currentItem.necessity == 5)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+        }
+        else if(currentItem.necessity == 4)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else if(currentItem.necessity == 3)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else if(currentItem.necessity == 2)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else if(currentItem.necessity == 1)
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_049_star.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        else
+        {
+            cell.Star1.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star2.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star3.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star4.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+            cell.Star5.image = [UIImage imageNamed:@"glyphicons_048_dislikes.png"];
+        }
+        
+        return cell;
+    }
+}
+
+-(IBAction)CheckBoxTapped:(id)sender
+{
+    //check
+    if ([[isCheckedArr objectAtIndex:[sender tag]] isEqualToString:@"0"]) {
+        
+        [isCheckedArr replaceObjectAtIndex:[sender tag] withObject:@"1"];
+        
+        ShoppingTripItem *s = [self.ShoppingTripItemList objectAtIndex:[sender tag]];
+        s.check = 1;
+        [s updateShoppingItem:s.itemID :s.shoppingItemName :s.categoryID :s.shoppingItemPrice :s.necessity :s.check];
+        
+    }
+    //uncheck
+    else if ([[isCheckedArr objectAtIndex:[sender tag]] isEqualToString:@"1"]) {
+        [isCheckedArr replaceObjectAtIndex:[sender tag] withObject:@"0"];
+        
+        ShoppingTripItem *s = [self.ShoppingTripItemList objectAtIndex:[sender tag]];
+        s.check = 2;
+        [s updateShoppingItem:s.itemID :s.shoppingItemName :s.categoryID :s.shoppingItemPrice :s.necessity :s.check];
     }
     
-    return cell;
+    [self.ShoppingTripTV reloadData];
 }
 
 /*
@@ -296,10 +426,13 @@
         st.shoppingTripCompleted = 1;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
+        [self.ShoppingTripTV reloadData];
     }
     else if([self.StartEndTrip.titleLabel.text isEqualToString:@"End Trip"])
     {
         //Duration count down stop
+        st.shoppingTripCompleted = 3;
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.StartEndTrip setTitle:@"Complete Trip" forState:UIControlStateNormal];
     }
     else
@@ -308,12 +441,24 @@
         //Update Shopping Trip and set ShoppingTripCompleted to TRUE
         st.shoppingTripCompleted = 2;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
+        
+        for(ShoppingTripItem *item in self.ShoppingTripItemList)
+        {
+            //delete unchecked item in the database
+            if(item.check == 0)
+            {
+                [item deleteShoppingItem:item.itemID];
+            }
+        }
+        
         [self.ShoppingTripItemList removeAllObjects];
         self.lbDuration.text = @"Duration";
         self.lbBudget.text = @"Budget";
         self.lbTripName.text = @"Trip Name";
         [self.ShoppingTripTV reloadData];
         self.StartEndTrip.hidden = TRUE;
+        self.AddTrip.enabled = TRUE;
+        self.DeleteTrip.enabled = FALSE;
     }
 }
 

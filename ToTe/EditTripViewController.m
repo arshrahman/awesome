@@ -280,7 +280,8 @@
         for(ShoppingTripItem *item in self.ShoppingTripItemList)
         {
             //add item into database
-            [sti addshoppingItem:item.shoppingItemName :item.shoppingItemPrice :item.categoryID :item.necessity];
+            item.check = 0;
+            [sti addshoppingItem:item.shoppingItemName :item.shoppingItemPrice :item.categoryID :item.necessity :item.check];
         }
         
         [self dismissModalViewControllerAnimated:YES];
