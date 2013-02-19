@@ -15,6 +15,7 @@
 {
     NSMutableArray *CategoryList;
     int catID;
+    CMPopTipView *tooltip;
 }
 
 @end
@@ -360,7 +361,24 @@
         [self.AddItemPrice setText:@""];
         [self.AddItemName setText:@""];
         
+        
+        NSString *count = [NSString stringWithFormat: @"Number of item added: %d", self.editTripViewController.ShoppingTripItemList.count];
+        
+        tooltip = [[CMPopTipView alloc]
+                   initWithMessage:count] ;
+        tooltip.delegate = self;
+        tooltip.backgroundColor = [UIColor grayColor];
+        tooltip.textColor = [UIColor whiteColor];
+        [tooltip presentPointingAtBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+        
+        NSTimer *timerShowToolTip;
+        timerShowToolTip = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dismissToolTip) userInfo:nil repeats:NO];
     }
+}
+
+- (void) dismissToolTip
+{
+    [tooltip dismissAnimated:YES];
 }
 
 

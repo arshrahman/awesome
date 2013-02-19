@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMPopTipView.h"
 
 @class EditTripViewController;
 
-@interface AddShoppingItemViewController : UITableViewController<UIActionSheetDelegate>
+@interface AddShoppingItemViewController : UITableViewController<UIActionSheetDelegate, CMPopTipViewDelegate>
 {
     int AddStar;
 }
