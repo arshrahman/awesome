@@ -46,6 +46,7 @@
 @synthesize scroller;
 @synthesize pageControl;
 @synthesize topButton;
+@synthesize btnReset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -138,9 +139,9 @@
     [super viewDidLoad];
         
     self.navigationItem.hidesBackButton = YES;
-    
-    //self.view.backgroundColor = [UIColor clearColor];
-    
+        
+    self.navigationItem.leftBarButtonItem = nil;
+
     [self.tabBarController setDelegate:self];
     sideView = [[UITableView alloc] initWithFrame:CGRectMake(340, 8, 280, 150) style:UITableViewStylePlain];
     sideView.delegate = self;
@@ -668,6 +669,7 @@
 - (void)viewDidUnload {
     [self setScroller:nil];
     [self setTopButton:nil];
+    [self setBtnReset:nil];
     [super viewDidUnload];
 }
 @end

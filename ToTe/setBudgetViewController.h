@@ -15,6 +15,7 @@
     BOOL pageControlIsChangingPage;
     UIActivityIndicatorView *activity;
     UIView *activityView;
+    IBOutlet UIBarButtonItem *btnReset;
 }
 
 @property(nonatomic, retain)IBOutlet UITableView *topView;
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *topButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnReset;
 
 - (IBAction)pageControl:(id)sender;
 - (IBAction)btnClicked:(id)sender;
