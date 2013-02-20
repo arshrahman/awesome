@@ -72,7 +72,7 @@
     if([check isEqualToString:@"This Week"])
     {
         NSString *date = [self.sortedDays objectAtIndex:section];
-        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        NSMutableArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
         return [purchaseOnThisDay count];
         //return self.PurchaseListWeek.count;
         //NSString *date = [self.ThisWeekDate objectAtIndex:section];
@@ -138,7 +138,7 @@
     if([check isEqualToString:@"This Week"])
     {
         date = [self.sortedDays objectAtIndex:indexPath.section];
-        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        NSMutableArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
         currentPurchaseItem = [purchaseOnThisDay objectAtIndex:indexPath.row];
     }
     else
@@ -298,7 +298,7 @@
     if([check isEqualToString:@"This Week"])
     {
         NSString *date = [self.sortedDays objectAtIndex:indexPath.section];
-        NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+        NSMutableArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
         editingView.purchaseItem = [purchaseOnThisDay objectAtIndex:tableView.indexPathForSelectedRow.row];
         
         //editingView.purchaseItem = [self.PurchaseListWeek objectAtIndex:tableView.indexPathForSelectedRow.row];
