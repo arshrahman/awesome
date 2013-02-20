@@ -224,39 +224,23 @@
         if([check isEqualToString:@"This Week"])
         {
             NSString *date = [self.sortedDays objectAtIndex:indexPath.section];
-            NSArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
+            NSMutableArray *purchaseOnThisDay = [self.individualDayPurchase objectForKey:date];
             Purchase *p = [purchaseOnThisDay objectAtIndex:indexPath.row];
+            
+            NSLog(@"%d", purchaseOnThisDay.count);
+            
+            NSLog(@"%d", indexPath.section);
+            NSLog(@"%d", indexPath.row);
+            
+            [purchaseOnThisDay removeObjectAtIndex:indexPath.row];
             
             [self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
             
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+
+            
             //Call database method
             [p deletePurchase:p.uniqueId];
-            
-            [self Refresh];
-            /*
-             //[self.individualDayPurchase removeObjectForKey:date];
-             NSLog(@"%d", purchaseOnThisDay.count);
-             if(purchaseOnThisDay.count == 1)
-             {
-             
-             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-             
-             [self.sortedDays removeObjectAtIndex:indexPath.section];
-             }
-             else
-             {
-             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-             }
-             NSLog(@"%d", indexPath.section);
-             NSLog(@"%d", indexPath.row);
-             
-             //[self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
-             // Delete the row from the data source
-             //[self.PurchaseListWeek removeObjectAtIndex:indexPath.row];
-             //[purchaseOnThisDay removeObserver:p forKeyPath:date];
-             //[self.individualDayPurchase removeObserver:purchaseOnThisDay forKeyPath:date];
-             //[self.PurchaseList removeAllObjects];
-             */
         }
         else
         {
@@ -266,7 +250,7 @@
             
             // Delete the row from the data source
             [self.PurchaseList removeObjectAtIndex:indexPath.row];
-            [self.PurchaseListWeek removeAllObjects];
+            
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     }
