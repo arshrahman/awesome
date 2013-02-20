@@ -291,7 +291,7 @@
     
     if([check2 isEqualToString:@"Cancel"])
     {
-        [self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+        //[self.AddItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];
     }
     else
     {

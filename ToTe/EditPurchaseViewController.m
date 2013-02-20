@@ -192,7 +192,7 @@
     
     if([check2 isEqualToString:@"Cancel"])
     {
-        [self.EditItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+        //[self.EditItemCategory setTitle:@"Select Category" forState:UIControlStateNormal];
     }
     else
     {

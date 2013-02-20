@@ -121,13 +121,29 @@
     [sender resignFirstResponder];
 }
 
+- (IBAction)SelectCategory:(id)sender
+{
+    UIActionSheet *as = [[UIActionSheet alloc]initWithTitle:@"Categories" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    //Change the index
+    for(Category *c in CategoryList)
+    {
+        [as addButtonWithTitle:c.category_name];
+    }
+    
+    as.cancelButtonIndex = [as addButtonWithTitle:@"Cancel"];
+    
+    [as showInView:self.view];
+    //[as showFromTabBar:self.tabBarController.tabBar];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *check2 = [actionSheet buttonTitleAtIndex:buttonIndex];
     
     if([check2 isEqualToString:@"Cancel"])
     {
-        [self.editCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+        //[self.editCategory setTitle:@"Select Category" forState:UIControlStateNormal];
     }
     else
     {
