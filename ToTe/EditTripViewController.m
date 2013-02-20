@@ -226,6 +226,15 @@
     //NSString checkTripDuration = self.ShoppingTripDuration.text;
     NSString *checkTripBudget = self.ShoppingTripBudget.text;
     
+    //Shopping Trip total item price
+    double i = 0;
+    for(ShoppingTripItem *item in self.ShoppingTripItemList)
+    {
+        i = i + item.shoppingItemPrice;
+    }
+    
+    st.shoppingTotal = i;
+    
     if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
@@ -246,6 +255,11 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please add at least one item for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
+    else if(i > [checkTripBudget doubleValue])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Insufficient budget: Please increase the amount of your shopping budget!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
     else
     {
         //Shopping Trip Name
@@ -256,15 +270,6 @@
 
         //Shopping Trip Duration
         st.Duration = @"00:00";
-    
-        //Shopping Trip total item price
-        double i = 0;
-        for(ShoppingTripItem *item in self.ShoppingTripItemList)
-        {
-            i = i + item.shoppingItemPrice;
-        }
-    
-        st.shoppingTotal = i;
     
         //Current Date
         st.shoppingDate = [NSDate date];
