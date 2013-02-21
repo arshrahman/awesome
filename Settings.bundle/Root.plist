@@ -34,7 +34,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Share Data With TP</string>
+			<string>Share Data</string>
 			<key>Key</key>
 			<string>ShareSwitch</string>
 			<key>DefaultValue</key>
