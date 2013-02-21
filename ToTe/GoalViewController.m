@@ -58,7 +58,7 @@
         NSString *amount = [NSString stringWithFormat: @"%.2f", goal.goal_amount];
         
         //append budget/goal title/end date
-		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal, %@ by %@! Please support me by encouraging and reminding me!:D", amount, goal.goal_title, goal.deadline]];
+		[twitter setInitialText:[NSString stringWithFormat:@"Hi everyone! I have decided to save $%@ for my goal, %@ by %@! Please encouraging me!", amount, goal.goal_title, goal.deadline]];
         
 		[self presentViewController:twitter animated:YES completion:nil];
         
