@@ -92,7 +92,7 @@
         }
         else if(st.shoppingTripCompleted == 3)
         {
-            [self.StartEndTrip setTitle:@"Complete Trip" forState:UIControlStateNormal];
+            [self.StartEndTrip setTitle:@"Confirm Trip" forState:UIControlStateNormal];
             self.StartEndTrip.hidden = FALSE;
         }
     }
@@ -433,7 +433,7 @@
         //Duration count down stop
         st.shoppingTripCompleted = 3;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
-        [self.StartEndTrip setTitle:@"Complete Trip" forState:UIControlStateNormal];
+        [self.StartEndTrip setTitle:@"Confirm Trip" forState:UIControlStateNormal];
     }
     else
     {
