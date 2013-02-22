@@ -242,43 +242,48 @@
     
     NSMutableArray *goalIDArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"PostSMGoals"];
     
-    if (goalIDArray.count > 0)
+    if ([a connected])
     {
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        
-        g = [[Goal alloc]init];
-        
-        SettingsData *s = [[SettingsData alloc]init];
-        [s getDataFromSetting];
-        
-        checkFB = s.Facebook;
-        checkTwitter = s.Twitter;
-        
-        NSString *toPost =@"";
-        
-        if (goalIDArray.count == 1)
+        if (goalIDArray.count > 0)
         {
-            Goal *gl = [g SelectGoalForSMPosting:[[goalIDArray objectAtIndex:0] integerValue]];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"PostSMGoals"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
             
-            if (gl.goal_amount > 0)
+            g = [[Goal alloc]init];
+            
+            SettingsData *s = [[SettingsData alloc]init];
+            [s getDataFromSetting];
+            
+            checkFB = s.Facebook;
+            checkTwitter = s.Twitter;
+            
+            NSString *toPost =@"";
+            
+            if (goalIDArray.count == 1)
             {
-                toPost = [NSString stringWithFormat:@"Yes! I have successfully saved this week for my goal, \"%@\"! %g weeks to go! I can achieve my goal! :D", gl.goal_title, gl.goal_amount];
+                Goal *gl = [g SelectGoalForSMPosting:[[goalIDArray objectAtIndex:0] integerValue]];
+                
+                if (gl.goal_amount > 0)
+                {
+                    toPost = [NSString stringWithFormat:@"Yes! I have successfully saved this week for my goal, \"%@\"! %g weeks to go! I can achieve my goal! :D", gl.goal_title, gl.goal_amount];
+                }
+                else
+                {
+                    toPost = [NSString stringWithFormat:@"Yay! After %d weeks, I have managed to save %.2g%% of my goal, %@! Thanks everyone for your support! :D", gl.weeks_met, gl.amount_tosave, gl.goal_title];
+                    
+                    NSLog(@"%@, id: %d", toPost, [[goalIDArray objectAtIndex:0] integerValue]);
+                }
             }
             else
             {
-                toPost = [NSString stringWithFormat:@"Yay! After %d weeks, I have managed to save %.2g%% of my goal, %@! Thanks everyone for your support! :D", gl.weeks_met, gl.amount_tosave, gl.goal_title];
-                
-                NSLog(@"%@, id: %d", toPost, [[goalIDArray objectAtIndex:0] integerValue]);
+                toPost = [NSString stringWithFormat:@"Yes! I have successfully saved %d goals for this week!", goalIDArray.count];
             }
+            
+            [self FacebookPost:toPost];
         }
-        else
-        {
-            toPost = [NSString stringWithFormat:@"Yes! I have successfully saved %d goals for this week!", goalIDArray.count];
-        }
-        
-        [self FacebookPost:toPost];
+
     }
+    
 }
 
 
@@ -599,7 +604,7 @@
 
 - (IBAction)btnClicked:(id)sender
 {
-    if (!allowEdit)
+    if (allowEdit)
     {
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         

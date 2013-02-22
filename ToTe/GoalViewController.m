@@ -10,6 +10,7 @@
 #import "Goal.h"
 #import "GoalDetailViewController.h"
 #import "SettingsData.h"
+#import "AppLaunch.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface GoalViewController ()
@@ -136,7 +137,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //check if ns got something & ns > 0
+    
+    AppLaunch *a = [[AppLaunch alloc]init];
+    
     int newGoalID = [[[NSUserDefaults standardUserDefaults]objectForKey:@"NewGoal"] integerValue];
 
     SettingsData *s = [[SettingsData alloc]init];
@@ -156,23 +159,28 @@
     
     [tblViewGoal reloadData];
     
-    if (newGoalID > 0)
+    if ([a connected])
     {
-        for (int i = goalArray.count-1; i >= 0; i--)
+        if (newGoalID > 0)
         {
-            Goal *gl = [goalArray objectAtIndex:i];
-            NSLog(@"gl: %d, newgoal: %d", gl.goal_id, newGoalID);
-            
-            if (gl.goal_id == newGoalID)
+            for (int i = goalArray.count-1; i >= 0; i--)
             {
-                NSLog(@"%d", newGoalID);
-                [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"NewGoal"];
-                [self FacebookPost:gl];
+                Goal *gl = [goalArray objectAtIndex:i];
+                NSLog(@"gl: %d, newgoal: %d", gl.goal_id, newGoalID);
                 
-                break;
+                if (gl.goal_id == newGoalID)
+                {
+                    NSLog(@"%d", newGoalID);
+                    [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"NewGoal"];
+                    [self FacebookPost:gl];
+                    
+                    break;
+                }
             }
         }
+
     }
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
