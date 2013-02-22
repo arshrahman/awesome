@@ -38,19 +38,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    st = [[ShoppingTrip alloc]init];
+    shoppingTripArray = [[NSMutableArray alloc]init];
+    shoppingTripItemArray = [[NSMutableArray alloc]init];
+    shoppingTripArray = [st SelectCompletedShopping];
     
 }
 
 
 -(void)viewWillAppear:(BOOL)animated
 {
-   
-    
-    st = [[ShoppingTrip alloc]init];
-    shoppingTripArray = [[NSMutableArray alloc]init];
-    shoppingTripItemArray = [[NSMutableArray alloc]init];
-    shoppingTripArray = [st SelectCompletedShopping];
-    
    
 }
 
@@ -74,10 +71,11 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    ShoppingTrip *st = [shoppingTripArray objectAtIndex:indexPath.row];
+    ShoppingTrip *sTrip = [[ShoppingTrip alloc ]init];
+    sTrip = [shoppingTripArray objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = st.shoppingTripName;
-    cell.detailTextLabel.text = st.shoppingDate;
+    cell.textLabel.text = sTrip.shoppingTripName;
+    cell.detailTextLabel.text = sTrip.shoppingDate;
     return cell;
 }
 
