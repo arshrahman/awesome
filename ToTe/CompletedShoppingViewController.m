@@ -49,6 +49,7 @@
     st = [[ShoppingTrip alloc]init];
     shoppingTripArray = [[NSMutableArray alloc]init];
     shoppingTripItemArray = [[NSMutableArray alloc]init];
+    shoppingTripArray = [st SelectCompletedShopping];
     
    
 }
@@ -65,52 +66,18 @@
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *goalTbViewCell = @"goalTbViewCell";
+    static NSString *CellIdentifier = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"goalTbViewCell"];
-    
-    UILabel *lblname = nil;
-    UILabel *lbldate = nil;
-    UIImageView *imv = nil;
-    
-    if(cell == nil)
+    if (!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goalTbViewCell];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.showsReorderControl = YES;
-        
-        lblname = [[UILabel alloc]initWithFrame:CGRectMake(63, 3, 280, 25)];
-        lblname.textColor = [UIColor blackColor];
-        lblname.font = [UIFont fontWithName:@"Helvetica" size:17];
-        lblname.text = @"";
-        lblname.tag = 100;
-        
-        lbldate = [[UILabel alloc]initWithFrame:CGRectMake(63, 26, 280, 25)];
-        lbldate.textColor = [UIColor blackColor];
-        lbldate.font = [UIFont fontWithName:@"Helvetica" size:16];
-        lbldate.textColor = [UIColor darkGrayColor];
-        lbldate.tag = 200;
-        
-        imv = [[UIImageView alloc]initWithFrame:CGRectMake(11, 10, 41, 35)];
-        imv.image=[UIImage imageNamed:@"glyphicons_138_picture.png"];
-        imv.layer.cornerRadius = 5.0;
-        imv.clipsToBounds = YES;
-        imv.tag = 300;
-        
-        [cell.contentView addSubview:lblname];
-        [cell.contentView addSubview:lbldate];
-        [cell.contentView addSubview:imv];
-    }
-    else
-    {
-        lblname = (UILabel *)[cell.contentView viewWithTag:100];
-        lbldate = (UILabel *)[cell.contentView viewWithTag:200];
-        imv = (UIImageView *)[cell.contentView viewWithTag:300];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
+    ShoppingTrip *st = [shoppingTripArray objectAtIndex:indexPath.row];
     
+    cell.textLabel.text = st.shoppingTripName;
+    cell.detailTextLabel.text = st.shoppingDate;
     return cell;
 }
 

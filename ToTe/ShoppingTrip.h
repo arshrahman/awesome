@@ -26,4 +26,6 @@
 - (void)deleteShoppingTrip:(int)shoppingID;
 -(void)updateShoppingTrip:(int)shoppingID: (int)shoppingTripCompleted;
 
+-(NSMutableArray *) SelectCompletedShopping;
+
 @end
