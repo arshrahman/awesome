@@ -54,7 +54,7 @@
     goalArray = [[NSMutableArray alloc]init];
     goalIDArray = [[NSMutableArray alloc]init];
     
-    for (Goal *gg in [g SelectAllGoals])
+    for (Goal *gg in [g SelectCompletedGoals])
     {
         [goalArray addObject:gg];
         [goalIDArray addObject:[NSNumber numberWithInt:gg.goal_id]];
