@@ -215,7 +215,7 @@
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
     int maxID = 0;
-    ShoppingTrip *trip = [[ShoppingTrip alloc]init];
+   
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
@@ -227,6 +227,7 @@
         {
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
+                ShoppingTrip *trip = [[ShoppingTrip alloc]init];
                 
                 NSString *shoppingId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                 
