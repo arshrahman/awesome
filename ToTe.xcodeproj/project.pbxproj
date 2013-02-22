@@ -449,6 +449,10 @@
 		B4664534169C0A0100C83739 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B4664533169C0A0100C83739 /* logo.jpeg */; };
 		B46A481B16BA1AC7009A2E1F /* EditGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A481816BA1AC6009A2E1F /* EditGoalViewController.m */; };
 		B46A481C16BA1AC7009A2E1F /* GoalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A481A16BA1AC7009A2E1F /* GoalDetailViewController.m */; };
+		B4C67F8916D725C5004E24A0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C67F8816D725C5004E24A0 /* icon.png */; };
+		B4C67F8C16D725F5004E24A0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C67F8B16D725F5004E24A0 /* icon.png */; };
+		B4C67F8E16D7267C004E24A0 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C67F8D16D7267C004E24A0 /* icon1.png */; };
+		B4C67F9016D72687004E24A0 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C67F8F16D72687004E24A0 /* icon1.png */; };
 		B4C85A2016A7A3D00036E52E /* Budget.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C85A1F16A7A3D00036E52E /* Budget.m */; };
 		B4C8688516BB7305008171FD /* TipOfDay.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4C8688416BB7305008171FD /* TipOfDay.plist */; };
 		B4CAC24A16B139E900626478 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CAC24916B139E900626478 /* SettingsViewController.m */; };
@@ -957,6 +961,10 @@
 		B46A481816BA1AC6009A2E1F /* EditGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGoalViewController.m; sourceTree = "<group>"; };
 		B46A481916BA1AC6009A2E1F /* GoalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalDetailViewController.h; sourceTree = "<group>"; };
 		B46A481A16BA1AC7009A2E1F /* GoalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalDetailViewController.m; sourceTree = "<group>"; };
+		B4C67F8816D725C5004E24A0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = images/icon.png; sourceTree = "<group>"; };
+		B4C67F8B16D725F5004E24A0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		B4C67F8D16D7267C004E24A0 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1.png; path = images/icon1.png; sourceTree = "<group>"; };
+		B4C67F8F16D72687004E24A0 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
 		B4C85A1E16A7A3D00036E52E /* Budget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Budget.h; sourceTree = "<group>"; };
 		B4C85A1F16A7A3D00036E52E /* Budget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Budget.m; sourceTree = "<group>"; };
 		B4C8688416BB7305008171FD /* TipOfDay.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TipOfDay.plist; sourceTree = "<group>"; };
@@ -1107,7 +1115,7 @@
 		CEB0703C169B9A5100F96FD4 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		CEB0703D169B9A5100F96FD4 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		CEB0704D169BC85B00F96FD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		CEFC834916917DE600F4E2B1 /* ToTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEFC834916917DE600F4E2B1 /* iBudget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBudget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFC834D16917DE600F4E2B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEFC834F16917DE600F4E2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEFC835116917DE600F4E2B1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1363,6 +1371,8 @@
 		CEB06CF31696860F00F96FD4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B4C67F8D16D7267C004E24A0 /* icon1.png */,
+				B4C67F8816D725C5004E24A0 /* icon.png */,
 				B4472EE716D13C5E00904163 /* navbar.jpg */,
 				B4472EE816D13C5E00904163 /* bground.jpg */,
 				B4472EE516D1374B00904163 /* bground.png */,
@@ -1799,6 +1809,8 @@
 		CEFC833E16917DE600F4E2B1 = {
 			isa = PBXGroup;
 			children = (
+				B4C67F8F16D72687004E24A0 /* icon1.png */,
+				B4C67F8B16D725F5004E24A0 /* icon.png */,
 				B413212216CF917E00FEA52B /* SystemConfiguration.framework */,
 				B426C3C016BACB9D00C251CB /* QuartzCore.framework */,
 				B46641DE169BFFF900C83739 /* libsqlite3.0.dylib */,
@@ -1813,7 +1825,7 @@
 		CEFC834A16917DE600F4E2B1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CEFC834916917DE600F4E2B1 /* ToTe.app */,
+				CEFC834916917DE600F4E2B1 /* iBudget.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1892,7 +1904,7 @@
 			);
 			name = ToTe;
 			productName = ToTe;
-			productReference = CEFC834916917DE600F4E2B1 /* ToTe.app */;
+			productReference = CEFC834916917DE600F4E2B1 /* iBudget.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2366,6 +2378,10 @@
 				B4472EEA16D13C5E00904163 /* bground.jpg in Resources */,
 				CE9A046B16D3B0B00038E904 /* customCell2.xib in Resources */,
 				CE9A047616D3D5E90038E904 /* customCell1.xib in Resources */,
+				B4C67F8916D725C5004E24A0 /* icon.png in Resources */,
+				B4C67F8C16D725F5004E24A0 /* icon.png in Resources */,
+				B4C67F8E16D7267C004E24A0 /* icon1.png in Resources */,
+				B4C67F9016D72687004E24A0 /* icon1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2501,7 +2517,7 @@
 					"\"$(SRCROOT)/ToTe\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iBudget;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2518,7 +2534,7 @@
 					"\"$(SRCROOT)/ToTe\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iBudget;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

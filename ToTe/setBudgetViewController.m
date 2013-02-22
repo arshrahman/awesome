@@ -599,7 +599,7 @@
 
 - (IBAction)btnClicked:(id)sender
 {
-    if (allowEdit)
+    if (!allowEdit)
     {
         UpdateBudgetViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateBudgetViewController"];
         
