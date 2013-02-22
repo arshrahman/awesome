@@ -476,6 +476,8 @@
 		CE41602016C0B14200D7E2BC /* PurchasedItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */; };
 		CE4336E416D7360700594A5E /* CompletedGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4336E316D7360700594A5E /* CompletedGoalsViewController.m */; };
 		CE4336E816D739A700594A5E /* CompletedGoalsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4336E716D739A700594A5E /* CompletedGoalsDetailViewController.m */; };
+		CE4336F716DDDCED00594A5E /* CompletedShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4336F616DDDCED00594A5E /* CompletedShoppingViewController.m */; };
+		CE4336FB16DDDCED00594A5E /* CompletedShoppingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4336FA16DDDCED00594A5E /* CompletedShoppingDetailViewController.m */; };
 		CE5292BF16C213790006BED4 /* ShoppingTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */; };
 		CE5292C216C213930006BED4 /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C116C213930006BED4 /* EditTripViewController.m */; };
 		CE5292C516C213B80006BED4 /* EditShoppingItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C416C213B80006BED4 /* EditShoppingItemViewController.m */; };
@@ -1081,6 +1083,10 @@
 		CE4336E316D7360700594A5E /* CompletedGoalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedGoalsViewController.m; sourceTree = "<group>"; };
 		CE4336E616D739A700594A5E /* CompletedGoalsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedGoalsDetailViewController.h; sourceTree = "<group>"; };
 		CE4336E716D739A700594A5E /* CompletedGoalsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedGoalsDetailViewController.m; sourceTree = "<group>"; };
+		CE4336F516DDDCED00594A5E /* CompletedShoppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedShoppingViewController.h; sourceTree = "<group>"; };
+		CE4336F616DDDCED00594A5E /* CompletedShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedShoppingViewController.m; sourceTree = "<group>"; };
+		CE4336F916DDDCED00594A5E /* CompletedShoppingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedShoppingDetailViewController.h; sourceTree = "<group>"; };
+		CE4336FA16DDDCED00594A5E /* CompletedShoppingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedShoppingDetailViewController.m; sourceTree = "<group>"; };
 		CE5292BD16C213790006BED4 /* ShoppingTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTripViewController.h; sourceTree = "<group>"; };
 		CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTripViewController.m; sourceTree = "<group>"; };
 		CE5292C016C213920006BED4 /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTripViewController.h; sourceTree = "<group>"; };
@@ -1374,6 +1380,10 @@
 				CE4336E316D7360700594A5E /* CompletedGoalsViewController.m */,
 				CE4336E616D739A700594A5E /* CompletedGoalsDetailViewController.h */,
 				CE4336E716D739A700594A5E /* CompletedGoalsDetailViewController.m */,
+				CE4336F516DDDCED00594A5E /* CompletedShoppingViewController.h */,
+				CE4336F616DDDCED00594A5E /* CompletedShoppingViewController.m */,
+				CE4336F916DDDCED00594A5E /* CompletedShoppingDetailViewController.h */,
+				CE4336FA16DDDCED00594A5E /* CompletedShoppingDetailViewController.m */,
 			);
 			name = Overview;
 			sourceTree = "<group>";
@@ -2450,6 +2460,8 @@
 				CE9A047216D3D5870038E904 /* customCell1.m in Sources */,
 				CE4336E416D7360700594A5E /* CompletedGoalsViewController.m in Sources */,
 				CE4336E816D739A700594A5E /* CompletedGoalsDetailViewController.m in Sources */,
+				CE4336F716DDDCED00594A5E /* CompletedShoppingViewController.m in Sources */,
+				CE4336FB16DDDCED00594A5E /* CompletedShoppingDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
