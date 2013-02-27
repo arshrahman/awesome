@@ -393,8 +393,6 @@
                 //Array
                 [purchaseList addObject:p];
                 
-                NSLog(@"Show This Week Purchase");
-                
                 //sqlite3_close(budgetDB);
             }
             

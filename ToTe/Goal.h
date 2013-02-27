@@ -36,4 +36,6 @@
 -(void)ReorderPriority:(NSMutableArray *)gIdArray;
 -(Goal *)SelectGoalForSMPosting:(int)g_id;
 
+-(NSMutableArray *)SelectCompletedGoals;
+
 @end

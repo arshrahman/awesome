@@ -474,6 +474,8 @@
 		CE41601E16C0B14200D7E2BC /* ByCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601816C0B14200D7E2BC /* ByCategoryViewController.m */; };
 		CE41601F16C0B14200D7E2BC /* ViewBudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601A16C0B14200D7E2BC /* ViewBudgetViewController.m */; };
 		CE41602016C0B14200D7E2BC /* PurchasedItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */; };
+		CE4336E416D7360700594A5E /* CompletedGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4336E316D7360700594A5E /* CompletedGoalsViewController.m */; };
+		CE4336E816D739A700594A5E /* CompletedGoalsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4336E716D739A700594A5E /* CompletedGoalsDetailViewController.m */; };
 		CE5292BF16C213790006BED4 /* ShoppingTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */; };
 		CE5292C216C213930006BED4 /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C116C213930006BED4 /* EditTripViewController.m */; };
 		CE5292C516C213B80006BED4 /* EditShoppingItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5292C416C213B80006BED4 /* EditShoppingItemViewController.m */; };
@@ -1075,6 +1077,10 @@
 		CE41601B16C0B14200D7E2BC /* ViewBudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewBudgetViewController.h; sourceTree = "<group>"; };
 		CE41601C16C0B14200D7E2BC /* PurchasedItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchasedItemsViewController.m; sourceTree = "<group>"; };
 		CE41601D16C0B14200D7E2BC /* PurchasedItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchasedItemsViewController.h; sourceTree = "<group>"; };
+		CE4336E216D7360700594A5E /* CompletedGoalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedGoalsViewController.h; sourceTree = "<group>"; };
+		CE4336E316D7360700594A5E /* CompletedGoalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedGoalsViewController.m; sourceTree = "<group>"; };
+		CE4336E616D739A700594A5E /* CompletedGoalsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedGoalsDetailViewController.h; sourceTree = "<group>"; };
+		CE4336E716D739A700594A5E /* CompletedGoalsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedGoalsDetailViewController.m; sourceTree = "<group>"; };
 		CE5292BD16C213790006BED4 /* ShoppingTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTripViewController.h; sourceTree = "<group>"; };
 		CE5292BE16C213790006BED4 /* ShoppingTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTripViewController.m; sourceTree = "<group>"; };
 		CE5292C016C213920006BED4 /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTripViewController.h; sourceTree = "<group>"; };
@@ -1364,6 +1370,10 @@
 				B452204A16A54F74006209A7 /* OverviewViewController.m */,
 				CE195F1916CB56350071197F /* ByWeekGraphViewController.h */,
 				CE195F1A16CB56350071197F /* ByWeekGraphViewController.m */,
+				CE4336E216D7360700594A5E /* CompletedGoalsViewController.h */,
+				CE4336E316D7360700594A5E /* CompletedGoalsViewController.m */,
+				CE4336E616D739A700594A5E /* CompletedGoalsDetailViewController.h */,
+				CE4336E716D739A700594A5E /* CompletedGoalsDetailViewController.m */,
 			);
 			name = Overview;
 			sourceTree = "<group>";
@@ -2438,6 +2448,8 @@
 				B413211C16CF908B00FEA52B /* Reachability.m in Sources */,
 				CE9A046F16D3B3290038E904 /* customCell2.m in Sources */,
 				CE9A047216D3D5870038E904 /* customCell1.m in Sources */,
+				CE4336E416D7360700594A5E /* CompletedGoalsViewController.m in Sources */,
+				CE4336E816D739A700594A5E /* CompletedGoalsDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

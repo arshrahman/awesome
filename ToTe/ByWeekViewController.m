@@ -117,7 +117,7 @@
     NSString *full = [combined stringByAppendingString:dateWithNewFormatEnd];
     
     cell.textLabel.text = full;
-    cell.detailTextLabel.text= [NSString stringWithFormat:@"%2.1f/%2.1f", expenses,
+    cell.detailTextLabel.text= [NSString stringWithFormat:@"$%2.2f/$%2.2f", expenses,
                                 weeklyBudget.budget_amount];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

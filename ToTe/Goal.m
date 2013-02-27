@@ -459,4 +459,50 @@
     return weeks;
 }
 
+//pol
+-(NSMutableArray *)SelectCompletedGoals
+{
+    NSMutableArray *goals = [[NSMutableArray alloc]init];
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT GOAL_ID, TITLE, GOAL_AMOUNT, GOAL_PHOTO, WEEKS_MET, AMOUNT_TOSAVE, DEADLINE FROM GOAL WHERE DATE('NOW') > DEADLINE ORDER BY PRIORITY"];
+        
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                Goal *gg = [[Goal alloc]init];
+                
+                gg.goal_id = sqlite3_column_int(statement, 0);
+                gg.goal_title = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                gg.goal_amount = sqlite3_column_double(statement, 2);
+                gg.goal_photo = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                gg.weeks_met = sqlite3_column_int(statement, 4);
+                gg.amount_tosave = sqlite3_column_double(statement, 5);
+                gg.deadline = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+                
+                [goals addObject:gg];
+            }
+        }
+        else
+        {
+            NSLog(@"Got Error in select all goals");
+        }
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(budgetDB);
+    
+    return goals;
+}
+
 @end

@@ -27,7 +27,6 @@
     double expenses;
     
     int weekday;
-    BOOL allowEdit;
 }
 
 @synthesize budgetItem = b;
@@ -89,13 +88,6 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comp = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
     weekday = [comp weekday];
-    allowEdit = FALSE;
-    
-    if (weekday == 2 || weekday == 3)
-    {
-        allowEdit = TRUE;
-        topButton.tintColor = [UIColor colorWithRed:255.0/255.0 green:150.0/255.0 blue:0/255.0 alpha:1];
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
