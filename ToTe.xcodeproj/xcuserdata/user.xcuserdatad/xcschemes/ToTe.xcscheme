@@ -15,7 +15,6 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEFC834816917DE600F4E2B1"
-               BuildableName = "ToTe.app"
                BlueprintName = "ToTe"
                ReferencedContainer = "container:ToTe.xcodeproj">
             </BuildableReference>
@@ -33,7 +32,6 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEFC834816917DE600F4E2B1"
-            BuildableName = "ToTe.app"
             BlueprintName = "ToTe"
             ReferencedContainer = "container:ToTe.xcodeproj">
          </BuildableReference>
@@ -52,7 +50,6 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEFC834816917DE600F4E2B1"
-            BuildableName = "ToTe.app"
             BlueprintName = "ToTe"
             ReferencedContainer = "container:ToTe.xcodeproj">
          </BuildableReference>
@@ -70,7 +67,6 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEFC834816917DE600F4E2B1"
-            BuildableName = "ToTe.app"
             BlueprintName = "ToTe"
             ReferencedContainer = "container:ToTe.xcodeproj">
          </BuildableReference>
