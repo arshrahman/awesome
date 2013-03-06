@@ -269,8 +269,8 @@
         st.shoppingBudget = [ShoppingTripBudget.text doubleValue];
 
         //Shopping Trip Duration
-        st.Duration = @"00:00";
-    
+        st.Duration = self.ShoppingTripDuration.currentTitle;
+        
         //Current Date
         st.shoppingDate = [NSDate date];
         
@@ -340,17 +340,20 @@
     [dateSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
     
     CGRect pickerFrame = CGRectMake(0, 44, 0, 0);
-    UIDatePicker *deadlinePicker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
     
-    [deadlinePicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    // Create a new date with the current time
+    NSDate *date = [NSDate new];
+    // Split up the date components
+    NSDateComponents *time = [[NSCalendar currentCalendar]
+                              components:NSHourCalendarUnit | NSMinuteCalendarUnit
+                              fromDate:date];
+    NSInteger seconds = ([time hour] * 60 * 60) + ([time minute] * 60);
     
+    UIDatePicker *picker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
+    [picker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    [picker setCountDownDuration:seconds];
     
-    NSDateFormatter *df = [[NSDateFormatter alloc]init];
-    //[df setLocale:[NSLocale currentLocale]];
-    //[df setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [df setDateFormat:@"HH:mm:ss"];
-    
-    [dateSheet addSubview:deadlinePicker];
+    [dateSheet addSubview:picker];
     
     UIToolbar *controlBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, dateSheet.bounds.size.width, 44)];
     [[UIToolbar appearance] setTintColor:[UIColor lightGrayColor]];
@@ -376,30 +379,36 @@
 {
     NSArray *listOfViews = [dateSheet subviews];
     
+    NSDateComponents* result = [[NSDateComponents alloc]init];
+    NSString *Hour = [[NSString alloc]init];
+    NSString *Min = [[NSString alloc]init];
+    
     for(UIView *subView in listOfViews)
     {
+        
         if([subView isKindOfClass:[UIDatePicker class]])
         {
             self.timeline = [(UIDatePicker *)subView date];
             
-            NSLog(@"%@", self.timeline);
+            NSLog(@"Time:");
             
-            NSDateFormatter *df = [[NSDateFormatter alloc]init];
-            [df setDateFormat:@"HH:mm:ss"];
-            NSString *formattedDateString = [df stringFromDate:self.timeline];
+            NSCalendar* cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
             
-            NSDateFormatter *dr = [[NSDateFormatter alloc]init];
-            [dr setDateFormat:@"HH:mm:ss"];
-            self.timeline = [dr dateFromString:formattedDateString];
+             result = [cal components:NSHourCalendarUnit |
+                                        NSMinuteCalendarUnit
+                                              fromDate:self.timeline];
+            
+            NSLog(@"%d hours, %d minutes",
+                  [result hour], [result minute]);
+            
+            Hour = [NSString stringWithFormat:@"%d Hr ",[result hour]];
+            Min = [NSString stringWithFormat:@"%d Min",[result minute]];
         }
     }
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSString *Dura = [Hour stringByAppendingString: Min];
     
-    //[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    
-    [self.ShoppingTripDuration setTitle:[dateFormatter stringFromDate:self.timeline] forState:UIControlStateNormal];
+    [self.ShoppingTripDuration setTitle:Dura forState:UIControlStateNormal];
     //[txtDeadline setText:[dateFormatter stringFromDate:self.deadline]];
     
     //if([txtAmount.text length] > 0)[self ChangelblSave];
