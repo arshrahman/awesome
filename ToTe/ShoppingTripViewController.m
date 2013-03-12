@@ -50,6 +50,12 @@
     //load it once
     NSLog(@"Shopping Trip");
 	// Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     //Retrieve Data
     st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
@@ -64,16 +70,10 @@
     if(st.shoppingID != 0)
     {
         //use split here
-        self.lbDuration.text = st.Duration;
+        
         self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", st.shoppingBudget];
         self.lbTripName.text = st.shoppingTripName;
     }
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     
     if(self.ShoppingTripItemList.count > 0)
     {
@@ -86,7 +86,10 @@
         {
             [self.StartEndTrip setTitle:@"Start Trip" forState:UIControlStateNormal];
             self.StartEndTrip.hidden = FALSE;
-
+            
+            //Only When user have not start the trip
+            self.lbDuration.text = st.Duration;
+            
         }
         else if(st.shoppingTripCompleted == 1)
         {
