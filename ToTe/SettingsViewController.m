@@ -42,12 +42,17 @@
     
     if (FirstTimeUse != 3)
     {
+        //Message box
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sharing Of Data"message:@"For your information, this application gather data and is being shared with Temeask Polytechic for research purposes. To disable this function, look under phone setting." delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+        
         BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
         [self.navigationController pushViewController:svc animated:NO];
         
     }
     else
     {
+        //Not first use
         setBudgetViewController *sbc = [self.storyboard instantiateViewControllerWithIdentifier:@"setBudgetViewController"];
         [self.navigationController pushViewController:sbc animated:NO];
     }

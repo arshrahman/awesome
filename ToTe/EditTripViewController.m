@@ -235,7 +235,22 @@
     
     st.shoppingTotal = i;
     
-    if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0))
+    if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0) && ([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name, the Duration and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if(([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0) && ([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Duration and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([checkTripName length] == 0 && ([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Duration of the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
@@ -258,6 +273,11 @@
     else if(i > [checkTripBudget doubleValue])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Insufficient budget: Please increase the amount of your shopping budget!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
+    else if(([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the duration of your shopping!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
     else
@@ -342,12 +362,13 @@
     CGRect pickerFrame = CGRectMake(0, 44, 0, 0);
     
     // Create a new date with the current time
-    NSDate *date = [NSDate new];
+    //NSDate *date = [NSDate new];
     // Split up the date components
-    NSDateComponents *time = [[NSCalendar currentCalendar]
-                              components:NSHourCalendarUnit | NSMinuteCalendarUnit
-                              fromDate:date];
-    NSInteger seconds = ([time hour] * 60 * 60) + ([time minute] * 60);
+    //NSDateComponents *time = [[NSCalendar currentCalendar]
+                              //components:NSHourCalendarUnit | NSMinuteCalendarUnit
+                              //fromDate:date];
+    
+    NSInteger seconds = (0 * 60 * 60) + (1 * 60);
     
     UIDatePicker *picker = [[UIDatePicker alloc]initWithFrame:pickerFrame];
     [picker setDatePickerMode:UIDatePickerModeCountDownTimer];
@@ -380,8 +401,9 @@
     NSArray *listOfViews = [dateSheet subviews];
     
     NSDateComponents* result = [[NSDateComponents alloc]init];
-    NSString *Hour = [[NSString alloc]init];
-    NSString *Min = [[NSString alloc]init];
+    int Hour = 0;
+    int Min = 0;
+    NSString *Dura = [[NSString alloc] init];
     
     for(UIView *subView in listOfViews)
     {
@@ -401,17 +423,25 @@
             NSLog(@"%d hours, %d minutes",
                   [result hour], [result minute]);
             
-            Hour = [NSString stringWithFormat:@"%d Hr ",[result hour]];
-            Min = [NSString stringWithFormat:@"%d Min",[result minute]];
+            Hour = [result hour];
+            Min = [result minute];
+            
+            NSLog(@"%d", Min);
         }
     }
     
-    NSString *Dura = [Hour stringByAppendingString: Min];
+    if(Hour > 4 || (Hour == 4 && Min > 0))
+    {
+        Hour = 4;
+        Min = 0;
+        
+        //Messge
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Shopping Trip Duration"message:@"The maximum hours you can have is up till 4 hour per shopping trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
+    }
     
+    Dura = [NSString stringWithFormat:@"%02d:%02d:00", Hour, Min];
     [self.ShoppingTripDuration setTitle:Dura forState:UIControlStateNormal];
-    //[txtDeadline setText:[dateFormatter stringFromDate:self.deadline]];
-    
-    //if([txtAmount.text length] > 0)[self ChangelblSave];
     
     [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
 }

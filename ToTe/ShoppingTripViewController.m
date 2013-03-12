@@ -32,6 +32,7 @@
 @synthesize lbBudget;
 @synthesize lbDuration;
 @synthesize lbTripName;
+@synthesize Extend;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,14 +47,9 @@
 {
     [super viewDidLoad];
     
+    //load it once
     NSLog(@"Shopping Trip");
 	// Do any additional setup after loading the view.
-    
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     //Retrieve Data
     st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
@@ -67,10 +63,17 @@
     
     if(st.shoppingID != 0)
     {
+        //use split here
         self.lbDuration.text = st.Duration;
         self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", st.shoppingBudget];
         self.lbTripName.text = st.shoppingTripName;
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     
     if(self.ShoppingTripItemList.count > 0)
     {
@@ -397,12 +400,16 @@
 
 - (IBAction)DeletePressed:(id)sender {
     
+    StopTime = TRUE;
+    [self setTimer];
+    
     [st deleteShoppingTrip:st.shoppingID];
     [self.ShoppingTripItemList removeAllObjects];
     self.lbDuration.text = @"Duration";
     self.lbBudget.text = @"Budget";
     self.lbTripName.text = @"Trip Name";
     [self.ShoppingTripTV reloadData];
+    lbDuration.textColor = [UIColor blackColor];
     
     self.StartEndTrip.hidden = TRUE;
 
@@ -422,7 +429,9 @@
     //Start and End Trip
     if([self.StartEndTrip.titleLabel.text isEqualToString:@"Start Trip"])
     {
-        //Duration count down start
+        //Duration count down timer start
+        StopTime = FALSE;
+        [self setTimer];
         st.shoppingTripCompleted = 1;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
@@ -431,9 +440,12 @@
     else if([self.StartEndTrip.titleLabel.text isEqualToString:@"End Trip"])
     {
         //Duration count down stop
+        StopTime = TRUE;
+        [self setTimer];
         st.shoppingTripCompleted = 3;
         [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
         [self.StartEndTrip setTitle:@"Confirm Trip" forState:UIControlStateNormal];
+        lbDuration.textColor = [UIColor blackColor];
     }
     else
     {
@@ -466,5 +478,115 @@
     
     //Add and Delete Trip
     //[self.EditItemCategory setTitle:c.category_name forState:UIControlStateNormal];
+}
+
+-(void)timerRun {
+    secondsCount = secondsCount - 1;
+    int sec = secondsCount%60;
+    int min = (secondsCount/60)%60;
+    int hr = (secondsCount/3600)%60;
+    
+    //20 min - turn red
+    if(min < 20)
+    {
+        lbDuration.textColor = [UIColor redColor];
+    }
+    
+    NSString *timerOutput = [NSString stringWithFormat:@"%02d:%02d:%02d", hr, min, sec];
+    
+    self.lbDuration.text = timerOutput;
+    
+    if(secondsCount == 0)
+    {
+        [countdownTimer invalidate];
+        countdownTimer = nil;
+        
+        //Message
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duration"message:@"Time Allocated For This Shopping Trip Is Up!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Extend Trip",@"End Trip", nil];
+        
+        alert.tag = 1;
+        [alert show];
+            
+        //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Extendation"];
+    }
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+   
+    NSString *alertButton = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if(alertView.tag == 1)
+    {
+        if ([alertButton isEqualToString:@"End Trip"]) {
+            NSLog(@"End Trip");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duration"message:@"Are you sure you want to end the Trip?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"Cancel", nil];
+            alert.tag = 2;
+            [alert show];
+        }
+        else if([alertButton isEqualToString:@"Extend Trip"])
+        {
+            NSLog(@"Extend Trip");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duration"message:@"Are you sure you want to extend the Trip?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"Cancel", nil];
+            alert.tag = 3;
+            [alert show];
+        }
+    }
+    //End Trip
+    else if(alertView.tag == 2)
+    {
+        if ([alertButton isEqualToString:@"Yes"]) {
+            [StartEndTrip sendActionsForControlEvents: UIControlEventTouchUpInside];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duration"message:@"Time Allocated For This Shopping Trip Is Up!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Extend Trip",@"End Trip", nil];
+            
+            alert.tag = 1;
+            [alert show];
+        }
+    }
+    //Extend Trip
+    else if(alertView.tag == 3)
+    {
+        if ([alertButton isEqualToString:@"Yes"]) {
+            lbDuration.text = @"00:05:00";
+            [self setTimer];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duration"message:@"Time Allocated For This Shopping Trip Is Up!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Extend Trip",@"End Trip", nil];
+            
+            alert.tag = 1;
+            [alert show];
+        }
+    }
+}
+
+-(void)setTimer {
+    
+    if(StopTime == TRUE)
+    {
+        if (countdownTimer) {
+            [countdownTimer invalidate];
+            countdownTimer = nil;
+        }
+    }
+    else
+    {
+        //secondsCount = 3600;
+        NSArray* time = [lbDuration.text componentsSeparatedByString: @":"];
+        NSString* HH = [time objectAtIndex: 0];
+        NSString* MM = [time objectAtIndex: 1];
+        
+        NSInteger ConvertHH = [HH integerValue];
+        NSInteger ConvertMM = [MM integerValue];
+        
+        ConvertHH = ConvertHH * 3600;
+        ConvertMM = ConvertMM * 60;
+        
+        secondsCount = ConvertHH + ConvertMM;
+        
+        countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerRun) userInfo:nil repeats:YES];
+    }
 }
 @end

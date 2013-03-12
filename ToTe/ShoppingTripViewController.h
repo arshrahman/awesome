@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShoppingTripViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface ShoppingTripViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     int numStar;
+    NSTimer *countdownTimer;
+    BOOL StopTime;
+    int secondsCount;
 }
 
 @property (nonatomic, strong)NSMutableArray *ShoppingTripList;
@@ -22,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbTripName;
 @property (weak, nonatomic) IBOutlet UILabel *lbBudget;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *DeleteTrip;
+@property BOOL Extend;
 
 - (IBAction)DeletePressed:(id)sender;
 - (IBAction)StartEndPressed:(id)sender;
