@@ -56,6 +56,14 @@
 {
     [super viewWillAppear:animated];
     
+    //AppKilled
+    /*
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"AppKilled"])
+    {
+        [self setTimer];
+    }
+     */
+    
     //Retrieve Data
     st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
@@ -484,20 +492,47 @@
 }
 
 -(void)timerRun {
-    secondsCount = secondsCount - 1;
-    int sec = secondsCount%60;
-    int min = (secondsCount/60)%60;
-    int hr = (secondsCount/3600)%60;
+    
+    int sec;
+    int min;
+    int hr;
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"TimeCheck"])
+    {
+        int TimeSpan = [[NSUserDefaults standardUserDefaults] integerForKey:@"TimeSpan"];
+        
+        NSLog(@"%d",TimeSpan);
+        
+        if(secondsCount > TimeSpan)
+        {
+            secondsCount = secondsCount - TimeSpan;
+            sec = secondsCount%60;
+            min = (secondsCount/60)%60;
+            hr = (secondsCount/3600)%60;
+        }
+        else
+        {
+            secondsCount = 0;
+            sec = secondsCount%60;
+            min = (secondsCount/60)%60;
+            hr = (secondsCount/3600)%60;
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"TimeCheck"];
+    }
+    else
+    {
+        secondsCount = secondsCount - 1;
+        sec = secondsCount%60;
+        min = (secondsCount/60)%60;
+        hr = (secondsCount/3600)%60;
+    }
     
     //20 min - turn red
     if(min < 20)
     {
         lbDuration.textColor = [UIColor redColor];
     }
-    
-    NSString *timerOutput = [NSString stringWithFormat:@"%02d:%02d:%02d", hr, min, sec];
-    
-    self.lbDuration.text = timerOutput;
     
     if(secondsCount == 0)
     {
@@ -509,9 +544,11 @@
         
         alert.tag = 1;
         [alert show];
-            
-        //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Extendation"];
     }
+    
+    NSString *timerOutput = [NSString stringWithFormat:@"%02d:%02d:%02d", hr, min, sec];
+    
+    self.lbDuration.text = timerOutput;
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -573,9 +610,11 @@
             [countdownTimer invalidate];
             countdownTimer = nil;
         }
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"Time"];
     }
     else
     {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Time"];
         //secondsCount = 3600;
         NSArray* time = [lbDuration.text componentsSeparatedByString: @":"];
         NSString* HH = [time objectAtIndex: 0];
@@ -588,6 +627,13 @@
         ConvertMM = ConvertMM * 60;
         
         secondsCount = ConvertHH + ConvertMM;
+    
+        /*
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"AppKilled"])
+        {
+            secondsCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"AppGottenKilled"];
+        }
+         */
         
         countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerRun) userInfo:nil repeats:YES];
     }

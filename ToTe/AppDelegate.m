@@ -49,13 +49,48 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"Time"])
+    {
+        NSDateComponents* backTime = [[NSDateComponents alloc]init];
+    
+        NSCalendar* cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+        backTime = [cal components:NSHourCalendarUnit |
+              NSMinuteCalendarUnit | NSSecondCalendarUnit
+                    fromDate:[NSDate date]];
+    
+        int Time = ([backTime hour] *3600) + ([backTime minute] *60) + [backTime second];
+    
+        [[NSUserDefaults standardUserDefaults] setInteger:Time forKey:@"TimeSpan"];
+
+        NSLog(@"%d Seconds", Time);
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"Time"])
+    {
+        NSDateComponents* foreTime = [[NSDateComponents alloc]init];
+    
+        NSCalendar* cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+        foreTime = [cal components:NSHourCalendarUnit |
+                   NSMinuteCalendarUnit | NSSecondCalendarUnit
+                         fromDate:[NSDate date]];
+    
+        int CurrentTime = ([foreTime hour] *3600) + ([foreTime minute] *60) + [foreTime second];
+    
+        int TimeSpan = [[NSUserDefaults standardUserDefaults] integerForKey:@"TimeSpan"];
+    
+        TimeSpan = CurrentTime - TimeSpan;
+    
+        NSLog(@"%d Seconds", TimeSpan);
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:TimeSpan forKey:@"TimeSpan"];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeCheck"];
+    }
     
     AppLaunch *a = [[AppLaunch alloc]init];
     [a InsertPreviousBudget];
@@ -68,6 +103,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    NSLog(@"App Killed");
+    //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AppKilled"];
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
