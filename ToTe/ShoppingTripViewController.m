@@ -444,7 +444,7 @@
         StopTime = FALSE;
         [self setTimer];
         st.shoppingTripCompleted = 1;
-        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted : st.Duration];
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
         [self.ShoppingTripTV reloadData];
     }
@@ -454,7 +454,7 @@
         StopTime = TRUE;
         [self setTimer];
         st.shoppingTripCompleted = 3;
-        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted :st.Duration];
         [self.StartEndTrip setTitle:@"Confirm Trip" forState:UIControlStateNormal];
         lbDuration.textColor = [UIColor blackColor];
     }
@@ -463,7 +463,7 @@
         //Update Shopping Trip and Shopping Trip item
         //Update Shopping Trip and set ShoppingTripCompleted to TRUE
         st.shoppingTripCompleted = 2;
-        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted];
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted :st.Duration];
         
         for(ShoppingTripItem *item in self.ShoppingTripItemList)
         {
@@ -591,6 +591,28 @@
         if ([alertButton isEqualToString:@"Yes"]) {
             lbDuration.text = @"00:05:00";
             [self setTimer];
+            
+            //Add the 5 minutes into the current duration
+            NSArray* time = [st.Duration componentsSeparatedByString: @":"];
+            NSString* HH = [time objectAtIndex: 0];
+            NSString* MM = [time objectAtIndex: 1];
+            
+            NSInteger ConvertHH = [HH integerValue];
+            NSInteger ConvertMM = [MM integerValue];
+            
+            ConvertHH = ConvertHH * 3600;
+            ConvertMM = ConvertMM * 60;
+            
+            int totalDuration = ConvertHH + ConvertMM + (60*5);
+            
+            NSLog(@"%d seconds", totalDuration);
+            
+            int sec = totalDuration%60;
+            int min = (totalDuration/60)%60;
+            int hr = (totalDuration/3600)%60;
+            
+            
+            st.Duration = [NSString stringWithFormat:@"%02d:%02d:%02d", hr, min, sec];
         }
         else
         {

@@ -183,7 +183,7 @@
     }
 }
 
--(void)updateShoppingTrip:(int)shoppingID :(int)shoppingTripCompleted
+-(void)updateShoppingTrip:(int)shoppingID :(int)shoppingTripCompleted :(NSString *)duration
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -191,7 +191,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_LIST SET SHOPPING_TRIP_COMPLETED = '%d' WHERE SHOPPING_ID = '%d'", shoppingTripCompleted, shoppingID];
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_LIST SET SHOPPING_TRIP_COMPLETED = '%d', DURATION = '%@' WHERE SHOPPING_ID = '%d'", shoppingTripCompleted, duration, shoppingID];
         
         const char *query_sql = [querySql UTF8String];
         
