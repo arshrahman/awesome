@@ -43,7 +43,7 @@
     if (FirstTimeUse != 3)
     {
         //Message box
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sharing Of Data"message:@"For your information, this application gather data and is being shared with Temeask Polytechic for research purposes. To disable this function, look under phone setting." delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sharing Of Data"message:@"Information from this App will be sent to Temasek Poltechnic PSY Diploma for research purposes. All data will be kept confidential and anonymous, and will strictly be used for research purposes. If you  do not wish to send your data, you may opt out by going to 'Settings' and disable the 'export data' function." delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
         
         BudgetViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"BudgetViewController"];
