@@ -18,7 +18,7 @@
 @property (nonatomic, strong)NSMutableArray *ShoppingTripList;
 @property (nonatomic, strong)NSMutableArray *ShoppingTripItemList;
 @property (weak, nonatomic) IBOutlet UITextField *ShoppingTripTitle;
-@property (weak, nonatomic) IBOutlet UITextField *ShoppingTripBudget;
+@property (weak, nonatomic) IBOutlet UILabel *ShoppingTripBudget;
 @property (weak, nonatomic) IBOutlet UIButton *ShoppingTripDuration;
 @property (weak, nonatomic) IBOutlet UITableView *ShoppingTripItemTV;
 @property (nonatomic, retain) NSDate *timeline;

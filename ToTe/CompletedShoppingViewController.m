@@ -24,8 +24,6 @@
 
 @implementation CompletedShoppingViewController 
 
-@synthesize tblViewShop;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -74,8 +72,12 @@
     ShoppingTrip *sTrip = [[ShoppingTrip alloc ]init];
     sTrip = [shoppingTripArray objectAtIndex:indexPath.row];
     
+    
     cell.textLabel.text = sTrip.shoppingTripName;
     cell.detailTextLabel.text = sTrip.shoppingDate;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
@@ -88,14 +90,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    ShoppingTrip *ggl = [goalArray objectAtIndex:indexPath.row];
-//    
-//    CompletedShoppingDetailViewController *sdc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompletedShoppingDetailViewController"];
-//    sdc.goal_id = ggl.goal_id;
-//    
-//    sdc.goalTitle = ggl.goal_title;
-//    
-//    [self.navigationController pushViewController:sdc animated:YES];
+    
+    CompletedShoppingDetailViewController *sdc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompletedShoppingDetailViewController"];
+    
+    ShoppingTrip *s = [[ShoppingTrip alloc ]init];
+    s = [shoppingTripArray objectAtIndex:indexPath.row];
+    
+    sdc.ShoppingTripID = s.shoppingID;
+    
+    [self.navigationController pushViewController:sdc animated:YES];
     
 }
 
@@ -108,7 +111,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setTblViewShop:nil];
     [super viewDidUnload];
 }
 

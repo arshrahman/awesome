@@ -44,6 +44,12 @@
     [self DoTimeline];
     self.ShoppingTripItemList = [[NSMutableArray alloc]init];
     self.ShoppingTripList = [[NSMutableArray alloc]init];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    tap.cancelsTouchesInView = FALSE;
+    [self.view addGestureRecognizer:tap];
 	// Do any additional setup after loading the view.
 }
 
@@ -207,6 +213,7 @@
 }
 
 - (IBAction)TimerPicker:(id)sender {
+    [self dismissKeyboard];
     [dateSheet showInView:self.view];
     [dateSheet setBounds:CGRectMake(0, 0, 320, 485)];
 }
@@ -234,7 +241,7 @@
     }
     
     st.shoppingTotal = i;
-    
+    /*
     if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0) && ([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name, the Duration and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
@@ -245,11 +252,14 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Duration and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
-    else if([checkTripName length] == 0 && ([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
+     */
+    //else
+    if([checkTripName length] == 0 && ([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Duration of the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
+    /*
     else if([checkTripName length] == 0 && ([checkTripBudget length] == 0 || [checkTripBudget doubleValue] == 0))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name and the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
@@ -260,6 +270,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Budget for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
+     */
     else if([checkTripName length] == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the Trip Name!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
@@ -270,11 +281,13 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please add at least one item for the Trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
+    /*
     else if(i > [checkTripBudget doubleValue])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Insufficient budget: Please increase the amount of your shopping budget!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
+     */
     else if(([ShoppingTripDuration.titleLabel.text isEqualToString:@"Duration"] || [ShoppingTripDuration.titleLabel.text isEqualToString:@"00:00:00"]))
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Trip"message:@"Please specify the duration of your shopping!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
@@ -346,6 +359,14 @@
 {
     [super viewWillAppear:animated];
     [self.ShoppingTripItemTV reloadData];
+    
+    double i = 0;
+    for(ShoppingTripItem *item in self.ShoppingTripItemList)
+    {
+        i = i + item.shoppingItemPrice;
+    }
+
+    ShoppingTripBudget.text = [NSString stringWithFormat:@"%.2lf", i];
 }
 
 -(IBAction)textfieldReutrn:(id)sender
@@ -450,6 +471,17 @@
 -(void)CancelTimeSet
 {
     [dateSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)dismissKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 

@@ -11,7 +11,7 @@
 #import "Budget.h"
 #import "BudgetCategory.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ByWeekGraphViewController.h"
+#import "ByCategoryGraphViewController.h"
 
 @interface ViewBudgetViewController ()
 
@@ -208,6 +208,8 @@
         }
         lblamount.text = [NSString stringWithFormat:@"$%g", [[topArray objectAtIndex:indexPath.row] doubleValue]];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
     }
     
@@ -227,7 +229,7 @@
             lblcurrent = [[UILabel alloc]initWithFrame:CGRectMake(65, 0, 157, 60)];
             lblcurrent.textColor = [UIColor blackColor];
             lblcurrent.font = [UIFont fontWithName:@"Helvetica" size:17];
-            lblcurrent.text = @"Current\nExpenses:";
+            lblcurrent.text = @"Expenses:";
             lblcurrent.lineBreakMode = UILineBreakModeWordWrap;
             lblcurrent.numberOfLines = 2;
             lblcurrent.tag = 400;
@@ -274,6 +276,7 @@
         
         lbltotal.text = [NSString stringWithFormat:@"$%g",[[bottomArray objectAtIndex:indexPath.row] doubleValue]];
         
+        cell1.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell1;
     }
@@ -345,6 +348,8 @@
             lblcatamount.text = [NSString stringWithFormat:@"$%g", bc.category_spent];
         }
         
+        cell2.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell2;
     }
 }
@@ -382,7 +387,7 @@
 - (IBAction)btnClicked:(id)sender
 {
     
-        ByWeekGraphViewController *bwg = [self.storyboard instantiateViewControllerWithIdentifier:@"ByWeekGraphViewController"];
+        ByCategoryGraphViewController *bwg = [self.storyboard instantiateViewControllerWithIdentifier:@"ByCategoryGraphViewController"];
         
         UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:bwg];
         [self.navigationController presentViewController:navC animated:YES completion:nil];

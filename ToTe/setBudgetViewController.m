@@ -36,6 +36,9 @@
     BOOL allowEdit;
     BOOL checkFB;
     BOOL checkTwitter;
+    BOOL postFaceBook;
+    BOOL postTwitter;
+    NSString *toPost;
     
     CMPopTipView *tooltip;
 }
@@ -93,7 +96,7 @@
              [self dismissModalViewControllerAnimated:YES];
          }];
 	}
-    
+    postTwitter = TRUE;
     
 }
 
@@ -128,9 +131,17 @@
                  [alert show];
              }
              
-             [self Tweet:post];
+             if(postTwitter == TRUE)
+             {
+                 [self Tweet:toPost];
+             }
+             else
+             {
+                 [self dismissModalViewControllerAnimated:YES];
+             }
          }];
 	}
+    postFaceBook = TRUE;
     
 }
 
@@ -257,7 +268,7 @@
             checkFB = s.Facebook;
             checkTwitter = s.Twitter;
             
-            NSString *toPost =@"";
+            toPost =@"";
             
             if (goalIDArray.count == 1)
             {
@@ -280,6 +291,11 @@
             }
             
             [self FacebookPost:toPost];
+            
+            if(postFaceBook == TRUE)
+            {
+                [self Tweet:toPost];
+            }
         }
 
     }
@@ -420,6 +436,8 @@
         }
         lblamount.text = [NSString stringWithFormat:@"$%.2f", [[topArray objectAtIndex:indexPath.row] doubleValue]];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
     }
     
@@ -510,6 +528,8 @@
             lbltotal.text = strSavings;
         }
         
+        cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell1;
     }
     
@@ -547,6 +567,7 @@
             [cell2.contentView addSubview:lblcat];
             [cell2.contentView addSubview:lblcatamount];
             [cell2.contentView addSubview:imgv];
+            
         }
         else
         {
@@ -579,6 +600,8 @@
         {
             lblcatamount.text = [NSString stringWithFormat:@"$%g", bc.category_spent];
         }
+        
+        cell2.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell2;
     }

@@ -56,14 +56,6 @@
 {
     [super viewWillAppear:animated];
     
-    //AppKilled
-    /*
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"AppKilled"])
-    {
-        [self setTimer];
-    }
-     */
-    
     //Retrieve Data
     st = [[ShoppingTrip alloc]init];
     ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
@@ -71,15 +63,19 @@
     st = [st checkShoppingTrip];
     self.ShoppingTripItemList = [sti viewCurrentShoppingTrip:st.shoppingID];
     
-    [self.ShoppingTripTV reloadData];
-    
+    double i = 0;
+    for(ShoppingTripItem *item in self.ShoppingTripItemList)
+    {
+        i = i + item.shoppingItemPrice;
+    }
+    st.shoppingBudget = i;
     NSLog(@"%d",self.ShoppingTripItemList.count);
     
     if(st.shoppingID != 0)
     {
         //use split here
         
-        self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", st.shoppingBudget];
+        self.lbBudget.text = [NSString stringWithFormat: @"$%.2lf", i];
         self.lbTripName.text = st.shoppingTripName;
     }
     
@@ -98,6 +94,11 @@
             //Only When user have not start the trip
             self.lbDuration.text = st.Duration;
             
+            isCheckedArr = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<[self.ShoppingTripItemList count]; i++) {
+                [isCheckedArr addObject:@"0"];
+            }
         }
         else if(st.shoppingTripCompleted == 1)
         {
@@ -126,11 +127,7 @@
         self.DeleteTrip.enabled =TRUE;
     }
     
-    isCheckedArr = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<[self.ShoppingTripItemList count]; i++) {
-        [isCheckedArr addObject:@"0"];
-    }
+    [self.ShoppingTripTV reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -248,17 +245,29 @@
         
         [cell.checkBox addTarget:self action:@selector(CheckBoxTapped:) forControlEvents:UIControlEventTouchUpInside];
         
+        NSLog(@"%d check box number:", currentItem.check);
+        if(currentItem.check == 1)
+        {
+            [cell.checkBox setImage:[UIImage imageNamed:@"glyphicons_152_check.png"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [cell.checkBox setImage:[UIImage imageNamed:@"glyphicons_153_unchecked.png"] forState:UIControlStateNormal];
+        }
+        /*
         if ([[isCheckedArr objectAtIndex:indexPath.row] isEqualToString:@"1"])
         {
             [cell.checkBox setImage:[UIImage imageNamed:@"glyphicons_152_check.png"] forState:UIControlStateNormal];
             currentItem.check = 1;
+            //[currentItem updateShoppingItem:currentItem.itemID :currentItem.shoppingItemName :currentItem.categoryID :currentItem.shoppingItemPrice :currentItem.necessity :currentItem.check];
         }
         else
         {
             [cell.checkBox setImage:[UIImage imageNamed:@"glyphicons_153_unchecked.png"] forState:UIControlStateNormal];
             currentItem.check = 0;
+            //[currentItem updateShoppingItem:currentItem.itemID :currentItem.shoppingItemName :currentItem.categoryID :currentItem.shoppingItemPrice :currentItem.necessity :currentItem.check];
         }
-        
+        */
         //NSLog([NSString stringWithFormat: @"%d", currentPurchaseItem.priority]);
         if(currentItem.necessity == 5)
         {
@@ -411,59 +420,66 @@
 
 - (IBAction)DeletePressed:(id)sender {
     
-    StopTime = TRUE;
-    [self setTimer];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duration"message:@"Are you sure you want to end the Trip?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"Cancel", nil];
+    alert.tag = 4;
+    [alert show];
     
-    [st deleteShoppingTrip:st.shoppingID];
-    [self.ShoppingTripItemList removeAllObjects];
-    self.lbDuration.text = @"Duration";
-    self.lbBudget.text = @"Budget";
-    self.lbTripName.text = @"Trip Name";
-    [self.ShoppingTripTV reloadData];
-    lbDuration.textColor = [UIColor blackColor];
-    
-    self.StartEndTrip.hidden = TRUE;
-
-    if(self.ShoppingTripItemList.count == 0)
-    {
-        self.AddTrip.enabled =TRUE;
-        self.DeleteTrip.enabled =FALSE;
     }
-    else
-    {
-        self.AddTrip.enabled = FALSE;
-        self.DeleteTrip.enabled =TRUE;
-    }
-}
 
 - (IBAction)StartEndPressed:(id)sender {
     //Start and End Trip
     if([self.StartEndTrip.titleLabel.text isEqualToString:@"Start Trip"])
     {
         //Duration count down timer start
+        double i = 0;
+        for(ShoppingTripItem *item in self.ShoppingTripItemList)
+        {
+            i = i + item.shoppingItemPrice;
+        }
+        
+        st.shoppingBudget = i;
+        st.Duration = lbDuration.text;
         StopTime = FALSE;
         [self setTimer];
         st.shoppingTripCompleted = 1;
-        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted : st.Duration];
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted : st.Duration :st.shoppingBudget];
         [self.StartEndTrip setTitle:@"End Trip" forState:UIControlStateNormal];
         [self.ShoppingTripTV reloadData];
     }
     else if([self.StartEndTrip.titleLabel.text isEqualToString:@"End Trip"])
     {
         //Duration count down stop
+        double i = 0;
+        for(ShoppingTripItem *item in self.ShoppingTripItemList)
+        {
+            i = i + item.shoppingItemPrice;
+        }
+        
+        st.shoppingBudget = i;
+        st.Duration = lbDuration.text;
         StopTime = TRUE;
         [self setTimer];
         st.shoppingTripCompleted = 3;
-        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted :st.Duration];
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted :st.Duration :st.shoppingBudget];
         [self.StartEndTrip setTitle:@"Confirm Trip" forState:UIControlStateNormal];
         lbDuration.textColor = [UIColor blackColor];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update Item"message:@"Please update the actual price of the item that were purchased before confirming the trip!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
+        [alert show];
     }
     else
     {
         //Update Shopping Trip and Shopping Trip item
         //Update Shopping Trip and set ShoppingTripCompleted to TRUE
         st.shoppingTripCompleted = 2;
-        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted :st.Duration];
+        double i = 0;
+        for(ShoppingTripItem *item in self.ShoppingTripItemList)
+        {
+            i = i + item.shoppingItemPrice;
+        }
+
+        st.shoppingBudget = i;
+        st.Duration = lbDuration.text;
+        [st updateShoppingTrip:st.shoppingID :st.shoppingTripCompleted :st.Duration :st.shoppingBudget];
         
         for(ShoppingTripItem *item in self.ShoppingTripItemList)
         {
@@ -554,7 +570,8 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
    
     NSString *alertButton = [alertView buttonTitleAtIndex:buttonIndex];
-    
+    NSLog(@"Check for alert");
+    NSLog(@"%d", alertView.tag);
     if(alertView.tag == 1)
     {
         if ([alertButton isEqualToString:@"End Trip"]) {
@@ -620,6 +637,37 @@
             
             alert.tag = 1;
             [alert show];
+        }
+    }
+    //delete trip
+    else if(alertView.tag == 4)
+    {
+        NSLog(@"Check deleted");
+        if ([alertButton isEqualToString:@"Yes"]) {
+            
+            StopTime = TRUE;
+            [self setTimer];
+            
+            [st deleteShoppingTrip:st.shoppingID];
+            [self.ShoppingTripItemList removeAllObjects];
+            self.lbDuration.text = @"Duration";
+            self.lbBudget.text = @"Budget";
+            self.lbTripName.text = @"Trip Name";
+            [self.ShoppingTripTV reloadData];
+            lbDuration.textColor = [UIColor blackColor];
+            
+            self.StartEndTrip.hidden = TRUE;
+            
+            if(self.ShoppingTripItemList.count == 0)
+            {
+                self.AddTrip.enabled =TRUE;
+                self.DeleteTrip.enabled =FALSE;
+            }
+            else
+            {
+                self.AddTrip.enabled = FALSE;
+                self.DeleteTrip.enabled =TRUE;
+            }
         }
     }
 }

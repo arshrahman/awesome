@@ -487,11 +487,20 @@
         {
             NSMutableArray *a = [allBudget objectAtIndex:i];
             
-            NSString *postData = [NSString stringWithFormat:@"entry.152079890=%@&entry.2099356811=%@&entry.1090870720=%@&entry.58372674=%@&entry.887497858=%@&entry.1309306391=%@&entry.763272716=%@&entry.1367868194=%@&entry.1886459060=%@&entry.169362762=%@&entry.1285347822=%@&entry.685118874=%@&entry.717710273=%@&entry.1955738301=%@&entry.26182424=%@&entry.426598365=%@&entry.1028591383=%@", userId, [a objectAtIndex:1], [a objectAtIndex:2], [a objectAtIndex:3], [a objectAtIndex:4], [a objectAtIndex:5], [a objectAtIndex:6], [a objectAtIndex:7], [a objectAtIndex:8], [a objectAtIndex:9], [a objectAtIndex:10], [a objectAtIndex:11], [a objectAtIndex:12], [a objectAtIndex:13], [a objectAtIndex:14], [a objectAtIndex:15], [a objectAtIndex:16]];
+            NSString *postData = [NSString stringWithFormat:@"entry.438961016=%@&entry.1436555243=%@&entry.552793815=%@&entry.746540612=%@&entry.1932033856=%@&entry.2055701615=%@&entry.775557635=%@&entry.1439625454=%@&entry.416764628=%@&entry.757389573=%@&entry.1868294311=%@&entry.421682123=%@&entry.1637610947=%@&entry.224435391=%@&entry.55619981=%@&entry.205332776=%@&entry.1918622646=%@", userId, [a objectAtIndex:1], [a objectAtIndex:2], [a objectAtIndex:3], [a objectAtIndex:4], [a objectAtIndex:5], [a objectAtIndex:6], [a objectAtIndex:7], [a objectAtIndex:8], [a objectAtIndex:9], [a objectAtIndex:10], [a objectAtIndex:11], [a objectAtIndex:12], [a objectAtIndex:13], [a objectAtIndex:14], [a objectAtIndex:15], [a objectAtIndex:16]];
             
-            NSString *postUrl = @"https://docs.google.com/forms/d/1HYdL3f7O9mU0X1g1xbBG4wvPU2-oZRHTmhYK8404Hqg/formResponse";
+            NSString *postUrl = @"https://docs.google.com/forms/d/1RR5Y2UrS0dLizM1XOsA_fcbPnZrQmhTyXUvTFXk92Dg/formResponse";
             
             [self PostToGoogleDocs:postData :postUrl];
+            
+            /*
+             NSString *postData = [NSString stringWithFormat:@"entry.152079890=%@&entry.2099356811=%@&entry.1090870720=%@&entry.58372674=%@&entry.887497858=%@&entry.1309306391=%@&entry.763272716=%@&entry.1367868194=%@&entry.1886459060=%@&entry.169362762=%@&entry.1285347822=%@&entry.685118874=%@&entry.717710273=%@&entry.1955738301=%@&entry.26182424=%@&entry.426598365=%@&entry.1028591383=%@", userId, [a objectAtIndex:1], [a objectAtIndex:2], [a objectAtIndex:3], [a objectAtIndex:4], [a objectAtIndex:5], [a objectAtIndex:6], [a objectAtIndex:7], [a objectAtIndex:8], [a objectAtIndex:9], [a objectAtIndex:10], [a objectAtIndex:11], [a objectAtIndex:12], [a objectAtIndex:13], [a objectAtIndex:14], [a objectAtIndex:15], [a objectAtIndex:16]];
+             
+             NSString *postUrl = @"https://docs.google.com/forms/d/1HYdL3f7O9mU0X1g1xbBG4wvPU2-oZRHTmhYK8404Hqg/formResponse";
+             
+             [self PostToGoogleDocs:postData :postUrl];
+
+             */
             
             //NSLog(@"count: %d", a.count);
             
@@ -532,13 +541,19 @@
                 int weeksMet = sqlite3_column_int(stmt, 8);
                 int WeeksNotMet = currentWeek - weeksMet;
                 
-                NSString *postData = [NSString stringWithFormat:@"entry.1261645413=%@&entry.360723927=%@&entry.1203475284=%@&entry.900055872=%@&entry.1258465337=%@&entry.299703273=%@&entry.999414664=%d&entry.1402876013=%.2g&entry.1176602381=%g&entry.1525126050=%g&entry.665489647=%d&entry.223088735=%d", userId, [self GetMonday], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 4)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)], sqlite3_column_int(stmt, 7), sqlite3_column_double(stmt, 9), totalWeeks, currentWeek, weeksMet, WeeksNotMet];
+                NSString *postData = [NSString stringWithFormat: @"entry.26931492=%@&entry.865944682=%@&entry.1720980280=%@&entry.1010261859=%@&entry.133893497=%@&entry.1485357229=%@&entry.958458425=%d&entry.2091895354=%.2g&entry.1379433766=%g&entry.892277926=%g&entry.2054276655=%d&entry.1212905666=%d", userId, [self GetMonday], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 4)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)], sqlite3_column_int(stmt, 7), sqlite3_column_double(stmt, 9), totalWeeks, currentWeek, weeksMet, WeeksNotMet];
                 
-                NSString *postUrl = @"https://docs.google.com/forms/d/1EDKzdw1zuapQdRPRMX6eGlrJKBJ3h08fDoUbxgHzFpA/formResponse";
+                NSString *postUrl = @"https://docs.google.com/forms/d/1sc40yiZ9jcK4OXK7-DdAndDH8WQSXaIh23AD4g6in7U/formResponse";
                 
                 [self PostToGoogleDocs:postData :postUrl];
                 
                 //NSLog(@"Today: %@, StartDate: %@, LastDate: %@, Total Weeks: %g, Current Week: %g, WeeksMet: %d, WeeksNotMet: %d", today, startDate, lastDate, totalWeeks, currentWeek, weeksMet, WeeksNotMet);
+                
+                /*
+                 @"entry.26931492=%@&entry.865944682=%@&entry.1720980280=%@&entry.1010261859=%@&entry.133893497=%@&entry.1485357229=%@&entry.958458425=%d&entry.2091895354=%.2g&entry.1379433766=%g&entry.892277926=%d&entry.2054276655=%d&entry.1212905666=%d"
+                 
+                 @"entry.1261645413=%@&entry.360723927=%@&entry.1203475284=%@&entry.900055872=%@&entry.1258465337=%@&entry.299703273=%@&entry.999414664=%d&entry.1402876013=%.2g&entry.1176602381=%g&entry.1525126050=%g&entry.665489647=%d&entry.223088735=%d"
+                 */
             }
         }
         
@@ -605,11 +620,65 @@
         {
             while (sqlite3_step(stmt)==SQLITE_ROW)
             {
-                NSString *postData = [NSString stringWithFormat:@"entry.395258719=%@&entry.1972562077=%@&entry.1195554600=%@&entry.1561213365=%@&entry.2104599426=%@&entry.1563488957=%@&entry.973034644=%@&entry.1844750374=NA&entry.1008128023=%.2f&entry.1588387965=%d&entry.1581699001=NA&entry.405367472=NA&entry.1877571082=NA&entry.58475353=NA", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)], @"Ad-Hoc Purchase", @"Ad-Hoc Purchase", [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], sqlite3_column_double(stmt, 4), sqlite3_column_int(stmt, 5)];
+                NSString *postData = [NSString stringWithFormat:@"entry.187737116=%@&entry.1314116310=%@&entry.680426145=%@&entry.209055421=%@&entry.933020400=%@&entry.1584629268=%@&entry.585277832=%@&entry.266548399=NA&entry.1254698536=%.2f&entry.911054539=%d&entry.1089189439=NA&entry.408767355=NA&entry.655771286=NA&entry.1260236527=NA", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)], @"Ad-Hoc Purchase", @"Ad-Hoc Purchase", [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)], sqlite3_column_double(stmt, 4), sqlite3_column_int(stmt, 5)];
                 
-                NSString *postUrl = @"https://docs.google.com/forms/d/18TiQ4aDTmjQ2q2z-IMaFHAGEzJ9BCkUdCNgQez0Ckys/formResponse";
+                NSString *postUrl = @"https://docs.google.com/forms/d/1Zvo67e--yx7yaZZ7yrGtsp8aPCFyeLOiuHy2GIm28SE/formResponse";
                 
                 [self PostToGoogleDocs:postData :postUrl];
+                
+                /*
+                 @"entry.187737116=%@&entry.1314116310=%@&entry.680426145=%@&entry.209055421=%@&entry.933020400=%@&entry.1584629268=%@&entry.585277832=%@&entry.266548399=NA&entry.1254698536=%.2f&entry.911054539=%d&entry.1089189439=NA&entry.408767355=NA&entry.655771286=NA&entry.1260236527=NA"
+                 
+                 @"
+                 entry.395258719=%@&
+                 entry.1972562077=%@&
+                 entry.1195554600=%@&
+                 entry.1561213365=%@&
+                 entry.2104599426=%@&
+                 entry.1563488957=%@&
+                 entry.973034644=%@&
+                 entry.1844750374=NA&
+                 entry.1008128023=%.2f&
+                 entry.1588387965=%d&
+                 entry.1581699001=NA&
+                 entry.405367472=NA&
+                 entry.1877571082=NA&
+                 entry.58475353=NA"
+                 
+                 
+                 @"
+                 -entry.395258719=%@&
+                 
+                 entry.1972562077=%@&
+                 entry.1195554600=%@&
+                 entry.1561213365=%@&
+                 entry.2104599426=%@&
+                 
+                 -entry.1563488957=%@&
+                 
+                 -entry.973034644=%@&
+                 
+                 -entry.1844750374=%.2f&
+                 
+                 -entry.1008128023=%.2f&
+                 
+                 -entry.1588387965=%d&
+                 
+                 entry.1581699001=%.2f&
+                 entry.405367472=%.2f&
+                 entry.1877571082=%.2f&
+                 entry.58475353=%.2f"
+                 
+                 
+                 @"
+                 entry.395258719=%@&
+                 entry.1563488957=%@&
+                 entry.973034644=%@&
+                 entry.1844750374=%.2f&
+                 entry.1008128023=%.2f&
+                 entry.1588387965=%d"
+                 */
+                
             }
         }
         sqlite3_finalize(stmt);
@@ -638,16 +707,16 @@
                         NSString *postData = @"";
                         if (firstRow)
                         {
-                            postData = [NSString stringWithFormat:@"entry.395258719=%@&entry.1972562077=%@&entry.1195554600=%@&entry.1561213365=%@&entry.2104599426=%@&entry.1563488957=%@&entry.973034644=%@&entry.1844750374=%.2f&entry.1008128023=%.2f&entry.1588387965=%d&entry.1581699001=%.2f&entry.405367472=%.2f&entry.1877571082=%.2f&entry.58475353=%.2f", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 1)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 2)], @"Shopping Trip", [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 1)], sqlite3_column_double(st, 2), sqlite3_column_double(st, 2), sqlite3_column_int(st, 3), sqlite3_column_double(s, 4), sqlite3_column_double(s, 5), sqlite3_column_double(s, 6), sqlite3_column_double(s, 6)];
+                            postData = [NSString stringWithFormat:@"entry.187737116=%@&entry.1314116310=%@&entry.680426145=%@&entry.209055421=%@&entry.933020400=%@&entry.1584629268=%@&entry.585277832=%@&entry.266548399=%.2f&&entry.1254698536=%.2f&entry.911054539=%d&entry.1089189439=%.2f&&entry.408767355=%.2f&&entry.655771286=%.2f&&entry.1260236527=%.2f&", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 1)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 2)], @"Shopping Trip", [NSString stringWithUTF8String:(const char *)sqlite3_column_text(s, 3)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 1)], sqlite3_column_double(st, 2), sqlite3_column_double(st, 2), sqlite3_column_int(st, 3), sqlite3_column_double(s, 4), sqlite3_column_double(s, 5), sqlite3_column_double(s, 6), sqlite3_column_double(s, 6)];
                             
                             firstRow = FALSE;
                         }
                         else
                         {
-                            postData = [NSString stringWithFormat:@"entry.395258719=%@&entry.1563488957=%@&entry.973034644=%@&entry.1844750374=%.2f&entry.1008128023=%.2f&entry.1588387965=%d", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 1)], sqlite3_column_double(st, 2), sqlite3_column_double(st, 2), sqlite3_column_int(st, 3)];
+                            postData = [NSString stringWithFormat: @"entry.187737116=%@&entry.1584629268=%@&entry.585277832=%@&entry.266548399=%.2f&entry.1254698536=%.2f&entry.911054539=%d", userId, [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 0)], [NSString stringWithUTF8String:(const char *)sqlite3_column_text(st, 1)], sqlite3_column_double(st, 2), sqlite3_column_double(st, 2), sqlite3_column_int(st, 3)];
                         }
                         
-                        NSString *postUrl = @"https://docs.google.com/forms/d/18TiQ4aDTmjQ2q2z-IMaFHAGEzJ9BCkUdCNgQez0Ckys/formResponse";
+                        NSString *postUrl = @"https://docs.google.com/forms/d/1Zvo67e--yx7yaZZ7yrGtsp8aPCFyeLOiuHy2GIm28SE/formResponse";
                         
                         [self PostToGoogleDocs:postData :postUrl];
                     }

@@ -183,7 +183,7 @@
     }
 }
 
--(void)updateShoppingTrip:(int)shoppingID :(int)shoppingTripCompleted :(NSString *)duration
+-(void)updateShoppingTrip:(int)shoppingID :(int)shoppingTripCompleted :(NSString *)duration:(double)shoppingBudget
 {
     char *error;
     Database *db = [[Database alloc]init];
@@ -191,7 +191,7 @@
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_LIST SET SHOPPING_TRIP_COMPLETED = '%d', DURATION = '%@' WHERE SHOPPING_ID = '%d'", shoppingTripCompleted, duration, shoppingID];
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_LIST SET SHOPPING_TRIP_COMPLETED = '%d', DURATION = '%@', SHOPPING_BUDGET = '%f' WHERE SHOPPING_ID = '%d'", shoppingTripCompleted, duration, shoppingBudget,shoppingID];
         
         const char *query_sql = [querySql UTF8String];
         
@@ -214,7 +214,7 @@
     
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
-    int maxID = 0;
+    //int maxID = 0;
    
     
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
@@ -275,6 +275,73 @@
     }
     sqlite3_close(budgetDB);
     return shoppingList;
+}
+
+-(ShoppingTrip *) SelectCompletedShoppingTrip:(int)ID
+{
+    ShoppingTrip *trip = [[ShoppingTrip alloc]init];
+    
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    //int maxID = 0;
+    
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_LIST WHERE SHOPPING_TRIP_COMPLETED == 2 AND SHOPPING_ID == '%d'", ID];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                
+                NSString *shoppingId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+                
+                NSString *budgetId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                
+                NSString *shoppingName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                NSString *shoppingDate = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                
+                NSString *shoppingBudget = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                
+                NSString *Duration = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
+                
+                NSString *shoppingTotal = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+                
+                NSString *shoppingTripCompleted = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 7)];
+                
+                double convertTotal = [shoppingTotal doubleValue];
+                int convertShoppingId = [shoppingId integerValue];
+                int convertBudgetId = [budgetId integerValue];
+                double convertShoppingBudget = [shoppingBudget doubleValue];
+                int convertShoppingTripCompleted = [shoppingTripCompleted integerValue];
+                
+                [trip setShoppingID:convertShoppingId];
+                [trip setBudgetID:convertBudgetId];
+                [trip setShoppingDate:shoppingDate];
+                [trip setShoppingTotal:convertTotal];
+                [trip setShoppingTripName:shoppingName];
+                [trip setShoppingBudget:convertShoppingBudget];
+                [trip setDuration:Duration];
+                [trip setShoppingTripCompleted:convertShoppingTripCompleted];
+                
+                NSLog(@"Show Shopping Trip");
+                //sqlite3_close(budgetDB);
+            }
+            
+            sqlite3_finalize(statement);
+        }
+        else
+        {
+            NSLog(@"Error!");
+        }
+    }
+    sqlite3_close(budgetDB);
+    
+    return trip;
 }
 
 @end

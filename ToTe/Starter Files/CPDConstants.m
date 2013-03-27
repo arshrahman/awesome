@@ -10,14 +10,22 @@
 
 @implementation CPDConstants
 
+//Colours of the graph
 NSString *  const CPDThemeNameDarkGradient  = @"Dark Gradient";
 NSString *  const CPDThemeNamePlainBlack    = @"Plain Black";
 NSString *  const CPDThemeNamePlainWhite    = @"Plain White";
+
+//Legend
 NSString *  const CPDThemeNameSlate         = @"Slate";
 NSString *  const CPDThemeNameStocks        = @"Stocks";
 
-NSString *  const CPDTickerSymbolAAPL       = @"AAPL";
-NSString *  const CPDTickerSymbolGOOG       = @"GOOG";
-NSString *  const CPDTickerSymbolMSFT       = @"MSFT";
+//Category Graph
+NSString * const CPDTickerSymbolCategoryExpend = @"Category Expend";
+
+//Expenditure Graph
+NSString * const CPDTickerSymbolExpend =@"Expend";
+NSString * const CPDTickerSymbolSaving =@"Saving";
+
+//NSString *  const CPDTickerSymbolMSFT       = @"MSFT";
 
 @end

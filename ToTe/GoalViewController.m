@@ -22,6 +22,8 @@
     BOOL checkFB;
     BOOL checkTwitter;
     BOOL goalMet;
+    BOOL postFaceBook;
+    BOOL postTwitter;
 }
 
 @end
@@ -88,7 +90,7 @@
              [self dismissModalViewControllerAnimated:YES];
          }];
 	}
-    
+    postTwitter = TRUE;
     
 }
 
@@ -129,10 +131,18 @@
                  [alert show];
              }
              
-             [self Tweet:goal];
+             if(postTwitter == TRUE)
+             {
+                 [self Tweet:goal];
+             }
+             else
+             {
+                 [self dismissModalViewControllerAnimated:YES];
+             }
          }];
 	}
-    
+    postFaceBook = TRUE;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -172,8 +182,13 @@
                 {
                     NSLog(@"%d", newGoalID);
                     [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"NewGoal"];
+                    
                     [self FacebookPost:gl];
                     
+                    if(postFaceBook == TRUE)
+                    {
+                        [self Tweet:gl];
+                    }
                     break;
                 }
             }

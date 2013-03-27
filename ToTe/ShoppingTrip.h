@@ -24,8 +24,9 @@
 -(ShoppingTrip *) checkShoppingTrip;
 - (void)addshoppingTrip:(NSString *)shoppingName :(double)shoppingBudget :(NSString *)Duration :(double)shoppingTotal :(int)shoppingTripCompleted;
 - (void)deleteShoppingTrip:(int)shoppingID;
--(void)updateShoppingTrip:(int)shoppingID: (int)shoppingTripCompleted :(NSString *)duration;
+-(void)updateShoppingTrip:(int)shoppingID: (int)shoppingTripCompleted :(NSString *)duration :(double)shoppingBudget;
 
 -(NSMutableArray *) SelectCompletedShopping;
+-(ShoppingTrip *) SelectCompletedShoppingTrip:(int)ID;
 
 @end

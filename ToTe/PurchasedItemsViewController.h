@@ -16,9 +16,11 @@
 
 @property (nonatomic) IBOutlet UITableView *PurchasedItemsUITableView;
 @property (nonatomic, strong)NSMutableArray *PurchaseList;
-@property (nonatomic, strong)NSMutableArray *PurchaseListWeek;
+@property (nonatomic, strong)NSMutableArray *ShoppingList;
+@property (nonatomic, strong)NSMutableArray *CombineList;
 @property (nonatomic, strong)NSMutableArray *PurchaseListCategory;
 @property (nonatomic, strong)NSMutableArray *PurchaseListPrice;
 
+-(void)Refresh;
 
 @end

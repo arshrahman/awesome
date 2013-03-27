@@ -11,6 +11,7 @@
 #import "sqlite3.h"
 #import "Budget.h"
 #import "Category.h"
+#import "CombinePurchases.h"
 
 @implementation ShoppingTripItem
 {
@@ -60,6 +61,9 @@
                 
                 NSString *necessity = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
                 
+                NSString *check = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+                
+                NSLog(check);
                 //NSString *itemBought = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                 
                 double convertPrice = [shoppingItemPrice doubleValue];
@@ -69,6 +73,7 @@
                 int convertCate = [category integerValue];
                 //int convertItemBought = [itemBought integerValue];
                 int checkCate = convertCate - 1;
+                int convertCheck = [check integerValue];
                 
                 [sti setItemID:convertItemId];
                 [sti setShoppingID:convertShoppingId];
@@ -76,6 +81,7 @@
                 [sti setShoppingItemPrice:convertPrice];
                 [sti setNecessity:convertNecessity];
                 [sti setCategoryID:convertCate];
+                [sti setCheck:convertCheck];
                 //[sti setItemsBought:convertItemBought];
                 
                 c = [categoryList objectAtIndex:checkCate];
@@ -167,9 +173,16 @@
     Database *db = [[Database alloc]init];
     dbPathString = [db SetDBPath];
     
+    //get current Date
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *theDate = [dateFormat stringFromDate:date];
+    
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
-        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_ITEM SET CATEGORY_ID = '%d', SHOPPING_ITEM_NAME = '%@', SHOPPING_ITEM_PRICE ='%2f', NECESSITY = '%d', SHOPPING_CHECK = '%d' WHERE ITEM_ID = '%d'", categoryID, shoppingItemName, shoppingItemPrice, necessity, check, ItemID];
+        NSString *querySql = [NSString stringWithFormat:@"UPDATE SHOPPING_ITEM SET CATEGORY_ID = '%d', SHOPPING_ITEM_NAME = '%@', SHOPPING_ITEM_PRICE ='%2f', NECESSITY = '%d', SHOPPING_CHECK = '%d', SHOPPING_ITEM_DATE = '%@' WHERE ITEM_ID = '%d'", categoryID, shoppingItemName, shoppingItemPrice, necessity, check, theDate, ItemID];
         
         const char *query_sql = [querySql UTF8String];
         
@@ -184,5 +197,150 @@
         sqlite3_close(budgetDB);
     }
 }
+
+//For History module, gets everything
+//only for displaying purposes for history module and cannot be use in any other module.
+- (NSMutableArray *) getShoppingTrip
+{
+    shoppingItemList =[[NSMutableArray alloc]init];
+    
+    Category *c = [[Category alloc]init];
+    categoryList = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        [categoryList addObject:cc];
+    }
+    
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_ITEM WHERE SHOPPING_CHECK = 1"];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                CombinePurchases *sti = [[CombinePurchases alloc]init];
+                
+                NSString *category = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                NSString *shoppingItemName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                
+                NSString *shoppingItemPrice = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                
+                NSString *necessity = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
+                
+                NSString *shopping_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 7)];
+                
+                double convertPrice = [shoppingItemPrice doubleValue];
+                int convertNecessity = [necessity integerValue];
+                int convertCate = [category integerValue];
+                int checkCate = convertCate - 1;
+                
+                [sti setName:shoppingItemName];
+                [sti setPrice:convertPrice];
+                [sti setPriority:convertNecessity];
+                [sti setCateID:convertCate];
+                [sti setDate:shopping_date];
+                
+                c = [categoryList objectAtIndex:checkCate];
+                
+                [sti setCategory: c.category_name];
+                
+                //Array
+                [shoppingItemList addObject:sti];
+                
+                NSLog(@"Show Shopping Item");
+                
+                //sqlite3_close(budgetDB);
+            }
+            
+            sqlite3_finalize(statement);
+        }
+        else
+        {
+            NSLog(@"Error!");
+        }
+    }
+    sqlite3_close(budgetDB);
+    return shoppingItemList;
+}
+
+- (NSMutableArray *) getShoppingTripItem:(int)ID
+{
+    shoppingItemList =[[NSMutableArray alloc]init];
+    
+    Category *c = [[Category alloc]init];
+    categoryList = [[NSMutableArray alloc]init];
+    
+    for(Category *cc in [c SelectAllCategory])
+    {
+        [categoryList addObject:cc];
+    }
+    
+    Database *db = [[Database alloc]init];
+    dbPathString = [db SetDBPath];
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM SHOPPING_ITEM WHERE SHOPPING_CHECK = 1 AND SHOPPING_ID == '%d'", ID];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                ShoppingTripItem *sti = [[ShoppingTripItem alloc]init];
+                
+                NSString *category = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                NSString *shoppingItemName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                
+                NSString *shoppingItemPrice = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                
+                NSString *necessity = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
+                
+                NSString *shopping_date = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 7)];
+                
+                double convertPrice = [shoppingItemPrice doubleValue];
+                int convertNecessity = [necessity integerValue];
+                int convertCate = [category integerValue];
+                int checkCate = convertCate - 1;
+                
+                [sti setShoppingItemName:shoppingItemName];
+                [sti setShoppingItemPrice:convertPrice];
+                [sti setNecessity:convertNecessity];
+                [sti setCategoryID:convertCate];
+                [sti setDate:shopping_date];
+                
+                c = [categoryList objectAtIndex:checkCate];
+                
+                [sti setCategory: c.category_name];
+                
+                //Array
+                [shoppingItemList addObject:sti];
+                
+                NSLog(@"Show Shopping Item");
+                
+                //sqlite3_close(budgetDB);
+            }
+            
+            sqlite3_finalize(statement);
+        }
+        else
+        {
+            NSLog(@"Error!");
+        }
+    }
+    sqlite3_close(budgetDB);
+    return shoppingItemList;
+}
+
 
 @end

@@ -14,8 +14,11 @@ extern NSString * const CPDThemeNamePlainWhite;
 extern NSString * const CPDThemeNameSlate;
 extern NSString * const CPDThemeNameStocks;
 
-extern NSString * const CPDTickerSymbolAAPL;
-extern NSString * const CPDTickerSymbolGOOG;
-extern NSString * const CPDTickerSymbolMSFT;
+//Category Graph
+extern NSString * const CPDTickerSymbolCategoryExpend;
+
+//Expenditure Graph
+extern NSString * const CPDTickerSymbolExpend;
+extern NSString * const CPDTickerSymbolSaving;
 
 @end

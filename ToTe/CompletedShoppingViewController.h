@@ -10,6 +10,4 @@
 
 @interface CompletedShoppingViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITableView *tblViewShop;
-
 @end

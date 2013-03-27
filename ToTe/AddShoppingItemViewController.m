@@ -53,6 +53,13 @@
     {
         [CategoryList addObject:cc];
     }
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    tap.cancelsTouchesInView = FALSE;
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning
@@ -242,6 +249,7 @@
     
     NSString *price = self.AddItemPrice.text;
     NSString *category = self.AddItemCategory.currentTitle;
+    /*
     if(([price length] == 0 || [price doubleValue] == 0) && [category isEqualToString:@"Select Category"])
     {
         NSLog(@"Call alert");
@@ -254,7 +262,9 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the price of the item in the textfield!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
         [alert show];
     }
-    else if([category isEqualToString:@"Select Category"])
+    */
+    //else
+    if([category isEqualToString:@"Select Category"])
     {
         NSLog(@"Call alert");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Item"message:@"Please specify the category of the item!" delegate:nil cancelButtonTitle:@"OK"otherButtonTitles:nil];
@@ -381,6 +391,15 @@
     [tooltip dismissAnimated:YES];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
+}
 
+-(void)dismissKeyboard
+{
+    [self.view endEditing:YES];
+}
 
 @end

@@ -11,6 +11,7 @@
 #import "sqlite3.h"
 #import "Budget.h"
 #import "Category.h"
+#import "CombinePurchases.h"
 
 
 @implementation Purchase
@@ -331,10 +332,10 @@
 }
 
 //Pol
+//History Module
 //View All Purchases
 - (NSMutableArray *) viewAllPurchases
 {
-    NSLog(@"Viewall");
     purchaseList =[[NSMutableArray alloc]init];
     
     Category *c = [[Category alloc]init];
@@ -359,9 +360,7 @@
             NSLog(@"Viewall if");
             while (sqlite3_step(statement)==SQLITE_ROW)
             {
-                Purchase *p = [[Purchase alloc]init];
-                
-                NSString *uniqueId = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+                CombinePurchases *p = [[CombinePurchases alloc]init];
                 
                 NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 5)];
                 
@@ -374,12 +373,10 @@
                 NSString *priority = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                 
                 double convertPrice = [price doubleValue];
-                int convertId = [uniqueId integerValue];
                 int convertPriority = [priority integerValue];
                 int convertCate = [category integerValue];
                 int checkCate = convertCate - 1;
                 
-                [p setUniqueId:convertId];
                 [p setName:name];
                 [p setDate:date];
                 [p setPrice:convertPrice];

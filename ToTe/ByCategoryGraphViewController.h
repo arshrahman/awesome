@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ByWeekGraphViewController : UIViewController<CPTBarPlotDataSource, CPTBarPlotDelegate>
+@interface ByCategoryGraphViewController : UIViewController<CPTBarPlotDataSource, CPTBarPlotDelegate>
 
 @property (nonatomic, strong) IBOutlet CPTGraphHostingView *hostView;
-@property (nonatomic, strong) CPTBarPlot *aaplPlot;
-@property (nonatomic, strong) CPTBarPlot *googPlot;
-@property (nonatomic, strong) CPTBarPlot *msftPlot;
+@property (nonatomic, strong) CPTBarPlot *ExpendPlot;
 @property (nonatomic, strong) CPTPlotSpaceAnnotation *priceAnnotation;
+@property (nonatomic) int ID;
+@property (nonatomic) int categoryID;
 
 -(void)initPlot;
 -(void)configureGraph;

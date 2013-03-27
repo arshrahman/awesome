@@ -2,13 +2,12 @@
 //  ByCategoryViewController.h
 //  ToTe
 //
-//  Created by Pol on 4/2/13.
+//  Created by user on 20/3/13.
 //  Copyright (c) 2013 user. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ByCategoryViewController : UIViewController
+@interface ByCategoryViewController : UITableViewController
 
-@property (nonatomic) IBOutlet UITableView *ByCategoryUITableView;
 @end

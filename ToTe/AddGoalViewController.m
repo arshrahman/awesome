@@ -201,7 +201,7 @@
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
+    NSLog(@"Check");
     [textField resignFirstResponder];
     return YES;
 }
@@ -238,12 +238,14 @@
 
 -(void)dismissKeyboard
 {
+    NSLog(@"Check 2");
     [self.view endEditing:YES];
 }
 
 
 - (void)SwipeKeyboard:(UISwipeGestureRecognizer *)swipeGestureRecognizer
 {
+    NSLog(@"Check 3");
     [self.view endEditing:YES];
 }
 
@@ -266,6 +268,7 @@
 
 -(void)DoDeadline
 {
+    [self dismissKeyboard];
     dateSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     
     [dateSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];

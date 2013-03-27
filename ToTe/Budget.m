@@ -515,6 +515,7 @@
     return incomeBudget;
 }
 
+//can be use for the graph
 -(NSMutableArray *)GetBudgetCategories:(int)budgetid
 {
     NSMutableArray *budgetCategories = [[NSMutableArray alloc]init];
@@ -558,6 +559,5 @@
     
     return budgetCategories;
 }
-
 
 @end

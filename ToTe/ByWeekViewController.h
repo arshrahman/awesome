@@ -13,6 +13,6 @@
 //@property (nonatomic) IBOutlet UITableView *ByWeekUITableView;
 @property (nonatomic, strong)NSMutableArray *BudgetList;
 
--(double)GetCurentExpenses:(int)budgetid;
+//-(double)GetCurentExpenses:(int)budgetid;
 
 @end

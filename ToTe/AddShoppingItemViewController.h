@@ -38,6 +38,6 @@
 - (IBAction)starFiveClicked:(id)sender;
 - (IBAction)donePressed:(id)sender;
 - (IBAction)newItem:(id)sender;
-
+- (void) dismissToolTip;
 
 @end

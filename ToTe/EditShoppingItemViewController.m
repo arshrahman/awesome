@@ -42,6 +42,13 @@
 {
     [super viewDidLoad];
 
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    tap.cancelsTouchesInView = FALSE;
+    [self.view addGestureRecognizer:tap];
+    
     NSLog(@"Edit shopping Trip Item");
     
     self.editItemName.text = self.shoppingItem.shoppingItemName;
@@ -319,6 +326,7 @@
         self.shoppingItem.category = self.editCategory.currentTitle;
         self.shoppingItem.categoryID = catID;
         self.shoppingItem.necessity = EditStar;
+        self.shoppingItem.check = 1;
         
         [sti updateShoppingItem:self.shoppingItem.itemID :self.shoppingItem.shoppingItemName :self.shoppingItem.categoryID :self.shoppingItem.shoppingItemPrice :self.shoppingItem.necessity :self.shoppingItem.check];
         
@@ -327,6 +335,17 @@
     
     NSLog(@"Update data");
     
+    [self.view endEditing:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)dismissKeyboard
+{
     [self.view endEditing:YES];
 }
 
