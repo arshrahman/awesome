@@ -219,7 +219,7 @@
                 }
             }
             
-            if(convertCategoryExpend.count == 0)
+            if(convertCategoryExpend.count == 0 || convertCategoryExpend.count < numWeeks.count)
             {
                  [convertCategoryExpend addObject:[NSDecimalNumber numberWithDouble:0.0]];
             }

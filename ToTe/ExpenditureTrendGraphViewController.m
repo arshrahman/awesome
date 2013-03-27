@@ -122,8 +122,8 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     // 5 - Enable user interactions for plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(10.0f)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(10.0f)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(100.0f)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(100.0f)];
 }
 
 -(void)configurePlots {
@@ -175,7 +175,7 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     [xRange expandRangeByFactor:CPTDecimalFromCGFloat(2.5f)];
     plotSpace.xRange = xRange;
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.0f)];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(100.0f)];
     plotSpace.yRange = yRange;
     
     // 4 - Create styles and symbols

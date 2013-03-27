@@ -215,6 +215,7 @@ CGFloat const CPDBarInitialX = 1.0f;
     NSInteger minorIncrement = 10;
     //get the highest amount
     CGFloat yMax;
+    
     NSDecimalNumber *a = 0;
     NSDecimalNumber *b = 0;
     NSArray *checkAmount = [[CPDStockPriceStore sharedInstance] weeklyExpendByCategory:CPDTickerSymbolCategoryExpend :self.ID:self.categoryID ];
