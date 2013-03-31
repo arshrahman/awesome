@@ -13,6 +13,7 @@
     NSMutableArray *allBudget;
     NSMutableArray *containerOfAllTheEightWeeks;
     NSMutableArray *eightWeeksBudget;
+    NSMutableArray *eightWeeksBudget2;
     NSMutableArray *Expend;
     NSMutableArray *Saving;
 }

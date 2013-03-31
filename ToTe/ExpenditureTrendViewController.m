@@ -70,6 +70,7 @@
     Budget *b2 = [[Budget alloc]init];
     
     NSMutableArray *eightWeek = [containerOfAllTheEightWeeks objectAtIndex:indexPath.row];
+    NSLog(@"%d Eight week Count", eightWeek.count);
     b1 = [eightWeek objectAtIndex:0];
     b2 = [eightWeek lastObject];
     
@@ -179,7 +180,7 @@
 {
     ExpenditureTrendGraphViewController *EG = [self.storyboard instantiateViewControllerWithIdentifier:@"ExpenditureTrendGraphViewController"];
      EG.ID = tableView.indexPathForSelectedRow.row;
-    
+    NSLog(@"%d index number:", EG.ID);
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Back" style: UIBarButtonItemStyleBordered target: nil action: nil];
     
     [[self navigationItem] setBackBarButtonItem: newBackButton];
@@ -202,32 +203,35 @@
     
     allBudget = [b viewAllBudget];
     int count = 0;
+    int count2 = allBudget.count;
     for(Budget *bb in allBudget)
     {
-        if(allBudget.count > 8)
+        if(eightWeeksBudget.count == 8)
         {
-            if(count < 8)
-            {
-                [eightWeeksBudget addObject:bb];
-                count++;
-            }
-            else if(count == 8)
-            {
-                NSLog(@"8");
-                [containerOfAllTheEightWeeks addObject:eightWeeksBudget];
-                count = 0;
-                [eightWeeksBudget removeAllObjects];
-            }
+            eightWeeksBudget = [[NSMutableArray alloc]init];
+            [eightWeeksBudget addObject:bb];
         }
         else
         {
             [eightWeeksBudget addObject:bb];
-            count++;
-            if(count == allBudget.count)
-            {
-                [containerOfAllTheEightWeeks addObject:eightWeeksBudget];
-            }
         }
+        count++;
+        
+        if(count==8)
+        {
+            NSMutableArray *budget = [[NSMutableArray alloc]init];
+            budget = eightWeeksBudget;
+            [containerOfAllTheEightWeeks addObject:budget];
+            count=0;
+        }
+        else if(count == 1 && count2 < 8)
+        {
+            NSMutableArray *budget2 = [[NSMutableArray alloc]init];
+            budget2 = eightWeeksBudget;
+            [containerOfAllTheEightWeeks addObject:budget2];
+        }
+        
+        count2--;
     }
     
     return containerOfAllTheEightWeeks;

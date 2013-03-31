@@ -62,7 +62,7 @@ CGFloat const CPDBarInitialX = 1.0f;
     [self configureGraph];
     [self configurePlots];
     [self configureAxes];
-    [self configureLegend];
+    //[self configureLegend];
 }
 
 -(void)configureGraph
@@ -214,22 +214,23 @@ CGFloat const CPDBarInitialX = 1.0f;
     NSInteger majorIncrement = 50;
     NSInteger minorIncrement = 10;
     //get the highest amount
-    CGFloat yMax;
+    CGFloat yMax = 0;
     
-    NSDecimalNumber *a = 0;
-    NSDecimalNumber *b = 0;
-    NSArray *checkAmount = [[CPDStockPriceStore sharedInstance] weeklyExpendByCategory:CPDTickerSymbolCategoryExpend :self.ID:self.categoryID ];
-    if(checkAmount.count != 0)
+    NSDecimalNumber *a3 = 0;
+    NSDecimalNumber *b3 = 0;
+    NSArray *checkAmount3 = [[CPDStockPriceStore sharedInstance] weeklyExpendByCategory:CPDTickerSymbolCategoryExpend :self.ID:self.categoryID ];
+    if(checkAmount3.count != 0)
     {
-        for (NSInteger i = 0; i < checkAmount.count; i ++) {
+        for (NSInteger i = 0; i < checkAmount3.count; i ++) {
             //check
-            b = [checkAmount objectAtIndex:i];
-            if(a < b)
+            b3 = [checkAmount3 objectAtIndex:i];
+            if(a3 < b3)
             {
-                a = b;
+                a3 = b3;
             }
         }
-        yMax = [a doubleValue]*20;
+        
+        yMax = [a3 doubleValue]*20;
     }
     else
     {
@@ -401,14 +402,15 @@ CGFloat const CPDBarInitialX = 1.0f;
     NSLog(@"Check graph");
     [self initPlot];
 }
-
+/*
 -(NSString *)legendTitleForBarPlot:(CPTBarPlot *)barPlot recordIndex:(NSUInteger)index
 {
     if ([barPlot.identifier isEqual:CPDTickerSymbolCategoryExpend] ==YES) {
         
         //return [[[CPDStockPriceStore sharedInstance] weeklyExpendByCategory:CPDTickerSymbolCategoryExpend :self.ID:self.categoryID] objectAtIndex:index];
+        return @"Expend";
     }
-    return @"Expend";
+    return @"N/A";
 }
 
 
@@ -429,4 +431,5 @@ CGFloat const CPDBarInitialX = 1.0f;
     CGFloat legendPadding = -(self.view.bounds.size.width / 10);
     graph.legendDisplacement = CGPointMake(legendPadding, -35.0);
 }
+ */
 @end

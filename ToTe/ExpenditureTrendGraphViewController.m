@@ -122,8 +122,8 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     // 5 - Enable user interactions for plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(100.0f)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(100.0f)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(10.0f)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.5f) length:CPTDecimalFromFloat(10.0f)];
 }
 
 -(void)configurePlots {
@@ -132,19 +132,6 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     
     // 2 - Create the three plots
-    /*
-    CPTScatterPlot *aaplPlot = [[CPTScatterPlot alloc] init];
-    aaplPlot.dataSource = self;
-    aaplPlot.identifier = CPDTickerSymbolAAPL;
-    CPTColor *aaplColor = [CPTColor redColor];
-    [graph addPlot:aaplPlot toPlotSpace:plotSpace];
-    
-    CPTScatterPlot *googPlot = [[CPTScatterPlot alloc] init];
-    googPlot.dataSource = self;
-    googPlot.identifier = CPDTickerSymbolGOOG;
-    CPTColor *googColor = [CPTColor greenColor];
-    [graph addPlot:googPlot toPlotSpace:plotSpace];
-    */
     CPTScatterPlot *expendPlot = [[CPTScatterPlot alloc] init];
     expendPlot.dataSource = self;
     expendPlot.identifier = CPDTickerSymbolExpend;
@@ -159,23 +146,35 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     CPTColor *savingColor = [CPTColor greenColor];
     [graph addPlot:savingPlot toPlotSpace:plotSpace];
     
-    /*
-    CPTScatterPlot *msftPlot = [[CPTScatterPlot alloc] init];
-    msftPlot.dataSource = self;
-    msftPlot.identifier = CPDTickerSymbolMSFT;
-    CPTColor *msftColor = [CPTColor blueColor];
-    [graph addPlot:msftPlot toPlotSpace:plotSpace];
-     */
-    
     // 3 - Set up plot space
     [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:expendPlot,
                                 savingPlot,
                                 nil]];
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(2.5f)];
+    NSArray *check = [[CPDStockPriceStore sharedInstance] EightWeek:self.ID];
+    if(check.count > 6)
+    {
+        [xRange expandRangeByFactor:CPTDecimalFromCGFloat(0.4f)];
+        self.yoffset = 0.4f;
+    }
+    else if(check.count > 4 && check.count <= 6)
+    {
+        [xRange expandRangeByFactor:CPTDecimalFromCGFloat(0.6f)];
+        self.yoffset = 0.6f;
+    }
+    else if(check.count > 2 && check.count <= 4)
+    {
+        [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.0f)];
+        self.yoffset = 1.0f;
+    }
+    else
+    {
+        [xRange expandRangeByFactor:CPTDecimalFromCGFloat(2.0f)];
+        self.yoffset = 2.0f;
+    }
     plotSpace.xRange = xRange;
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(100.0f)];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.0f)];
     plotSpace.yRange = yRange;
     
     // 4 - Create styles and symbols
@@ -238,7 +237,7 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     x.labelTextStyle = axisTextStyle;
     //x.majorTickLineStyle = axisLineStyle;
     x.majorTickLength = 4.0f;
-    x.tickDirection = CPTSignNegative;
+    //x.tickDirection = CPTSignNegative;
     CGFloat dateCount = [[[CPDStockPriceStore sharedInstance] EightWeek:self.ID] count];
     NSMutableSet *xLabels = [NSMutableSet setWithCapacity:dateCount];
     NSMutableSet *xLocations = [NSMutableSet setWithCapacity:dateCount];
@@ -260,7 +259,22 @@ CGFloat const CPDBarInitialX2 = 0.35f;
     CPTAxis *y = axisSet.yAxis;
     y.title = @"Price (in dollar)";
     y.titleTextStyle = axisTitleStyle;
-    y.titleOffset = -75.0f;
+    if(self.yoffset == 0.4f)
+    {
+        y.titleOffset = 200.0f;
+    }
+    else if(self.yoffset == 0.6)
+    {
+        y.titleOffset = 120.0f;
+    }
+    else if(self.yoffset == 1.0)
+    {
+        y.titleOffset = 30.0f;
+    }
+    else
+    {
+        y.titleOffset = -60.0f;
+    }
     //y.axisLineStyle = axisLineStyle;
     y.majorGridLineStyle = gridLineStyle;
     y.labelingPolicy = CPTAxisLabelingPolicyNone;
@@ -301,8 +315,7 @@ CGFloat const CPDBarInitialX2 = 0.35f;
             }
         }
     }
-    NSLog(@"%@ check - ",a);
-    NSLog(@"%@ check - ",a2);
+    
     if([a doubleValue] > [a2 doubleValue])
     {
         yMax = [a doubleValue]*10;

@@ -20,5 +20,7 @@
 -(void)configureGraph;
 -(void)configurePlots;
 -(void)configureAxes;
+//-(void)configureLegend;
 -(void)hideAnnotation:(CPTGraph *)graph;
+//-(NSString *)legendTitleForBarPlot:(CPTBarPlot *)barPlot recordIndex:(NSUInteger)index;
 @end

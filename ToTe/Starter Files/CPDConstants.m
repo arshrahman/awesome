@@ -26,6 +26,4 @@ NSString * const CPDTickerSymbolCategoryExpend = @"Category Expend";
 NSString * const CPDTickerSymbolExpend =@"Expend";
 NSString * const CPDTickerSymbolSaving =@"Saving";
 
-//NSString *  const CPDTickerSymbolMSFT       = @"MSFT";
-
 @end

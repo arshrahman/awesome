@@ -14,11 +14,14 @@
 @property (nonatomic, strong) CPTBarPlot *Plot;
 @property (nonatomic, strong) CPTPlotSpaceAnnotation *priceAnnotation;
 @property (nonatomic) int ID;
+@property (nonatomic)double yoffset;
 
 -(void)initPlot;
 -(void)configureGraph;
 -(void)configurePlots;
 -(void)configureAxes;
+-(void)configureLegend;
 -(void)hideAnnotation:(CPTGraph *)graph;
+-(NSString *)legendTitle:(CPTScatterPlot *)plot recordIndex:(NSUInteger)index;
 
 @end

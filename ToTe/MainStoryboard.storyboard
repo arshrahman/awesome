@@ -1288,9 +1288,18 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26X-Id-wfJ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq8-yJ-nj0">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="9OJ-Yl-i9k"/>
+                                                        <constraint firstAttribute="width" constant="67" id="Rv8-SG-5Jd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ya-SX-clQ">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="1ug-Mh-Zkn"/>
+                                                        <constraint firstAttribute="height" constant="20" id="6kh-mw-cvU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                     <state key="normal" image="glyphicons_048_dislikes.png">
@@ -1301,12 +1310,13 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="starOneClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="0BM-d0-lRM"/>
+                                                        <action selector="starOneClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="eCS-UN-Sfe"/>
+                                                        <action selector="starOneClicked:" destination="WR9-Dr-gED" eventType="touchUpInside" id="fD7-tX-rIi"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUt-Pk-PTk">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWm-bt-432">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="sh1-uy-Chm"/>
+                                                        <constraint firstAttribute="width" constant="20" id="35E-rg-9ow"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="glyphicons_048_dislikes.png">
@@ -1317,12 +1327,13 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="starTwoClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="qkX-wg-K8Y"/>
+                                                        <action selector="starTwoClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="969-fD-KDc"/>
+                                                        <action selector="starTwoClicked:" destination="WR9-Dr-gED" eventType="touchUpInside" id="Tv3-3x-iPu"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdi-n5-oXc">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ4-Mv-bqh">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="VZo-FT-I5s"/>
+                                                        <constraint firstAttribute="width" constant="20" id="hzf-J8-RCt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="glyphicons_048_dislikes.png">
@@ -1333,13 +1344,13 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="starThreeClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="Sdy-G2-MJU"/>
+                                                        <action selector="starThreeClicked:" destination="WR9-Dr-gED" eventType="touchUpInside" id="JEr-KJ-O9m"/>
+                                                        <action selector="starThreeClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="LGo-yV-EmO"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCG-PN-Llh">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG7-OM-ll1">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="Sc9-os-Be0"/>
-                                                        <constraint firstAttribute="width" constant="20" id="oi8-L0-1Db"/>
+                                                        <constraint firstAttribute="width" constant="20" id="7fS-nW-Cec"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="glyphicons_048_dislikes.png">
@@ -1350,12 +1361,13 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="starFourClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="YY5-hw-e4I"/>
+                                                        <action selector="starFourClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="2s9-5U-QuJ"/>
+                                                        <action selector="starFourClicked:" destination="WR9-Dr-gED" eventType="touchUpInside" id="VxV-sh-mXI"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPv-SL-gww">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUy-oq-7nf">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="6lB-t9-fNv"/>
+                                                        <constraint firstAttribute="width" constant="20" id="lr7-Tt-WsF"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="glyphicons_048_dislikes.png">
@@ -1366,42 +1378,30 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="starFiveClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="8wJ-tE-bDu"/>
+                                                        <action selector="starFiveClicked:" destination="579-MX-tAV" eventType="touchUpInside" id="IAx-OK-qnk"/>
+                                                        <action selector="starFiveClicked:" destination="WR9-Dr-gED" eventType="touchUpInside" id="clr-Q7-xhX"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq8-yJ-nj0">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="67" id="Rv8-SG-5Jd"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="top" secondItem="NPv-SL-gww" secondAttribute="top" type="default" id="0ps-u0-HXF"/>
-                                            <constraint firstItem="Sdi-n5-oXc" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="200" id="1xT-lG-MFr"/>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="bottom" secondItem="Sdi-n5-oXc" secondAttribute="bottom" type="default" id="2fI-Kx-jFM"/>
                                             <constraint firstItem="Pq8-yJ-nj0" firstAttribute="top" secondItem="qyk-xl-sWe" secondAttribute="top" constant="13" id="41R-K9-CdK"/>
-                                            <constraint firstItem="NPv-SL-gww" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="270" id="4om-Ow-hv3"/>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="top" secondItem="Sdi-n5-oXc" secondAttribute="top" type="default" id="Aqe-3d-qgj"/>
-                                            <constraint firstItem="Sdi-n5-oXc" firstAttribute="baseline" secondItem="gCG-PN-Llh" secondAttribute="baseline" type="default" id="FmY-t0-ApE"/>
-                                            <constraint firstItem="Sdi-n5-oXc" firstAttribute="top" secondItem="AUt-Pk-PTk" secondAttribute="top" type="default" id="HSz-jL-1tF"/>
-                                            <constraint firstItem="26X-Id-wfJ" firstAttribute="baseline" secondItem="Pq8-yJ-nj0" secondAttribute="baseline" type="default" id="MU5-3G-Q3x"/>
-                                            <constraint firstItem="26X-Id-wfJ" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="130" id="PcC-e0-zHL"/>
-                                            <constraint firstItem="AUt-Pk-PTk" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="165" id="WzD-Ew-cxh"/>
-                                            <constraint firstItem="26X-Id-wfJ" firstAttribute="bottom" secondItem="AUt-Pk-PTk" secondAttribute="bottom" type="default" id="aCp-0c-YUl"/>
-                                            <constraint firstItem="Sdi-n5-oXc" firstAttribute="baseline" secondItem="AUt-Pk-PTk" secondAttribute="baseline" type="default" id="aT7-F7-PAU"/>
-                                            <constraint firstItem="26X-Id-wfJ" firstAttribute="top" secondItem="AUt-Pk-PTk" secondAttribute="top" type="default" id="amA-jk-5Pv"/>
-                                            <constraint firstItem="Sdi-n5-oXc" firstAttribute="bottom" secondItem="AUt-Pk-PTk" secondAttribute="bottom" type="default" id="c4l-Je-znx"/>
+                                            <constraint firstAttribute="trailing" secondItem="yG7-OM-ll1" secondAttribute="trailing" constant="65" id="8i5-sl-77p"/>
+                                            <constraint firstItem="8ya-SX-clQ" firstAttribute="top" secondItem="Pq8-yJ-nj0" secondAttribute="top" type="default" id="901-ol-Eah"/>
+                                            <constraint firstItem="bQ4-Mv-bqh" firstAttribute="top" secondItem="yG7-OM-ll1" secondAttribute="top" type="default" id="9EY-ip-enq"/>
+                                            <constraint firstItem="yG7-OM-ll1" firstAttribute="bottom" secondItem="bQ4-Mv-bqh" secondAttribute="bottom" type="default" id="A07-p7-873"/>
+                                            <constraint firstItem="uWm-bt-432" firstAttribute="bottom" secondItem="bQ4-Mv-bqh" secondAttribute="bottom" type="default" id="AM2-MJ-5ZY"/>
+                                            <constraint firstItem="bQ4-Mv-bqh" firstAttribute="top" secondItem="uWm-bt-432" secondAttribute="top" type="default" id="AoN-ai-lYO"/>
+                                            <constraint firstItem="8ya-SX-clQ" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="130" id="DUA-x2-OMP"/>
+                                            <constraint firstItem="yG7-OM-ll1" firstAttribute="bottom" secondItem="qUy-oq-7nf" secondAttribute="bottom" type="default" id="Rlc-h0-mpd"/>
+                                            <constraint firstAttribute="trailing" secondItem="bQ4-Mv-bqh" secondAttribute="trailing" constant="100" id="X3y-ly-D5m"/>
                                             <constraint firstItem="Pq8-yJ-nj0" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="30" id="fFX-QA-fLm"/>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="bottom" secondItem="NPv-SL-gww" secondAttribute="bottom" type="default" id="fHG-aY-C8I"/>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="leading" secondItem="qyk-xl-sWe" secondAttribute="leading" constant="235" id="gfN-iQ-dU5"/>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="baseline" secondItem="NPv-SL-gww" secondAttribute="baseline" type="default" id="oBz-iD-JXv"/>
-                                            <constraint firstItem="26X-Id-wfJ" firstAttribute="baseline" secondItem="AUt-Pk-PTk" secondAttribute="baseline" type="default" id="q3N-SR-CMS"/>
-                                            <constraint firstItem="gCG-PN-Llh" firstAttribute="top" secondItem="qyk-xl-sWe" secondAttribute="top" constant="10" id="t3Q-vt-qVV"/>
+                                            <constraint firstAttribute="trailing" secondItem="qUy-oq-7nf" secondAttribute="trailing" constant="30" id="mbV-wt-iUu"/>
+                                            <constraint firstItem="uWm-bt-432" firstAttribute="top" secondItem="8ya-SX-clQ" secondAttribute="top" type="default" id="ngh-IY-l8f"/>
+                                            <constraint firstAttribute="trailing" secondItem="uWm-bt-432" secondAttribute="trailing" constant="135" id="rLI-2E-ckL"/>
+                                            <constraint firstItem="yG7-OM-ll1" firstAttribute="top" secondItem="qUy-oq-7nf" secondAttribute="top" type="default" id="x3j-s4-EW5"/>
+                                            <constraint firstItem="uWm-bt-432" firstAttribute="bottom" secondItem="8ya-SX-clQ" secondAttribute="bottom" type="default" id="yta-Mh-aHS"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -1413,11 +1413,11 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="EditStar1" destination="26X-Id-wfJ" id="1dd-0H-69b"/>
-                        <outlet property="EditStar2" destination="AUt-Pk-PTk" id="Kld-FZ-n7o"/>
-                        <outlet property="EditStar3" destination="Sdi-n5-oXc" id="SUt-IX-Phv"/>
-                        <outlet property="EditStar4" destination="gCG-PN-Llh" id="K4O-xG-alQ"/>
-                        <outlet property="EditStar5" destination="NPv-SL-gww" id="Ede-Gq-cgq"/>
+                        <outlet property="EditStar1" destination="8ya-SX-clQ" id="p0S-Ep-AiC"/>
+                        <outlet property="EditStar2" destination="uWm-bt-432" id="dAs-M1-jxd"/>
+                        <outlet property="EditStar3" destination="bQ4-Mv-bqh" id="41J-vy-2Td"/>
+                        <outlet property="EditStar4" destination="yG7-OM-ll1" id="nWl-SJ-PaL"/>
+                        <outlet property="EditStar5" destination="qUy-oq-7nf" id="oDQ-Zx-KMS"/>
                         <outlet property="editCategory" destination="1L5-og-zkq" id="Jbc-9r-8kD"/>
                         <outlet property="editItemName" destination="te8-A1-Iex" id="dPP-Dq-8Ae"/>
                         <outlet property="editItemPrice" destination="wsG-aF-oqd" id="Djm-Dn-ZWq"/>
@@ -2389,7 +2389,7 @@
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="B8y-9O-3A8">
-                                        <rect key="frame" x="0.0" y="164" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="164" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -2506,7 +2506,7 @@
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="L9h-OH-kBk">
-                                        <rect key="frame" x="0.0" y="313" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="313" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -3687,6 +3687,311 @@
         <image name="glyphicons_377_riflescope.png" width="25" height="25"/>
         <image name="logo.jpeg" width="970" height="938"/>
     </resources>
+    <classes>
+        <class className="AddGoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCancel:"/>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblSave" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AddPurchaseViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="cancelPressed:"/>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="AddItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AddShoppingItemViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddShoppingItemViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Cancel:"/>
+                <relationship kind="action" name="DownKeyPad:"/>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="action" name="newItem:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReturn:"/>
+                <relationship kind="outlet" name="AddItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="AddNewItem" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="AddStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="BudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
+                <relationship kind="outlet" name="tbWeeklyIncome" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ByCategoryDateViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByCategoryDateViewController.h"/>
+        </class>
+        <class className="ByCategoryGraphViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByCategoryGraphViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="hostView" candidateClass="CPTGraphHostingView"/>
+            </relationships>
+        </class>
+        <class className="ByCategoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByCategoryViewController.h"/>
+        </class>
+        <class className="ByWeekViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ByWeekViewController.h"/>
+        </class>
+        <class className="CPTGraphHostingView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
+        </class>
+        <class className="CompletedGoalsDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CompletedGoalsDetailViewController.h"/>
+        </class>
+        <class className="CompletedGoalsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CompletedGoalsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tblViewGoal" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CompletedShoppingDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CompletedShoppingDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="ShoppingTripTV" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="lbBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbDuration" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbTripName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CompletedShoppingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CompletedShoppingViewController.h"/>
+        </class>
+        <class className="EditGoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditGoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCancel:"/>
+                <relationship kind="action" name="btnCancelEdit:"/>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="addGoalTB" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="btnCancel" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblSave" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="txtAmount" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDeadline" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtDescription" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="txtGoal" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="EditPurchaseViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditPurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="btnUpdate:"/>
+                <relationship kind="action" name="cancelPressed:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="EditItemCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="EditItemPrice" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="EditStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar5" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="EditShoppingItemViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditShoppingItemViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Cancel:"/>
+                <relationship kind="action" name="SelectCategory:"/>
+                <relationship kind="action" name="btnUpdate:"/>
+                <relationship kind="action" name="starFiveClicked:"/>
+                <relationship kind="action" name="starFourClicked:"/>
+                <relationship kind="action" name="starOneClicked:"/>
+                <relationship kind="action" name="starThreeClicked:"/>
+                <relationship kind="action" name="starTwoClicked:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="EditStar1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="EditStar5" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="editCategory" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="editItemName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="editItemPrice" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="EditTripViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditTripViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="AddItem:"/>
+                <relationship kind="action" name="Cancel:"/>
+                <relationship kind="action" name="Done:"/>
+                <relationship kind="action" name="TimerPicker:"/>
+                <relationship kind="action" name="textfieldReutrn:"/>
+                <relationship kind="outlet" name="ShoppingTripBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ShoppingTripDuration" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="ShoppingTripItemTV" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="ShoppingTripTitle" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ExpenditureTrendGraphViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpenditureTrendGraphViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="hostView" candidateClass="CPTGraphHostingView"/>
+            </relationships>
+        </class>
+        <class className="ExpenditureTrendViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpenditureTrendViewController.h"/>
+        </class>
+        <class className="GoalDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnEdit:"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnReorderClicked:"/>
+                <relationship kind="outlet" name="btnReorder" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tblViewGoal" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MainPageViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainPageViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="OverviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
+        </class>
+        <class className="PurchaseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PurchaseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Switch:"/>
+                <relationship kind="action" name="btnEdit:"/>
+                <relationship kind="outlet" name="Edit" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="PurchaseTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="SortBy" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="PurchasedItemsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PurchasedItemsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="PurchasedItemsUITableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+        </class>
+        <class className="ShoppingTripViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShoppingTripViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="AddPressed:"/>
+                <relationship kind="action" name="DeletePressed:"/>
+                <relationship kind="action" name="StartEndPressed:"/>
+                <relationship kind="outlet" name="AddTrip" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="DeleteTrip" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="ShoppingTripTV" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="StartEndTrip" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lbBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbDuration" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbTripName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="StartPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartPageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblTip" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
+        </class>
+        <class className="UpdateBudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UpdateBudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnCancel:"/>
+                <relationship kind="action" name="btnDone:"/>
+                <relationship kind="outlet" name="budgetCat" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="lblBudget" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="TPKeyboardAvoidingScrollView"/>
+                <relationship kind="outlet" name="tbWeeklyIncome" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="txtBudget" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ViewBudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewBudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnClicked:"/>
+                <relationship kind="action" name="pageControl:"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="setBudgetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/setBudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnClicked:"/>
+                <relationship kind="action" name="btnResetClicked:"/>
+                <relationship kind="action" name="pageControl:"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="btnReset" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="scroller" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sideView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="topButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="topView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
