@@ -105,20 +105,20 @@
     topArray = [[NSMutableArray alloc]init];
     bottomArray = [[NSMutableArray alloc]init];
     catList = [[NSMutableArray alloc]init];
-    b = [[Budget alloc]init];
+    //b = [[Budget alloc]init];
     
-    for(Budget *bb in [b GetIncomeBudget])
+    for(Budget *bb in [b GetIncomeBudget:b.budget_id])
     {
         [topArray addObject:bb];
     }
     
-    expenses = b.GetExpenses;
+    expenses = [b GetExpenses:b.budget_id];
     income = [[topArray objectAtIndex:0] doubleValue];
     
     [bottomArray addObject:[NSNumber numberWithDouble:expenses]];
     [bottomArray addObject:[NSNumber numberWithDouble:income - expenses]];
     
-    for (BudgetCategory *bc in b.GetBudgetCategories)
+    for (BudgetCategory *bc in [b GetBudgetCategories:b.budget_id])
     {
         [catList addObject:bc];
     }

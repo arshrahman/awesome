@@ -440,5 +440,124 @@
     return budgetList;
 }
 
+-(double)GetExpenses:(int)budgetid
+{
+    double expenses = 0;
+    NSLog (@"budget id goes here");
+    NSLog (@"%d", budgetid);
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = %d UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = %d)X", budgetid, budgetid];
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                expenses = sqlite3_column_double(statement, 0);
+            }
+        }
+        
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(budgetDB);
+    NSLog(@"%f", expenses);
+    return expenses;
+}
+
+
+-(NSMutableArray *)GetIncomeBudget:(int)budgetid
+{
+    NSMutableArray *incomeBudget = [[NSMutableArray alloc]init];
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT WINCOME, BUDGET_AMOUNT FROM BUDGET WHERE BUDGET_ID = %d", budgetid];
+        const char *query_sql = [querySql UTF8String];
+        
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                NSNumber *income = [NSNumber numberWithDouble:sqlite3_column_double(statement, 0)];
+                NSNumber *budget = [NSNumber numberWithDouble:sqlite3_column_double(statement, 1)];
+                
+                [incomeBudget addObject:income];
+                [incomeBudget addObject:budget];
+            }
+            NSLog(@"budgetincome here");
+        }
+        else
+        {
+            NSLog(@"Hi!");
+        }
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(budgetDB);
+    
+    return incomeBudget;
+}
+
+-(NSMutableArray *)GetBudgetCategories:(int)budgetid
+{
+    NSMutableArray *budgetCategories = [[NSMutableArray alloc]init];
+    
+    if(dbPathString == NULL)
+    {
+        Database *d = [[Database alloc]init];
+        dbPathString = d.SetDBPath;
+    }
+    
+    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
+    {
+        
+        sqlite3_stmt *statement;
+        NSString *querySql = [NSString stringWithFormat:@"SELECT X.CATEGORY_ID, X.CATEGORY_NAME, X.CATEGORY_IMAGE, SUM(X.CATEGORY_SPENT), CATEGORY_AMOUNT FROM (SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(I.SHOPPING_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM SHOPPING_ITEM I, CATEGORY C, SHOPPING_LIST L WHERE C.CATEGORY_ID = I.CATEGORY_ID AND I.SHOPPING_ID = L.SHOPPING_ID AND L.BUDGET_ID = %d GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, SUM(P.PURCHASE_ITEM_PRICE) AS CATEGORY_SPENT, '' AS CATEGORY_AMOUNT FROM PURCHASE P, CATEGORY C WHERE C.CATEGORY_ID = P.CATEGORY_ID AND P.BUDGET_ID = %d GROUP BY C.CATEGORY_ID UNION SELECT C.CATEGORY_ID, C.CATEGORY_NAME, C.CATEGORY_IMAGE, '' AS CATEGORY_SPENT, BC.CATEGORY_AMOUNT FROM CATEGORY C, BUDGET_CATEGORY BC WHERE C.CATEGORY_ID = BC.CATEGORY_ID AND BC.BUDGET_ID = %d) X GROUP BY X.CATEGORY_ID ORDER BY X.CATEGORY_AMOUNT;", budgetid, budgetid, budgetid];
+        
+        const char *query_sql = [querySql UTF8String];
+        
+        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement)==SQLITE_ROW)
+            {
+                BudgetCategory *bc = [[BudgetCategory alloc]init];
+                
+                bc.category_id = sqlite3_column_int(statement, 0);
+                [bc setBcategory_name:[[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)]];
+                bc.bcategory_image = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                bc.category_spent = sqlite3_column_double(statement, 3);
+                bc.category_amount = sqlite3_column_double(statement, 4);
+                
+                [budgetCategories addObject:bc];
+            }
+        }
+        else
+        {
+            NSLog(@"Hi!");
+        }
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(budgetDB);
+    
+    return budgetCategories;
+}
+
 
 @end

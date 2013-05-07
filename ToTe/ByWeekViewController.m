@@ -92,7 +92,7 @@
     int budget_id = weeklyBudget.budget_id;
     //double expenses =weeklyBudget.GetExpenses;
     NSLog (@"expenses go here");
-    double expenses =  [self GetCurentExpenses:budget_id];
+    double expenses =  [weeklyBudget GetExpenses:budget_id];
 //    [weeklyBudget GetCurrentExpenses:budget_id];
     
 //    NSString *start = weeklyBudget.startDate;
@@ -156,40 +156,6 @@
    
 
 }
-
--(double)GetCurentExpenses:(int)budgetid
-{
-    double expenses = 0;
-    NSLog (@"budget id goes here");
-    NSLog (@"%d", budgetid);
-    
-    if(dbPathString == NULL)
-    {
-        Database *d = [[Database alloc]init];
-        dbPathString = d.SetDBPath;
-    }
-    
-    if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
-    {
-        sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = %d UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = %d)X", budgetid, budgetid];
-        const char *query_sql = [querySql UTF8String];
-        
-        if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while (sqlite3_step(statement)==SQLITE_ROW)
-            {
-                expenses = sqlite3_column_double(statement, 0);
-            }
-        }
-        
-        sqlite3_finalize(statement);
-    }
-    sqlite3_close(budgetDB);
-    NSLog(@"%f", expenses);
-    return expenses;
-}
-
 
 
 @end

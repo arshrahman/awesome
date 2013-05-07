@@ -29,5 +29,8 @@
 
 //Pol
 -(NSMutableArray *) viewAllBudget;
+-(double)GetExpenses:(int)budgetid;
+-(NSMutableArray *)GetIncomeBudget:(int) budgetid;
+-(NSMutableArray *)GetBudgetCategories:(int)budgetid;
 
 @end
