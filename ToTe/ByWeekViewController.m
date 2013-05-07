@@ -90,9 +90,9 @@
     
     // Configure the cell...
     int budget_id = weeklyBudget.budget_id;
-    double expenses =weeklyBudget.GetExpenses;
-    
-//    double expenses =  [self GetCurentExpenses:budget_id];
+    //double expenses =weeklyBudget.GetExpenses;
+    NSLog (@"expenses go here");
+    double expenses =  [self GetCurentExpenses:budget_id];
 //    [weeklyBudget GetCurrentExpenses:budget_id];
     
 //    NSString *start = weeklyBudget.startDate;
@@ -160,6 +160,8 @@
 -(double)GetCurentExpenses:(int)budgetid
 {
     double expenses = 0;
+    NSLog (@"budget id goes here");
+    NSLog (@"%d", budgetid);
     
     if(dbPathString == NULL)
     {
@@ -170,7 +172,7 @@
     if (sqlite3_open([dbPathString UTF8String], &budgetDB)==SQLITE_OK)
     {
         sqlite3_stmt *statement;
-        NSString *querySql = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = '%d' FROM BUDGET UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = '%d' FROM BUDGET)X", budgetid, budgetid];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT SUM(X.EXPENSE) FROM (SELECT SUM(S.SHOPPING_TOTAL) AS EXPENSE FROM SHOPPING_LIST S WHERE S.BUDGET_ID = %d UNION SELECT SUM(P.PURCHASE_ITEM_PRICE) AS EXPENSE FROM PURCHASE P WHERE P.BUDGET_ID = %d)X", budgetid, budgetid];
         const char *query_sql = [querySql UTF8String];
         
         if (sqlite3_prepare(budgetDB, query_sql, -1, &statement, NULL)==SQLITE_OK)
