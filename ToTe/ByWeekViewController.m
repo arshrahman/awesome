@@ -109,7 +109,7 @@
     
     NSDate *dateStart = [dateFormatter dateFromString:dateRepresentingStartDay];
     NSDate *dateEnd = [dateFormatter dateFromString:dateRepresentingEndDay];
-    [dateFormatter setDateFormat:@"MMM-dd-yyyy"];
+    [dateFormatter setDateFormat:@"dd MMM yyyy"];
     NSString *dateWithNewFormatStart = [dateFormatter stringFromDate:dateStart];
     NSString *dateWithNewFormatEnd = [dateFormatter stringFromDate:dateEnd];
     
@@ -142,7 +142,7 @@
     
     NSDate *dateStart = [dateFormatter dateFromString:dateRepresentingStartDay];
     NSDate *dateEnd = [dateFormatter dateFromString:dateRepresentingEndDay];
-    [dateFormatter setDateFormat:@"MMM-dd-yyyy"];
+    [dateFormatter setDateFormat:@"dd MMM"];
     NSString *dateWithNewFormatStart = [dateFormatter stringFromDate:dateStart];
     NSString *dateWithNewFormatEnd = [dateFormatter stringFromDate:dateEnd];
     
